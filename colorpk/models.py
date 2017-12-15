@@ -9,5 +9,6 @@ class Color(models.Model):
     colortype = models.CharField(max_length=50)
     display = models.BooleanField()
     createdate = models.DateField()
+
     class Meta:
         db_table = 'color'
