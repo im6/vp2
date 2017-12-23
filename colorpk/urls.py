@@ -16,13 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from colorpk.modules.color import views
+from colorpk_server import views
 
 urlpatterns = [
     path('', views.index),
     path('color/<int:id>/', views.colorOne),
     path('latest/', views.latest),
     path('new/', views.index),
-    path('admin/', admin.site.urls),
     path('about/', views.about),
 ]
