@@ -1,9 +1,11 @@
-<h1>
+{% extends "base.html" %}
+{% block mainContent %}
+    <h1>
     this is a test for {{ name }}
-
-</h1>
-{% for story in list %}
-<h2>
-  {{ story.color }}
-</h2>
-{% endfor %}
+    </h1>
+    {% for story in list %}
+    <h2>
+      {{ story.color }}
+    </h2>
+    {% endfor %}
+{% endblock %}
