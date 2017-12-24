@@ -4,15 +4,15 @@ from django.template import Context, Template
 from django.template.loader import get_template, render_to_string
 from .models import Color
 from datetime import datetime
+import json
 
 def index(request):
     template = get_template('main.html')
-    joe = Color.objects.create(like=2,
-                               color="F38181#FCE38A#EAFFD0#95E1D3",
-                               display=1,
-                               createdate=datetime.now()
-                               )
-    return HttpResponse(template.render({"my_name": "Adrian"}))
+    alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
+    return HttpResponse(template.render({
+        "list": alldata,
+        "name": 'all color data'
+    }))
 
 def colorOne(request, id):
     return HttpResponse("Hello, world. number : %s."%id)
