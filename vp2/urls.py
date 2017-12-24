@@ -1,4 +1,4 @@
-"""colorpk URL Configuration
+"""vp2 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from colorpk_server import views
+from colorpk import views
 
 urlpatterns = [
     path('', views.index),

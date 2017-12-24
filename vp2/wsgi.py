@@ -1,5 +1,5 @@
 """
-WSGI config for colorpk project.
+WSGI config for vp2 project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -12,10 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 from django.apps import AppConfig
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "colorpk.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vp2.settings")
 
 application = get_wsgi_application()
-
-class ColorPkConfig(AppConfig):
-    name = 'colorpk'
-    verbose_name = "ColorPK Web"
