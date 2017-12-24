@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'colorpk'
+    'colorpk',
+    'django.contrib.staticfiles',
     #'django.contrib.admin',
     #'django.contrib.auth',
     #'django.contrib.contenttypes',
     #'django.contrib.sessions',
     #'django.contrib.messages',
-    #'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +79,9 @@ WSGI_APPLICATION = 'vp2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('SQL_DATABASE'),
-        'USER': os.environ.get('SQL_USERNAME'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD'),
-        'HOST': os.environ.get('SQL_HOST'),
-        'PORT': os.environ.get('SQL_PORT'),
+        'OPTIONS': {
+            'read_default_file': 'local/my.cnf',
+        },
     }
 }
 
@@ -125,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
