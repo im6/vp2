@@ -639,6 +639,8 @@ __webpack_require__(7);
 
 __webpack_require__(9);
 
+__webpack_require__(15);
+
 __webpack_require__(13);
 
 /***/ }),
@@ -773,7 +775,52 @@ exports = module.exports = __webpack_require__(3)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\n.main {\n  width: 100%;\n  overflow-x: hidden;\n  padding: 60px 0px 40px 0;\n  background: rgba(230, 230, 230, 0.95); }\n\nheader {\n  width: 100%;\n  height: 45px;\n  border-bottom: 1px solid #e2e2e2; }\n  header .pure-button {\n    font-size: 73%; }\n    header .pure-button:nth-child(1), header .pure-button:nth-child(2) {\n      background: #efefef;\n      color: #dc6288; }\n    header .pure-button:nth-child(3) {\n      background: #42b8dd;\n      color: white; }\n  header .header1 img {\n    width: 55px;\n    margin: 6px 6px 0 16px; }\n  header .header1 span {\n    display: inline-block;\n    font-size: 1.7em;\n    position: absolute;\n    top: 17px;\n    color: #968fc7; }\n  header .header2 {\n    width: 190px;\n    margin: 9px auto 0 auto; }\n", ""]);
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\n.main {\n  width: 100%;\n  overflow-x: hidden;\n  padding: 60px 0px 40px 0;\n  background: rgba(230, 230, 230, 0.95); }\n\nheader {\n  width: 100%;\n  height: 45px;\n  box-shadow: 0px 5px 10px 0px rgba(0, 64, 128, 0.1); }\n  header > div {\n    display: flex;\n    justify-content: space-between; }\n  header .pure-button {\n    font-size: 73%;\n    background: white;\n    border: 1px solid #56a5f7; }\n    header .pure-button:nth-child(1) {\n      color: white;\n      background: #56a5f7; }\n    header .pure-button:nth-child(2), header .pure-button:nth-child(3), header .pure-button:nth-child(4) {\n      color: #56a5f7;\n      border-right: none; }\n  header .header1 img {\n    width: 50px;\n    margin: 6px 6px 0 16px; }\n  header .header1 span {\n    display: inline-block;\n    font-size: 1.6em;\n    position: absolute;\n    left: 80px;\n    top: 15px;\n    color: #56a5f7; }\n  header .header2 {\n    margin: 9px 20px 0 0; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(16);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(4)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./pureOverwrite.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./pureOverwrite.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".pure-button-group .pure-button:last-child {\n  border-top-right-radius: 2px;\n  border-bottom-right-radius: 2px;\n  border-right: 1px solid; }\n", ""]);
 
 // exports
 
