@@ -22,9 +22,12 @@
         </script>
     </head>
     <body>
+        {% include 'layout/header.html' %}
+
         {% block mainContent %}
             <h1>no mainContent at all</h1>
         {% endblock %}
+
 
         {% load static %}
         <script src="{% static "bundle.js" %}"></script>

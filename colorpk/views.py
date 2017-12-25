@@ -8,9 +8,9 @@ import json
 
 def index(request):
     template = get_template('main.html')
-    alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
+    #alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
     return HttpResponse(template.render({
-        "list": alldata,
+        "list": [],
         "name": 'all color data'
     }))
 
