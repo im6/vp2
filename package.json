@@ -18,6 +18,7 @@
   "homepage": "https://github.com/zj1926/vp2#readme",
   "dependencies": {},
   "devDependencies": {
+    "animejs": "^2.2.0",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

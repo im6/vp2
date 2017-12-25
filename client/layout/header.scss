@@ -1,0 +1,49 @@
+$button-color: #56a5f7;
+$header-height: 45px;
+$header-font: 13px;
+$header-btn-padding-v: 6px;
+$header-btn-margin-v: 8px;
+
+header {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  background-color: white;
+  //border-bottom: 1px solid #e2e2e2;
+  box-shadow: 0px 5px 10px 0px rgba(0,64,128,0.1);
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .headerBtn {
+    font-size: $header-font;
+    background: white;
+    border: 1px solid $button-color;
+    padding: $header-btn-padding-v 11px;
+    border-radius: 4px;
+
+    &:nth-child(1){
+      color: white;
+      background: $button-color;
+    }
+    &:nth-child(2), &:nth-child(3), &:nth-child(4){
+      color: $button-color;
+    }
+  }
+
+  .header1{
+    img{
+      width: 53px;
+      margin: 2px 6px 0 16px;
+    }
+  }
+
+  .header2 {
+    margin: $header-btn-margin-v 16px 0 0;
+  }
+
+}

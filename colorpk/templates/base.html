@@ -24,9 +24,11 @@
     <body>
         {% include 'layout/header.html' %}
 
-        {% block mainContent %}
-            <h1>no mainContent at all</h1>
-        {% endblock %}
+        <main>
+            {% block mainContent %}
+                <h1>no mainContent at all</h1>
+            {% endblock %}
+        </main>
 
 
         {% load static %}
