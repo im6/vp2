@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(7);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -526,7 +526,7 @@ function updateLink (link, options, obj) {
 
 __webpack_require__(3);
 
-var _colors = __webpack_require__(13);
+var _colors = __webpack_require__(10);
 
 window._colorpk.initData.forEach(function (v) {
   var listDom = document.getElementsByClassName('list')[0];
@@ -541,14 +541,144 @@ window._colorpk.initData.forEach(function (v) {
 "use strict";
 
 
-__webpack_require__(11);
+var _debounce = __webpack_require__(4);
 
-__webpack_require__(16);
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(5);
+
+__webpack_require__(8);
+
+var _colors = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import 'style-loader!css-loader!purecss/build/pure-min.css';
+//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
+var mainElem = document.getElementsByTagName('main')[0];
+window.onresize = (0, _debounce2.default)(function (e) {
+  mainElem.style.width = (0, _colors.calcMainBoxWidth)(e.target.innerWidth) + 'px';
+}, 200);
 
 /***/ }),
-/* 4 */,
-/* 5 */,
+/* 4 */
+/***/ (function(module, exports) {
+
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing. The function also has a property 'clear' 
+ * that is a function which will clear the timer to prevent previously scheduled executions. 
+ *
+ * @source underscore.js
+ * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+ * @param {Function} function to wrap
+ * @param {Number} timeout in ms (`100`)
+ * @param {Boolean} whether to execute at the beginning (`false`)
+ * @api public
+ */
+
+module.exports = function debounce(func, wait, immediate){
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
+
+  function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+    }
+  };
+
+  var debounced = function(){
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
+    }
+
+    return result;
+  };
+
+  debounced.clear = function() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+  
+  debounced.flush = function() {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+      
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+};
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(6);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
+
+// module
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0; }\n\nmain {\n  padding: 80px 0px 40px 0;\n  background: rgba(248, 252, 255, 0.95);\n  margin: 0 auto; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports) {
 
 
@@ -643,17 +773,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -667,8 +793,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss");
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -678,21 +804,21 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
+
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0; }\n\nmain {\n  width: 100%;\n  padding: 80px 0px 40px 0;\n  background: rgba(248, 252, 255, 0.95); }\n", ""]);
+exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 45px;\n  background-color: white;\n  box-shadow: 0px 5px 10px 0px rgba(0, 64, 128, 0.1); }\n  header > div {\n    display: flex;\n    justify-content: space-between; }\n  header .headerBtn {\n    font-size: 13px;\n    background: white;\n    border: 1px solid #56a5f7;\n    padding: 6px 11px;\n    border-radius: 4px; }\n    header .headerBtn:nth-child(1) {\n      color: white;\n      background: #56a5f7; }\n    header .headerBtn:nth-child(2), header .headerBtn:nth-child(3), header .headerBtn:nth-child(4) {\n      color: #56a5f7; }\n  header .header1 img {\n    width: 53px;\n    margin: 2px 6px 0 16px; }\n  header .header2 {\n    margin: 8px 16px 0 0; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -701,9 +827,11 @@ exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createBox = undefined;
+exports.calcMainBoxWidth = exports.createBox = undefined;
 
-__webpack_require__(14);
+__webpack_require__(11);
+
+var BOXWD = 260;
 
 // const boxes = document.getElementsByClassName('box');
 // for(let i = 0; i < boxes.length; i ++){
@@ -777,14 +905,19 @@ var createBox = exports.createBox = function createBox(id, value, like, isliked)
   return newBox;
 };
 
+var calcMainBoxWidth = exports.calcMainBoxWidth = function calcMainBoxWidth(w) {
+  var num = Math.floor(w * 0.9 / BOXWD);
+  return num * BOXWD;
+};
+
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(15);
+var content = __webpack_require__(12);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -809,7 +942,7 @@ if(false) {
 }
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -818,51 +951,6 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 // module
 exports.push([module.i, ".list {\n  margin: 0 auto; }\n  .list .box {\n    width: 220px;\n    height: 285px;\n    background-color: white;\n    border-radius: 6px;\n    display: inline-block;\n    padding: 10px 10px 0 10px;\n    margin: 11px 10px;\n    box-shadow: 0 2px 3px 0.6px #d9d9d9;\n    transition: box-shadow 0.3s ease-in-out; }\n    .list .box:hover {\n      transition: box-shadow 0.5s;\n      box-shadow: 0 5px 20px 2px #cccccc; }\n    .list .box .canvas {\n      height: 230px; }\n      .list .box .canvas > div > span {\n        color: white;\n        background-color: rgba(110, 110, 110, 0.4);\n        padding: 4px 6px;\n        display: inline-block;\n        opacity: 0;\n        border-radius: 0px 0px 4px 0px;\n        transition: opacity 0.3s ease-in-out; }\n      .list .box .canvas > div:hover span {\n        opacity: 1; }\n      .list .box .canvas div:nth-child(1) {\n        border-radius: 4px 4px 0 0;\n        height: 39%; }\n      .list .box .canvas div:nth-child(2) {\n        height: 25%; }\n      .list .box .canvas div:nth-child(3) {\n        height: 18%; }\n      .list .box .canvas div:nth-child(4) {\n        border-radius: 0 0 4px 4px;\n        height: 18%; }\n    .list .box button {\n      margin-top: 13px;\n      height: 30px;\n      padding: 0 12px;\n      border: 1px solid #d9d9d9;\n      background-color: white;\n      cursor: pointer;\n      border-radius: 4px;\n      color: #919191;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }\n      .list .box button img {\n        width: 17px;\n        vertical-align: middle;\n        margin-right: 3px; }\n      .list .box button span {\n        vertical-align: middle;\n        font-size: 15px; }\n    .list .box button:active {\n      border: 1px solid #56a5f7;\n      color: #56a5f7; }\n    .list .box button:focus {\n      outline: 0; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(17);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 45px;\n  background-color: white;\n  box-shadow: 0px 5px 10px 0px rgba(0, 64, 128, 0.1); }\n  header > div {\n    display: flex;\n    justify-content: space-between; }\n  header .headerBtn {\n    font-size: 13px;\n    background: white;\n    border: 1px solid #56a5f7;\n    padding: 6px 11px;\n    border-radius: 4px; }\n    header .headerBtn:nth-child(1) {\n      color: white;\n      background: #56a5f7; }\n    header .headerBtn:nth-child(2), header .headerBtn:nth-child(3), header .headerBtn:nth-child(4) {\n      color: #56a5f7; }\n  header .header1 img {\n    width: 53px;\n    margin: 2px 6px 0 16px; }\n  header .header2 {\n    margin: 8px 16px 0 0; }\n", ""]);
 
 // exports
 
