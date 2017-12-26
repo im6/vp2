@@ -1,9 +1,77 @@
+$box-padding: 10px;
+$color-radius: 4px;
+
 .list{
   margin: 0 auto;
   .box {
-    width: 280px;
-    height: 300px;
-    border: 1px solid gray;
+    width: 220px;
+    height: 285px;
+    background-color: white;
+    //border: 1px solid rgba(128, 128, 128, 0.33);
+    border-radius: 6px;
     display: inline-block;
+    padding: $box-padding $box-padding 0 $box-padding;
+    margin: 11px 10px;
+
+    box-shadow: 0 2px 3px 0.6px #d9d9d9;
+    transition: box-shadow 0.3s ease-in-out;
+    &:hover {
+      transition: box-shadow 0.5s;
+      box-shadow: 0 5px 20px 2px #cccccc;
+    }
+
+    .canvas {
+      height: 230px;
+
+      > div{
+        color: white;
+      }
+
+      div:nth-child(1){
+        border-radius: $color-radius $color-radius 0 0;
+        height: 39%;
+      }
+      div:nth-child(2){
+        height: 25%;
+      }
+      div:nth-child(3){
+        height: 18%;
+      }
+      div:nth-child(4){
+        border-radius: 0 0 $color-radius $color-radius;
+        height: 18%;
+      }
+    }
+
+    button {
+      margin-top: 13px;
+
+      //width: 70px;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #cbcbcb;
+      background-color: white;
+      border-radius: 4px;
+      color: #919191;
+
+      img {
+        width: 17px;
+        vertical-align: middle;
+        margin-right: 3px;
+      }
+      span {
+        vertical-align:middle;
+        font-size: 16px;
+      }
+    }
+
+    button:active {
+      border: 1px solid #56a5f7;
+      color: #56a5f7;
+    }
+
+    button:focus{
+      outline:0; // for chrome style purpose
+    }
   }
 }

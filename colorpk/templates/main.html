@@ -9,11 +9,20 @@
              data-v="{{ oneBox.color }}"
              data-l="{{ oneBox.like }}"
         >
-            {% for oneColor in oneBox.canvas %}
-                <div style="background-color: {{ oneColor }}">
-                    {{ oneColor }}
-                </div>
-            {% endfor %}
+            <div class="canvas">
+                {% for oneColor in oneBox.canvas %}
+                    <div style="background-color: {{ oneColor }}">
+                        {{ oneColor }}
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button">
+                <img src="/static/hrt.svg" alt="hrt.img">
+                <span>
+                    {{ oneBox.like }}
+                </span>
+            </button>
+
         </div>
         {% endfor %}
     </div>
