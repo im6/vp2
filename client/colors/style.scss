@@ -49,10 +49,12 @@ $color-radius: 4px;
       //width: 70px;
       height: 30px;
       padding: 0 12px;
-      border: 1px solid #cbcbcb;
-      background-color: white;
+      border: 1px solid #d9d9d9;
+      background-color: white;;
+      cursor: pointer;
       border-radius: 4px;
       color: #919191;
+      transition: all .3s cubic-bezier(.645,.045,.355,1);
 
       img {
         width: 17px;
@@ -61,7 +63,7 @@ $color-radius: 4px;
       }
       span {
         vertical-align:middle;
-        font-size: 16px;
+        font-size: 15px;
       }
     }
 
