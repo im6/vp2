@@ -23,8 +23,17 @@ $color-radius: 4px;
     .canvas {
       height: 230px;
 
-      > div{
+      > div > span {
         color: white;
+        background-color: rgba(110, 110, 110, 0.4);
+        padding: 4px 6px;
+        display: inline-block;
+        opacity: 0;
+        border-radius: 0px 0px 4px 0px;
+        transition: opacity 0.3s ease-in-out;
+      }
+      > div:hover span{
+        opacity: 1;
       }
 
       div:nth-child(1){
