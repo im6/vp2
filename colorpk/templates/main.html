@@ -3,30 +3,39 @@
 
 {% block mainContent %}
     <div class="list">
-        {% for oneBox in list %}
-        <div class="box"
-             data-k="{{ oneBox.id }}"
-             data-v="{{ oneBox.color }}"
-             data-l="{{ oneBox.like }}"
-        >
-            <div class="canvas">
-                {% for oneColor in oneBox.canvas %}
-                    <div style="background-color: {{ oneColor }}">
-                        <span>
-                            {{ oneColor }}
-                        </span>
-                    </div>
-                {% endfor %}
-            </div>
-            <button type="button">
-                <img src="/static/hrt.svg" alt="hrt.img">
-                <span>
-                    {{ oneBox.like }}
-                </span>
-            </button>
-
-        </div>
-        {% endfor %}
+{#        {% for oneBox in list %}#}
+{#        <div class="box"#}
+{#             data-k="{{ oneBox.id }}"#}
+{#             data-v="{{ oneBox.color }}"#}
+{#             data-l="{{ oneBox.like }}"#}
+{#        >#}
+{#            <div class="canvas">#}
+{#                {% for oneColor in oneBox.canvas %}#}
+{#                    <div style="background-color: {{ oneColor }}">#}
+{#                        <span>#}
+{#                            {{ oneColor }}#}
+{#                        </span>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <button type="button">#}
+{#                <img src="/static/hrt.svg">#}
+{#                <span>#}
+{#                    {{ oneBox.like }}#}
+{#                </span>#}
+{#            </button>#}
+{##}
+{#        </div>#}
+{#        {% endfor %}#}
     </div>
 
+    <script>
+        window._colorpk = {
+          auth: null,
+          initData: null,
+        };
+        window._colorpk.initData = [
+          {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
+        ];
+    </script>
 {% endblock %}

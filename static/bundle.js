@@ -526,7 +526,13 @@ function updateLink (link, options, obj) {
 
 __webpack_require__(3);
 
-__webpack_require__(13);
+var _colors = __webpack_require__(13);
+
+window._colorpk.initData.forEach(function (v) {
+  var listDom = document.getElementsByClassName('list')[0];
+  var oneBox = (0, _colors.createBox)(v.id, v.color, v.like, false);
+  listDom.appendChild(oneBox);
+});
 
 /***/ }),
 /* 3 */
@@ -692,31 +698,84 @@ exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createBox = undefined;
+
 __webpack_require__(14);
 
-var boxes = document.getElementsByClassName('box');
+// const boxes = document.getElementsByClassName('box');
+// for(let i = 0; i < boxes.length; i ++){
+//   let thisBox = boxes[i];
+//   let id = thisBox.attributes.getNamedItem('data-k').value;
+//   thisBox.getElementsByTagName('button')[0].onclick = (v) => {
+//     let imgElem = thisBox.getElementsByTagName('img')[0];
+//     let txtElem = thisBox.getElementsByTagName('span')[4];
+//
+//     let likeNum = parseInt(txtElem.innerText);
+//     if(imgElem.src.indexOf('hrt.svg') > -1){
+//       imgElem.src = imgElem.src.replace('hrt.svg', 'hrtr.svg');
+//       txtElem.innerText = likeNum + 1;
+//     } else {
+//       imgElem.src = imgElem.src.replace('hrtr.svg', 'hrt.svg');
+//       txtElem.innerText = likeNum - 1;
+//     }
+//   }
+// }
 
-var _loop = function _loop(i) {
-  var thisBox = boxes[i];
-  var id = thisBox.attributes.getNamedItem('data-k').value;
-  thisBox.getElementsByTagName('button')[0].onclick = function (v) {
-    var imgElem = thisBox.getElementsByTagName('img')[0];
-    var txtElem = thisBox.getElementsByTagName('span')[4];
+var createBox = exports.createBox = function createBox(id, value, like, isliked) {
+  var newBox = document.createElement("div");
+  newBox.classList.add('box');
+  newBox.dataset.k = id;
+  newBox.dataset.l = like;
 
-    var likeNum = parseInt(txtElem.innerText);
-    if (imgElem.src.indexOf('hrt.svg') > -1) {
-      imgElem.src = imgElem.src.replace('hrt.svg', 'hrtr.svg');
-      txtElem.innerText = likeNum + 1;
+  // canvas management
+  var newCanvas = document.createElement("div");
+  newCanvas.classList.add('canvas');
+  var colors0 = value.split('#');
+  var colors1 = colors0.map(function (v) {
+    return '#' + v;
+  });
+
+  colors1.forEach(function (v) {
+    var oneColor = document.createElement("div");
+    var oneColorTxt = document.createElement("span");
+    oneColorTxt.innerText = v;
+    oneColor.appendChild(oneColorTxt);
+    oneColor.style.backgroundColor = v;
+
+    newCanvas.appendChild(oneColor);
+  });
+
+  // likeBtn management
+  var newBtn = document.createElement("button");
+  newBtn.setAttribute("type", "button");
+
+  var likeTxt = document.createElement("span");
+  likeTxt.innerText = like;
+  var likeImg = document.createElement("img");
+  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
+
+  newBtn.appendChild(likeImg);
+  newBtn.appendChild(likeTxt);
+
+  // bind click event
+  newBtn.onclick = function (v) {
+    if (likeImg.src.indexOf('hrt.svg') > -1) {
+      likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
+      likeTxt.innerText = like + 1;
     } else {
-      imgElem.src = imgElem.src.replace('hrtr.svg', 'hrt.svg');
-      txtElem.innerText = likeNum - 1;
+      likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
+      likeTxt.innerText = like;
     }
   };
-};
 
-for (var i = 0; i < boxes.length; i++) {
-  _loop(i);
-}
+  //combine
+  newBox.appendChild(newCanvas);
+  newBox.appendChild(newBtn);
+  return newBox;
+};
 
 /***/ }),
 /* 14 */

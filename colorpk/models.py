@@ -19,5 +19,5 @@ class Color(models.Model):
             "username": self.username,
             "colortype": self.colortype,
             "display": self.display,
-            "createdate": self.createdate,
+            #"createdate": self.createdate,
         }

@@ -14,7 +14,6 @@ def index(request):
         value["canvas"] = list(map(lambda x: "#%s"%x, value["canvas"]))
     return HttpResponse(template.render({
         "list": alldata,
-        "name": 'all color data'
     }))
 
 def colorOne(request, id):
