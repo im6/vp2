@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(7);
+var	fixUrls = __webpack_require__(8);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -524,15 +524,84 @@ function updateLink (link, options, obj) {
 "use strict";
 
 
-__webpack_require__(3);
-
-var _colors = __webpack_require__(10);
-
-window._colorpk.initData.forEach(function (v) {
-  var listDom = document.getElementsByClassName('list')[0];
-  var oneBox = (0, _colors.createBox)(v.id, v.color, v.like, false);
-  listDom.appendChild(oneBox);
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports.createBox = undefined;
+
+__webpack_require__(11);
+
+// const boxes = document.getElementsByClassName('box');
+// for(let i = 0; i < boxes.length; i ++){
+//   let thisBox = boxes[i];
+//   let id = thisBox.attributes.getNamedItem('data-k').value;
+//   thisBox.getElementsByTagName('button')[0].onclick = (v) => {
+//     let imgElem = thisBox.getElementsByTagName('img')[0];
+//     let txtElem = thisBox.getElementsByTagName('span')[4];
+//
+//     let likeNum = parseInt(txtElem.innerText);
+//     if(imgElem.src.indexOf('hrt.svg') > -1){
+//       imgElem.src = imgElem.src.replace('hrt.svg', 'hrtr.svg');
+//       txtElem.innerText = likeNum + 1;
+//     } else {
+//       imgElem.src = imgElem.src.replace('hrtr.svg', 'hrt.svg');
+//       txtElem.innerText = likeNum - 1;
+//     }
+//   }
+// }
+
+var createBox = exports.createBox = function createBox(id, value, like, isliked) {
+  var newBox = document.createElement("div");
+  newBox.classList.add('box');
+  newBox.dataset.k = id;
+  newBox.dataset.l = like;
+
+  // canvas management
+  var newCanvas = document.createElement("div");
+  newCanvas.classList.add('canvas');
+  var colors0 = value.split('#');
+  var colors1 = colors0.map(function (v) {
+    return '#' + v;
+  });
+
+  colors1.forEach(function (v) {
+    var oneColor = document.createElement("div");
+    var oneColorTxt = document.createElement("span");
+    oneColorTxt.innerText = v;
+    oneColor.appendChild(oneColorTxt);
+    oneColor.style.backgroundColor = v;
+
+    newCanvas.appendChild(oneColor);
+  });
+
+  // likeBtn management
+  var newBtn = document.createElement("button");
+  newBtn.setAttribute("type", "button");
+
+  var likeTxt = document.createElement("span");
+  likeTxt.innerText = like;
+  var likeImg = document.createElement("img");
+  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
+
+  newBtn.appendChild(likeImg);
+  newBtn.appendChild(likeTxt);
+
+  // bind click event
+  newBtn.onclick = function (v) {
+    if (likeImg.src.indexOf('hrt.svg') > -1) {
+      likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
+      likeTxt.innerText = like + 1;
+    } else {
+      likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
+      likeTxt.innerText = like;
+    }
+  };
+
+  //combine
+  newBox.appendChild(newCanvas);
+  newBox.appendChild(newBtn);
+  return newBox;
+};
 
 /***/ }),
 /* 3 */
@@ -541,27 +610,50 @@ window._colorpk.initData.forEach(function (v) {
 "use strict";
 
 
-var _debounce = __webpack_require__(4);
+__webpack_require__(4);
 
-var _debounce2 = _interopRequireDefault(_debounce);
+var _colors = __webpack_require__(2);
 
-__webpack_require__(5);
-
-__webpack_require__(8);
-
-var _colors = __webpack_require__(10);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//import 'style-loader!css-loader!purecss/build/pure-min.css';
-//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
-var mainElem = document.getElementsByTagName('main')[0];
-window.onresize = (0, _debounce2.default)(function (e) {
-  mainElem.style.width = (0, _colors.calcMainBoxWidth)(e.target.innerWidth) + 'px';
-}, 200);
+window._colorpk.initData.forEach(function (v) {
+  var listDom = document.getElementsByClassName('list')[0];
+  var oneBox = (0, _colors.createBox)(v.id, v.color, v.like, false);
+  listDom.appendChild(oneBox);
+});
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _debounce = __webpack_require__(5);
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(6);
+
+__webpack_require__(9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BOXWD = 260; //import 'style-loader!css-loader!purecss/build/pure-min.css';
+//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
+
+var mainElem = document.getElementsByTagName('main')[0];
+
+var adjustLayout = function adjustLayout(w) {
+  mainElem.style.width = Math.floor(w * 0.9 / BOXWD) * BOXWD + 'px';
+};
+
+window.onresize = (0, _debounce2.default)(function (e) {
+  adjustLayout(e.target.innerWidth);
+}, 200);
+
+adjustLayout(window.innerWidth);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -633,13 +725,13 @@ module.exports = function debounce(func, wait, immediate){
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(6);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -664,7 +756,7 @@ if(false) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -672,13 +764,13 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0; }\n\nmain {\n  padding: 80px 0px 40px 0;\n  background: rgba(248, 252, 255, 0.95);\n  margin: 0 auto; }\n", ""]);
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: rgba(248, 252, 255, 0.95); }\n\nmain {\n  max-width: 1300px;\n  padding: 80px 0px 40px 0;\n  margin: 0 auto; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 
@@ -773,13 +865,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -804,7 +896,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -816,99 +908,6 @@ exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  
 
 // exports
 
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.calcMainBoxWidth = exports.createBox = undefined;
-
-__webpack_require__(11);
-
-var BOXWD = 260;
-
-// const boxes = document.getElementsByClassName('box');
-// for(let i = 0; i < boxes.length; i ++){
-//   let thisBox = boxes[i];
-//   let id = thisBox.attributes.getNamedItem('data-k').value;
-//   thisBox.getElementsByTagName('button')[0].onclick = (v) => {
-//     let imgElem = thisBox.getElementsByTagName('img')[0];
-//     let txtElem = thisBox.getElementsByTagName('span')[4];
-//
-//     let likeNum = parseInt(txtElem.innerText);
-//     if(imgElem.src.indexOf('hrt.svg') > -1){
-//       imgElem.src = imgElem.src.replace('hrt.svg', 'hrtr.svg');
-//       txtElem.innerText = likeNum + 1;
-//     } else {
-//       imgElem.src = imgElem.src.replace('hrtr.svg', 'hrt.svg');
-//       txtElem.innerText = likeNum - 1;
-//     }
-//   }
-// }
-
-var createBox = exports.createBox = function createBox(id, value, like, isliked) {
-  var newBox = document.createElement("div");
-  newBox.classList.add('box');
-  newBox.dataset.k = id;
-  newBox.dataset.l = like;
-
-  // canvas management
-  var newCanvas = document.createElement("div");
-  newCanvas.classList.add('canvas');
-  var colors0 = value.split('#');
-  var colors1 = colors0.map(function (v) {
-    return '#' + v;
-  });
-
-  colors1.forEach(function (v) {
-    var oneColor = document.createElement("div");
-    var oneColorTxt = document.createElement("span");
-    oneColorTxt.innerText = v;
-    oneColor.appendChild(oneColorTxt);
-    oneColor.style.backgroundColor = v;
-
-    newCanvas.appendChild(oneColor);
-  });
-
-  // likeBtn management
-  var newBtn = document.createElement("button");
-  newBtn.setAttribute("type", "button");
-
-  var likeTxt = document.createElement("span");
-  likeTxt.innerText = like;
-  var likeImg = document.createElement("img");
-  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
-
-  newBtn.appendChild(likeImg);
-  newBtn.appendChild(likeTxt);
-
-  // bind click event
-  newBtn.onclick = function (v) {
-    if (likeImg.src.indexOf('hrt.svg') > -1) {
-      likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
-      likeTxt.innerText = like + 1;
-    } else {
-      likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
-      likeTxt.innerText = like;
-    }
-  };
-
-  //combine
-  newBox.appendChild(newCanvas);
-  newBox.appendChild(newBtn);
-  return newBox;
-};
-
-var calcMainBoxWidth = exports.calcMainBoxWidth = function calcMainBoxWidth(w) {
-  var num = Math.floor(w * 0.9 / BOXWD);
-  return num * BOXWD;
-};
 
 /***/ }),
 /* 11 */

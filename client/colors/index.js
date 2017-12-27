@@ -1,7 +1,5 @@
 import './style.scss';
 
-const BOXWD = 260;
-
 // const boxes = document.getElementsByClassName('box');
 // for(let i = 0; i < boxes.length; i ++){
 //   let thisBox = boxes[i];
@@ -73,10 +71,4 @@ export const createBox = (id, value, like, isliked) => {
   newBox.appendChild(newCanvas);
   newBox.appendChild(newBtn);
   return newBox;
-};
-
-
-export const calcMainBoxWidth = (w) => {
- let num = Math.floor(w * 0.9/BOXWD);
- return num * BOXWD;
 };
