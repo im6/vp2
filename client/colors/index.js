@@ -1,4 +1,5 @@
 import './style.scss';
+import { ajax } from '../util';
 
 // const boxes = document.getElementsByClassName('box');
 // for(let i = 0; i < boxes.length; i ++){
@@ -18,6 +19,22 @@ import './style.scss';
 //     }
 //   }
 // }
+
+const likeAjax = (id, like) => {
+  ajax({
+    method: 'POST',
+    url: `like/${id}`,
+    data: {
+      like,
+    },
+    success: (v) => {
+      debugger;
+    },
+    fail: () => {
+      debugger;
+    }
+  });
+};
 
 export const createBox = (id, value, like, isliked) => {
   const newBox = document.createElement("div");
@@ -60,9 +77,11 @@ export const createBox = (id, value, like, isliked) => {
     if(likeImg.src.indexOf('hrt.svg') > -1){
       likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
       likeTxt.innerText = like + 1;
+      likeAjax(id, true);
     } else {
       likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
       likeTxt.innerText = like;
+      likeAjax(id, false);
     }
   };
 

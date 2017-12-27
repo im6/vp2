@@ -1,6 +1,5 @@
-import './layout';
-
-import { createBox } from './colors';
+import '../layout';
+import { createBox } from '../colors';
 
 window._colorpk.initData.forEach(v => {
   const listDom = document.getElementsByClassName('list')[0];

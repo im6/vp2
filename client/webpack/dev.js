@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   watch: true,
-  entry: './client/index.js',
+  entry: './client/entry/main.js',
   module:{
     rules: [
       {
