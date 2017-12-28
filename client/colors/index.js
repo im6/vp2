@@ -28,10 +28,8 @@ const likeAjax = (id, like) => {
       like,
     },
     success: (v) => {
-      debugger;
     },
     fail: () => {
-      debugger;
     }
   });
 };

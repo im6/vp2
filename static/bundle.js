@@ -534,9 +534,6 @@ window._colorpk.initData.forEach(function (v) {
   $listDiv.appendChild((0, _colors.createBox)(v.id, v.color, v.like, false));
 });
 
-// let c = document.cookie;
-// debugger;
-
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -868,12 +865,8 @@ var likeAjax = function likeAjax(id, like) {
     data: {
       like: like
     },
-    success: function success(v) {
-      debugger;
-    },
-    fail: function fail() {
-      debugger;
-    }
+    success: function success(v) {},
+    fail: function fail() {}
   });
 };
 
@@ -987,6 +980,25 @@ exports.push([module.i, ".list {\n  margin: 0 auto; }\n  .list .box {\n    width
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var getCookieLocal = function getCookieLocal() {
+  var result = {};
+  if (!window.cookie || window.cookie.length === 0) {
+    var cookies0 = document.cookie.split(';');
+    result = cookies0.reduce(function (acc, v, k) {
+      var idx = v.indexOf('=');
+      var v1 = v.split(v[idx]);
+      acc[v1[0]] = v1[1];
+      return acc;
+    }, {});
+  } else {
+    console.error('invalid cookie');
+  }
+
+  return result;
+};
+
+var localCookie = getCookieLocal();
+
 var ajax = exports.ajax = function ajax(config) {
   var method = config.method,
       url = config.url,
@@ -1007,6 +1019,7 @@ var ajax = exports.ajax = function ajax(config) {
   };
 
   xhr.open(method, url);
+  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
   if (method !== 'GET') {
     xhr.setRequestHeader('Content-Type', 'application/json');
   }

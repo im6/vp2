@@ -5,7 +5,9 @@ from django.template.loader import get_template, render_to_string
 from .models import Color
 from datetime import datetime
 import json
+from django.views.decorators.csrf import ensure_csrf_cookie
 
+@ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
     alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
