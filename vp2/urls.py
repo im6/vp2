@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from colorpk import views
+from colorpk import restful
 
 urlpatterns = [
     path('', views.index),
     path('color/<int:id>/', views.colorOne),
+    path('like/<int:id>', restful.toggleLike),
     path('latest/', views.latest),
     path('new/', views.index),
     path('about/', views.about),

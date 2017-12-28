@@ -1,8 +1,11 @@
 import '../layout';
 import { createBox } from '../colors';
 
+const $listDiv = document.getElementsByClassName('list')[0];
+
 window._colorpk.initData.forEach(v => {
-  const listDom = document.getElementsByClassName('list')[0];
-  const oneBox = createBox(v.id, v.color, v.like, false);
-  listDom.appendChild(oneBox);
+  $listDiv.appendChild(createBox(v.id, v.color, v.like, false));
 });
+
+// let c = document.cookie;
+// debugger;

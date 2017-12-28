@@ -528,11 +528,14 @@ __webpack_require__(3);
 
 var _colors = __webpack_require__(10);
 
+var $listDiv = document.getElementsByClassName('list')[0];
+
 window._colorpk.initData.forEach(function (v) {
-  var listDom = document.getElementsByClassName('list')[0];
-  var oneBox = (0, _colors.createBox)(v.id, v.color, v.like, false);
-  listDom.appendChild(oneBox);
+  $listDiv.appendChild((0, _colors.createBox)(v.id, v.color, v.like, false));
 });
+
+// let c = document.cookie;
+// debugger;
 
 /***/ }),
 /* 3 */
