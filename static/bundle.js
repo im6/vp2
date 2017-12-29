@@ -681,7 +681,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: rgba(248, 252, 255, 0.95); }\n\nmain {\n  max-width: 1300px;\n  padding: 80px 0px 40px 0;\n  margin: 0 auto; }\n", ""]);
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: rgba(248, 252, 255, 0.95); }\n\nmain {\n  max-width: 1300px;\n  padding: 60px 0 40px 0;\n  margin: 0 auto; }\n", ""]);
 
 // exports
 
@@ -900,14 +900,8 @@ var createBox = exports.createBox = function createBox(id, value, like, isliked)
   // likeBtn management
   var newBtn = document.createElement("button");
   newBtn.setAttribute("type", "button");
-
-  var likeTxt = document.createElement("span");
-  likeTxt.innerText = like;
-  var likeImg = document.createElement("img");
-  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
-
-  newBtn.appendChild(likeImg);
-  newBtn.appendChild(likeTxt);
+  var likeImg = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
+  newBtn.innerHTML = '<img src="' + likeImg + '"><span>' + like + '</span>';
 
   // bind click event
   newBtn.onclick = function (v) {
@@ -968,7 +962,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".list {\n  margin: 0 auto; }\n  .list .box {\n    width: 220px;\n    height: 285px;\n    background-color: white;\n    border-radius: 6px;\n    display: inline-block;\n    padding: 10px 10px 0 10px;\n    margin: 11px 10px;\n    box-shadow: 0 2px 3px 0.6px #d9d9d9;\n    transition: box-shadow 0.3s ease-in-out;\n    animation-name: fadeInAnim;\n    animation-fill-mode: backwards;\n    animation-duration: 200ms; }\n\n@keyframes fadeInAnim {\n  0% {\n    opacity: 0; } }\n    .list .box:hover {\n      transition: box-shadow 0.5s;\n      box-shadow: 0 5px 20px 2px #cccccc; }\n    .list .box .canvas {\n      height: 230px; }\n      .list .box .canvas > div {\n        animation-name: barMove;\n        animation-fill-mode: backwards;\n        animation-duration: 1.5s;\n        animation-timing-function: cubic-bezier(0, 1, 0, 1); }\n\n@keyframes barMove {\n  0% {\n    height: 0; } }\n        .list .box .canvas > div > span {\n          color: white;\n          background-color: rgba(110, 110, 110, 0.4);\n          padding: 4px 6px;\n          display: inline-block;\n          opacity: 0;\n          border-radius: 0 0 4px 0;\n          transition: opacity 0.3s ease-in; }\n        .list .box .canvas > div:hover > span {\n          opacity: 1; }\n        .list .box .canvas > div:nth-child(1) {\n          border-radius: 4px 4px 0 0;\n          height: 39%; }\n        .list .box .canvas > div:nth-child(2) {\n          height: 25%; }\n        .list .box .canvas > div:nth-child(3) {\n          height: 18%; }\n        .list .box .canvas > div:nth-child(4) {\n          border-radius: 0 0 4px 4px;\n          height: 18%; }\n    .list .box button {\n      margin-top: 13px;\n      height: 30px;\n      padding: 0 12px;\n      border: 1px solid #d9d9d9;\n      background-color: white;\n      cursor: pointer;\n      border-radius: 4px;\n      color: #919191;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }\n      .list .box button img {\n        width: 17px;\n        vertical-align: middle;\n        margin-right: 5px; }\n      .list .box button span {\n        vertical-align: middle;\n        font-size: 15px; }\n    .list .box button:active {\n      border: 1px solid #56a5f7;\n      color: #56a5f7; }\n    .list .box button:focus {\n      outline: 0; }\n", ""]);
+exports.push([module.i, ".list {\n  margin: 0 auto; }\n  .list .box {\n    width: 220px;\n    height: 285px;\n    background-color: white;\n    border-radius: 6px;\n    display: inline-block;\n    padding: 10px 10px 0 10px;\n    margin: 11px 10px;\n    box-shadow: 0 2px 3px 0.6px #d9d9d9;\n    transition: box-shadow 0.3s ease-in-out;\n    animation-name: fadeInAnim;\n    animation-fill-mode: backwards;\n    animation-duration: 200ms; }\n\n@keyframes fadeInAnim {\n  0% {\n    opacity: 0; } }\n    .list .box:hover {\n      transition: box-shadow 0.5s;\n      box-shadow: 0 5px 20px 2px #cccccc; }\n    .list .box .canvas {\n      height: 230px; }\n      .list .box .canvas > div {\n        animation-name: barMove;\n        animation-fill-mode: backwards;\n        animation-duration: 1.6s;\n        animation-timing-function: cubic-bezier(0, 1, 0, 1); }\n\n@keyframes barMove {\n  0% {\n    height: 0; } }\n        .list .box .canvas > div > span {\n          color: white;\n          background-color: rgba(110, 110, 110, 0.4);\n          padding: 4px 6px;\n          display: inline-block;\n          opacity: 0;\n          border-radius: 0 0 4px 0;\n          transition: opacity 0.3s ease-in; }\n        .list .box .canvas > div:hover > span {\n          opacity: 1; }\n        .list .box .canvas > div:nth-child(1) {\n          border-radius: 4px 4px 0 0;\n          height: 39%; }\n        .list .box .canvas > div:nth-child(2) {\n          height: 25%; }\n        .list .box .canvas > div:nth-child(3) {\n          height: 18%; }\n        .list .box .canvas > div:nth-child(4) {\n          border-radius: 0 0 4px 4px;\n          height: 18%; }\n    .list .box button {\n      margin-top: 13px;\n      height: 30px;\n      padding: 0 12px;\n      border: 1px solid #d9d9d9;\n      background-color: white;\n      cursor: pointer;\n      border-radius: 4px;\n      color: #919191;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }\n      .list .box button img {\n        width: 17px;\n        vertical-align: middle;\n        margin-right: 5px; }\n      .list .box button span {\n        vertical-align: middle;\n        font-size: 15px; }\n    .list .box button:active {\n      border: 1px solid #56a5f7;\n      color: #56a5f7; }\n    .list .box button:focus {\n      outline: 0; }\n", ""]);
 
 // exports
 

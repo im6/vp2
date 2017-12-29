@@ -61,14 +61,8 @@ export const createBox = (id, value, like, isliked) => {
   // likeBtn management
   const newBtn = document.createElement("button");
   newBtn.setAttribute("type", "button");
-
-  const likeTxt = document.createElement("span");
-  likeTxt.innerText = like;
-  const likeImg = document.createElement("img");
-  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
-
-  newBtn.appendChild(likeImg);
-  newBtn.appendChild(likeTxt);
+  const likeImg = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
+  newBtn.innerHTML = `<img src="${likeImg}"><span>${like}</span>`;
 
   // bind click event
   newBtn.onclick = (v) => {
