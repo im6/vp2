@@ -85,7 +85,15 @@ $color-radius: 4px;
       cursor: pointer;
       border-radius: 4px;
       color: #919191;
-      transition: all .3s cubic-bezier(.645,.045,.355,1);
+
+      animation-name: btnAnim;
+      animation-fill-mode: backwards;
+      animation-duration: .3s;
+      animation-delay: .4s;
+
+      @keyframes btnAnim {
+        0% { opacity: 0; }
+      }
 
       img {
         width: 17px;
