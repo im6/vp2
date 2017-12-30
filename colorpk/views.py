@@ -8,7 +8,9 @@ import json
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
@@ -29,6 +31,7 @@ def latest(request):
 def about(request):
     return HttpResponse(get_template('about.html').render())
 
+@cache_page(60 * 60)
 def notfound(request):
     # return redirect('/404found')
     return render_to_response('error_404.html')
