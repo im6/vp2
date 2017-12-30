@@ -3,18 +3,20 @@ import './layout';
 import { createBox } from './service';
 
 const ENTRYANIMDELAY = 60,
-  STEP = 20,
+  STEP = 11,
   LIMIT = window._colorpk.initData.length;
 const $listDiv = document.getElementsByClassName('list')[0];
+
 let currentIdx = 0;
 
-
 const addColorBox = (startIndex) => {
-  for(let i = startIndex; i < startIndex + STEP; i ++){
-    let v = window._colorpk.initData[i];
-    let k = i - startIndex;
+  for(let i = 0; i < STEP; i ++) {
+    const v = window._colorpk.initData[startIndex + i];
+    if(!v){
+      return;
+    }
     const oneBox = createBox(v.id, v.color, v.like, false);
-    oneBox.style.animationDelay = `${(k * ENTRYANIMDELAY)}ms`;
+    oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
   }
 };
@@ -25,12 +27,12 @@ currentIdx += STEP;
 
 
 document.body.onscroll = debounce(evt => {
-  let e = evt.target.scrollingElement;
-  let offset = e.scrollHeight - e.scrollTop - window.innerHeight;
-  console.log(currentIdx);
-  if(offset < 50 && currentIdx < LIMIT - STEP - 1) {
+  const e = evt.target.scrollingElement;
+  const offset = e.scrollHeight - e.scrollTop - window.innerHeight;
+
+  if(offset < 80 && currentIdx < LIMIT) {
     addColorBox(currentIdx);
-    currentIdx = Math.min(LIMIT - 1, currentIdx + STEP);
+    currentIdx += STEP;
   }
-}, 250);
+}, 200);
 

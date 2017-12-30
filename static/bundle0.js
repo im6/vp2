@@ -607,17 +607,20 @@ var _service = __webpack_require__(10);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ENTRYANIMDELAY = 60,
-    STEP = 20,
+    STEP = 11,
     LIMIT = window._colorpk.initData.length;
 var $listDiv = document.getElementsByClassName('list')[0];
+
 var currentIdx = 0;
 
 var addColorBox = function addColorBox(startIndex) {
-  for (var i = startIndex; i < startIndex + STEP; i++) {
-    var v = window._colorpk.initData[i];
-    var k = i - startIndex;
+  for (var i = 0; i < STEP; i++) {
+    var v = window._colorpk.initData[startIndex + i];
+    if (!v) {
+      return;
+    }
     var oneBox = (0, _service.createBox)(v.id, v.color, v.like, false);
-    oneBox.style.animationDelay = k * ENTRYANIMDELAY + 'ms';
+    oneBox.style.animationDelay = i * ENTRYANIMDELAY + 'ms';
     $listDiv.appendChild(oneBox);
   }
 };
@@ -628,12 +631,12 @@ currentIdx += STEP;
 document.body.onscroll = (0, _debounce2.default)(function (evt) {
   var e = evt.target.scrollingElement;
   var offset = e.scrollHeight - e.scrollTop - window.innerHeight;
-  console.log(currentIdx);
-  if (offset < 50 && currentIdx < LIMIT - STEP - 1) {
+
+  if (offset < 80 && currentIdx < LIMIT) {
     addColorBox(currentIdx);
-    currentIdx = Math.min(LIMIT - 1, currentIdx + STEP);
+    currentIdx += STEP;
   }
-}, 250);
+}, 200);
 
 /***/ }),
 /* 4 */
