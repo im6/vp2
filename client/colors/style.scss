@@ -89,10 +89,13 @@ $color-radius: 4px;
       animation-name: btnAnim;
       animation-fill-mode: backwards;
       animation-duration: .3s;
-      animation-delay: .4s;
+      animation-delay: .42s;
 
       @keyframes btnAnim {
-        0% { opacity: 0; }
+        0% {
+          opacity: 0;
+          transform: scale(0.7);
+        }
       }
 
       img {
