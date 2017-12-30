@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 3)
+#@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')

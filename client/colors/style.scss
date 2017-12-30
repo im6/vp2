@@ -100,6 +100,19 @@ $color-radius: 4px;
         }
       }
 
+      &:active {
+        background-color: #f7f7f7;
+      }
+
+      &:hover {
+        border: 1px solid #56a5f7;
+        color: #56a5f7;
+      }
+
+      &:focus{
+        outline:0; // for chrome style purpose
+      }
+
       img {
         width: 17px;
         vertical-align: middle;
@@ -111,13 +124,6 @@ $color-radius: 4px;
       }
     }
 
-    button:active {
-      border: 1px solid #56a5f7;
-      color: #56a5f7;
-    }
 
-    button:focus{
-      outline:0; // for chrome style purpose
-    }
   }
 }
