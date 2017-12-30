@@ -6,6 +6,8 @@ from .models import Color
 from datetime import datetime
 import json
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 
 @ensure_csrf_cookie
 def index(request):
@@ -26,3 +28,7 @@ def latest(request):
 
 def about(request):
     return HttpResponse(get_template('about.html').render())
+
+def notfound(request):
+    # return redirect('/404found')
+    return render_to_response('error_404.html')

@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from colorpk import views
 from colorpk import restful
 
@@ -25,4 +25,5 @@ urlpatterns = [
     path('latest/', views.latest),
     path('new/', views.index),
     path('about/', views.about),
+    re_path('/*/', views.notfound),
 ]
