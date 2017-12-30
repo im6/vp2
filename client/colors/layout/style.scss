@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
+$FOOTERHEIGHT: 100px;
 
 html {
     h1,h2,h3,h4,h5,p,span,li,div,button {
@@ -9,14 +10,26 @@ html {
     width: 100%;
     height: 100%;
 }
+
 body {
     margin: 0;
     padding: 0;
-    background: rgba(248,252,255,0.95);
 }
 
 main {
-    max-width: 1300px;
-    padding: 60px 0 40px 0;
-    margin: 0 auto;
+    padding: 60px 0 20px 0;
+    background: rgba(248, 252, 255, 1);
+    margin-bottom: $FOOTERHEIGHT;
+}
+
+footer {
+    background-image: radial-gradient(#4c4b4b 0%, #292929 100%);
+    position: fixed;
+    height: $FOOTERHEIGHT;
+    width: 100%;
+    bottom: 0;
+    z-index: -1;
+
+    color: white;
+
 }
