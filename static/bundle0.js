@@ -710,7 +710,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0; }\n\nmain {\n  padding: 60px 0 20px 0;\n  background: #f8fcff;\n  margin-bottom: 100px; }\n\nfooter {\n  background-image: radial-gradient(#4c4b4b 0%, #292929 100%);\n  position: fixed;\n  height: 100px;\n  width: 100%;\n  bottom: 0;\n  z-index: -1;\n  color: white; }\n", ""]);
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0; }\n\nmain {\n  padding: 60px 0 50px 0;\n  background: #f8fcff; }\n", ""]);
 
 // exports
 

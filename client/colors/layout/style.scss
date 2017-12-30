@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
-$FOOTERHEIGHT: 100px;
+$FOOTERHEIGHT: 26px;
+$BACKCOLOR: #f8fcff;
 
 html {
-    h1,h2,h3,h4,h5,p,span,li,div,button {
+    h1,h2,h3,h4,h5,p,span,li,div,button, footer {
       font-family: 'Cabin', sans-serif;
     }
     margin:0;
@@ -17,19 +18,18 @@ body {
 }
 
 main {
-    padding: 60px 0 20px 0;
-    background: rgba(248, 252, 255, 1);
-    margin-bottom: $FOOTERHEIGHT;
+    padding: 60px 0 50px 0;
+    background: $BACKCOLOR;
+    //margin-bottom: $FOOTERHEIGHT;
 }
 
-footer {
-    background-image: radial-gradient(#4c4b4b 0%, #292929 100%);
-    position: fixed;
-    height: $FOOTERHEIGHT;
-    width: 100%;
-    bottom: 0;
-    z-index: -1;
-
-    color: white;
-
-}
+//footer {
+//    background-color: $BACKCOLOR;
+//    //position: fixed;
+//    height: $FOOTERHEIGHT;
+//    width: 100%;
+//    bottom: 0;
+//    z-index: -1;
+//    text-align: center;
+//    color: #7eaad9;
+//}
