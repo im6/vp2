@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config client/webpack/dev.js"
+    "start": "webpack --config client/webpack/dev.js",
+    "build": "webpack --config client/webpack/prod.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "purecss": "^1.0.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   }

@@ -3,7 +3,7 @@ import './layout';
 import { createBox } from './service';
 
 const ENTRYANIMDELAY = 60,
-  STEP = 31,
+  STEP = 11,
   LIMIT = window._colorpk.initData.length;
 const $listDiv = document.getElementsByClassName('list')[0];
 
@@ -12,7 +12,7 @@ let currentIdx = 0;
 const addColorBox = (startIndex) => {
   for(let i = 0; i < STEP; i ++) {
     const v = window._colorpk.initData[startIndex + i];
-    if(!v){
+    if(!v) {
       return;
     }
     const oneBox = createBox(v.id, v.color, v.like, false);
@@ -25,14 +25,13 @@ const addColorBox = (startIndex) => {
 addColorBox(currentIdx);
 currentIdx += STEP;
 
+document.body.onscroll = debounce(evt => {
+  const e = evt.target.scrollingElement;
+  const offset = e.scrollHeight - e.scrollTop - window.innerHeight;
 
-// document.body.onscroll = debounce(evt => {
-//   const e = evt.target.scrollingElement;
-//   const offset = e.scrollHeight - e.scrollTop - window.innerHeight;
-//
-//   if(offset < 80 && currentIdx < LIMIT) {
-//     addColorBox(currentIdx);
-//     currentIdx += STEP;
-//   }
-// }, 200);
+  if(offset < 80 && currentIdx < LIMIT) {
+    addColorBox(currentIdx);
+    currentIdx += STEP;
+  }
+}, 200);
 
