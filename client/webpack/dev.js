@@ -3,7 +3,9 @@ const path = require('path');
 
 module.exports = {
   watch: true,
-  entry: './client/entry/main.js',
+  entry: {
+    'bundle0': './client/colors/index.js',
+  },
   module:{
     rules: [
       {
@@ -32,6 +34,6 @@ module.exports = {
   output: {
     publicPath: '/static',
     path: path.join(__dirname, '../../static'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
 };

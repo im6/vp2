@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -519,58 +519,6 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(3);
-
-var _colors = __webpack_require__(10);
-
-var $listDiv = document.getElementsByClassName('list')[0];
-var ENTRYANIMDELAY = 60;
-
-window._colorpk.initData.forEach(function (v, k) {
-  var oneBox = (0, _colors.createBox)(v.id, v.color, v.like, false);
-  oneBox.style.animationDelay = k * ENTRYANIMDELAY + 'ms';
-  $listDiv.appendChild(oneBox);
-});
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _debounce = __webpack_require__(4);
-
-var _debounce2 = _interopRequireDefault(_debounce);
-
-__webpack_require__(5);
-
-__webpack_require__(8);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var BOXWD = 260; //import 'style-loader!css-loader!purecss/build/pure-min.css';
-//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
-
-var mainElem = document.getElementsByTagName('main')[0];
-
-var adjustLayout = function adjustLayout(w) {
-  mainElem.style.width = Math.floor(w * 0.9 / BOXWD) * BOXWD + 'px';
-};
-
-window.onresize = (0, _debounce2.default)(function (e) {
-  adjustLayout(e.target.innerWidth);
-}, 200);
-
-adjustLayout(window.innerWidth);
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -642,6 +590,84 @@ module.exports = function debounce(func, wait, immediate){
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _debounce = __webpack_require__(2);
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(4);
+
+var _service = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ENTRYANIMDELAY = 60,
+    STEP = 20,
+    LIMIT = window._colorpk.initData.length;
+var $listDiv = document.getElementsByClassName('list')[0];
+var currentIdx = 0;
+
+var addColorBox = function addColorBox(startIndex) {
+  for (var i = startIndex; i < startIndex + STEP; i++) {
+    var v = window._colorpk.initData[i];
+    var k = i - startIndex;
+    var oneBox = (0, _service.createBox)(v.id, v.color, v.like, false);
+    oneBox.style.animationDelay = k * ENTRYANIMDELAY + 'ms';
+    $listDiv.appendChild(oneBox);
+  }
+};
+
+addColorBox(currentIdx);
+currentIdx += STEP;
+
+document.body.onscroll = (0, _debounce2.default)(function (evt) {
+  var e = evt.target.scrollingElement;
+  var offset = e.scrollHeight - e.scrollTop - window.innerHeight;
+  console.log(currentIdx);
+  if (offset < 50 && currentIdx < LIMIT - STEP - 1) {
+    addColorBox(currentIdx);
+    currentIdx = Math.min(LIMIT - 1, currentIdx + STEP);
+  }
+}, 250);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _debounce = __webpack_require__(2);
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(5);
+
+__webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BOXWD = 260; //import 'style-loader!css-loader!purecss/build/pure-min.css';
+//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
+
+var mainElem = document.getElementsByTagName('main')[0];
+
+var adjustLayout = function adjustLayout(w) {
+  mainElem.style.width = Math.floor(w * 0.9 / BOXWD) * BOXWD + 'px';
+};
+
+window.onresize = (0, _debounce2.default)(function (e) {
+  adjustLayout(e.target.innerWidth);
+}, 200);
+
+adjustLayout(window.innerWidth);
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -662,8 +688,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./style.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./style.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -802,8 +828,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./header.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
