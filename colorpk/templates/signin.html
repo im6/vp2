@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
-
+{% load static %}
 {% block mainContent %}
-    <h1>Single Sign on</h1>
+    <div>
+        <h3>Please Sign in with:</h3>
+        <a href="/xxx">
+            <img src="{% static "oauth1.png" %}" alt="">
+        </a>
+
+        <a href="/xxx">
+            <img src="{% static "oauth2.png" %}" alt="">
+        </a>
+
+        <a href="/xxx">
+            <img src="{% static "oauth4.png" %}" alt="">
+        </a>
+    </div>
+    <script src="{% static "bundle1.js" %}"></script>
 {% endblock %}

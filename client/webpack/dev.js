@@ -5,6 +5,7 @@ module.exports = {
   watch: true,
   entry: {
     'bundle0': './client/colors/index.js',
+    'bundle1': './client/signin/index.js',
   },
   module:{
     rules: [
