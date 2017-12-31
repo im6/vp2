@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 
-#@cache_page(60 * 3)
+@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
@@ -25,8 +25,16 @@ def index(request):
 def colorOne(request, id):
     return HttpResponse("Hello, world. number : %s."%id)
 
+@cache_page(60 * 3)
 def latest(request):
-    return HttpResponse("Hello, world. latest view.")
+    template = get_template('main.html')
+    alldata = list(map(lambda x: x.to_dict(), Color.objects.all().order_by('-id')))
+    for key, value in enumerate(alldata):
+        value["canvas"] = value["color"].split("#")
+        value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
+    return HttpResponse(template.render({
+        "list": alldata,
+    }))
 
 def about(request):
     return HttpResponse(get_template('about.html').render())
