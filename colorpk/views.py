@@ -23,7 +23,13 @@ def index(request):
     }))
 
 def colorOne(request, id):
-    return HttpResponse("Hello, world. number : %s."%id)
+    return render_to_response('one_color.html')
+
+def create(request):
+    return render_to_response('create.html')
+
+def signin(request):
+    return render_to_response('signin.html')
 
 @cache_page(60 * 3)
 def latest(request):

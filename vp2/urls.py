@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from colorpk import views
-from colorpk import restful
+from colorpk import controller
 
 urlpatterns = [
     path('', views.index),
-    path('color/<int:id>/', views.colorOne),
-    path('like/<int:id>', restful.toggleLike),
+    path('color/<int:id>', views.colorOne),
+    path('like/<int:id>', controller.toggleLike),
     path('latest/', views.latest),
-    path('new/', views.index),
+    path('create/', views.create),
+    path('signin', views.signin),
     path('about/', views.about),
     re_path('/*/', views.notfound),
 ]

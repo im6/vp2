@@ -8,8 +8,6 @@
         <meta name="keywords" content="ColorPK" />
         <meta name="description" content="ColorPK website" />
         <link rel="shortcut icon" href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico" />
-        <style>
-        </style>
         <script type="text/javascript">
             if(window.location.hostname.indexOf('javascript.fun') > -1){
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -23,16 +21,10 @@
     </head>
     <body>
         {% include 'layout/header.html' %}
-
         <main>
             {% block mainContent %}
-                <h1>no mainContent at all</h1>
             {% endblock %}
         </main>
-
-
 {#        {% include 'layout/footer.html' %}#}
-        {% load static %}
-        <script src="{% static "bundle0.js" %}"></script>
     </body>
 </html>

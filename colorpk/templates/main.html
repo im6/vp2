@@ -12,4 +12,6 @@
           {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
         ];
     </script>
+    {% load static %}
+    <script src="{% static "bundle0.js" %}"></script>
 {% endblock %}
