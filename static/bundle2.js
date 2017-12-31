@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -658,294 +658,38 @@ exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/**
- * Returns a function, that, as long as it continues to be invoked, will not
- * be triggered. The function will be called after it stops being called for
- * N milliseconds. If `immediate` is passed, trigger the function on the
- * leading edge, instead of the trailing. The function also has a property 'clear' 
- * that is a function which will clear the timer to prevent previously scheduled executions. 
- *
- * @source underscore.js
- * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
- * @param {Function} function to wrap
- * @param {Number} timeout in ms (`100`)
- * @param {Boolean} whether to execute at the beginning (`false`)
- * @api public
- */
-
-module.exports = function debounce(func, wait, immediate){
-  var timeout, args, context, timestamp, result;
-  if (null == wait) wait = 100;
-
-  function later() {
-    var last = Date.now() - timestamp;
-
-    if (last < wait && last >= 0) {
-      timeout = setTimeout(later, wait - last);
-    } else {
-      timeout = null;
-      if (!immediate) {
-        result = func.apply(context, args);
-        context = args = null;
-      }
-    }
-  };
-
-  var debounced = function(){
-    context = this;
-    args = arguments;
-    timestamp = Date.now();
-    var callNow = immediate && !timeout;
-    if (!timeout) timeout = setTimeout(later, wait);
-    if (callNow) {
-      result = func.apply(context, args);
-      context = args = null;
-    }
-
-    return result;
-  };
-
-  debounced.clear = function() {
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = null;
-    }
-  };
-  
-  debounced.flush = function() {
-    if (timeout) {
-      result = func.apply(context, args);
-      context = args = null;
-      
-      clearTimeout(timeout);
-      timeout = null;
-    }
-  };
-
-  return debounced;
-};
-
-
-/***/ }),
-/* 6 */
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-var _debounce = __webpack_require__(5);
-
-var _debounce2 = _interopRequireDefault(_debounce);
-
-__webpack_require__(7);
-
-var _service = __webpack_require__(10);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ENTRYANIMDELAY = 60,
-    STEP = 11,
-    LIMIT = window._colorpk.initData.length;
-var $listDiv = document.getElementsByClassName('list')[0];
-
-var currentIdx = 0;
-
-var addColorBox = function addColorBox(startIndex) {
-  for (var i = 0; i < STEP; i++) {
-    var v = window._colorpk.initData[startIndex + i];
-    if (!v) {
-      return;
-    }
-    var oneBox = (0, _service.createBox)(v.id, v.color, v.like, false);
-    oneBox.style.animationDelay = i * ENTRYANIMDELAY + 'ms';
-    $listDiv.appendChild(oneBox);
-  }
-};
-
-addColorBox(currentIdx);
-currentIdx += STEP;
-
-document.body.onscroll = (0, _debounce2.default)(function (evt) {
-  var e = evt.target.scrollingElement;
-  var offset = e.scrollHeight - e.scrollTop - window.innerHeight;
-
-  if (offset < 80 && currentIdx < LIMIT) {
-    addColorBox(currentIdx);
-    currentIdx += STEP;
-  }
-}, 200);
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _debounce = __webpack_require__(5);
-
-var _debounce2 = _interopRequireDefault(_debounce);
-
-__webpack_require__(8);
 
 __webpack_require__(3);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+__webpack_require__(18);
 
-var BOXWD = 260; //import 'style-loader!css-loader!purecss/build/pure-min.css';
-//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
-
-var mainElem = document.getElementsByClassName('list')[0];
-
-var adjustLayout = function adjustLayout(w) {
-  mainElem.style.width = Math.floor(w * 0.9 / BOXWD) * BOXWD + 'px';
-};
-
-window.onresize = (0, _debounce2.default)(function (e) {
-  adjustLayout(e.target.innerWidth);
-}, 200);
-
-adjustLayout(window.innerWidth);
+alert('this is new color');
 
 /***/ }),
-/* 8 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./style.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(undefined);
-// imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
-
-// module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0; }\n\nmain {\n  padding: 60px 0 50px 0;\n  background: #f8fcff; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createBox = undefined;
-
-__webpack_require__(11);
-
-var _util = __webpack_require__(13);
-
-var likeAjax = function likeAjax(id, like) {
-  (0, _util.ajax)({
-    method: 'POST',
-    url: 'like/' + id,
-    data: {
-      like: like
-    },
-    success: function success(v) {},
-    fail: function fail() {}
-  });
-};
-
-var createBox = exports.createBox = function createBox(id, value, like, isliked) {
-  var newBox = document.createElement("div");
-  newBox.classList.add('box');
-  newBox.dataset.k = id;
-  newBox.dataset.l = like;
-
-  // canvas management
-  var newCanvas = document.createElement("div");
-  newCanvas.classList.add('canvas');
-  var colors0 = value.split('#');
-  var colors1 = colors0.map(function (v) {
-    return '#' + v;
-  });
-
-  colors1.forEach(function (v) {
-    var oneColor = document.createElement("div");
-    var oneColorTxt = document.createElement("span");
-    oneColorTxt.innerText = v;
-    oneColor.appendChild(oneColorTxt);
-    oneColor.style.backgroundColor = v;
-
-    newCanvas.appendChild(oneColor);
-  });
-
-  // likeBtn management
-  var newBtn = document.createElement("button");
-  newBtn.setAttribute("type", "button");
-
-  var likeTxt = document.createElement("span");
-  likeTxt.innerText = like;
-  var likeImg = document.createElement("img");
-  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
-
-  newBtn.appendChild(likeImg);
-  newBtn.appendChild(likeTxt);
-
-  // bind click event
-  newBtn.onclick = function (v) {
-    if (likeImg.src.indexOf('hrt.svg') > -1) {
-      likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
-      likeTxt.innerText = like + 1;
-      likeAjax(id, true);
-    } else {
-      likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
-      likeTxt.innerText = like;
-      likeAjax(id, false);
-    }
-  };
-
-  //combine
-  newBox.appendChild(newCanvas);
-  newBox.appendChild(newBtn);
-  return newBox;
-};
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(19);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -970,74 +714,18 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, ".list {\n  margin: 0 auto;\n  max-width: 1300px; }\n  .list .box {\n    width: 220px;\n    height: 285px;\n    background-color: white;\n    border-radius: 6px;\n    display: inline-block;\n    padding: 10px 10px 0 10px;\n    margin: 11px 10px;\n    box-shadow: 0 2px 3px 0.6px #d9d9d9;\n    transition: box-shadow 0.3s ease-in-out;\n    animation-name: fadeInAnim;\n    animation-fill-mode: backwards;\n    animation-duration: 200ms; }\n\n@keyframes fadeInAnim {\n  0% {\n    opacity: 0; } }\n    .list .box:hover {\n      transition: box-shadow 0.5s;\n      box-shadow: 0 5px 20px 2px #cccccc; }\n    .list .box .canvas {\n      height: 230px; }\n      .list .box .canvas > div {\n        animation-name: barMove;\n        animation-fill-mode: backwards;\n        animation-duration: 1.6s;\n        animation-timing-function: cubic-bezier(0, 1, 0, 1); }\n\n@keyframes barMove {\n  0% {\n    height: 0; } }\n        .list .box .canvas > div > span {\n          color: white;\n          background-color: rgba(110, 110, 110, 0.4);\n          padding: 4px 6px;\n          display: inline-block;\n          opacity: 0;\n          border-radius: 0 0 4px 0;\n          transition: opacity 0.3s ease-in; }\n        .list .box .canvas > div:hover > span {\n          opacity: 1; }\n        .list .box .canvas > div:nth-child(1) {\n          border-radius: 4px 4px 0 0;\n          height: 39%; }\n        .list .box .canvas > div:nth-child(2) {\n          height: 25%; }\n        .list .box .canvas > div:nth-child(3) {\n          height: 18%; }\n        .list .box .canvas > div:nth-child(4) {\n          border-radius: 0 0 4px 4px;\n          height: 18%; }\n    .list .box button {\n      margin-top: 13px;\n      height: 30px;\n      padding: 0 12px;\n      border: 1px solid #d9d9d9;\n      background-color: white;\n      cursor: pointer;\n      border-radius: 4px;\n      color: #919191;\n      animation-name: btnAnim;\n      animation-fill-mode: backwards;\n      animation-duration: .3s;\n      animation-delay: .42s; }\n\n@keyframes btnAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n      .list .box button:active {\n        background-color: #f7f7f7; }\n      .list .box button:hover {\n        border: 1px solid #56a5f7;\n        color: #56a5f7; }\n      .list .box button:focus {\n        outline: 0; }\n      .list .box button img {\n        width: 17px;\n        vertical-align: middle;\n        margin-right: 5px; }\n      .list .box button span {\n        vertical-align: middle;\n        font-size: 15px; }\n", ""]);
+exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: linear-gradient(to left top, #f7bb97, #dd5e89); }\n\nmain {\n  padding: 300px 0 50px 0; }\n  main > div {\n    width: 160px;\n    margin: auto;\n    background-color: white;\n    padding: 40px;\n    border-radius: 5px;\n    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);\n    animation-name: boxAnim;\n    animation-fill-mode: backwards;\n    animation-duration: .5s;\n    animation-delay: 0.25s; }\n\n@keyframes boxAnim {\n  0% {\n    opacity: 0; } }\n    main > div a {\n      text-decoration: none;\n      display: inline-block;\n      animation-name: iconAnim;\n      animation-fill-mode: backwards;\n      animation-duration: .5s;\n      animation-delay: 0.75s; }\n\n@keyframes iconAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n", ""]);
 
 // exports
 
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getCookieLocal = function getCookieLocal() {
-  var result = {};
-  if (!window.cookie || window.cookie.length === 0) {
-    var cookies0 = document.cookie.split(';');
-    result = cookies0.reduce(function (acc, v, k) {
-      var idx = v.indexOf('=');
-      var v1 = v.split(v[idx]);
-      acc[v1[0]] = v1[1];
-      return acc;
-    }, {});
-  } else {
-    console.error('invalid cookie');
-  }
-
-  return result;
-};
-
-var localCookie = getCookieLocal();
-
-var ajax = exports.ajax = function ajax(config) {
-  var method = config.method,
-      url = config.url,
-      data = config.data,
-      success = config.success,
-      fail = config.fail;
-
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        success(xhr.responseText);
-      } else {
-        fail();
-      }
-    }
-  };
-
-  xhr.open(method, url);
-  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
-  if (method !== 'GET') {
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  }
-  xhr.send(JSON.stringify(data));
-};
 
 /***/ })
 /******/ ]);

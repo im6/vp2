@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     'bundle0': './client/colors/index.js',
     'bundle1': './client/signin/index.js',
+    'bundle2': './client/newcolor/index.js',
   },
   module:{
     rules: [
