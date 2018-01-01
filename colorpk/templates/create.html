@@ -3,17 +3,17 @@
 {% load static %}
 {% block mainContent %}
     <div class="canvas">
+        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 0)', position:'right'}"></button>
         <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 1)', position:'right'}"></button>
         <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 2)', position:'right'}"></button>
         <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 3)', position:'right'}"></button>
-        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 4)', position:'right'}"></button>
     </div>
     <div class="btnGrp">
-        <button class="btn btn-primary">
+        <button id="createBtn" class="btn btn-primary">
             Create
         </button>
         &nbsp;&nbsp;&nbsp;
-        <button class="btn">
+        <button id="resetBtn" class="btn">
             Reset
         </button>
     </div>

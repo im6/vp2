@@ -43,6 +43,7 @@ main {
 
     @keyframes boxAnim {
       0% {
+        opacity: 0;
         height: 0;
       }
     }
