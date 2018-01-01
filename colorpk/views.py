@@ -25,7 +25,7 @@ def index(request):
 def colorOne(request, id):
     return render_to_response('one_color.html')
 
-def create(request):
+def newcolor(request):
     return render_to_response('create.html')
 
 def signin(request):
@@ -41,9 +41,6 @@ def latest(request):
     return HttpResponse(template.render({
         "list": alldata,
     }))
-
-def about(request):
-    return HttpResponse(get_template('about.html').render())
 
 @cache_page(60 * 60)
 def notfound(request):

@@ -1,5 +1,6 @@
 import './style.scss';
 import './jscolor.min';
+import { ajax } from '../shared/util';
 
 const state = [null,null,null,null];
 const bars = document.getElementsByClassName('jscolor');
@@ -15,7 +16,18 @@ window.setTextColor = (picker, id) => {
 };
 
 document.getElementById('createBtn').onclick = () => {
-  debugger;
+  ajax({
+    method: 'POST',
+    url: `/create`,
+    data: {
+      color: state,
+    },
+    success: (v) => {
+      debugger;
+    },
+    fail: () => {
+    }
+  });
 };
 
 document.getElementById('resetBtn').onclick = () => {

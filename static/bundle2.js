@@ -635,6 +635,8 @@ __webpack_require__(16);
 
 __webpack_require__(18);
 
+var _util = __webpack_require__(19);
+
 var state = [null, null, null, null];
 var bars = document.getElementsByClassName('jscolor');
 
@@ -649,7 +651,17 @@ window.setTextColor = function (picker, id) {
 };
 
 document.getElementById('createBtn').onclick = function () {
-  debugger;
+  (0, _util.ajax)({
+    method: 'POST',
+    url: '/create',
+    data: {
+      color: state
+    },
+    success: function success(v) {
+      debugger;
+    },
+    fail: function fail() {}
+  });
 };
 
 document.getElementById('resetBtn').onclick = function () {
@@ -696,7 +708,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, ".btn {\n  height: 30px;\n  padding: 0 12px;\n  border: 1px solid #d9d9d9;\n  background-color: white;\n  cursor: pointer;\n  border-radius: 4px;\n  color: #919191;\n  font-size: 15px;\n  animation-name: btnAnim;\n  animation-fill-mode: backwards;\n  animation-duration: .3s;\n  animation-delay: .42s; }\n\n@keyframes btnAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n  .btn:active {\n    background-color: #f7f7f7; }\n  .btn:hover {\n    border: 1px solid #56a5f7;\n    color: #56a5f7; }\n  .btn:focus {\n    outline: 0; }\n\n.btn-primary {\n  border: none;\n  color: white;\n  background-color: #56a5f7; }\n  .btn-primary:hover {\n    color: white;\n    border: none; }\n  .btn-primary:active {\n    background-color: #6099d4; }\n\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -2px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n\nhtml {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: linear-gradient(to left top, #f0f0f0, #ffffff); }\n\nmain {\n  padding-top: 100px; }\n  main .canvas {\n    width: 180px;\n    margin: auto;\n    padding: 10px;\n    border: 1px solid darkgray;\n    border-radius: 5px;\n    background-color: white;\n    box-shadow: 0 5px 20px 1.5px #cccccc; }\n  main .jscolor {\n    height: 50px;\n    width: 100%;\n    border: 1px dashed darkgray;\n    display: block;\n    animation-name: boxAnim;\n    animation-fill-mode: backwards;\n    animation-duration: .6s;\n    animation-delay: 0.05s; }\n\n@keyframes boxAnim {\n  0% {\n    opacity: 0;\n    height: 0; } }\n    main .jscolor:nth-child(1) {\n      border-radius: 4px 4px 0 0; }\n    main .jscolor:nth-child(4) {\n      border-radius: 0 0 4px 4px; }\n  main .btnGrp {\n    width: 146px;\n    margin: 30px auto; }\n", ""]);
+exports.push([module.i, ".btn {\n  height: 30px;\n  padding: 0 12px;\n  border: 1px solid #d9d9d9;\n  background-color: white;\n  cursor: pointer;\n  border-radius: 4px;\n  color: #919191;\n  font-size: 15px;\n  animation-name: btnAnim;\n  animation-fill-mode: backwards;\n  animation-duration: .3s;\n  animation-delay: .42s; }\n\n@keyframes btnAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n  .btn:active {\n    background-color: #f7f7f7; }\n  .btn:hover {\n    border: 1px solid #56a5f7;\n    color: #56a5f7; }\n  .btn:focus {\n    outline: 0; }\n\n.btn-primary {\n  border: none;\n  color: white;\n  background-color: #56a5f7; }\n  .btn-primary:hover {\n    color: white;\n    border: none; }\n  .btn-primary:active {\n    background-color: #6099d4; }\n\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -16px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n\nhtml {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: linear-gradient(to left top, #f0f0f0, #ffffff); }\n\nmain {\n  padding-top: 100px; }\n  main .canvas {\n    width: 180px;\n    margin: auto;\n    padding: 10px;\n    border: 1px solid darkgray;\n    border-radius: 5px;\n    background-color: white;\n    box-shadow: 0 5px 20px 1.5px #cccccc; }\n  main .jscolor {\n    height: 50px;\n    width: 100%;\n    border: 1px dashed darkgray;\n    display: block;\n    animation-name: boxAnim;\n    animation-fill-mode: backwards;\n    animation-duration: .6s;\n    animation-delay: 0.05s; }\n\n@keyframes boxAnim {\n  0% {\n    opacity: 0;\n    height: 0; } }\n    main .jscolor:nth-child(1) {\n      border-radius: 4px 4px 0 0; }\n    main .jscolor:nth-child(4) {\n      border-radius: 0 0 4px 4px; }\n  main .btnGrp {\n    width: 146px;\n    margin: 30px auto; }\n", ""]);
 
 // exports
 
@@ -1106,6 +1118,62 @@ window.jscolor || (window.jscolor = function () {
         r = document.getElementsByTagName("button");e.tryInstallOnElements(n, t), e.tryInstallOnElements(r, t);
   }, e.register(), e.jscolor;
 }());
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getCookieLocal = function getCookieLocal() {
+  var result = {};
+  if (!window.cookie || window.cookie.length === 0) {
+    var cookies0 = document.cookie.split(';');
+    result = cookies0.reduce(function (acc, v, k) {
+      var idx = v.indexOf('=');
+      var v1 = v.split(v[idx]);
+      acc[v1[0]] = v1[1];
+      return acc;
+    }, {});
+  } else {
+    console.error('invalid cookie');
+  }
+
+  return result;
+};
+
+var localCookie = getCookieLocal();
+
+var ajax = exports.ajax = function ajax(config) {
+  var method = config.method,
+      url = config.url,
+      data = config.data,
+      success = config.success,
+      fail = config.fail;
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        success(xhr.responseText);
+      } else {
+        fail();
+      }
+    }
+  };
+
+  xhr.open(method, url);
+  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
+  if (method !== 'GET') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
+  xhr.send(JSON.stringify(data));
+};
 
 /***/ })
 /******/ ]);
