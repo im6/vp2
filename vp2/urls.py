@@ -23,8 +23,8 @@ urlpatterns = [
     path('color/<int:id>', views.colorOne),
     path('like/<int:id>', controller.toggleLike),
     path('create', controller.createColor),
-    path('latest/', views.latest),
-    path('newcolor/', views.newcolor),
+    path('latest', views.latest),
+    path('newcolor', views.newcolor),
     path('signin', views.signin),
     re_path('/*/', views.notfound),
 ]

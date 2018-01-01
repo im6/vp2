@@ -133,3 +133,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 CSRF_USE_SESSIONS = False
+APPEND_SLASH = False
