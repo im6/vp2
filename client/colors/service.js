@@ -40,6 +40,7 @@ export const createBox = (id, value, like, isliked) => {
 
   // likeBtn management
   const newBtn = document.createElement("button");
+  newBtn.classList.add('btn');
   newBtn.setAttribute("type", "button");
 
   const likeTxt = document.createElement("span");

@@ -1,9 +1,35 @@
-$button-color: #56a5f7;
 
 .btn {
-  font-size: 13px;
-  background: white;
-  border: 1px solid $button-color;
-  padding: 8px 11px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #d9d9d9;
+  background-color: white;;
+  cursor: pointer;
   border-radius: 4px;
+  color: #919191;
+
+  animation-name: btnAnim;
+  animation-fill-mode: backwards;
+  animation-duration: .3s;
+  animation-delay: .42s;
+
+  @keyframes btnAnim {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  &:active {
+    background-color: #f7f7f7;
+  }
+
+  &:hover {
+    border: 1px solid #56a5f7;
+    color: #56a5f7;
+  }
+
+  &:focus{
+    outline:0; // for chrome style purpose
+  }
 }
