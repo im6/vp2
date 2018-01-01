@@ -1,3 +1,4 @@
+$btn-color: #56a5f7;
 
 .btn {
   height: 30px;
@@ -26,11 +27,25 @@
   }
 
   &:hover {
-    border: 1px solid #56a5f7;
-    color: #56a5f7;
+    border: 1px solid $btn-color;
+    color: $btn-color;
   }
 
   &:focus{
     outline:0; // for chrome style purpose
+  }
+}
+
+.btn-primary {
+  border: none;
+  color: white;
+  background-color: $btn-color;
+
+  &:hover {
+    color: white;
+    border: none;
+  }
+  &:active {
+    background-color: #6099d4;
   }
 }
