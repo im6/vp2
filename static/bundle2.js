@@ -692,13 +692,14 @@ __webpack_require__(18);
 
 var _util = __webpack_require__(3);
 
-var state = [null, null, null, null];
 var bars = document.getElementsByClassName('jscolor');
+var state = [null, null, null, null];
 
 var resetColors = function resetColors() {
   for (var i = 0; i < 4; i++) {
     bars[i].jscolor.fromString('ffffff');
   }
+  state = [null, null, null, null];
 };
 
 window.setTextColor = function (picker, id) {
@@ -706,17 +707,22 @@ window.setTextColor = function (picker, id) {
 };
 
 document.getElementById('createBtn').onclick = function () {
-  (0, _util.ajax)({
-    method: 'POST',
-    url: '/create',
-    data: {
-      color: state
-    },
-    success: function success(v) {
-      debugger;
-    },
-    fail: function fail() {}
-  });
+  if (state.indexOf(null) > -1) {
+    // not valid color here
+  } else {
+    (0, _util.ajax)({
+      method: 'POST',
+      url: '/create',
+      data: {
+        color: state
+      },
+      success: function success(v) {
+        debugger;
+        resetColors();
+      },
+      fail: function fail() {}
+    });
+  }
 };
 
 document.getElementById('resetBtn').onclick = function () {
