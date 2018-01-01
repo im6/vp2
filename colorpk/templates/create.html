@@ -2,8 +2,12 @@
 
 {% load static %}
 {% block mainContent %}
-    <div>
-        <h3>New COlor</h3>
+    <div class="canvas">
+        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 1)', position:'right'}"></button>
+        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 2)', position:'right'}"></button>
+        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 3)', position:'right'}"></button>
+        <button class="jscolor" data-jscolor="{valueElement:'chosen-value', onFineChange:'setTextColor(this, 4)', position:'right'}"></button>
     </div>
+
     <script src="{% static "bundle2.js" %}"></script>
 {% endblock %}

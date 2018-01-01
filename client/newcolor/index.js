@@ -1,4 +1,7 @@
 import '../colors/layout/header.scss';
 import './style.scss';
+import './jscolor.min';
 
-alert('this is new color');
+window.setTextColor = (picker, id) => {
+  console.log(id);
+};

@@ -11,47 +11,34 @@ html {
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to left top, rgb(247, 187, 151), rgb(221, 94, 137));
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to left top, #f0f0f0, #ffffff);
 }
 
 main {
-    padding: 300px 0 50px 0;
-    > div {
-      width: 160px;
-      margin: auto;
-      background-color: white;
-      padding: 40px;
-      border-radius: 5px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  padding-top: 100px;
 
-      animation-name: boxAnim;
-      animation-fill-mode: backwards;
-      animation-duration: .5s;
-      animation-delay: 0.25s;
+  .canvas {
+    width: 180px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 5px 20px 1.5px #cccccc;
+  }
+  .jscolor {
+    height: 50px;
+    width: 100%;
+    border: 1px dashed darkgray;
+    display: block;
 
-      @keyframes boxAnim {
-        0% {
-          opacity: 0;
-        }
-      }
-
-      a {
-        text-decoration: none;
-        display: inline-block;
-
-        animation-name: iconAnim;
-        animation-fill-mode: backwards;
-        animation-duration: .5s;
-        animation-delay: 0.75s;
-
-        @keyframes iconAnim {
-          0% {
-            opacity: 0;
-            transform: scale(0);
-          }
-        }
-      }
+    &:nth-child(1){
+      border-radius: 4px 4px 0 0;
     }
+    &:nth-child(4){
+      border-radius: 0 0 4px 4px;
+    }
+  }
 }
