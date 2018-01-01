@@ -4,16 +4,33 @@
     </a>
     <nav>
       <ul>
-          <li><a href="/signin">Sign In</a></li>
-          <li>
-              <a href="javascript:void(0)">&#9662; Popular</a>
-              <ul class="submenu">
-                <li><a href="/">Popular</a></li>
-                <li><a href="/latest">Latest</a></li>
-                <li><a href="//www.javascript.fun/about/">About</a></li>
-              </ul>
-          </li>
-          <li><a href="/newcolor">&#43; Create</a></li>
+          {% if path != '/' and path != '/latest' %}
+              <li><a href="/">&#8592; Back</a></li>
+          {% else %}
+              <li>
+                  <a href="javascript:void(0)">
+                      &#9662;
+                      {% if path == '/' %}
+                        Popular
+                      {% elif path == '/latest' %}
+                        Latest
+                      {% endif %}
+                  </a>
+                  <ul class="submenu">
+                    <li><a href="/">Popular</a></li>
+                    <li><a href="/latest">Latest</a></li>
+                    <li><a href="//www.javascript.fun/about/">About</a></li>
+                  </ul>
+              </li>
+          {% endif %}
+
+          {% if path != '/signin' %}
+              <li><a href="/signin">Sign In</a></li>
+          {% endif %}
+
+          {% if path != '/newcolor' %}
+              <li><a href="/newcolor">&#43; Create</a></li>
+          {% endif %}
       </ul>
     </nav>
 </header>

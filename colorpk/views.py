@@ -20,16 +20,21 @@ def index(request):
         value["canvas"] = list(map(lambda x: "#%s"%x, value["canvas"]))
     return HttpResponse(template.render({
         "list": alldata,
+        "path": request.path
     }))
 
 def colorOne(request, id):
     return render_to_response('one_color.html')
 
 def newcolor(request):
-    return render_to_response('create.html')
+    return render_to_response('create.html', {
+        "path": request.path
+    })
 
 def signin(request):
-    return render_to_response('signin.html')
+    return render_to_response('signin.html', {
+        "path": request.path
+    })
 
 @cache_page(60 * 3)
 def latest(request):
@@ -40,6 +45,7 @@ def latest(request):
         value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
     return HttpResponse(template.render({
         "list": alldata,
+        "path": request.path
     }))
 
 @cache_page(60 * 60)
