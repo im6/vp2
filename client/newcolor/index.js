@@ -1,4 +1,3 @@
-import '../colors/layout/header.scss';
 import './style.scss';
 import './jscolor.min';
 

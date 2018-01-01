@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -613,51 +613,8 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(4);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -2px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 3 */,
+/* 4 */,
 /* 5 */,
 /* 6 */,
 /* 7 */,
@@ -665,26 +622,22 @@ exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  
 /* 9 */,
 /* 10 */,
 /* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(3);
-
-__webpack_require__(15);
+__webpack_require__(13);
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(16);
+var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -709,7 +662,7 @@ if(false) {
 }
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -717,7 +670,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: linear-gradient(to left top, #f7bb97, #dd5e89); }\n\nmain {\n  padding: 300px 0 50px 0; }\n  main > div {\n    width: 160px;\n    margin: auto;\n    background-color: white;\n    padding: 40px;\n    border-radius: 5px;\n    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);\n    animation-name: boxAnim;\n    animation-fill-mode: backwards;\n    animation-duration: .5s;\n    animation-delay: 0.25s; }\n\n@keyframes boxAnim {\n  0% {\n    opacity: 0; } }\n    main > div a {\n      text-decoration: none;\n      display: inline-block;\n      animation-name: iconAnim;\n      animation-fill-mode: backwards;\n      animation-duration: .5s;\n      animation-delay: 0.75s; }\n\n@keyframes iconAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n", ""]);
+exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -2px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n\nhtml {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  background: linear-gradient(to left top, #f7bb97, #dd5e89); }\n\nmain {\n  padding: 300px 0 50px 0; }\n  main > div {\n    width: 160px;\n    margin: auto;\n    background-color: white;\n    padding: 40px;\n    border-radius: 5px;\n    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);\n    animation-name: boxAnim;\n    animation-fill-mode: backwards;\n    animation-duration: .3s;\n    animation-delay: 0.25s; }\n\n@keyframes boxAnim {\n  0% {\n    opacity: 0; } }\n    main > div a {\n      text-decoration: none;\n      display: inline-block;\n      animation-name: iconAnim;\n      animation-fill-mode: backwards;\n      animation-duration: .5s;\n      animation-delay: 0.5s; }\n\n@keyframes iconAnim {\n  0% {\n    opacity: 0;\n    transform: scale(0); } }\n", ""]);
 
 // exports
 

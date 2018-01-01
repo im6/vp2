@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -614,51 +614,6 @@ module.exports = function (css) {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(4);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./header.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -2px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -730,19 +685,19 @@ module.exports = function debounce(func, wait, immediate){
 
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(5);
+var _debounce = __webpack_require__(3);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(7);
+__webpack_require__(5);
 
-var _service = __webpack_require__(10);
+var _service = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -779,25 +734,23 @@ document.body.onscroll = (0, _debounce2.default)(function (evt) {
 }, 200);
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(5);
+var _debounce = __webpack_require__(3);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(8);
-
-__webpack_require__(3);
+__webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BOXWD = 260; //import 'style-loader!css-loader!purecss/build/pure-min.css';
+//import 'style-loader!css-loader!purecss/build/pure-min.css';
 //import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
-
+var BOXWD = 260;
 var mainElem = document.getElementsByClassName('list')[0];
 
 var adjustLayout = function adjustLayout(w) {
@@ -811,13 +764,13 @@ window.onresize = (0, _debounce2.default)(function (e) {
 adjustLayout(window.innerWidth);
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -842,7 +795,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -850,13 +803,13 @@ exports = module.exports = __webpack_require__(0)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Cabin);", ""]);
 
 // module
-exports.push([module.i, "html {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0; }\n\nmain {\n  padding: 60px 0 50px 0;\n  background: #f8fcff; }\n", ""]);
+exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 41px;\n  background-color: white;\n  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.1); }\n\nnav ul, nav li {\n  margin: 0;\n  padding: 0; }\n\nnav ul {\n  list-style: none;\n  width: 100%; }\n\nnav li {\n  float: right;\n  position: relative; }\n  nav li:hover > a {\n    color: #afe3ff; }\n  nav li:hover ul.submenu {\n    opacity: 1;\n    transform: scaleY(1);\n    top: 40px;\n    /* adjust this as per top nav padding top & bottom comes */ }\n\nnav a {\n  color: #30A6E6;\n  display: block;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none; }\n\n.submenu {\n  left: 0;\n  top: -2px;\n  opacity: 0;\n  position: absolute;\n  box-shadow: 0 5px 8px 2px #cccccc;\n  z-index: 2;\n  transform: scaleY(0);\n  transition: transform .28s ease-out, top .28s ease-out; }\n  .submenu li {\n    width: 100%; }\n  .submenu a {\n    background-color: white; }\n    .submenu a:hover {\n      background-color: #30A6E6;\n      color: white; }\n\nhtml {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n  html h1, html h2, html h3, html h4, html h5, html p, html span, html li, html div, html button, html footer, html a {\n    font-family: 'Cabin', sans-serif; }\n\nbody {\n  margin: 0;\n  padding: 0; }\n\nmain {\n  padding: 60px 0 50px 0;\n  background: #f8fcff; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -867,9 +820,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createBox = undefined;
 
-__webpack_require__(11);
+__webpack_require__(9);
 
-var _util = __webpack_require__(13);
+var _util = __webpack_require__(11);
 
 var likeAjax = function likeAjax(id, like) {
   (0, _util.ajax)({
@@ -939,13 +892,13 @@ var createBox = exports.createBox = function createBox(id, value, like, isliked)
 };
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -970,7 +923,7 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -984,7 +937,7 @@ exports.push([module.i, ".list {\n  margin: 0 auto;\n  max-width: 1300px; }\n  .
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

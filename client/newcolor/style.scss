@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
+@import '../shared/button';
+@import '../shared/header';
 
 html {
     h1,h2,h3,h4,h5,p,span,li,div,button,footer,a {
@@ -34,11 +36,27 @@ main {
     border: 1px dashed darkgray;
     display: block;
 
+    animation-name: boxAnim;
+    animation-fill-mode: backwards;
+    animation-duration: .6s;
+    animation-delay: 0.05s;
+
+    @keyframes boxAnim {
+      0% {
+        height: 0;
+      }
+    }
+
     &:nth-child(1){
       border-radius: 4px 4px 0 0;
     }
     &:nth-child(4){
       border-radius: 0 0 4px 4px;
     }
+  }
+
+  .btnGrp {
+    width: 150px;
+    margin: 30px auto;
   }
 }

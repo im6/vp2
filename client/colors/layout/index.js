@@ -2,7 +2,6 @@
 //import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
 import debounce from 'debounce';
 import './style.scss';
-import './header.scss';
 
 const BOXWD = 260;
 const mainElem = document.getElementsByClassName('list')[0];
