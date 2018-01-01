@@ -2,12 +2,14 @@
 //import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
 import debounce from 'debounce';
 import './style.scss';
+import { isMobile } from '../../shared/util';
 
-const BOXWD = 260;
+const BOXWD = isMobile ? 185 : 260;
 const mainElem = document.getElementsByClassName('list')[0];
+const SPACEPERCENT = isMobile ? 0.99 : 0.9;
 
 const adjustLayout = (w) => {
-  mainElem.style.width = Math.floor(w * 0.9/BOXWD) * BOXWD + 'px';
+  mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
 };
 
 window.onresize = debounce((e) => {

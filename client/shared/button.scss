@@ -49,3 +49,9 @@ $btn-color: #56a5f7;
     background-color: #6099d4;
   }
 }
+
+@media (max-width: 768px) {
+  .btn {
+    height: auto;
+  }
+}
