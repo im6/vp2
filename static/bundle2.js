@@ -613,7 +613,62 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 3 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getCookieLocal = function getCookieLocal() {
+  var result = {};
+  if (!window.cookie || window.cookie.length === 0) {
+    var cookies0 = document.cookie.split(';');
+    result = cookies0.reduce(function (acc, v, k) {
+      var idx = v.indexOf('=');
+      var v1 = v.split(v[idx]);
+      acc[v1[0]] = v1[1];
+      return acc;
+    }, {});
+  } else {
+    console.error('invalid cookie');
+  }
+
+  return result;
+};
+
+var localCookie = getCookieLocal();
+
+var ajax = exports.ajax = function ajax(config) {
+  var method = config.method,
+      url = config.url,
+      data = config.data,
+      success = config.success,
+      fail = config.fail;
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        success(xhr.responseText);
+      } else {
+        fail();
+      }
+    }
+  };
+
+  xhr.open(method, url);
+  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
+  if (method !== 'GET') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
+  xhr.send(JSON.stringify(data));
+};
+
+/***/ }),
 /* 4 */,
 /* 5 */,
 /* 6 */,
@@ -635,7 +690,7 @@ __webpack_require__(16);
 
 __webpack_require__(18);
 
-var _util = __webpack_require__(19);
+var _util = __webpack_require__(3);
 
 var state = [null, null, null, null];
 var bars = document.getElementsByClassName('jscolor');
@@ -1118,62 +1173,6 @@ window.jscolor || (window.jscolor = function () {
         r = document.getElementsByTagName("button");e.tryInstallOnElements(n, t), e.tryInstallOnElements(r, t);
   }, e.register(), e.jscolor;
 }());
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getCookieLocal = function getCookieLocal() {
-  var result = {};
-  if (!window.cookie || window.cookie.length === 0) {
-    var cookies0 = document.cookie.split(';');
-    result = cookies0.reduce(function (acc, v, k) {
-      var idx = v.indexOf('=');
-      var v1 = v.split(v[idx]);
-      acc[v1[0]] = v1[1];
-      return acc;
-    }, {});
-  } else {
-    console.error('invalid cookie');
-  }
-
-  return result;
-};
-
-var localCookie = getCookieLocal();
-
-var ajax = exports.ajax = function ajax(config) {
-  var method = config.method,
-      url = config.url,
-      data = config.data,
-      success = config.success,
-      fail = config.fail;
-
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        success(xhr.responseText);
-      } else {
-        fail();
-      }
-    }
-  };
-
-  xhr.open(method, url);
-  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
-  if (method !== 'GET') {
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  }
-  xhr.send(JSON.stringify(data));
-};
 
 /***/ })
 /******/ ]);

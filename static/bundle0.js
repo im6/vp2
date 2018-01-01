@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -614,6 +614,62 @@ module.exports = function (css) {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getCookieLocal = function getCookieLocal() {
+  var result = {};
+  if (!window.cookie || window.cookie.length === 0) {
+    var cookies0 = document.cookie.split(';');
+    result = cookies0.reduce(function (acc, v, k) {
+      var idx = v.indexOf('=');
+      var v1 = v.split(v[idx]);
+      acc[v1[0]] = v1[1];
+      return acc;
+    }, {});
+  } else {
+    console.error('invalid cookie');
+  }
+
+  return result;
+};
+
+var localCookie = getCookieLocal();
+
+var ajax = exports.ajax = function ajax(config) {
+  var method = config.method,
+      url = config.url,
+      data = config.data,
+      success = config.success,
+      fail = config.fail;
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        success(xhr.responseText);
+      } else {
+        fail();
+      }
+    }
+  };
+
+  xhr.open(method, url);
+  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
+  if (method !== 'GET') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
+  xhr.send(JSON.stringify(data));
+};
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -685,19 +741,19 @@ module.exports = function debounce(func, wait, immediate){
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(3);
+var _debounce = __webpack_require__(4);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(5);
+__webpack_require__(6);
 
-var _service = __webpack_require__(8);
+var _service = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -734,17 +790,17 @@ document.body.onscroll = (0, _debounce2.default)(function (evt) {
 }, 200);
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(3);
+var _debounce = __webpack_require__(4);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(6);
+__webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -764,13 +820,13 @@ window.onresize = (0, _debounce2.default)(function (e) {
 adjustLayout(window.innerWidth);
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(7);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -795,7 +851,7 @@ if(false) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -809,7 +865,7 @@ exports.push([module.i, "header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -820,17 +876,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createBox = undefined;
 
-__webpack_require__(9);
+__webpack_require__(10);
 
-var _util = __webpack_require__(19);
+var _util = __webpack_require__(3);
 
-var likeAjax = function likeAjax(id, like) {
+var likeAjax = function likeAjax(id) {
   (0, _util.ajax)({
     method: 'POST',
     url: 'like/' + id,
-    data: {
-      like: like
-    },
+    data: {},
     success: function success(v) {},
     fail: function fail() {}
   });
@@ -871,10 +925,10 @@ var createBox = exports.createBox = function createBox(id, value, like, isliked)
   newBtn.onclick = function (v) {
     if (newBtn.innerHTML.indexOf('hrt.svg') > -1) {
       newBtn.innerHTML = '<img src="/static/hrtr.svg">' + (like + 1);
-      likeAjax(id, true);
+      likeAjax(id);
     } else {
       newBtn.innerHTML = '<img src="/static/hrt.svg">' + like;
-      likeAjax(id, false);
+      // don't call server
     }
   };
 
@@ -885,13 +939,13 @@ var createBox = exports.createBox = function createBox(id, value, like, isliked)
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(10);
+var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -916,7 +970,7 @@ if(false) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -928,70 +982,6 @@ exports.push([module.i, ".btn {\n  height: 30px;\n  padding: 0 12px;\n  border: 
 
 // exports
 
-
-/***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var getCookieLocal = function getCookieLocal() {
-  var result = {};
-  if (!window.cookie || window.cookie.length === 0) {
-    var cookies0 = document.cookie.split(';');
-    result = cookies0.reduce(function (acc, v, k) {
-      var idx = v.indexOf('=');
-      var v1 = v.split(v[idx]);
-      acc[v1[0]] = v1[1];
-      return acc;
-    }, {});
-  } else {
-    console.error('invalid cookie');
-  }
-
-  return result;
-};
-
-var localCookie = getCookieLocal();
-
-var ajax = exports.ajax = function ajax(config) {
-  var method = config.method,
-      url = config.url,
-      data = config.data,
-      success = config.success,
-      fail = config.fail;
-
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        success(xhr.responseText);
-      } else {
-        fail();
-      }
-    }
-  };
-
-  xhr.open(method, url);
-  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
-  if (method !== 'GET') {
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  }
-  xhr.send(JSON.stringify(data));
-};
 
 /***/ })
 /******/ ]);

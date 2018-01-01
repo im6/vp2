@@ -1,13 +1,11 @@
 import './style.scss';
 import { ajax } from '../shared/util';
 
-const likeAjax = (id, like) => {
+const likeAjax = (id) => {
   ajax({
     method: 'POST',
     url: `like/${id}`,
-    data: {
-      like,
-    },
+    data: {},
     success: (v) => {
     },
     fail: () => {
@@ -49,10 +47,10 @@ export const createBox = (id, value, like, isliked) => {
   newBtn.onclick = (v) => {
     if(newBtn.innerHTML.indexOf('hrt.svg') > -1){
       newBtn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
-      likeAjax(id, true);
+      likeAjax(id);
     } else {
       newBtn.innerHTML = `<img src="/static/hrt.svg">${like}`;
-      likeAjax(id, false);
+      // don't call server
     }
   };
 
