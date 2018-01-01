@@ -43,27 +43,18 @@ export const createBox = (id, value, like, isliked) => {
   newBtn.classList.add('btn');
   newBtn.setAttribute("type", "button");
 
-  const likeTxt = document.createElement("span");
-  likeTxt.innerText = like;
-  const likeImg = document.createElement("img");
-  likeImg.src = isliked ? '/static/hrtr.svg' : '/static/hrt.svg';
-
-  newBtn.appendChild(likeImg);
-  newBtn.appendChild(likeTxt);
+  newBtn.innerHTML = `<img src="${isliked ? '/static/hrtr.svg' : '/static/hrt.svg'}">${like}`;
 
   // bind click event
   newBtn.onclick = (v) => {
-    if(likeImg.src.indexOf('hrt.svg') > -1){
-      likeImg.src = likeImg.src.replace('hrt.svg', 'hrtr.svg');
-      likeTxt.innerText = like + 1;
+    if(newBtn.innerHTML.indexOf('hrt.svg') > -1){
+      newBtn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
       likeAjax(id, true);
     } else {
-      likeImg.src = likeImg.src.replace('hrtr.svg', 'hrt.svg');
-      likeTxt.innerText = like;
+      newBtn.innerHTML = `<img src="/static/hrt.svg">${like}`;
       likeAjax(id, false);
     }
   };
-
 
   //combine
   newBox.appendChild(newCanvas);
