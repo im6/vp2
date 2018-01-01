@@ -15,8 +15,16 @@ const getCookieLocal = () => {
   return result;
 };
 
-const localCookie = getCookieLocal();
+const mobileDetect = () => {
+  let isMobile = false;
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    isMobile = true;
+  }
+  return isMobile;
+};
 
+
+const localCookie = getCookieLocal();
 
 export const ajax = (config) => {
   const { method, url, data, success, fail } = config;
@@ -39,3 +47,5 @@ export const ajax = (config) => {
   }
   xhr.send(JSON.stringify(data));
 };
+
+export const isMobile = mobileDetect();

@@ -1,6 +1,6 @@
 //source: https://codepen.io/dhanushbadge/pen/olsvi?limit=all&page=3&q=menu
 $header-height: 41px;
-$nav-color: #30A6E6;
+$nav-color: #63c0d6;  //#63c0d6
 $nav-color-hover: #afe3ff;
 
 header {
@@ -11,6 +11,15 @@ header {
   height: $header-height;
   background-color: white;
   box-shadow: 0 5px 10px 0 rgba(0,64,128,0.1);
+
+  > a{
+    float: left;
+    margin: 4px 20px;
+    font-size: 1.6em;
+    color: $nav-color;
+    letter-spacing: 1.35px;
+    text-decoration: none;
+  }
 }
 
 nav {
@@ -66,4 +75,10 @@ nav {
       color: white;
     }
   }
+}
+
+@media (max-width: 768px) {
+    header > a {
+        display: none;
+    }
 }
