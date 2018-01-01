@@ -1,5 +1,5 @@
 import './style.scss';
-import { ajax } from '../util';
+import { ajax } from '../shared/util';
 
 const likeAjax = (id, like) => {
   ajax({
