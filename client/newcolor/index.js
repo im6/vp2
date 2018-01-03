@@ -1,8 +1,12 @@
 import './style.scss';
 import './jscolor.min';
+import dragula from 'dragula';
+import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
 
+const HANDLENAME = 'drgHdl';
 const bars = document.getElementsByClassName('jscolor');
+const canvas = document.getElementsByClassName('canvas')[0];
 let state = [null,null,null,null];
 
 const resetColors = () => {
@@ -39,3 +43,17 @@ document.getElementById('createBtn').onclick = () => {
 document.getElementById('resetBtn').onclick = () => {
   resetColors();
 };
+
+for(let i = 0; i < 4; i ++){
+  bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`
+}
+
+dragula([canvas],{
+  moves: function (el, container, handle) {
+    return handle.className === HANDLENAME;
+  }
+});
+
+setTimeout(() => {
+  canvas.style.height = '200px'; // for dragular effect
+}, 600);
