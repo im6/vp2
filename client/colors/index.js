@@ -16,7 +16,7 @@ const likeAjax = (id) => {
   });
 };
 
-const ENTRYANIMDELAY = 60,
+const ENTRYANIMDELAY = 58,
   STEP = 11,
   LIMIT = window._colorpk.initData.length;
 const $listDiv = document.getElementsByClassName('list')[0];

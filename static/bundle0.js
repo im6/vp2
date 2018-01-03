@@ -781,7 +781,7 @@ var likeAjax = function likeAjax(id) {
   });
 };
 
-var ENTRYANIMDELAY = 60,
+var ENTRYANIMDELAY = 58,
     STEP = 11,
     LIMIT = window._colorpk.initData.length;
 var $listDiv = document.getElementsByClassName('list')[0];
