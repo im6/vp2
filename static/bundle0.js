@@ -767,7 +767,19 @@ __webpack_require__(10);
 
 var _box = __webpack_require__(34);
 
+var _util = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var likeAjax = function likeAjax(id) {
+  (0, _util.ajax)({
+    method: 'POST',
+    url: 'like/' + id,
+    data: {},
+    success: function success(v) {},
+    fail: function fail() {}
+  });
+};
 
 var ENTRYANIMDELAY = 60,
     STEP = 11,
@@ -782,7 +794,15 @@ var addColorBox = function addColorBox(startIndex) {
     if (!v) {
       return;
     }
-    var oneBox = (0, _box.createBox)(v.id, v.color, v.like, false);
+    var oneBox = (0, _box.Box)({
+      id: v.id,
+      value: v.color,
+      like: v.like,
+      isLiked: false,
+      likeFn: function likeFn(i) {
+        likeAjax(i);
+      }
+    });
     oneBox.style.animationDelay = i * ENTRYANIMDELAY + 'ms';
     $listDiv.appendChild(oneBox);
   }
@@ -957,66 +977,50 @@ exports.push([module.i, ".btn {\n  height: 30px;\n  padding: 0 12px;\n  border: 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createBox = undefined;
+var Box = exports.Box = function Box(_ref) {
+  var id = _ref.id,
+      value = _ref.value,
+      like = _ref.like,
+      isliked = _ref.isliked,
+      likeFn = _ref.likeFn;
 
-var _util = __webpack_require__(3);
+  var box = document.createElement("div");
+  box.classList.add('box');
+  box.dataset.k = id;
+  box.dataset.l = like;
 
-var likeAjax = function likeAjax(id) {
-  (0, _util.ajax)({
-    method: 'POST',
-    url: 'like/' + id,
-    data: {},
-    success: function success(v) {},
-    fail: function fail() {}
-  });
-};
-
-var createBox = exports.createBox = function createBox(id, value, like, isliked) {
-  var newBox = document.createElement("div");
-  newBox.classList.add('box');
-  newBox.dataset.k = id;
-  newBox.dataset.l = like;
-
-  // canvas management
-  var newCanvas = document.createElement("div");
-  newCanvas.classList.add('canvas');
+  var cvs = document.createElement("div");
+  cvs.classList.add('canvas');
   var colors0 = value.split('#');
   var colors1 = colors0.map(function (v) {
     return '#' + v;
   });
-
   colors1.forEach(function (v) {
     var oneColor = document.createElement("div");
     var oneColorTxt = document.createElement("span");
     oneColorTxt.innerText = v;
     oneColor.appendChild(oneColorTxt);
     oneColor.style.backgroundColor = v;
-
-    newCanvas.appendChild(oneColor);
+    cvs.appendChild(oneColor);
   });
 
-  // likeBtn management
-  var newBtn = document.createElement("button");
-  newBtn.classList.add('btn');
-  newBtn.setAttribute("type", "button");
-
-  newBtn.innerHTML = '<img src="' + (isliked ? '/static/hrtr.svg' : '/static/hrt.svg') + '">' + like;
-
-  // bind click event
-  newBtn.onclick = function (v) {
-    if (newBtn.innerHTML.indexOf('hrt.svg') > -1) {
-      newBtn.innerHTML = '<img src="/static/hrtr.svg">' + (like + 1);
-      likeAjax(id);
+  var btn = document.createElement("button");
+  btn.classList.add('btn');
+  btn.setAttribute("type", "button");
+  btn.innerHTML = "<img src=\"" + (isliked ? '/static/hrtr.svg' : '/static/hrt.svg') + "\">" + like;
+  btn.onclick = function (v) {
+    if (btn.innerHTML.indexOf('hrt.svg') > -1) {
+      btn.innerHTML = "<img src=\"/static/hrtr.svg\">" + (like + 1);
+      likeFn(id);
     } else {
-      newBtn.innerHTML = '<img src="/static/hrt.svg">' + like;
+      btn.innerHTML = "<img src=\"/static/hrt.svg\">" + like;
       // don't call server
     }
   };
 
-  //combine
-  newBox.appendChild(newCanvas);
-  newBox.appendChild(newBtn);
-  return newBox;
+  box.appendChild(cvs);
+  box.appendChild(btn);
+  return box;
 };
 
 /***/ })

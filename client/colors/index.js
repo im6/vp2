@@ -1,7 +1,20 @@
 import debounce from 'debounce';
 import './layout';
 import './style.scss';
-import { createBox } from './box';
+import { Box } from './box';
+import { ajax } from '../shared/util';
+
+const likeAjax = (id) => {
+  ajax({
+    method: 'POST',
+    url: `like/${id}`,
+    data: {},
+    success: (v) => {
+    },
+    fail: () => {
+    }
+  });
+};
 
 const ENTRYANIMDELAY = 60,
   STEP = 11,
@@ -16,7 +29,15 @@ const addColorBox = (startIndex) => {
     if(!v) {
       return;
     }
-    const oneBox = createBox(v.id, v.color, v.like, false);
+    const oneBox = Box({
+      id: v.id,
+      value: v.color,
+      like: v.like,
+      isLiked: false,
+      likeFn: (i) => {
+        likeAjax(i);
+      },
+    });
     oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
   }
