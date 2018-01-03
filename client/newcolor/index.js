@@ -7,21 +7,18 @@ import { ajax } from '../shared/util';
 const HANDLENAME = 'drgHdl';
 const bars = document.getElementsByClassName('jscolor');
 const canvas = document.getElementsByClassName('canvas')[0];
-let state = [null,null,null,null];
 
 const resetColors = () => {
   for(let i = 0; i < 4; i ++){
     bars[i].jscolor.fromString('ffffff');
   }
-  state = [null,null,null,null];
-};
-
-window.setTextColor = (picker, id) => {
-  state[id] = picker.toString();
 };
 
 document.getElementById('createBtn').onclick = () => {
-  if(state.indexOf(null) > -1){
+  const state = [].slice.call(bars).map(v => {
+    return v.jscolor.toString();
+  });
+  if(state.filter(v => v === 'ffffff').length > 1){
     // not valid color here
   } else {
     ajax({
@@ -31,7 +28,6 @@ document.getElementById('createBtn').onclick = () => {
         color: state,
       },
       success: (v) => {
-        debugger;
         resetColors();
       },
       fail: () => {
@@ -49,9 +45,9 @@ for(let i = 0; i < 4; i ++){
 }
 
 dragula([canvas],{
-  moves: function (el, container, handle) {
+  moves: (el, container, handle) => {
     return handle.className === HANDLENAME;
-  }
+  },
 });
 
 setTimeout(() => {

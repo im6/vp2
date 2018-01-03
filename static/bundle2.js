@@ -713,21 +713,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HANDLENAME = 'drgHdl';
 var bars = document.getElementsByClassName('jscolor');
 var canvas = document.getElementsByClassName('canvas')[0];
-var state = [null, null, null, null];
 
 var resetColors = function resetColors() {
   for (var i = 0; i < 4; i++) {
     bars[i].jscolor.fromString('ffffff');
   }
-  state = [null, null, null, null];
-};
-
-window.setTextColor = function (picker, id) {
-  state[id] = picker.toString();
 };
 
 document.getElementById('createBtn').onclick = function () {
-  if (state.indexOf(null) > -1) {
+  var state = [].slice.call(bars).map(function (v) {
+    return v.jscolor.toString();
+  });
+  if (state.filter(function (v) {
+    return v === 'ffffff';
+  }).length > 1) {
     // not valid color here
   } else {
     (0, _util.ajax)({
@@ -737,7 +736,6 @@ document.getElementById('createBtn').onclick = function () {
         color: state
       },
       success: function success(v) {
-        debugger;
         resetColors();
       },
       fail: function fail() {}
