@@ -1,6 +1,7 @@
 import debounce from 'debounce';
 import './layout';
-import { createBox } from './service';
+import './style.scss';
+import { createBox } from './box';
 
 const ENTRYANIMDELAY = 60,
   STEP = 11,
