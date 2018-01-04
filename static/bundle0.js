@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -613,7 +613,8 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -679,7 +680,7 @@ var ajax = exports.ajax = function ajax(config) {
 var isMobile = exports.isMobile = mobileDetect();
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -751,23 +752,23 @@ module.exports = function debounce(func, wait, immediate){
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(4);
+var _debounce = __webpack_require__(5);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(6);
+__webpack_require__(7);
 
 __webpack_require__(10);
 
-var _box = __webpack_require__(34);
+var _box = __webpack_require__(12);
 
-var _util = __webpack_require__(3);
+var _util = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -822,19 +823,19 @@ document.body.onscroll = (0, _debounce2.default)(function (evt) {
 }, 200);
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _debounce = __webpack_require__(4);
+var _debounce = __webpack_require__(5);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(7);
+__webpack_require__(8);
 
-var _util = __webpack_require__(3);
+var _util = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -855,13 +856,13 @@ window.onresize = (0, _debounce2.default)(function (e) {
 adjustLayout(window.innerWidth);
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -886,7 +887,7 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -900,7 +901,6 @@ exports.push([module.i, "header {\n  position: fixed;\n  z-index: 3;\n  top: 0;\
 
 
 /***/ }),
-/* 9 */,
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -946,29 +946,7 @@ exports.push([module.i, ".btn {\n  height: 30px;\n  padding: 0 12px;\n  border: 
 
 
 /***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

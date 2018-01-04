@@ -8,3 +8,4 @@ node_modules
 local
 npm-debug.log
 static/*.map
+static_temp/*.js
