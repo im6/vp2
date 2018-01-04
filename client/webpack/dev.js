@@ -35,7 +35,7 @@ module.exports = {
   },
   output: {
     publicPath: '/static',
-    path: path.join(__dirname, '../../static_temp'),
+    path: path.join(__dirname, '../../static'),
     filename: '[name].js'
   },
 };
