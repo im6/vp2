@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 3)
+#@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
@@ -18,6 +18,14 @@ def index(request):
     for key, value in enumerate(alldata):
         value["canvas"] = value["color"].split("#")
         value["canvas"] = list(map(lambda x: "#%s"%x, value["canvas"]))
+
+    if request.session.test_cookie_worked():
+        print('cookie is working')
+        request.session.delete_test_cookie()
+
+    request.session.set_test_cookie()
+    print('cookie set')
+
     return HttpResponse(template.render({
         "list": alldata,
         "path": request.path
