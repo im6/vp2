@@ -10,6 +10,7 @@ const SPACEPERCENT = isMobile ? 0.99 : 0.9;
 
 const adjustLayout = (w) => {
   mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
+  mainElem.style.maxWidth = `${BOXWD * 5}px`;
 };
 
 window.onresize = debounce((e) => {
