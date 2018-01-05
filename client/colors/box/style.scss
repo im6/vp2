@@ -28,6 +28,7 @@ $color-radius: 4px;
 
   .canvas {
     height: 82%;
+    cursor: pointer;
 
     > div {
       animation-name: barMove;
@@ -41,8 +42,9 @@ $color-radius: 4px;
 
       > span {
         color: white;
+        cursor: text;
         background-color: rgba(110, 110, 110, 0.4);
-        padding: 4px 6px;
+        padding: 4px 9px;
         display: inline-block;
         opacity: 0;
         border-radius: 0 0 4px 0;

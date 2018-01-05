@@ -1,4 +1,4 @@
-export const Box = ({id, value, like, isliked, likeFn}) => {
+export const Box = ({id, value, like, isliked, onLike, onRedir}) => {
   const box = document.createElement("div");
   box.classList.add('box');
   box.dataset.k = id;
@@ -16,6 +16,11 @@ export const Box = ({id, value, like, isliked, likeFn}) => {
     oneColor.style.backgroundColor = v;
     cvs.appendChild(oneColor);
   });
+  cvs.onclick = (v) => {
+    if(v.target.tagName === 'DIV'){
+      onRedir(id);
+    }
+  };
 
   const btn = document.createElement("button");
   btn.classList.add('btn');
@@ -24,7 +29,7 @@ export const Box = ({id, value, like, isliked, likeFn}) => {
   btn.onclick = (v) => {
     if(btn.innerHTML.indexOf('hrt.svg') > -1){
       btn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
-      likeFn(id);
+      onLike(id);
     } else {
       btn.innerHTML = `<img src="/static/hrt.svg">${like}`;
       // don't call server

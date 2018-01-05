@@ -34,9 +34,12 @@ const addColorBox = (startIndex) => {
       value: v.color,
       like: v.like,
       isLiked: false,
-      likeFn: (i) => {
+      onLike: (i) => {
         likeAjax(i);
       },
+      onRedir: (id) => {
+        window.location.href = `/color/${id}`;
+      }
     });
     oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
