@@ -2,24 +2,13 @@
 
 {% load static %}
 {% block mainContent %}
-    <div class="box" data-k="1">
-        <div class="canvas">
-            <div style="background-color: rgb(243, 129, 129);">
-                <span>#F38181</span>
-            </div>
-            <div style="background-color: rgb(252, 227, 138);">
-                <span>#FCE38A</span>
-            </div>
-            <div style="background-color: rgb(234, 255, 208);">
-                <span>#EAFFD0</span>
-            </div>
-            <div style="background-color: rgb(149, 225, 211);">
-                <span>#95E1D3</span>
-            </div>
-        </div>
-        <button class="btn btn-primary" type="button">
-            Download
-        </button>
+    <div class="box">
+        <div class="canvas" data-v="{{ value }}"></div>
+        <a id="download"  download="colorpk_download_{{ id }}.png">
+            <button class="btn btn-primary" type="button">
+                Download
+            </button>
+        </a>
     </div>
 
     <script src="{% static "bundle3.js" %}"></script>

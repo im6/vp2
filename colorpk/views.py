@@ -32,7 +32,12 @@ def index(request):
     }))
 
 def colorOne(request, id):
-    return render_to_response('one_color.html')
+    oneColor = Color.objects.get(id=id)
+    return render_to_response('one_color.html', {
+        "path": request.path,
+        "id": id,
+        "value": oneColor.color
+    })
 
 def newcolor(request):
     return render_to_response('create.html', {
