@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Cabin');
-@import '../../shared/header';
+//@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import './header';
 
 $FOOTERHEIGHT: 26px;
-$BACKCOLOR: #f8fcff;
 
 html {
     h1,h2,h3,h4,h5,p,span,li,div,button,footer,a {
@@ -21,7 +20,6 @@ body {
 
 main {
     padding: 60px 0 50px 0;
-    background: $BACKCOLOR;
     //margin-bottom: $FOOTERHEIGHT;
 }
 
