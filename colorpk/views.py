@@ -10,7 +10,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
-from colorpk.oauth2 import getUrl
+from colorpk.oauth2 import getUrl, config
+import requests
 
 
 @cache_page(60 * 3)
@@ -76,7 +77,38 @@ def notfound(request):
     return render_to_response('error_404.html')
 
 def auth(request, src):
-    a = 1
-    return render_to_response('signin.html', {
-        "path": request.path
-    })
+    if request.session['state'] == request.GET['state']:
+        if src == 'fb':
+            payload0 = {
+                "client_id": config['fb']['appkey'],
+                "client_secret": config['fb']['appsecret'],
+                "code": request.GET['code'],
+                "redirect_uri": config['fb']['url'],
+            }
+            r0 = requests.get("%s/oauth/access_token"%config['fb']['api'], params=payload0)
+            res0 = json.loads(r0.text)
+
+            payload1 = {
+                "access_token": res0['access_token'],
+                "fields": 'id,name,picture'
+            }
+            r1 = requests.get("%s/me"%config['fb']['api'], params=payload1)
+            res1 = json.loads(r1.text)
+            data = {
+                "id": res1["id"],
+                "name": res1["name"],
+                "isAdmin": False,
+                "img": res1['picture']['url'],
+                "type": 'fb'
+            }
+        return render_to_response('signin.html', {
+            "path": request.path,
+            "error": "No valid state"
+        })
+
+    else:
+        return render_to_response('signin.html', {
+            "path": request.path,
+            "error": "No valid state"
+        })
+
