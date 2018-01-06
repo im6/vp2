@@ -10,5 +10,6 @@ urlpatterns = [
     path('latest', views.latest),
     path('newcolor', views.newcolor),
     path('signin', views.signin),
+    path('auth/<str:src>', views.auth),
     re_path(r'/*', views.notfound),
 ]

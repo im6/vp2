@@ -5,10 +5,13 @@ from django.template.loader import get_template, render_to_string
 from .models import Color
 from datetime import datetime
 import json
+import uuid
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
+from colorpk.oauth2 import getUrl
+
 
 @cache_page(60 * 3)
 @ensure_csrf_cookie
@@ -46,8 +49,13 @@ def newcolor(request):
     })
 
 def signin(request):
+    state = str(uuid.uuid4())
+    request.session['state'] =  state
     return render_to_response('signin.html', {
-        "path": request.path
+        "path": request.path,
+        "wb": getUrl('wb', state),
+        "fb": getUrl('fb', state),
+        "gg": getUrl('gg', state),
     })
 
 @cache_page(60 * 3)
@@ -66,3 +74,9 @@ def latest(request):
 def notfound(request):
     # return redirect('/404found')
     return render_to_response('error_404.html')
+
+def auth(request, src):
+    a = 1
+    return render_to_response('signin.html', {
+        "path": request.path
+    })
