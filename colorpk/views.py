@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.template import Context, Template
 from django.template.loader import get_template, render_to_string
-from .models import Color
+from .models import db
 from datetime import datetime
 import json
 import uuid
@@ -10,7 +10,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
-from colorpk.oauth2 import getUrl, config
+from colorpk.models.auth import getUrl, config
+from colorpk.models.db import Color
 import requests
 
 
@@ -80,8 +81,8 @@ def auth(request, src):
     if request.session['state'] == request.GET['state']:
         if src == 'fb':
             payload0 = {
-                "client_id": config['fb']['appkey'],
-                "client_secret": config['fb']['appsecret'],
+                "client_id": config['fb']['appKey'],
+                "client_secret": config['fb']['appSecret'],
                 "code": request.GET['code'],
                 "redirect_uri": config['fb']['url'],
             }

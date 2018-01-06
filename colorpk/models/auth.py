@@ -1,4 +1,5 @@
 import configparser
+from abc import ABCMeta, abstractmethod
 
 config = configparser.ConfigParser()
 config.read('local/connection.cnf')
@@ -22,3 +23,14 @@ def getUrl(src, state):
 
     return url
 
+class OAuth2(metaclass=ABCMeta):
+    def __init__(self, src):
+        self.api = config[src]['api']
+        self.appKey = config[src]['appKey']
+        self.appSecret = config[src]['appSecret']
+        self.url = config[src]['url']
+    def getToken(self):
+        pass
+
+    def getUserInfo(self):
+        pass
