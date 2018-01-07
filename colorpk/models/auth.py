@@ -1,7 +1,6 @@
 import configparser
 import requests
 import json
-
 from abc import ABCMeta, abstractmethod
 
 config = configparser.ConfigParser()
@@ -34,6 +33,15 @@ class OAuth2():
         self.appSecret = config[src]['appSecret']
         self.url = config[src]['url']
     def getToken(self, code):
+        pass
+    def getUserInfo(self, token):
+        pass
+
+class OAuth2_fb(OAuth2):
+    def __init__(self):
+        super().__init__('fb')
+
+    def getToken(self, code):
         payload = {
             "client_id": config[self.oauth]['appKey'],
             "client_secret": config[self.oauth]['appSecret'],
@@ -42,7 +50,7 @@ class OAuth2():
         }
         r = requests.get("%s/oauth/access_token" % config[self.oauth]['api'], params=payload)
         res = json.loads(r.text)
-        token = res['access_token']
+        token = res['access_token'] if 'access_token' in res else ''
         return token
 
     def getUserInfo(self, token):

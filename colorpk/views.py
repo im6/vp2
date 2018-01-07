@@ -12,9 +12,9 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import getUrl, config
 from colorpk.models.db import Color
-from colorpk.models.auth import OAuth2
+from colorpk.models.auth import OAuth2_fb
 import requests
-
+import sys
 
 @cache_page(60 * 3)
 @ensure_csrf_cookie
@@ -80,13 +80,19 @@ def notfound(request):
 
 def auth(request, src):
     if request.session['state'] == request.GET['state']:
-        auth = OAuth2(src)
+        auth = getattr(sys.modules[__name__], "OAuth2_%s"%src)()
         token = auth.getToken(request.GET['code'])
-        userInfo = auth.getUserInfo(token)
-        return render_to_response('signin.html', {
-            "path": request.path,
-            "user": json.dumps(userInfo)
-        })
+        if token:
+            userInfo = auth.getUserInfo(token)
+            return render_to_response('signin.html', {
+                "path": request.path,
+                "user": json.dumps(userInfo)
+            })
+        else:
+            return render_to_response('signin.html', {
+                "path": request.path,
+                "error": "No valid state"
+            })
     else:
         return render_to_response('signin.html', {
             "path": request.path,
