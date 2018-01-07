@@ -1,4 +1,7 @@
 import configparser
+import requests
+import json
+
 from abc import ABCMeta, abstractmethod
 
 config = configparser.ConfigParser()
@@ -23,14 +26,38 @@ def getUrl(src, state):
 
     return url
 
-class OAuth2(metaclass=ABCMeta):
+class OAuth2():
     def __init__(self, src):
+        self.oauth = src
         self.api = config[src]['api']
         self.appKey = config[src]['appKey']
         self.appSecret = config[src]['appSecret']
         self.url = config[src]['url']
-    def getToken(self):
-        pass
+    def getToken(self, code):
+        payload = {
+            "client_id": config[self.oauth]['appKey'],
+            "client_secret": config[self.oauth]['appSecret'],
+            "code": code,
+            "redirect_uri": config[self.oauth]['url'],
+        }
+        r = requests.get("%s/oauth/access_token" % config[self.oauth]['api'], params=payload)
+        res = json.loads(r.text)
+        token = res['access_token']
+        return token
 
-    def getUserInfo(self):
-        pass
+    def getUserInfo(self, token):
+        payload = {
+            "access_token": token,
+            "fields": 'id,name,picture'
+        }
+        r = requests.get("%s/me" % config[self.oauth]['api'], params=payload)
+        res = json.loads(r.text)
+        data = {
+            "id": res["id"],
+            "name": res["name"],
+            "isAdmin": False,
+            "img": res['picture']['data']['url'],
+            "oauth": self.oauth
+        }
+
+        return data

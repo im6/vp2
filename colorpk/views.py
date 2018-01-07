@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import getUrl, config
 from colorpk.models.db import Color
+from colorpk.models.auth import OAuth2
 import requests
 
 
@@ -79,34 +80,13 @@ def notfound(request):
 
 def auth(request, src):
     if request.session['state'] == request.GET['state']:
-        if src == 'fb':
-            payload0 = {
-                "client_id": config['fb']['appKey'],
-                "client_secret": config['fb']['appSecret'],
-                "code": request.GET['code'],
-                "redirect_uri": config['fb']['url'],
-            }
-            r0 = requests.get("%s/oauth/access_token"%config['fb']['api'], params=payload0)
-            res0 = json.loads(r0.text)
-
-            payload1 = {
-                "access_token": res0['access_token'],
-                "fields": 'id,name,picture'
-            }
-            r1 = requests.get("%s/me"%config['fb']['api'], params=payload1)
-            res1 = json.loads(r1.text)
-            data = {
-                "id": res1["id"],
-                "name": res1["name"],
-                "isAdmin": False,
-                "img": res1['picture']['url'],
-                "type": 'fb'
-            }
+        auth = OAuth2(src)
+        token = auth.getToken(request.GET['code'])
+        userInfo = auth.getUserInfo(token)
         return render_to_response('signin.html', {
             "path": request.path,
-            "error": "No valid state"
+            "user": json.dumps(userInfo)
         })
-
     else:
         return render_to_response('signin.html', {
             "path": request.path,
