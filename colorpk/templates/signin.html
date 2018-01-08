@@ -15,8 +15,11 @@
         <a href="{{ gg }}">
             <img src="{% static "oauth4.png" %}" alt="">
         </a>
-        {{ user }}
-        {{ error }}
+        {% if error %}
+            <span class="errorTxt">
+                {{ error }}
+            </span>
+        {% endif %}
     </div>
     <script src="{% static "bundle1.js" %}"></script>
 {% endblock %}

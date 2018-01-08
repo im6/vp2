@@ -85,8 +85,11 @@ class OAuth2_wb(OAuth2):
         }
         r = requests.post("%s/oauth2/access_token" % config[self.oauth]['api'], data=payload)
         res = json.loads(r.text)
-        token = res['access_token'] if 'access_token' in res else ''
-        self.uid = res['uid']
+        if 'access_token' in res:
+            token = res['access_token']
+            self.uid = res['uid']
+        else:
+            token = ''
         return token
 
     def getUserInfo(self, token):
