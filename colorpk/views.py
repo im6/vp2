@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import getUrl, config
 from colorpk.models.db import Color
-from colorpk.models.auth import OAuth2_fb, OAuth2_wb
+from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
 import sys
 
 @cache_page(60 * 3)

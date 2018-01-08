@@ -18,9 +18,9 @@ def getUrl(src, state):
               "client_id=%s&response_type=code&state=%s&redirect_uri=%s"\
               %(config[src]['appkey'], state, config[src]['url'])
     elif src == 'gg':
-        url = "https://api.weibo.com/oauth2/authorize?" \
-              "client_id=%s&scope=follow_app_official_microblog&" \
-              "state=%s&redirect_uri=%s"\
+        url = "https://accounts.google.com/o/oauth2/v2/auth?" \
+              "client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&" \
+              "response_type=code&state=%s&redirect_uri=%s"\
               %(config[src]['appkey'], state, config[src]['url'])
 
     return url
@@ -101,6 +101,39 @@ class OAuth2_wb(OAuth2):
             "name": res["name"],
             "isAdmin": False,
             "img": res['profile_image_url'],
+            "oauth": self.oauth
+        }
+        return data
+
+
+class OAuth2_gg(OAuth2):
+    def __init__(self):
+        super().__init__('gg')
+
+    def getToken(self, code):
+        payload = {
+            "code": code,
+            "client_id": config[self.oauth]['appKey'],
+            "client_secret": config[self.oauth]['appSecret'],
+            "redirect_uri": config[self.oauth]['url'],
+            "grant_type": "authorization_code"
+        }
+        r = requests.post("https://www.googleapis.com/oauth2/v4/token", data=payload)
+        res = json.loads(r.text)
+        token = res['access_token'] if 'access_token' in res else ''
+        return token
+
+    def getUserInfo(self, token):
+        payload = {
+            "access_token": token,
+        }
+        r = requests.get("https://www.googleapis.com/plus/v1/people/me", params=payload)
+        res = json.loads(r.text)
+        data = {
+            "id": res["id"],
+            "name": res["displayName"],
+            "isAdmin": False,
+            "img": res['image']['url'],
             "oauth": self.oauth
         }
         return data
