@@ -67,5 +67,40 @@ class OAuth2_fb(OAuth2):
             "img": res['picture']['data']['url'],
             "oauth": self.oauth
         }
+        return data
 
+
+class OAuth2_wb(OAuth2):
+    def __init__(self):
+        super().__init__('wb')
+        self.uid = None
+
+    def getToken(self, code):
+        payload = {
+            "client_id": config[self.oauth]['appKey'],
+            "client_secret": config[self.oauth]['appSecret'],
+            "code": code,
+            "grant_type": 'authorization_code',
+            "redirect_uri": config[self.oauth]['url'],
+        }
+        r = requests.post("%s/oauth2/access_token" % config[self.oauth]['api'], data=payload)
+        res = json.loads(r.text)
+        token = res['access_token'] if 'access_token' in res else ''
+        self.uid = res['uid']
+        return token
+
+    def getUserInfo(self, token):
+        payload = {
+            "access_token": token,
+            "uid": self.uid
+        }
+        r = requests.get("%s/2/users/show.json" % config[self.oauth]['api'], params=payload)
+        res = json.loads(r.text)
+        data = {
+            "id": res["id"],
+            "name": res["name"],
+            "isAdmin": False,
+            "img": res['profile_image_url'],
+            "oauth": self.oauth
+        }
         return data

@@ -12,8 +12,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import getUrl, config
 from colorpk.models.db import Color
-from colorpk.models.auth import OAuth2_fb
-import requests
+from colorpk.models.auth import OAuth2_fb, OAuth2_wb
 import sys
 
 @cache_page(60 * 3)
@@ -79,7 +78,7 @@ def notfound(request):
     return render_to_response('error_404.html')
 
 def auth(request, src):
-    if request.session['state'] == request.GET['state']:
+    if 'state' in request.session and request.session['state'] == request.GET['state']:
         auth = getattr(sys.modules[__name__], "OAuth2_%s"%src)()
         token = auth.getToken(request.GET['code'])
         if token:
@@ -91,11 +90,11 @@ def auth(request, src):
         else:
             return render_to_response('signin.html', {
                 "path": request.path,
-                "error": "No valid state"
+                "error": "Bad Credential"
             })
     else:
         return render_to_response('signin.html', {
             "path": request.path,
-            "error": "No valid state"
+            "error": "No valid state found"
         })
 
