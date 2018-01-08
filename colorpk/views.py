@@ -15,7 +15,7 @@ from colorpk.models.db import Color
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
 import sys
 
-@cache_page(60 * 3)
+#@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
@@ -83,11 +83,8 @@ def auth(request, src):
         token = auth.getToken(request.GET['code'])
         if token:
             userInfo = auth.getUserInfo(token)
-            return render_to_response('signin.html', {
-                "path": request.path,
-                "user": json.dumps(userInfo),
-                #"user1": {"id": "105749580437093457132", "oauth": "gg", "name": "ZJ Guo", "isAdmin": false, "img": "https://lh4.googleusercontent.com/-SSkvm3I1674/AAAAAAAAAAI/AAAAAAAAAHw/HEU8xy7qcds/photo.jpg?sz=50"}
-            })
+            request.session['user'] = userInfo
+            return redirect('/')
         else:
             return render_to_response('signin.html', {
                 "path": request.path,
