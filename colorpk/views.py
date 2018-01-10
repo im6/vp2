@@ -24,13 +24,6 @@ def index(request):
         value["canvas"] = value["color"].split("#")
         value["canvas"] = list(map(lambda x: "#%s"%x, value["canvas"]))
 
-    if request.session.test_cookie_worked():
-        print('cookie is working')
-        request.session.delete_test_cookie()
-
-    request.session.set_test_cookie()
-    print('cookie set')
-
     return HttpResponse(template.render({
         "list": alldata,
         "path": request.path

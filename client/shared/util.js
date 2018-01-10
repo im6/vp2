@@ -33,7 +33,7 @@ export const ajax = (config) => {
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        success(xhr.responseText);
+        success(JSON.parse(xhr.responseText));
       } else {
         fail();
       }

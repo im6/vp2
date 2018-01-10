@@ -3,6 +3,7 @@ import './layout';
 import './style.scss';
 import { Box } from './box';
 import { ajax } from '../shared/util';
+import '../shared/auth';
 
 const likeAjax = (id) => {
   ajax({
