@@ -1,5 +1,6 @@
 import './style.scss';
 import { downloadCanvas } from '../shared/util';
+import '../shared/auth';
 
 const canvasElem = document.getElementsByClassName('canvas')[0];
 const dlBtn = document.getElementById('download');

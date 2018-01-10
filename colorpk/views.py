@@ -15,7 +15,7 @@ from colorpk.models.db import Color
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
 import sys
 
-#@cache_page(60 * 3)
+@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
@@ -71,7 +71,7 @@ def notfound(request):
     return render_to_response('error_404.html')
 
 def auth(request, src):
-    if 'state' in request.session and request.session['state'] == request.GET['state']:
+    if request.session.get('state', None) == request.GET['state']:
         auth = getattr(sys.modules[__name__], "OAuth2_%s"%src)()
         token = auth.getToken(request.GET['code'])
         if token:

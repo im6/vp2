@@ -3,6 +3,7 @@ import './jscolor.min';
 import dragula from 'dragula';
 import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
+import '../shared/auth';
 
 const HANDLENAME = 'drgHdl';
 const bars = document.getElementsByClassName('jscolor');

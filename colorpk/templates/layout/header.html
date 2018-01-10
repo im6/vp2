@@ -4,13 +4,6 @@
     </a>
     <nav>
       <ul>
-          {% if request.session.user %}
-              <li class="nav-user">
-                  <a href="/profile">
-                      <img src="{{ request.session.user.img }}" alt="user icon" title="Go to {{ request.session.user.name }}'s Profile">
-                  </a>
-              </li>
-          {% endif %}
           {% if path != '/' and path != '/latest' %}
               <li><a href="/">&#8592; Back</a></li>
           {% else %}
@@ -31,7 +24,7 @@
               </li>
           {% endif %}
 
-          {% if path != '/signin' and not request.session.user %}
+          {% if path != '/signin' %}
               <li class="nav-signin"><a href="/signin">Sign In</a></li>
           {% endif %}
 
