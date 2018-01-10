@@ -1,4 +1,13 @@
-export const Box = ({id, value, like, isliked, onLike, onRedir}) => {
+import { noop } from '../../shared/util';
+
+export const Box = (vm) => {
+  const { id, value, like, isliked } = vm;
+  let { onLike, onRedir, onUnlike } = vm;
+
+  onUnlike = onUnlike || noop;
+  onLike = onLike || noop;
+  onRedir = onRedir || noop;
+
   const box = document.createElement("div");
   box.classList.add('box');
   box.dataset.k = id;
@@ -32,7 +41,7 @@ export const Box = ({id, value, like, isliked, onLike, onRedir}) => {
       onLike(id);
     } else {
       btn.innerHTML = `<img src="/static/hrt.svg">${like}`;
-      // don't call server
+      onUnlike(id);
     }
   };
 

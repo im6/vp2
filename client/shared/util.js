@@ -49,6 +49,7 @@ export const ajax = (config) => {
 };
 
 export const isMobile = mobileDetect();
+export const noop = () => {};
 
 export const downloadCanvas = (color) => {
   const HEIGHT = 420,

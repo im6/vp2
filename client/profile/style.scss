@@ -10,9 +10,11 @@ body {
 
 main {
   padding-top: 90px;
-  .box {
+  .list{
     margin: 0 auto;
-    display: block;
+    .box {
+      display: inline-block;
+    }
   }
 }
 
@@ -63,5 +65,4 @@ main {
       border-radius: 0 4px 4px 0;
     }
   }
-
 }
