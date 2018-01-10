@@ -2,6 +2,13 @@
 
 {% load static %}
 {% block mainContent %}
+    <div class="switch-field">
+      <input type="radio" id="switch_left" name="swt" value="0" checked/>
+      <label for="switch_left">Portfolio</label>
+      <input type="radio" id="switch_right" name="swt" value="1" />
+      <label for="switch_right">Like</label>
+    </div>
+
     <div class="list"></div>
     <script>
         window._colorpk = {
