@@ -8,6 +8,7 @@ module.exports = {
     'bundle1': './client/signin/index.js',
     'bundle2': './client/newcolor/index.js',
     'bundle3': './client/onecolor/index.js',
+    'bundle4': './client/profile/index.js',
   },
   module:{
     rules: [

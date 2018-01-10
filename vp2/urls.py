@@ -8,6 +8,7 @@ urlpatterns = [
     path('latest', views.latest),
     path('newcolor', views.newcolor),
     path('signin', views.signin),
+    path('profile', views.profile),
     path('auth/<str:src>', views.auth),
 
     path('like/<int:id>', controller.toggleLike),

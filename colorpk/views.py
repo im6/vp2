@@ -43,6 +43,19 @@ def newcolor(request):
         "path": request.path
     })
 
+def profile(request):
+    template = get_template('profile.html')
+    alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
+    for key, value in enumerate(alldata):
+        value["canvas"] = value["color"].split("#")
+        value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
+
+    return HttpResponse(template.render({
+        "path": request.path,
+        "list0": alldata[0: 10],
+        "list1": alldata[10: 20],
+    }))
+
 def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] =  state

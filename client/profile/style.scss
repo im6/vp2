@@ -1,0 +1,15 @@
+@import '../shared/button';
+@import '../shared/layout';
+@import '../colors/box/style.scss';
+
+body {
+  background: linear-gradient(to left top, #f0f0f0, #ffffff);
+}
+
+main {
+  padding-top: 100px;
+  .box {
+    margin: 0 auto;
+    display: block;
+  }
+}

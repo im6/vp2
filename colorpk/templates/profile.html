@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block mainContent %}
+    <div class="list"></div>
+    <script>
+        window._colorpk = {
+          auth: null,
+          initData: null,
+        };
+        window._colorpk.list0 = [
+          {% for oneBox in list0%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
+        ];
+        window._colorpk.list1 = [
+          {% for oneBox in list1%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
+        ];
+    </script>
+    <script src="{% static "bundle4.js" %}"></script>
+{% endblock %}

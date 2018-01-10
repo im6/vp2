@@ -12,7 +12,7 @@ const toggleNav = (user) => {
 
 ajax({
   method: 'GET',
-  url: 'userDetail',
+  url: '/userDetail',
   success: ({user}) => {
     if(user){
       toggleNav(user)
