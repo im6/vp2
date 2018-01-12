@@ -11,19 +11,14 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import getUrl, config
-from colorpk.models.db import Color
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
+import colorpk.cache_storage as cache
 import sys
 
-@cache_page(60 * 3)
 @ensure_csrf_cookie
 def index(request):
     template = get_template('main.html')
-    alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
-    for key, value in enumerate(alldata):
-        value["canvas"] = value["color"].split("#")
-        value["canvas"] = list(map(lambda x: "#%s"%x, value["canvas"]))
-
+    alldata = cache.getColors()
     return HttpResponse(template.render({
         "list": alldata,
         "path": request.path
@@ -31,11 +26,11 @@ def index(request):
 
 @cache_page(60 * 60 * 60)
 def colorOne(request, id):
-    oneColor = Color.objects.get(id=id)
+    oneColor = cache.getColor(id)
     return render_to_response('one_color.html', {
         "path": request.path,
         "id": id,
-        "value": oneColor.color
+        "value": oneColor.get('color')
     })
 
 def newcolor(request):
@@ -45,7 +40,7 @@ def newcolor(request):
 
 def profile(request):
     template = get_template('profile.html')
-    alldata = list(map(lambda x: x.to_dict(), Color.objects.all()))
+    alldata = cache.getColors()
     for key, value in enumerate(alldata):
         value["canvas"] = value["color"].split("#")
         value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
@@ -66,10 +61,9 @@ def signin(request):
         "gg": getUrl('gg', state),
     })
 
-@cache_page(60 * 3)
 def latest(request):
     template = get_template('main.html')
-    alldata = list(map(lambda x: x.to_dict(), Color.objects.all().order_by('-id')))
+    alldata = cache.getColors()
     for key, value in enumerate(alldata):
         value["canvas"] = value["color"].split("#")
         value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
