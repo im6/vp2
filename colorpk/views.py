@@ -41,10 +41,6 @@ def newcolor(request):
 def profile(request):
     template = get_template('profile.html')
     alldata = cache.getColors()
-    for key, value in enumerate(alldata):
-        value["canvas"] = value["color"].split("#")
-        value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
-
     return HttpResponse(template.render({
         "path": request.path,
         "list0": alldata[0: 10],
@@ -64,17 +60,14 @@ def signin(request):
 def latest(request):
     template = get_template('main.html')
     alldata = cache.getColors()
-    for key, value in enumerate(alldata):
-        value["canvas"] = value["color"].split("#")
-        value["canvas"] = list(map(lambda x: "#%s" % x, value["canvas"]))
+    alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
     return HttpResponse(template.render({
-        "list": alldata,
+        "list": alldata1,
         "path": request.path
     }))
 
 @cache_page(60 * 60)
 def notfound(request):
-    # return redirect('/404found')
     return render_to_response('error_404.html')
 
 def auth(request, src):

@@ -6,12 +6,7 @@ cache.set('global_colors', init_colors)
 cache.set('global_like', {})
 
 def getColors():
-    rawValue = cache.get('global_colors')
-    like_obj = cache.get('global_like')
-    for one in rawValue:
-        if one.get('id') in like_obj and like_obj.get(one.get('id')) > 0:
-            one['like'] += like_obj.get(one.get('id'))
-    return rawValue
+    return cache.get('global_colors')
 
 def getColor(id):
     cached_data = cache.get('global_colors')
@@ -20,6 +15,11 @@ def getColor(id):
 
 def like(id):
     like_obj = cache.get('global_like')
-    current_like = like_obj.get(id, 0)
-    like_obj[id] = current_like + 1
+    like_obj[id] = like_obj.get(id, 0) + 1
     cache.set('global_like', like_obj)
+
+    rawValue = cache.get('global_colors')
+    for one in rawValue:
+        if one.get('id') == id:
+            one['like'] += 1
+    cache.set('global_colors', rawValue)
