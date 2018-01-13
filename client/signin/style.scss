@@ -17,7 +17,7 @@ main {
       animation-name: boxAnim;
       animation-fill-mode: backwards;
       animation-duration: .3s;
-      animation-delay: 0.5s;
+      animation-delay: 0.15s;
 
       @keyframes boxAnim {
         0% {
@@ -33,7 +33,7 @@ main {
         animation-name: iconAnim;
         animation-fill-mode: backwards;
         animation-duration: .5s;
-        animation-delay: 0.8s;
+        animation-delay: 0.5s;
 
         @keyframes iconAnim {
           0% {
