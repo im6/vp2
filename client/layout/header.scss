@@ -35,6 +35,9 @@ nav {
   li {
     float: right;
 	position: relative;
+    border: 1px solid red;
+    height: 30px;
+    width: 90px;
 
     &:hover >a {
       color: $nav-color-hover;
@@ -50,31 +53,23 @@ nav {
   a {
 	color: $nav-color;
 	display: block;
-	padding: 10px 20px;
+	//padding: 10px 20px;
 	text-align: center;
 	text-decoration: none;
+    vertical-align: middle;
   }
 
 }
-.nav-user{
-  >a{
-    padding: 2px 20px;
-  }
-  img{
-    width: 35px;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-  }
-}
+
 
 .submenu {
   left: 0;
-  top: -15px; // dropdown animation starting location
-  opacity: 0;
+  //top: -15px; // dropdown animation starting location
+  //opacity: 0;
   position: absolute;
   box-shadow: 0 5px 8px 2px #cccccc;
   z-index: 2;
-  transform: scaleY(0);
+  //transform: scaleY(0);
   transition: transform .28s ease-out, top .28s ease-out;
 
   li {
@@ -89,58 +84,16 @@ nav {
   }
 }
 
-.custom-dropdown {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 10px; /* demo only */
-
-  select {
-    background-color: #1abc9c;
-    color: #fff;
-    font-size: inherit;
-    padding: .5em;
-    padding-right: 2.5em;
-    border: 0;
-    margin: 0;
-    border-radius: 3px;
-    text-indent: 0.01px;
-    text-overflow: '';
-    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+.nav-user{
+  > a {
+    padding: 2px 20px;
   }
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-  }
-
-  &::after { /*  Custom dropdown arrow */
-    content: "\25BC";
-    height: 1em;
-    font-size: .625em;
-    line-height: 1;
-    right: 1.2em;
-    top: 50%;
-    margin-top: -.5em;
-
-    color: rgba(0,0,0,.4);
-  }
-
-  &::before { /*  Custom dropdown arrow cover */
-    width: 2em;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 0 3px 3px 0;
-
-    background-color: rgba(0,0,0,.15);
+  img {
+    width: 35px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
   }
 }
-
-
-
 
 @media (max-width: 768px) {
     header > a {

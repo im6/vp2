@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
-@import './header';
-
 $FOOTERHEIGHT: 26px;
 
 html {
@@ -19,17 +17,5 @@ body {
 }
 
 main {
-    padding: 60px 0 50px 0;
-    //margin-bottom: $FOOTERHEIGHT;
+    padding-bottom: 50px;
 }
-
-//footer {
-//    background-color: $BACKCOLOR;
-//    //position: fixed;
-//    height: $FOOTERHEIGHT;
-//    width: 100%;
-//    bottom: 0;
-//    z-index: -1;
-//    text-align: center;
-//    color: #7eaad9;
-//}

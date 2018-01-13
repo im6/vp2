@@ -1,7 +1,6 @@
 //import 'style-loader!css-loader!purecss/build/pure-min.css';
 //import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
 import debounce from 'debounce';
-import '../shared/layout.scss';
 import { isMobile } from '../shared/util';
 
 const BOXWD = isMobile ? 185 : 260;
