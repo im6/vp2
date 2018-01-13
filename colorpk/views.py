@@ -5,12 +5,10 @@ from django.template.loader import get_template, render_to_string
 from .models import db
 from datetime import datetime
 import json
-import uuid
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
-from colorpk.models.auth import getUrl, config
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
 import colorpk.cache_storage as cache
 import sys
@@ -48,13 +46,8 @@ def profile(request):
     }))
 
 def signin(request):
-    state = str(uuid.uuid4())
-    request.session['state'] =  state
     return render_to_response('signin.html', {
         "path": request.path,
-        "wb": getUrl('wb', state),
-        "fb": getUrl('fb', state),
-        "gg": getUrl('gg', state),
     })
 
 def latest(request):
