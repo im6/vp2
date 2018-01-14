@@ -19,7 +19,7 @@ header {
 
 nav {
   margin: 0 1% 0 2%;
-  a {
+  > a {
     color: $nav-color;
     padding: 9.25px 10px;
     display: inline-block;
@@ -37,13 +37,13 @@ nav {
       color: $hover_3;
       border-bottom: 4px solid $hover_3;
     }
+  }
+}
 
-    &:nth-child(4) {
-      float: right;
-      &:hover {
-        color: $hover_4;
-        border-bottom: 4px solid $hover_4;
-      }
-    }
+.nav-auth{
+  float: right;
+  &:hover {
+    color: $hover_4;
+    border-bottom: 4px solid $hover_4;
   }
 }
