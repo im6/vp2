@@ -47,3 +47,10 @@ nav {
     border-bottom: 4px solid $hover_4;
   }
 }
+.nav-user {
+  float: right;
+  padding-top: 4px;
+  img {
+    width: 34px;
+  }
+}
