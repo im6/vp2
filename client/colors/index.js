@@ -4,7 +4,6 @@ import './style.scss';
 import { Box } from './box';
 import { ajax } from '../shared/util';
 import '../shared/auth';
-import '../layout/slider';
 
 const likeAjax = (id) => {
   ajax({

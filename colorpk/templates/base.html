@@ -20,16 +20,9 @@
         </script>
     </head>
     <body>
-        {% include 'layout/nav.html' %}
+        {% include 'layout/header.html' %}
         <main>
-            <div class="toggle-button navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </div>
-
             {% block mainContent %}{% endblock %}
         </main>
-
     </body>
 </html>
