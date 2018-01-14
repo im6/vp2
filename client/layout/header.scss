@@ -1,7 +1,10 @@
-//source: https://codepen.io/dhanushbadge/pen/olsvi?limit=all&page=3&q=menu
-$header-height: 41px;
-$nav-color: #63c0d6;  //#63c0d6
-$nav-color-hover: #afe3ff;
+
+$header-height: 40px;
+$nav-color: #8c8c8c;
+$hover_1: #F38181;
+$hover_2: #FCE38A;
+$hover_3: #95E1D3;
+$hover_4: #3FC1C9;
 
 header {
   position: fixed;
@@ -12,91 +15,35 @@ header {
   height: $header-height;
   background-color: white;
   box-shadow: 0 5px 10px 0 rgba(0,64,128,0.1);
-
-  > a{
-    float: left;
-    margin: 4px 20px;
-    font-size: 1.6em;
-    color: $nav-color;
-    letter-spacing: 1.2px;
-    text-decoration: none;
-  }
 }
 
 nav {
-  ul, li {
-    margin: 0;
-	padding: 0;
-  }
-  ul {
-	list-style: none;
-	width: 100%;
-  }
-  li {
-    float: right;
-	position: relative;
-    border: 1px solid red;
-    height: 30px;
-    width: 90px;
-
-    &:hover >a {
-      color: $nav-color-hover;
-    }
-
-    &:hover ul.submenu {
-      opacity: 1;
-      transform: scaleY(1);
-      top: 40px; /* adjust this as per top nav padding top & bottom comes */
-    }
-  }
-
+  margin: 0 1% 0 2%;
   a {
-	color: $nav-color;
-	display: block;
-	//padding: 10px 20px;
-	text-align: center;
-	text-decoration: none;
-    vertical-align: middle;
-  }
+    color: $nav-color;
+    padding: 9.25px 10px;
+    display: inline-block;
+    text-decoration: none;
 
-}
+    &:nth-child(1):hover {
+      color: $hover_1;
+      border-bottom: 4px solid $hover_1;
+    }
+    &:nth-child(2):hover {
+      color: $hover_2;
+      border-bottom: 4px solid $hover_2;
+    }
+    &:nth-child(3):hover {
+      color: $hover_3;
+      border-bottom: 4px solid $hover_3;
+    }
 
-
-.submenu {
-  left: 0;
-  //top: -15px; // dropdown animation starting location
-  //opacity: 0;
-  position: absolute;
-  box-shadow: 0 5px 8px 2px #cccccc;
-  z-index: 2;
-  //transform: scaleY(0);
-  transition: transform .28s ease-out, top .28s ease-out;
-
-  li {
-    width: 100%;
-  }
-  a {
-    background-color: white;
-    &:hover {
-      background-color: $nav-color;
-      color: white;
+    &:nth-child(4) {
+      float: right;
+      &:hover {
+        color: $hover_4;
+        border-bottom: 4px solid $hover_4;
+      }
     }
   }
-}
-
-.nav-user{
-  > a {
-    padding: 2px 20px;
-  }
-  img {
-    width: 35px;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-  }
-}
-
-@media (max-width: 768px) {
-    header > a {
-        display: none;
-    }
 }

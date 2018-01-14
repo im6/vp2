@@ -1,33 +1,14 @@
 <header>
     <nav>
-      <ul>
-          {% if path != '/' and path != '/latest' %}
-              <li><a href="/">&#8592; Back</a></li>
-          {% else %}
-              <li>
-                  <a href="javascript:void(0)">
-                      &#9662;
-                      {% if path == '/' %}
-                        Popular
-                      {% elif path == '/latest' %}
-                        Latest
-                      {% endif %}
-                  </a>
-                  <ul class="submenu">
-                    <li><a href="/">Popular</a></li>
-                    <li><a href="/latest">Latest</a></li>
-                    <li><a href="//www.javascript.fun/about/">About</a></li>
-                  </ul>
-              </li>
-          {% endif %}
+        <a href="/">Popular</a>
+        <a href="/latest">Latest</a>
+        {% if path != '/newcolor' %}
+            <a href="/newcolor">Create</a>
+        {% endif %}
 
-          {% if path != '/signin' %}
-              <li class="nav-signin"><a href="/signin">Sign In</a></li>
-          {% endif %}
 
-          {% if path != '/newcolor' %}
-              <li><a href="/newcolor">&#43; Create</a></li>
-          {% endif %}
-      </ul>
+        {% if path != '/signin' %}
+            <a href="/signin">Sign In</a>
+        {% endif %}
     </nav>
 </header>
