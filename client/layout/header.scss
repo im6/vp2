@@ -49,8 +49,23 @@ nav {
 }
 .nav-user {
   float: right;
-  padding-top: 4px;
-  img {
+  padding-top: 2px;
+  > img {
+    display: inline-block;
     width: 34px;
+    margin-right: 6px;
+    border-radius: 3px;
+  }
+  > div {
+    display: inline-block;
+    a {
+      font-size: 13.5px;
+      color: $nav-color;
+      display: block;
+      text-decoration: none;
+      &:hover {
+        color: $hover_4;
+      }
+    }
   }
 }
