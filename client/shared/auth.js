@@ -6,16 +6,16 @@ const navElem = document.querySelector('nav');
 const renderUser = (user) => {
   const elem = document.createElement('div');
   elem.className = 'nav-user';
-  elem.innerHTML = `<img src="${user.img}" alt="icon"><div><a href="/profile">${user.name}</a><a href="/signout">Sign out</a></div>`;
+  elem.innerHTML = `<img src="${user.img}" alt="icon"><div><a href="/profile">${user.name}</a><a href="/signin">Sign out</a></div>`;
   navElem.appendChild(elem);
 };
 
 const renderAuth = () => {
   const elem = document.createElement('a');
-  a.className = 'nav-auth';
-  a.href = '/signin';
-  a.innerText = 'Sign In';
-  navElem.appendChild(a);
+  elem.className = 'nav-auth';
+  elem.href = '/signin';
+  elem.innerText = 'Sign In';
+  navElem.appendChild(elem);
 };
 
 ajax({

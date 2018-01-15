@@ -26,8 +26,10 @@ def getUser(request):
     })
 
 def generateUrl(request):
+    # request.session.flush()  ## not sync db cleanup
     state = str(uuid.uuid4())
     request.session['state'] = state
+    request.session['user'] = None
     return JsonResponse({
         "wb": getUrl('wb', state),
         "fb": getUrl('fb', state),
