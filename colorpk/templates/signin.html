@@ -3,23 +3,33 @@
 {% load static %}
 {% block mainContent %}
     <div id="signin-box">
-        <h3>Please Sign in with:</h3>
-        <a>
-            <img src="{% static "oauth1.png" %}" alt="微博">
-        </a>
+        <div>
+            <a>
+                <img src="{% static "oauth1.png" %}" alt="微博">
+            </a>
 
-        <a>
-            <img src="{% static "oauth2.png" %}" alt="Facebook">
-        </a>
+            <a>
+                <img src="{% static "oauth2.png" %}" alt="Facebook">
+            </a>
 
-        <a>
-            <img src="{% static "oauth4.png" %}" alt="Google">
-        </a>
-        {% if error %}
-            <span class="errorTxt">
-                {{ error }}
-            </span>
-        {% endif %}
+            <a>
+                <img src="{% static "oauth4.png" %}" alt="Google">
+            </a>
+            {% if error %}
+                <span class="errorTxt">
+                    {{ error }}
+                </span>
+            {% endif %}
+        </div>
+
+        <div>
+            After Login, you will be able to:
+            <ul>
+                <li>Publish palette directly</li>
+                <li>Endorse your color</li>
+                <li>Save & Sync your colors on the cloud</li>
+            </ul>
+        </div>
     </div>
     <script src="{% static "bundle1.js" %}"></script>
 {% endblock %}

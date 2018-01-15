@@ -5,46 +5,65 @@ body {
 }
 
 main {
-    padding-top: 300px;
-    > div {
-      width: 200px;
-      margin: auto;
-      background-color: white;
-      padding: 40px;
-      border-radius: 5px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+    padding-top: 15%;
+}
 
-      animation-name: boxAnim;
-      animation-fill-mode: backwards;
-      animation-duration: .3s;
-      animation-delay: 0.15s;
+#signin-box {
+  width: 260px;
+  margin: auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
 
-      @keyframes boxAnim {
-        0% {
-          opacity: 0;
-        }
-      }
+  animation-name: boxAnim;
+  animation-fill-mode: backwards;
+  animation-duration: .3s;
+  animation-delay: 0.15s;
 
-      a {
-        text-decoration: none;
-        display: inline-block;
-        padding: 0 5px 6px 5px;
+  @keyframes boxAnim {
+    0% {
+      opacity: 0;
+    }
+  }
 
-        animation-name: iconAnim;
-        animation-fill-mode: backwards;
-        animation-duration: .5s;
-        animation-delay: 0.5s;
+  a {
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 12px;
 
-        @keyframes iconAnim {
-          0% {
-            opacity: 0;
-            transform: scale(0);
-          }
-        }
+    animation-name: iconAnim;
+    animation-fill-mode: backwards;
+    animation-duration: .6s;
+    animation-delay: 1s;
+    filter: grayscale(100%);
+    transition: filter 0.25s ease-in-out;
+
+    @keyframes iconAnim {
+      0% {
+        opacity: 0;
+        transform: scale(0);
       }
     }
-
-  .errorTxt{
-    color: red;
+    &:hover {
+      filter: none;
+    }
   }
+
+  div:nth-child(1){
+    width: 200px;
+    margin: 25px auto;
+  }
+
+  div:nth-child(2){
+    color: #757575;
+    font-size: 15px;
+    li {
+      font-size: 13px;
+    }
+  }
+}
+
+.errorTxt{
+  color: red;
 }
