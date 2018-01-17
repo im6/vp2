@@ -22,7 +22,6 @@ class Color(models.Model):
             #"createdate": self.createdate,
         }
 
-
 class User(models.Model):
     id = models.IntegerField(primary_key=True)
     oauth = models.SlugField(max_length=2)
@@ -32,6 +31,9 @@ class User(models.Model):
     lastlogin = models.DateTimeField()
 
 class UserLike(models.Model):
-    userid = models.ForeignKey(User, on_delete=models.CASCADE)
-    colorid = models.ForeignKey(Color, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("user", "color"),)
 

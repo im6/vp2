@@ -1,6 +1,7 @@
-from django.http import HttpResponse,JsonResponse
+from django.http import JsonResponse
 import json
 import colorpk.cache_storage as cache
+from colorpk.models.db import User, UserLike
 from colorpk.models.auth import getUrl
 import uuid
 
