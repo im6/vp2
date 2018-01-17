@@ -1,9 +1,12 @@
 from django.core.cache import cache
 from colorpk.models.db import Color
 
-init_colors = list(map(lambda x : x.to_dict(), Color.objects.all()))
-cache.set('global_colors', init_colors)
-cache.set('global_like', {})
+try:
+    init_colors = list(map(lambda x : x.to_dict(), Color.objects.all()))
+    cache.set('global_colors', init_colors)
+    cache.set('global_like', {})
+except BaseException as e:
+    print('error on getting all colors')
 
 def getColors():
     return cache.get('global_colors')
