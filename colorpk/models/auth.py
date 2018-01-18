@@ -1,7 +1,8 @@
 import configparser
 import requests
 import json
-from abc import ABCMeta, abstractmethod
+from urllib.parse import parse_qs
+from abc import ABC, abstractmethod
 
 config = configparser.ConfigParser()
 config.read('local/connection.cnf')
@@ -29,17 +30,21 @@ def getUrl(src, state):
 
     return url
 
-class OAuth2():
+class OAuth2(ABC):
     def __init__(self, src):
         self.oauth = src
         self.api = config[src]['api']
         self.appKey = config[src]['appKey']
         self.appSecret = config[src]['appSecret']
         self.url = config[src]['url']
+    @abstractmethod
     def getToken(self, code):
         pass
+
+    @abstractmethod
     def getUserInfo(self, token):
         pass
+
 
 class OAuth2_fb(OAuth2):
     def __init__(self):
@@ -47,12 +52,12 @@ class OAuth2_fb(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "client_id": config[self.oauth]['appKey'],
-            "client_secret": config[self.oauth]['appSecret'],
+            "client_id": self.appKey,
+            "client_secret": self.appSecret,
             "code": code,
-            "redirect_uri": config[self.oauth]['url'],
+            "redirect_uri": self.url,
         }
-        r = requests.get("%s/oauth/access_token" % config[self.oauth]['api'], params=payload)
+        r = requests.get("%s/oauth/access_token" % self.api, params=payload)
         res = json.loads(r.text)
         token = res['access_token'] if 'access_token' in res else ''
         return token
@@ -62,7 +67,7 @@ class OAuth2_fb(OAuth2):
             "access_token": token,
             "fields": 'id,name,picture'
         }
-        r = requests.get("%s/me" % config[self.oauth]['api'], params=payload)
+        r = requests.get("%s/me" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
             "id": res["id"],
@@ -81,13 +86,13 @@ class OAuth2_wb(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "client_id": config[self.oauth]['appKey'],
-            "client_secret": config[self.oauth]['appSecret'],
+            "client_id": self.appKey,
+            "client_secret": self.appSecret,
             "code": code,
             "grant_type": 'authorization_code',
-            "redirect_uri": config[self.oauth]['url'],
+            "redirect_uri": self.url,
         }
-        r = requests.post("%s/oauth2/access_token" % config[self.oauth]['api'], data=payload)
+        r = requests.post("%s/oauth2/access_token" % self.api, data=payload)
         res = json.loads(r.text)
         if 'access_token' in res:
             token = res['access_token']
@@ -101,7 +106,7 @@ class OAuth2_wb(OAuth2):
             "access_token": token,
             "uid": self.uid
         }
-        r = requests.get("%s/2/users/show.json" % config[self.oauth]['api'], params=payload)
+        r = requests.get("%s/2/users/show.json" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
             "id": res["id"],
@@ -120,12 +125,12 @@ class OAuth2_gg(OAuth2):
     def getToken(self, code):
         payload = {
             "code": code,
-            "client_id": config[self.oauth]['appKey'],
-            "client_secret": config[self.oauth]['appSecret'],
-            "redirect_uri": config[self.oauth]['url'],
+            "client_id": self.appKey,
+            "client_secret": self.appSecret,
+            "redirect_uri": self.url,
             "grant_type": "authorization_code"
         }
-        r = requests.post("https://www.googleapis.com/oauth2/v4/token", data=payload)
+        r = requests.post("%s/oauth2/v4/token"%self.api, data=payload)
         res = json.loads(r.text)
         token = res['access_token'] if 'access_token' in res else ''
         return token
@@ -134,13 +139,45 @@ class OAuth2_gg(OAuth2):
         payload = {
             "access_token": token,
         }
-        r = requests.get("https://www.googleapis.com/plus/v1/people/me", params=payload)
+        r = requests.get("%s/plus/v1/people/me"%self.api, params=payload)
         res = json.loads(r.text)
         data = {
             "id": res["id"],
             "name": res["displayName"],
             "isAdmin": False,
             "img": res['image']['url'],
+            "oauth": self.oauth
+        }
+        return data
+
+
+class OAuth2_gh(OAuth2):
+    def __init__(self):
+        super().__init__('gh')
+
+    def getToken(self, code):
+        payload = {
+            "client_id": self.appKey,
+            "client_secret": self.appSecret,
+            "code": code,
+            "redirect_uri": self.url,
+        }
+        r = requests.post("https://github.com/login/oauth/access_token", data=payload)
+        res = parse_qs(r.text)
+        token = res['access_token'][0] if 'access_token' in res else ''
+        return token
+
+    def getUserInfo(self, token):
+        payload = {
+            "access_token": token,
+        }
+        r = requests.get("%s/user" % self.api, params=payload)
+        res = json.loads(r.text)
+        data = {
+            "id": res["id"],
+            "name": res["name"] if res['name'] else res['login'],
+            "isAdmin": False,
+            "img": res['avatar_url'],
             "oauth": self.oauth
         }
         return data

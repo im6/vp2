@@ -59,6 +59,9 @@ nav {
   }
   > div {
     display: inline-block;
+    margin-top: 5px;
+    float: inherit;
+
     a {
       font-size: 13.5px;
       color: $nav-color;

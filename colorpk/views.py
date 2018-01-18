@@ -9,7 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
-from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg
+from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.cache_storage as cache
 import sys
 
