@@ -35,4 +35,5 @@ def generateUrl(request):
         "wb": getUrl('wb', state),
         "fb": getUrl('fb', state),
         "gg": getUrl('gg', state),
+        "gh": getUrl('gh', state),
     })

@@ -23,6 +23,10 @@ def getUrl(src, state):
               "response_type=code&state=%s&redirect_uri=%s"\
               %(config[src]['appkey'], state, config[src]['url'])
 
+    elif src == 'gh':
+        url = "https://github.com/login/oauth/authorize?client_id=%s&state=%s&redirect_uri=%s"\
+              %(config[src]['appkey'], state, config[src]['url'])
+
     return url
 
 class OAuth2():

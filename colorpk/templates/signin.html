@@ -5,15 +5,19 @@
     <div id="signin-box">
         <div>
             <a>
-                <img src="{% static "oauth1.png" %}" alt="微博">
+                <img src="{% static "wb.png" %}" title="微博" alt="微博">
+            </a>
+            <a>
+                <img src="{% static "gh.png" %}" title="Github" alt="Github">
             </a>
 
-            <a>
-                <img src="{% static "oauth2.png" %}" alt="Facebook">
-            </a>
+            <br>
 
             <a>
-                <img src="{% static "oauth4.png" %}" alt="Google">
+                <img src="{% static "gg.png" %}" title="Google" alt="Google">
+            </a>
+            <a>
+                <img src="{% static "fb.png" %}" title="Facebook" alt="Facebook">
             </a>
             {% if error %}
                 <span class="errorTxt">

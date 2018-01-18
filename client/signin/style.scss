@@ -9,10 +9,10 @@ main {
 }
 
 #signin-box {
-  width: 260px;
+  width: 240px;
   margin: auto;
   background-color: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 5px;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
 
@@ -30,14 +30,19 @@ main {
   a {
     text-decoration: none;
     display: inline-block;
-    margin-right: 12px;
+    margin: 8px 10px;
 
     animation-name: iconAnim;
     animation-fill-mode: backwards;
     animation-duration: .6s;
     animation-delay: 1s;
-    filter: grayscale(100%);
+    filter: grayscale(100%) brightness(70%);
     transition: filter 0.25s ease-in-out;
+
+    img {
+      width: 55px;
+      border-radius: 10px;
+    }
 
     @keyframes iconAnim {
       0% {
@@ -46,20 +51,20 @@ main {
       }
     }
     &:hover {
-      filter: none;
+      filter: grayscale(0) brightness(100%);
     }
   }
 
   div:nth-child(1){
-    width: 200px;
-    margin: 25px auto;
+    width: 155px;
+    margin: 20px auto;
   }
 
   div:nth-child(2){
     color: #757575;
     font-size: 15px;
     li {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 }

@@ -24,6 +24,7 @@ nav {
     padding: 9.25px 10px;
     display: inline-block;
     text-decoration: none;
+    transition: color 0.25s ease-in-out;
 
     &:nth-child(1):hover {
       color: $hover_1;
