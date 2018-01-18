@@ -18,8 +18,8 @@ main {
 
   animation-name: boxAnim;
   animation-fill-mode: backwards;
-  animation-duration: .3s;
-  animation-delay: 0.15s;
+  animation-duration: .5s;
+  animation-delay: 0.5s;
 
   @keyframes boxAnim {
     0% {
@@ -29,13 +29,12 @@ main {
 
   a {
     text-decoration: none;
-    display: inline-block;
+    display: none;
     margin: 8px 10px;
 
     animation-name: iconAnim;
     animation-fill-mode: backwards;
-    animation-duration: .6s;
-    animation-delay: 1s;
+    animation-duration: .4s;
     filter: grayscale(100%) brightness(70%);
     transition: filter 0.25s ease-in-out;
 
@@ -57,6 +56,7 @@ main {
 
   div:nth-child(1){
     width: 155px;
+    height: 148px; // placeholder
     margin: 15px auto 25px auto;
   }
 
