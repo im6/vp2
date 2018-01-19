@@ -11,6 +11,7 @@ const bars = document.getElementsByClassName('jscolor');
 const canvas = document.getElementsByClassName('canvas')[0];
 const textElem = document.getElementById('colorText');
 
+let currentIndex = 0;
 
 const resetColors = () => {
   for(let i = 0; i < 4; i ++){
@@ -44,14 +45,25 @@ document.getElementById('resetBtn').onclick = () => {
   resetColors();
 };
 
-textElem.oninput = ({ target }) => {
-  if(COLORREG.test(target.value)) {
 
+window._cpOnColorChange = (jsc) => {
+  textElem.value = jsc.toString();
+};
+
+textElem.oninput = ({ target }) => {
+  const vl = target.value;
+  if(COLORREG.test(vl)) {
+    bars[currentIndex].style.backgroundColor = '#' + vl;
+    bars[currentIndex].jscolor.fromString(vl);
   }
 };
 
 for(let i = 0; i < 4; i ++){
-  bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`
+  bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
+  bars[i].onclick = () => {
+    currentIndex = i;
+    textElem.value = bars[i].jscolor.toString();
+  };
 }
 
 dragula([canvas],{
