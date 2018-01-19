@@ -5,9 +5,12 @@ import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
 import '../shared/auth';
 
-const HANDLENAME = 'drgHdl';
+const HANDLENAME = 'drgHdl',
+  COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
 const bars = document.getElementsByClassName('jscolor');
 const canvas = document.getElementsByClassName('canvas')[0];
+const textElem = document.getElementById('colorText');
+
 
 const resetColors = () => {
   for(let i = 0; i < 4; i ++){
@@ -39,6 +42,12 @@ document.getElementById('createBtn').onclick = () => {
 
 document.getElementById('resetBtn').onclick = () => {
   resetColors();
+};
+
+textElem.oninput = ({ target }) => {
+  if(COLORREG.test(target.value)) {
+
+  }
 };
 
 for(let i = 0; i < 4; i ++){
