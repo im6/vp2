@@ -29,12 +29,13 @@ main {
 
   a {
     text-decoration: none;
-    display: none;
+    display: inline-block;
     margin: 8px 10px;
 
     animation-name: iconAnim;
     animation-fill-mode: backwards;
     animation-duration: .4s;
+    animation-delay: .8s;
     filter: grayscale(100%) brightness(70%);
     transition: filter 0.25s ease-in-out;
 
