@@ -4,6 +4,7 @@ import colorpk.cache_storage as cache
 from colorpk.models.db import User, UserLike
 from colorpk.models.auth import getUrl
 import uuid
+from datetime import timezone, datetime
 
 def toggleLike(request, id):
     body_unicode = request.body.decode('utf-8')
@@ -22,6 +23,10 @@ def createColor(request):
     })
 
 def getUser(request):
+    userInfo = request.session.get('user', None)
+    if userInfo:
+        updateLastLogin(userInfo)
+
     return JsonResponse({
         "user": request.session.get('user', None)
     })
@@ -37,3 +42,6 @@ def generateUrl(request):
         "gg": getUrl('gg', state),
         "gh": getUrl('gh', state),
     })
+
+def updateLastLogin(info):
+    User.objects.filter(oauth=info['oauth'], id=info['id']).update(lastlogin = datetime.now(timezone.utc))
