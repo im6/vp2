@@ -11,7 +11,7 @@ const bars = document.getElementsByClassName('jscolor');
 const canvas = document.getElementsByClassName('canvas')[0];
 const textElem = document.getElementById('colorText');
 
-let currentIndex = 0;
+let currentBar = null;
 
 const resetColors = () => {
   for(let i = 0; i < 4; i ++){
@@ -53,16 +53,16 @@ window._cpOnColorChange = (jsc) => {
 textElem.oninput = ({ target }) => {
   const vl = target.value;
   if(COLORREG.test(vl)) {
-    bars[currentIndex].style.backgroundColor = '#' + vl;
-    bars[currentIndex].jscolor.fromString(vl);
+    currentBar.style.backgroundColor = '#' + vl;
+    currentBar.jscolor.fromString(vl);
   }
 };
 
 for(let i = 0; i < 4; i ++){
   bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
-  bars[i].onclick = () => {
-    currentIndex = i;
-    textElem.value = bars[i].jscolor.toString();
+  bars[i].onclick = ({target}) => {
+    currentBar = target;
+    textElem.value = target.jscolor.toString();
   };
 }
 
