@@ -7,16 +7,18 @@ import '../shared/auth';
 
 const HANDLENAME = 'drgHdl',
   COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
-const bars = document.getElementsByClassName('jscolor');
-const canvas = document.getElementsByClassName('canvas')[0];
-const textElem = document.getElementById('colorText');
 
-let currentBar = null;
+const bars = document.getElementsByClassName('jscolor'),
+  canvas = document.getElementsByClassName('canvas')[0],
+  textElem = document.getElementById('colorText');
+
+let currentBar = bars[0];
 
 const resetColors = () => {
   for(let i = 0; i < 4; i ++){
     bars[i].jscolor.fromString('ffffff');
   }
+  textElem.value = '';
 };
 
 document.getElementById('createBtn').onclick = () => {
