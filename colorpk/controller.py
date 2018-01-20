@@ -43,5 +43,9 @@ def generateUrl(request):
         "gh": getUrl('gh', state),
     })
 
+## ========
+## Private Function Def
+## ========
+
 def updateLastLogin(info):
-    User.objects.filter(oauth=info['oauth'], id=info['id']).update(lastlogin = datetime.now(timezone.utc))
+    User.objects.filter(oauth=info['oauth'], oauthid=info['id']).update(lastlogin = datetime.now(timezone.utc))
