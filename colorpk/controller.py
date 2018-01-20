@@ -23,10 +23,6 @@ def createColor(request):
     })
 
 def getUser(request):
-    userInfo = request.session.get('user', None)
-    if userInfo:
-        updateLastLogin(userInfo)
-
     return JsonResponse({
         "user": request.session.get('user', None)
     })
@@ -44,8 +40,5 @@ def generateUrl(request):
     })
 
 ## ========
-## Private Function Def
+## CRUD operations:
 ## ========
-
-def updateLastLogin(info):
-    User.objects.filter(oauth=info['oauth'], oauthid=info['id']).update(lastlogin = datetime.now(timezone.utc))

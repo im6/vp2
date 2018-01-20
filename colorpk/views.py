@@ -77,6 +77,7 @@ def auth(request, src):
         token = auth.getToken(request.GET['code'])
         if token:
             userInfo = auth.getUserInfo(token)
+            auth.registerUser(userInfo)
             request.session['user'] = userInfo
             return redirect('/')
         else:

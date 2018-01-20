@@ -3,6 +3,8 @@ import requests
 import json
 from urllib.parse import parse_qs
 from abc import ABC, abstractmethod
+from datetime import timezone, datetime
+from colorpk.models.db import User
 
 config = configparser.ConfigParser()
 config.read('local/connection.cnf')
@@ -45,6 +47,15 @@ class OAuth2(ABC):
     def getUserInfo(self, token):
         pass
 
+    def registerUser(self, data):
+        if not User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid']).exists():
+            newUser = User(oauth=data['oauth'], name=data['name'], oauthid=data['oauthid'], lastlogin=datetime.now(timezone.utc))
+            newUser.save()
+            print('create new user!')
+        else:
+            User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid']).update(
+                lastlogin=datetime.now(timezone.utc))
+            print('existing user!')
 
 class OAuth2_fb(OAuth2):
     def __init__(self):
@@ -70,11 +81,11 @@ class OAuth2_fb(OAuth2):
         r = requests.get("%s/me" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "id": res["id"],
+            "oauthid": res["id"],
             "name": res["name"],
-            "isAdmin": False,
+            "isadmin": False,
             "img": res['picture']['data']['url'],
-            "oauth": self.oauth
+            "oauth": self.oauth,
         }
         return data
 
@@ -109,11 +120,11 @@ class OAuth2_wb(OAuth2):
         r = requests.get("%s/2/users/show.json" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "id": res["id"],
+            "oauthid": res["id"],
             "name": res["name"],
-            "isAdmin": False,
+            "isadmin": False,
             "img": res['profile_image_url'],
-            "oauth": self.oauth
+            "oauth": self.oauth,
         }
         return data
 
@@ -142,11 +153,11 @@ class OAuth2_gg(OAuth2):
         r = requests.get("%s/plus/v1/people/me"%self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "id": res["id"],
+            "oauthid": res["id"],
             "name": res["displayName"],
-            "isAdmin": False,
+            "isadmin": False,
             "img": res['image']['url'],
-            "oauth": self.oauth
+            "oauth": self.oauth,
         }
         return data
 
@@ -174,10 +185,10 @@ class OAuth2_gh(OAuth2):
         r = requests.get("%s/user" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "id": res["id"],
+            "oauthid": res["id"],
             "name": res["name"] if res['name'] else res['login'],
-            "isAdmin": False,
+            "isadmin": False,
             "img": res['avatar_url'],
-            "oauth": self.oauth
+            "oauth": self.oauth,
         }
         return data

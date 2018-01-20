@@ -30,6 +30,15 @@ class User(models.Model):
     isadmin = models.BooleanField()
     lastlogin = models.DateTimeField()
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "oauth": self.oauth,
+            "name": self.name,
+            "oauthid": self.oauthid,
+            "isadmin": self.isadmin,
+        }
+
 class UserLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
