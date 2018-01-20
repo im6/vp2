@@ -2,7 +2,8 @@ from django.core.cache import cache
 from colorpk.models.db import Color
 
 try:
-    init_colors = list(map(lambda x : x.to_dict(), Color.objects.all()))
+    init_colors0 = list(map(lambda x : x.to_dict(), Color.objects.all()))
+    init_colors = sorted(init_colors0, key=lambda v: v['id'], reverse=True)
     cache.set('global_colors', init_colors)
     cache.set('global_like', {})
 except BaseException as e:

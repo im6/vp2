@@ -22,6 +22,23 @@ def index(request):
         "path": request.path
     }))
 
+def latest(request):
+    template = get_template('main.html')
+    alldata = cache.getColors()
+    return HttpResponse(template.render({
+        "list": alldata,
+        "path": request.path
+    }))
+
+def popular(request):
+    template = get_template('main.html')
+    alldata = cache.getColors()
+    alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
+    return HttpResponse(template.render({
+        "list": alldata1,
+        "path": request.path
+    }))
+
 @cache_page(60 * 60 * 60)
 def colorOne(request, id):
     oneColor = cache.getColor(id)
@@ -49,15 +66,6 @@ def signin(request):
     return render_to_response('signin.html', {
         "path": request.path,
     })
-
-def latest(request):
-    template = get_template('main.html')
-    alldata = cache.getColors()
-    alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
-    return HttpResponse(template.render({
-        "list": alldata1,
-        "path": request.path
-    }))
 
 @cache_page(60 * 60)
 def notfound(request):

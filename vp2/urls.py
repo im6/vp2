@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index),
     path('color/<int:id>', views.colorOne),
     path('latest', views.latest),
+    path('popular', views.popular),
     path('newcolor', views.newcolor),
     path('signin', views.signin),
     path('profile', views.profile),
