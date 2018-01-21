@@ -48,14 +48,19 @@ class OAuth2(ABC):
         pass
 
     def registerUser(self, data):
-        if not User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid']).exists():
-            newUser = User(oauth=data['oauth'], name=data['name'], oauthid=data['oauthid'], lastlogin=datetime.now(timezone.utc))
-            newUser.save()
-            print('create new user!')
+        result = {'id': None, 'name': data['name'], 'img': data['img']}
+        qs = User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid'])
+        if qs.exists():
+            qs.update(lastlogin=datetime.now(timezone.utc))
+            result['id'] = qs.get().id
         else:
-            User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid']).update(
-                lastlogin=datetime.now(timezone.utc))
-            print('existing user!')
+            newUser = User(oauth=data['oauth'],
+                           name=data['name'],
+                           oauthid=data['oauthid'],
+                           lastlogin=datetime.now(timezone.utc))
+            newUser.save()
+            result['id'] = newUser.id
+        return result
 
 class OAuth2_fb(OAuth2):
     def __init__(self):

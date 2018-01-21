@@ -1,7 +1,7 @@
 from django.db import models
 
 class Color(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     like = models.IntegerField()
     color = models.CharField(max_length=27)
     userid = models.IntegerField(null=True)
@@ -23,7 +23,7 @@ class Color(models.Model):
         }
 
 class User(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     oauth = models.SlugField(max_length=2)
     name = models.CharField(max_length=50)
     oauthid = models.CharField(max_length=30)

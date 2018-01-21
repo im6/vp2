@@ -77,8 +77,8 @@ def auth(request, src):
         token = auth.getToken(request.GET['code'])
         if token:
             userInfo = auth.getUserInfo(token)
-            auth.registerUser(userInfo)
-            request.session['user'] = userInfo
+            userJSON = auth.registerUser(userInfo)
+            request.session['user'] = userJSON
             return redirect('/')
         else:
             return render_to_response('signin.html', {
