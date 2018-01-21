@@ -9,3 +9,4 @@ local
 npm-debug.log
 static/*.map
 static/*.js
+colorpk/migrations
