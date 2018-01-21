@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 import json
 import colorpk.cache_storage as cache
-from colorpk.models.db import User, UserLike
+from colorpk.models.db import User, UserLike, Color
 from colorpk.models.auth import getUrl
 import uuid
 from datetime import timezone, datetime
@@ -17,7 +17,22 @@ def toggleLike(request, id):
 def createColor(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
-    print(body)
+
+    newColorParams = {
+        'like': 0,
+        'color': '#'.join(body['color']),
+        'display': 1,
+        'createdate': datetime.now(timezone.utc)
+    }
+
+    user = request.session.get('user', None)
+    if user:
+        newColorParams['userid'] = user['userid']
+        newColorParams['username'] = user['username']
+
+    newColor = Color(**newColorParams)
+    newColor.save()
+
     return JsonResponse({
         "error": False
     })

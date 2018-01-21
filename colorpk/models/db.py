@@ -1,14 +1,15 @@
 from django.db import models
+from datetime import timezone, datetime
 
 class Color(models.Model):
     id = models.AutoField(primary_key=True)
     like = models.IntegerField()
-    color = models.CharField(max_length=27)
+    color = models.CharField(max_length=27, unique=True)
     userid = models.IntegerField(null=True)
     username = models.CharField(max_length=40, null=True)
     colortype = models.CharField(max_length=50, null=True)
-    display = models.BooleanField()
-    createdate = models.DateTimeField()
+    display = models.BooleanField(default=True)
+    createdate = models.DateTimeField(default=datetime.now(timezone.utc))
 
     def to_dict(self):
         return {
@@ -27,8 +28,8 @@ class User(models.Model):
     oauth = models.SlugField(max_length=2)
     name = models.CharField(max_length=50)
     oauthid = models.CharField(max_length=30)
-    isadmin = models.BooleanField()
-    lastlogin = models.DateTimeField()
+    isadmin = models.BooleanField(default=False)
+    lastlogin = models.DateTimeField(default=datetime.now(timezone.utc))
 
     def to_dict(self):
         return {
