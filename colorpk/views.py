@@ -1,16 +1,11 @@
 from django.http import HttpResponse
-from django.views.generic import TemplateView
-from django.template import Context, Template
 from django.template.loader import get_template, render_to_string
-from .models import db
-from datetime import datetime
-import json
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
-import colorpk.cache_storage as cache
+import colorpk.repository.cache as cache
 import sys
 
 @ensure_csrf_cookie
@@ -54,11 +49,18 @@ def newcolor(request):
     })
 
 def profile(request):
+    user = request.session.get('user', None)
+    if not user:
+        return redirect('/')
+
     template = get_template('profile.html')
     alldata = cache.getColors()
+
+    list0 = filter(lambda a : a.get('userid') == user.get('id'), alldata)
+
     return HttpResponse(template.render({
         "path": request.path,
-        "list0": alldata[0: 10],
+        "list0": list0,
         "list1": alldata[10: 20],
     }))
 

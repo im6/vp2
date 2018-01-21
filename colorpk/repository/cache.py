@@ -1,5 +1,5 @@
 from django.core.cache import cache
-from colorpk.models.db import Color
+from colorpk.repository.db import getAllColor
 
 def getColors():
     return cache.get('global_colors')
@@ -22,7 +22,7 @@ def like(id):
 
 def refreshColorStore():
     try:
-        init_colors0 = list(map(lambda x: x.to_dict(), Color.objects.filter(display=False)))
+        init_colors0 = getAllColor()
         init_colors = sorted(init_colors0, key=lambda v: v['id'], reverse=True)
         cache.set('global_colors', init_colors)
         cache.set('global_like', {})

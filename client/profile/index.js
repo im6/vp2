@@ -22,8 +22,9 @@ const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
 
 
-const addColorBox = () => {
-  window._colorpk.list0.forEach((v, i) => {
+const addColorBox = (source) => {
+  $listDiv.innerHTML = '';
+  window._colorpk[source].forEach((v, i) => {
     const oneBox = Box({
       id: v.id,
       value: v.color,
@@ -41,5 +42,13 @@ const addColorBox = () => {
   });
 };
 
-addColorBox();
+document.getElementById('switch_left').onclick = (event) => {
+  addColorBox('list0');
+};
+
+document.getElementById('switch_right').onclick = (event) => {
+  addColorBox('list1');
+};
+
+addColorBox('list0');
 
