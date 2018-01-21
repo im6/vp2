@@ -27,8 +27,8 @@ def createColor(request):
 
     user = request.session.get('user', None)
     if user:
-        newColorParams['userid'] = user['userid']
-        newColorParams['username'] = user['username']
+        newColorParams['userid'] = user['id']
+        newColorParams['username'] = user['name']
 
     newColor = Color(**newColorParams)
     newColor.save()
