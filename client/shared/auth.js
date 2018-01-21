@@ -2,6 +2,7 @@ import { ajax } from './util';
 
 
 const navElem = document.querySelector('nav');
+const loadingElem = document.getElementById('authLoading');
 
 const renderUser = (user) => {
   const elem = document.createElement('div');
@@ -23,9 +24,11 @@ ajax({
   url: '/userDetail',
   success: ({user}) => {
     if(user){
-      renderUser(user)
+      renderUser(user);
+      navElem.removeChild(loadingElem);
     } else {
       renderAuth();
+      navElem.removeChild(loadingElem);
     }
   },
   fail: () => {
