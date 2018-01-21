@@ -4,6 +4,9 @@ from colorpk.repository.db import getAllColor
 def getColors():
     return cache.get('global_colors')
 
+def getInvisibleColors():
+    return cache.get('global_colors_inv')
+
 def getColor(id):
     cached_data = cache.get('global_colors')
     filter0 = list(filter(lambda v : v.get('id') == id, cached_data))[0]
@@ -24,7 +27,11 @@ def refreshColorStore():
     try:
         init_colors0 = getAllColor()
         init_colors = sorted(init_colors0, key=lambda v: v['id'], reverse=True)
-        cache.set('global_colors', init_colors)
+        colors_visible = list(filter(lambda x:x['display'] == False, init_colors))
+        colors_invisible = list(filter(lambda x:x['display'] == True, init_colors))
+
+        cache.set('global_colors', colors_visible)
+        cache.set('global_colors_inv', colors_invisible)
         cache.set('global_like', {})
     except BaseException as e:
         print('error on getting all colors')

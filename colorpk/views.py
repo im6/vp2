@@ -55,9 +55,10 @@ def profile(request):
         return redirect('/unauth')
 
     template = get_template('profile.html')
-    alldata = cache.getColors()
+    visible_list = cache.getColors()
+    invis_list = cache.getInvisibleColors()
 
-    list0 = filter(lambda a : a.get('userid') == user.get('id'), alldata)
+    list0 = filter(lambda a : a.get('userid') == user.get('id'), visible_list + invis_list)
     list1 = getUserLikeColors(user)
 
     return HttpResponse(template.render({
