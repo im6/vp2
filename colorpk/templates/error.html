@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>404 Not Found | ColorPK</title>
+    <title>{{ code }} {{ msg }} | ColorPK</title>
     <link rel="shortcut icon" href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico" />
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <style>
@@ -127,6 +127,9 @@
           border-radius: 50%;
           animation: floatingShadow 3s ease-in-out infinite;
         }
+        p {
+            font-size: 1.4em;
+        }
     </style>
 </head>
 <body>
@@ -139,7 +142,7 @@
 
         <h1>Whoops!</h1>
         <p>
-            404 Not Found!
+            {{ code }} {{ msg }}
             <br>
             Back to <a href="/">ColorPK Home</a>
         </p>

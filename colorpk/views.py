@@ -51,7 +51,7 @@ def newcolor(request):
 def profile(request):
     user = request.session.get('user', None)
     if not user:
-        return redirect('/')
+        return redirect('/unauth')
 
     template = get_template('profile.html')
     alldata = cache.getColors()
@@ -71,7 +71,17 @@ def signin(request):
 
 @cache_page(60 * 60)
 def notfound(request):
-    return render_to_response('error_404.html')
+    return render_to_response('error.html', {
+        "code": 404,
+        "msg": "Not Found!"
+    })
+
+@cache_page(60 * 60)
+def unauth(request):
+    return render_to_response('error.html', {
+        "code": 401,
+        "msg": "Unauthorized!"
+    })
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:
