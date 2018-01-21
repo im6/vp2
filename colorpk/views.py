@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
+from colorpk.repository.db import getUserLikeColors
 import sys
 
 @ensure_csrf_cookie
@@ -57,11 +58,12 @@ def profile(request):
     alldata = cache.getColors()
 
     list0 = filter(lambda a : a.get('userid') == user.get('id'), alldata)
+    list1 = getUserLikeColors(user)
 
     return HttpResponse(template.render({
         "path": request.path,
         "list0": list0,
-        "list1": alldata[10: 20],
+        "list1": list1,
     }))
 
 def signin(request):

@@ -47,3 +47,9 @@ class UserLike(models.Model):
     class Meta:
         unique_together = (("user", "color"),)
 
+    def to_dict(self):
+        return {
+            "color": self.color.id,
+            "user": self.user.id,
+        }
+
