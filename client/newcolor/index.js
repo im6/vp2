@@ -1,6 +1,7 @@
 import './style.scss';
 import './jscolor.min';
 import dragula from 'dragula';
+import swal from 'sweetalert';
 import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
 import '../shared/auth';
@@ -26,7 +27,7 @@ document.getElementById('createBtn').onclick = () => {
     return v.jscolor.toString();
   });
   if(state.filter(v => v === 'ffffff').length > 1){
-    // not valid color here
+    swal("Oops", "You need to fill out all columns", "error" )
   } else {
     ajax({
       method: 'POST',

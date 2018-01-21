@@ -58,7 +58,7 @@ def profile(request):
     visible_list = cache.getColors()
     invis_list = cache.getInvisibleColors()
 
-    list0 = filter(lambda a : a.get('userid') == user.get('id'), visible_list + invis_list)
+    list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
     list1 = getUserLikeColors(user)
 
     return HttpResponse(template.render({
