@@ -8,9 +8,11 @@ def getInvisibleColors():
     return cache.get('global_colors_inv')
 
 def getColor(id):
-    cached_data = cache.get('global_colors')
-    filter0 = list(filter(lambda v : v.get('id') == id, cached_data))[0]
-    return filter0
+    filter0 = list(filter(lambda v : v.get('id') == id, cache.get('global_colors') + cache.get('global_colors_inv')))
+    if len(filter0) > 0:
+        return filter0[0]
+    else:
+        return None
 
 def like(id):
     like_obj = cache.get('global_like')

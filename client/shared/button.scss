@@ -1,8 +1,7 @@
 $btn-color: #56a5f7;
 
 .btn {
-  height: 30px;
-  padding: 0 12px;
+  padding: 4.5px 12px;
   border: 1px solid #d9d9d9;
   background-color: white;;
   cursor: pointer;
@@ -52,6 +51,6 @@ $btn-color: #56a5f7;
 
 @media (max-width: 768px) {
   .btn {
-    height: auto;
+    padding: 1px 8px;
   }
 }

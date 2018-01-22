@@ -38,13 +38,19 @@ def popular(request):
 @cache_page(60 * 60 * 60)
 def colorOne(request, id):
     oneColor = cache.getColor(id)
-    return render_to_response('one_color.html', {
-        "path": request.path,
-        "id": id,
-        "color": oneColor.get('color'),
-        "like": oneColor.get('like'),
-        "username": oneColor.get('username'),
-    })
+    if oneColor:
+        return render_to_response('one_color.html', {
+            "path": request.path,
+            "id": id,
+            "color": oneColor.get('color'),
+            "like": oneColor.get('like'),
+            "username": oneColor.get('username'),
+        })
+    else:
+        return render_to_response('error.html', {
+            "code": 404,
+            "msg": "Color Not Found!"
+        })
 
 def newcolor(request):
     return render_to_response('create.html', {
