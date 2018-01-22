@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.template.loader import get_template, render_to_string
+from django.template.loader import get_template
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
@@ -35,7 +35,6 @@ def popular(request):
         "path": request.path
     }))
 
-@cache_page(60 * 60 * 60)
 def colorOne(request, id):
     oneColor = cache.getColor(id)
     if oneColor:
@@ -53,9 +52,30 @@ def colorOne(request, id):
             "msg": "Color Not Found!"
         })
 
+@cache_page(60 * 60)
 def newcolor(request):
     return render_to_response('create.html', {
         "path": request.path
+    })
+
+@cache_page(60 * 60)
+def signin(request):
+    return render_to_response('signin.html', {
+        "path": request.path,
+    })
+
+@cache_page(60 * 60)
+def notfound(request):
+    return render_to_response('error.html', {
+        "code": 404,
+        "msg": "Not Found!"
+    })
+
+@cache_page(60 * 60)
+def unauth(request):
+    return render_to_response('error.html', {
+        "code": 401,
+        "msg": "Unauthorized!"
     })
 
 def profile(request):
@@ -75,25 +95,6 @@ def profile(request):
         "list0": list0,
         "list1": list1,
     }))
-
-def signin(request):
-    return render_to_response('signin.html', {
-        "path": request.path,
-    })
-
-@cache_page(60 * 60)
-def notfound(request):
-    return render_to_response('error.html', {
-        "code": 404,
-        "msg": "Not Found!"
-    })
-
-@cache_page(60 * 60)
-def unauth(request):
-    return render_to_response('error.html', {
-        "code": 401,
-        "msg": "Unauthorized!"
-    })
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:
