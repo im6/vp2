@@ -41,7 +41,9 @@ def colorOne(request, id):
     return render_to_response('one_color.html', {
         "path": request.path,
         "id": id,
-        "value": oneColor.get('color')
+        "color": oneColor.get('color'),
+        "like": oneColor.get('like'),
+        "username": oneColor.get('username'),
     })
 
 def newcolor(request):
