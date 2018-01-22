@@ -20,7 +20,7 @@ class Color(models.Model):
             "username": self.username,
             "colortype": self.colortype,
             "display": self.display,
-            #"createdate": self.createdate,
+            "createdate": self.createdate.strftime("%B %d, %Y")
         }
 
 class User(models.Model):

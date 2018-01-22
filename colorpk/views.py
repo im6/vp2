@@ -44,7 +44,8 @@ def colorOne(request, id):
             "id": id,
             "color": oneColor.get('color'),
             "like": oneColor.get('like'),
-            "username": oneColor.get('username'),
+            "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
+            "createdate": oneColor.get('createdate')
         })
     else:
         return render_to_response('error.html', {

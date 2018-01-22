@@ -9,18 +9,22 @@
             <button class="btn" type="button">
                 <img src="{% static "hrt.svg" %}">180
             </button>
-            <div>
-                {{ username }}
-            </div>
         </div>
 
         <br>
-
         <a id="download"  download="colorpk_{{ id }}.png">
             <button class="btn btn-primary" type="button">
                 Download
             </button>
         </a>
+        <br>
+        <p>
+            {{ username }},
+            <br>
+            {{ createdate }}
+        </p>
+
+
     </div>
 
     <script src="{% static "bundle3.js" %}"></script>

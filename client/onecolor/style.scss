@@ -16,9 +16,12 @@ main {
 .container {
   margin: 0 auto;
   width: 260px;
+  p {
+    color: #868686;
+  }
 }
 
-#download {
+#download, p {
   text-align: center;
   display: block;
 }
