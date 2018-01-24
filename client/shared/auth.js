@@ -19,13 +19,27 @@ const renderAuth = () => {
   navElem.appendChild(elem);
 };
 
+const renderLike = (list) => {
+  window._colorpk.initData.forEach(v => {
+    v.isLiked = list.indexOf(v.id) > -1;
+  });
+
+  const boxes = document.getElementsByClassName('box');
+  for(let i = 0; i < boxes.length; i ++){
+    if(list.indexOf(parseInt(boxes[i].dataset.k)) > -1){
+      boxes[i].childNodes[1].innerHTML = boxes[i].childNodes[1].innerHTML.replace('hrt.svg', 'hrtr.svg');
+    }
+  }
+};
+
 ajax({
   method: 'GET',
   url: '/userDetail',
-  success: ({user}) => {
+  success: ({user, like}) => {
     if(user){
       renderUser(user);
       navElem.removeChild(loadingElem);
+      renderLike(like)
     } else {
       renderAuth();
       navElem.removeChild(loadingElem);

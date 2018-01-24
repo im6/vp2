@@ -34,7 +34,7 @@ const addColorBox = (startIndex) => {
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: false,
+      isLiked: v.isLiked,
       onLike: (i) => {
         likeAjax(i);
       },
