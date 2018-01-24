@@ -23,6 +23,9 @@ const renderLike = (list) => {
   window._colorpk.initData.forEach(v => {
     v.isLiked = list.indexOf(v.id) > -1;
   });
+  window._colorpk.list0.forEach(v => {
+    v.isLiked = list.indexOf(v.id) > -1;
+  });
 
   const boxes = document.getElementsByClassName('box');
   for(let i = 0; i < boxes.length; i ++){

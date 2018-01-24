@@ -25,12 +25,11 @@ const addColorBox = (source) => {
   const likeMode = source === 'list1';
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
-    console.log(v.id);
     const oneBox = Box({
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: likeMode,
+      isLiked: likeMode || v.isLiked,
       onLike: (cid) => {
         likeAjax(cid, 'POST');
       },
