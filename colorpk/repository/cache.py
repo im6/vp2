@@ -1,5 +1,6 @@
 from django.core.cache import cache
 from colorpk.repository.db import getAllColor
+import logging
 
 def getColors():
     return cache.get('global_colors')
@@ -36,7 +37,7 @@ def refreshColorStore():
         cache.set('global_colors_inv', colors_invisible)
         cache.set('global_like', {})
     except BaseException as e:
-        print('error on getting all colors')
+        logging.error('error on getting all colors')
 
 
 refreshColorStore()

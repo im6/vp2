@@ -29,7 +29,7 @@ const addColorBox = (source) => {
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: false,
+      isLiked: source === 'list1',
       onLike: (i) => {
         likeAjax(i);
       },
@@ -37,6 +37,7 @@ const addColorBox = (source) => {
         debugger;
       }
     });
+
     oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
   });

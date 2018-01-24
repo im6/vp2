@@ -8,6 +8,7 @@ from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
 from colorpk.repository.db import getUserLikeColors
 import sys
+import logging
 
 @ensure_csrf_cookie
 def index(request):
@@ -104,6 +105,7 @@ def auth(request, src):
             userInfo = auth.getUserInfo(token)
             userJSON = auth.registerUser(userInfo)
             request.session['user'] = userJSON
+            logging.debug(userJSON)
             return redirect('/')
         else:
             return render_to_response('signin.html', {

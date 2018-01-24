@@ -1,7 +1,7 @@
 import { noop } from '../../shared/util';
 
 export const Box = (vm) => {
-  const { id, value, like, isliked } = vm;
+  const { id, value, like, isLiked } = vm;
   let { onLike, onRedir, onUnlike } = vm;
 
   onUnlike = onUnlike || noop;
@@ -34,7 +34,7 @@ export const Box = (vm) => {
   const btn = document.createElement("button");
   btn.classList.add('btn');
   btn.setAttribute("type", "button");
-  btn.innerHTML = `<img src="${isliked ? '/static/hrtr.svg' : '/static/hrt.svg'}">${like}`;
+  btn.innerHTML = `<img src="${isLiked ? '/static/hrtr.svg' : '/static/hrt.svg'}">${like}`;
   btn.onclick = (v) => {
     if(btn.innerHTML.indexOf('hrt.svg') > -1){
       btn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
