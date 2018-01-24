@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 import json
 import colorpk.repository.cache as cache
-from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike
+from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, getUserLike
 from colorpk.models.auth import getUrl
 import uuid
 
@@ -35,8 +35,13 @@ def createColor(request):
     })
 
 def getUser(request):
+    user = request.session.get('user', None)
+    like = []
+    if user:
+        like = getUserLike(user['id'])
     return JsonResponse({
-        "user": request.session.get('user', None)
+        "user": user,
+        "like": like
     })
 
 def generateUrl(request):

@@ -33,3 +33,8 @@ def createUserLike(colorId, userId):
 def deleteUserLike(colorId, userId):
     ul = UserLike.objects.get(color_id=colorId, user_id=userId)
     ul.delete()
+
+def getUserLike(userId):
+    list_like0 = UserLike.objects.filter(user_id = userId)
+    list_like1 = list(map(lambda x: x.to_dict()['color'], list_like0))
+    return list_like1
