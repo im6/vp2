@@ -1,17 +1,28 @@
 from django.http import JsonResponse
 import json
 import colorpk.repository.cache as cache
-from colorpk.repository.db import createNewColor
+from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike
 from colorpk.models.auth import getUrl
 import uuid
 
 def toggleLike(request, id):
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    cache.like(id)
-    return JsonResponse({
-        "color": id
-    })
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        cache.like(id)
+        user = request.session.get('user', None)
+        if user:
+            createUserLike(id, user['id'])
+        return JsonResponse({
+            "color": id
+        })
+    elif request.method == 'DELETE':
+        user = request.session.get('user', None)
+        if user:
+            deleteUserLike(id, user['id'])
+        return JsonResponse({
+            "error": False
+        })
 
 def createColor(request):
     body_unicode = request.body.decode('utf-8')

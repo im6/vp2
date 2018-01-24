@@ -6,9 +6,9 @@ import { Box } from '../colors/box';
 import { ajax } from '../shared/util';
 import '../shared/auth';
 
-const likeAjax = (id) => {
+const likeAjax = (id, method) => {
   ajax({
-    method: 'POST',
+    method,
     url: `like/${id}`,
     data: {},
     success: (v) => {
@@ -21,20 +21,25 @@ const likeAjax = (id) => {
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
 
-
 const addColorBox = (source) => {
+  const likeMode = source === 'list1';
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
+    console.log(v.id);
     const oneBox = Box({
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: source === 'list1',
-      onLike: (i) => {
-        likeAjax(i);
+      isLiked: likeMode,
+      onLike: (cid) => {
+        likeAjax(cid, 'POST');
       },
-      onUnlike: (id) => {
-        debugger;
+      onUnlike: (cid) => {
+        if(likeMode){
+          const thisBox = document.querySelector(`[data-k='${cid}']`);
+          $listDiv.removeChild(thisBox);
+          likeAjax(cid, 'DELETE');
+        }
       }
     });
 
