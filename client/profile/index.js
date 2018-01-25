@@ -1,5 +1,4 @@
 //https://codepen.io/JiveDig/pen/jbdJXR
-
 import '../colors/layout';
 import './style.scss';
 import { Box } from '../colors/box';
@@ -43,6 +42,14 @@ const addColorBox = (source) => {
     oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
   });
+
+  if(window._colorpk[source].length < 1){
+    if(likeMode){
+      $listDiv.innerHTML = '<h3>You have not liked any color.</h3>';
+    } else {
+      $listDiv.innerHTML = '<h3>You have not created any color.</h3>';
+    }
+  }
 };
 
 document.getElementById('switch_left').onclick = (event) => {
