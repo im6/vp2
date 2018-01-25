@@ -6,6 +6,19 @@ const canvasElem = document.getElementsByClassName('canvas')[0];
 const dlBtn = document.getElementById('download');
 const colorStr = canvasElem.dataset.v;
 const cls = colorStr.split('#');
+const likeAjax = (id) => {
+  ajax({
+    method: 'POST',
+    url: `like/${id}`,
+    data: {},
+    success: (v) => {
+    },
+    fail: () => {
+    }
+  });
+};
+
+
 cls.forEach(v => {
   const clrValue = '#' + v;
   const oneBar = document.createElement('div');

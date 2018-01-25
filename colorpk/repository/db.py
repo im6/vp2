@@ -1,12 +1,14 @@
 from colorpk.models.db import Color, UserLike, User
 from datetime import timezone, datetime
+import math
+from random import random
 
 def getAllColor():
     return list(map(lambda x: x.to_dict(), Color.objects.all()))
 
 def createNewColor(color, user):
     newColorParams = {
-        'like': 0,
+        'like': math.floor(random() * 30),
         'color': color,
         'display': 1,
         'createdate': datetime.now(timezone.utc)
@@ -18,8 +20,8 @@ def createNewColor(color, user):
     newColor = Color(**newColorParams)
     newColor.save()
 
-def getUserLikeColors(user):
-    list_like0 = UserLike.objects.filter(user=user['id'])
+def getUserLikeColors(userId):
+    list_like0 = UserLike.objects.filter(user=userId)
     list_like1 = list(map(lambda x: x.to_dict(), list_like0))
     color_list0 = list(map(lambda x: x['color'], list_like1))
     color_list1 = Color.objects.filter(id__in = color_list0)
