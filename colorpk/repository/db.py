@@ -2,6 +2,7 @@ from colorpk.models.db import Color, UserLike, User
 from datetime import timezone, datetime
 import math
 from random import random
+from django.db import Error
 
 def getAllColor():
     return list(map(lambda x: x.to_dict(), Color.objects.all()))
@@ -17,8 +18,14 @@ def createNewColor(color, user):
         newColorParams['userid'] = user['id']
         newColorParams['username'] = user['name']
 
-    newColor = Color(**newColorParams)
-    newColor.save()
+    error = False
+    try:
+        newColor = Color(**newColorParams)
+        newColor.save()
+    except Error as e:
+        error = True
+
+    return error
 
 def getUserLikeColors(userId):
     list_like0 = UserLike.objects.filter(user=userId)

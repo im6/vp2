@@ -35,8 +35,12 @@ document.getElementById('createBtn').onclick = () => {
       data: {
         color: state,
       },
-      success: (v) => {
-        resetColors();
+      success: ({error}) => {
+        if(error){
+          swal("Oops", "Color duplication detected", "error" )
+        }else{
+          resetColors();
+        }
       },
       fail: () => {
       }

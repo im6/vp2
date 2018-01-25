@@ -28,10 +28,10 @@ def createColor(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
-    createNewColor('#'.join(body['color']), user)
+    result = createNewColor('#'.join(body['color']), user)
 
     return JsonResponse({
-        "error": False
+        "error": result
     })
 
 def getUser(request):
