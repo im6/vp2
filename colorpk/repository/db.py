@@ -27,14 +27,6 @@ def createNewColor(color, user):
 
     return error
 
-def getUserLikeColors(userId):
-    list_like0 = UserLike.objects.filter(user=userId)
-    list_like1 = list(map(lambda x: x.to_dict(), list_like0))
-    color_list0 = list(map(lambda x: x['color'], list_like1))
-    color_list1 = Color.objects.filter(id__in = color_list0)
-    color_list2 = list(map(lambda x: x.to_dict(), color_list1))
-    return color_list2
-
 def createUserLike(colorId, userId):
     ul = UserLike(color_id=colorId, user_id=userId)
     ul.save()

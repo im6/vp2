@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
-from colorpk.repository.db import getUserLikeColors
+from colorpk.repository.db import getUserLike
 import sys
 import logging
 
@@ -89,7 +89,8 @@ def profile(request):
     invis_list = cache.getInvisibleColors()
 
     list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
-    list1 = getUserLikeColors(user.get('id'))
+    list1_ids = getUserLike(user.get('id'))
+    list1 = filter(lambda a : a.get('id') in list1_ids, visible_list)
 
     return HttpResponse(template.render({
         "path": request.path,
