@@ -3,27 +3,24 @@
 {% load static %}
 {% block mainContent %}
     <div class="container">
-
-        <div class="box">
-            <div class="canvas" data-v="{{ color }}"></div>
-            <button class="btn" type="button">
-                <img src="{% static "hrt.svg" %}">180
-            </button>
-        </div>
-
-        <br>
-        <a id="download"  download="colorpk_{{ id }}.png">
+        <a id="download" download="colorpk_{{ id }}.png">
             <button class="btn btn-primary" type="button">
                 Download
             </button>
         </a>
-        <br>
         <p>
             {{ username }}, {{ createdate }}
         </p>
-
-
     </div>
+    <script>
+        window._colorpk = {
+          selected: {
+            id: {{ id }},
+            color: '{{ color }}',
+            like: {{ like }}
+          }
+        };
+    </script>
 
     <script src="{% static "bundle3.js" %}"></script>
 {% endblock %}

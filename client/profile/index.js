@@ -9,7 +9,7 @@ import '../shared/auth';
 const likeAjax = (id, method) => {
   ajax({
     method,
-    url: `like/${id}`,
+    url: `/like/${id}`,
     data: {},
     success: (v) => {
     },

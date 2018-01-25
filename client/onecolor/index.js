@@ -1,15 +1,17 @@
 import './style.scss';
-import { downloadCanvas } from '../shared/util';
+import { downloadCanvas, noop, ajax } from '../shared/util';
 import '../shared/auth';
+import { Box } from '../colors/box';
 
-const canvasElem = document.getElementsByClassName('canvas')[0];
-const dlBtn = document.getElementById('download');
-const colorStr = canvasElem.dataset.v;
-const cls = colorStr.split('#');
+const downloadBtn = document.getElementById('download');
+const container = document.getElementsByClassName('container')[0];
+const selected = window._colorpk.selected;
+downloadBtn.href = downloadCanvas(selected.color);
+
 const likeAjax = (id) => {
   ajax({
     method: 'POST',
-    url: `like/${id}`,
+    url: `/like/${id}`,
     data: {},
     success: (v) => {
     },
@@ -18,15 +20,16 @@ const likeAjax = (id) => {
   });
 };
 
-
-cls.forEach(v => {
-  const clrValue = '#' + v;
-  const oneBar = document.createElement('div');
-  oneBar.style.backgroundColor = clrValue;
-  const txt = document.createElement('span');
-  txt.innerText = clrValue;
-  oneBar.appendChild(txt);
-  canvasElem.appendChild(oneBar);
+const oneBox = Box({
+  id: selected.id,
+  value: selected.color,
+  like: selected.like,
+  isLiked: false,
+  onLike: (i) => {
+    likeAjax(i);
+  },
+  onRedir: noop
 });
 
-dlBtn.href = downloadCanvas(colorStr);
+container.insertBefore(oneBox, downloadBtn);
+
