@@ -3,12 +3,12 @@
 import '../colors/layout';
 import './style.scss';
 import { Box } from '../colors/box';
-import { ajax } from '../shared/util';
+import { ajax, noop } from '../shared/util';
 import '../shared/auth';
 
-const likeAjax = (id, method) => {
+const unlikeAjax = (id) => {
   ajax({
-    method,
+    method: 'DELETE',
     url: `/like/${id}`,
     data: {},
     success: (v) => {
@@ -30,14 +30,12 @@ const addColorBox = (source) => {
       value: v.color,
       like: v.like,
       isLiked: likeMode || v.isLiked,
-      onLike: (cid) => {
-        likeAjax(cid, 'POST');
-      },
+      onLike: noop,
       onUnlike: (cid) => {
         if(likeMode){
           const thisBox = document.querySelector(`[data-k='${cid}']`);
           $listDiv.removeChild(thisBox);
-          likeAjax(cid, 'DELETE');
+          unlikeAjax(cid);
         }
       }
     });

@@ -2,20 +2,8 @@ import debounce from 'debounce';
 import './layout';
 import './style.scss';
 import { Box } from './box';
-import { ajax } from '../shared/util';
+import { noop } from '../shared/util';
 import '../shared/auth';
-
-const likeAjax = (id) => {
-  ajax({
-    method: 'POST',
-    url: `/like/${id}`,
-    data: {},
-    success: (v) => {
-    },
-    fail: () => {
-    }
-  });
-};
 
 const ENTRYANIMDELAY = 58,
   STEP = 11,
@@ -35,9 +23,7 @@ const addColorBox = (startIndex) => {
       value: v.color,
       like: v.like,
       isLiked: v.isLiked,
-      onLike: (i) => {
-        likeAjax(i);
-      },
+      onLike: noop,
       onRedir: (id) => {
         window.location.href = `/color/${id}`;
       }
