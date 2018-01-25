@@ -63,3 +63,4 @@ USE_L10N = True
 USE_TZ = True
 CSRF_USE_SESSIONS = False
 APPEND_SLASH = False
+SESSION_ENGINE='django.contrib.sessions.backends.signed_cookies'

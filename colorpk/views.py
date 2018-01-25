@@ -14,26 +14,38 @@ import logging
 def index(request):
     template = get_template('main.html')
     alldata = cache.getColors()
+    likeList = request.session.get('likes', [])
+    for cl in alldata:
+        cl['isLiked'] = cl['id'] in likeList
     return HttpResponse(template.render({
         "list": alldata,
-        "path": request.path
+        "path": request.path,
+        "user": request.session.get('user', None)
     }))
 
 def latest(request):
     template = get_template('main.html')
     alldata = cache.getColors()
+    likeList = request.session.get('likes', [])
+    for cl in alldata:
+        cl['isLiked'] = cl['id'] in likeList
     return HttpResponse(template.render({
         "list": alldata,
-        "path": request.path
+        "path": request.path,
+        "user": request.session.get('user', None)
     }))
 
 def popular(request):
     template = get_template('main.html')
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
+    likeList = request.session.get('likes', [])
+    for cl in alldata:
+        cl['isLiked'] = cl['id'] in likeList
     return HttpResponse(template.render({
         "list": alldata1,
-        "path": request.path
+        "path": request.path,
+        "user": request.session.get('user', None)
     }))
 
 def colorOne(request, id):
@@ -41,11 +53,17 @@ def colorOne(request, id):
     if oneColor:
         return render_to_response('one_color.html', {
             "path": request.path,
-            "id": id,
-            "color": oneColor.get('color'),
-            "like": oneColor.get('like'),
-            "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
-            "createdate": oneColor.get('createdate')
+            "user": request.session.get('user', None),
+            "list": [
+                {
+                    "id": id,
+                    "color": oneColor.get('color'),
+                    "like": oneColor.get('like'),
+                    "isLiked": oneColor.get('id') in request.session.get('likes', []),
+                    "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
+                    "createdate": oneColor.get('createdate'),
+                }
+            ]
         })
     else:
         return render_to_response('error.html', {
@@ -56,7 +74,8 @@ def colorOne(request, id):
 @cache_page(60 * 60)
 def newcolor(request):
     return render_to_response('create.html', {
-        "path": request.path
+        "path": request.path,
+        "user": request.session.get('user', None)
     })
 
 @cache_page(60 * 60)
@@ -89,13 +108,14 @@ def profile(request):
     invis_list = cache.getInvisibleColors()
 
     list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
-    list1_ids = getUserLike(user.get('id'))
+    list1_ids = request.session.get('likes', [])
     list1 = filter(lambda a : a.get('id') in list1_ids, visible_list)
 
     return HttpResponse(template.render({
         "path": request.path,
         "list0": list0,
         "list1": list1,
+        "user": request.session.get('user', None)
     }))
 
 def auth(request, src):
@@ -106,6 +126,7 @@ def auth(request, src):
             userInfo = auth.getUserInfo(token)
             userJSON = auth.registerUser(userInfo)
             request.session['user'] = userJSON
+            request.session['likes'] = getUserLike(userJSON['id'])
             logging.debug(userJSON)
             return redirect('/')
         else:

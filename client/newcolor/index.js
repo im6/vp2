@@ -4,7 +4,6 @@ import dragula from 'dragula';
 import swal from 'sweetalert';
 import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
-import '../shared/auth';
 
 const HANDLENAME = 'drgHdl',
   COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;

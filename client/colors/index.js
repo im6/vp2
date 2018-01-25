@@ -3,7 +3,6 @@ import './layout';
 import './style.scss';
 import { Box } from './box';
 import { noop } from '../shared/util';
-import '../shared/auth';
 
 const ENTRYANIMDELAY = 58,
   STEP = 11,

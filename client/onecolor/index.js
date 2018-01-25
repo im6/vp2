@@ -1,6 +1,5 @@
 import './style.scss';
 import { downloadCanvas, noop } from '../shared/util';
-import '../shared/auth';
 import { Box } from '../colors/box';
 
 const downloadBtn = document.getElementById('download');

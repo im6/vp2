@@ -7,11 +7,17 @@
         {% endif %}
 
         {% if path != '/signin' %}
-            <div id="authLoading">
-                <svg width="40px" class="loading" x="0px" y="0px" viewBox="0 0 150 150">
-                    <circle id="loading-inner" cx="75" cy="75" r="60"/>
-                </svg>
-            </div>
+            {% if user %}
+                <div class="nav-user">
+                    <img src="{{ user.img }}" alt="icon" />
+                    <div>
+                        <a href="/profile">{{ user.name }}</a>
+                        <a href="/signin">Sign out</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="/signin" class="nav-auth">Sign In</a>
+            {% endif %}
         {% endif %}
     </nav>
 </header>

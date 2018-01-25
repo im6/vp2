@@ -34,16 +34,6 @@ def createColor(request):
         "error": result
     })
 
-def getUser(request):
-    user = request.session.get('user', None)
-    like = []
-    if user:
-        like = getUserLike(user['id'])
-    return JsonResponse({
-        "user": user,
-        "like": like
-    })
-
 def generateUrl(request):
     # request.session.flush()  ## not sync db cleanup
     state = str(uuid.uuid4())

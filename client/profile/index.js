@@ -3,7 +3,6 @@ import '../colors/layout';
 import './style.scss';
 import { Box } from '../colors/box';
 import { ajax, noop } from '../shared/util';
-import '../shared/auth';
 
 const unlikeAjax = (id) => {
   ajax({
