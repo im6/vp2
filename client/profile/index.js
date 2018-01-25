@@ -4,18 +4,6 @@ import './style.scss';
 import { Box } from '../colors/box';
 import { ajax, noop } from '../shared/util';
 
-const unlikeAjax = (id) => {
-  ajax({
-    method: 'DELETE',
-    url: `/like/${id}`,
-    data: {},
-    success: (v) => {
-    },
-    fail: () => {
-    }
-  });
-};
-
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
 
@@ -33,7 +21,6 @@ const addColorBox = (source) => {
         if(likeMode){
           const thisBox = document.querySelector(`[data-k='${cid}']`);
           $listDiv.removeChild(thisBox);
-          unlikeAjax(cid);
         }
       }
     });

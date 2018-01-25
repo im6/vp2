@@ -1,14 +1,12 @@
 import { noop, ajax } from '../../shared/util';
 
-const likeAjax = (id) => {
+const likeAjax = (id, method) => {
   ajax({
-    method: 'POST',
+    method,
     url: `/like/${id}`,
     data: {},
-    success: (v) => {
-    },
-    fail: () => {
-    }
+    success: noop,
+    fail: noop
   });
 };
 
@@ -48,12 +46,13 @@ export const Box = (vm) => {
   btn.setAttribute("type", "button");
   btn.innerHTML = `<img src="${isLiked ? '/static/hrtr.svg' : '/static/hrt.svg'}">${like}`;
   btn.onclick = (v) => {
-    if(btn.innerHTML.indexOf('hrt.svg') > -1){
+    if(btn.innerHTML.indexOf('hrt.svg') > -1) {
       btn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
-      likeAjax(id);
+      likeAjax(id, 'POST');
       onLike(id);
     } else {
       btn.innerHTML = `<img src="/static/hrt.svg">${like}`;
+      likeAjax(id, 'DELETE');
       onUnlike(id);
     }
   };
