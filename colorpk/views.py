@@ -7,8 +7,10 @@ from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
 from colorpk.repository.db import getUserLike
+from colorpk.models.auth import getUrl
 import sys
 import logging
+import uuid
 
 @ensure_csrf_cookie
 def index(request):
@@ -71,17 +73,22 @@ def colorOne(request, id):
             "msg": "Color Not Found!"
         })
 
-@cache_page(60 * 60)
 def newcolor(request):
     return render_to_response('create.html', {
         "path": request.path,
         "user": request.session.get('user', None)
     })
 
-@cache_page(60 * 60)
 def signin(request):
+    state = str(uuid.uuid4())
+    request.session['state'] = state
+    request.session['user'] = None
     return render_to_response('signin.html', {
         "path": request.path,
+        "wb": getUrl('wb', state),
+        "fb": getUrl('fb', state),
+        "gg": getUrl('gg', state),
+        "gh": getUrl('gh', state),
     })
 
 @cache_page(60 * 60)

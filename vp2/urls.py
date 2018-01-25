@@ -15,7 +15,6 @@ urlpatterns = [
 
     path('like/<int:id>', controller.toggleLike),
     path('create', controller.createColor),
-    path('url', controller.generateUrl),
 
     re_path(r'/*', views.notfound),
 ]
