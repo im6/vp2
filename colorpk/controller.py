@@ -22,9 +22,9 @@ def toggleLike(request, id):
     elif request.method == 'DELETE':
         user = request.session.get('user', None)
         if user:
-            deleteUserLike(id, user['id'])
+            result = deleteUserLike(id, user['id'])
         return JsonResponse({
-            "error": False
+            "error": result
         })
 
 def createColor(request):

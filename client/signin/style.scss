@@ -57,7 +57,7 @@ main {
 
   div:nth-child(1){
     width: 155px;
-    height: 148px; // placeholder
+    min-height: 148px; // placeholder
     margin: 15px auto 25px auto;
   }
 
@@ -72,4 +72,5 @@ main {
 
 .errorTxt{
   color: red;
+  font-size: 14px;
 }
