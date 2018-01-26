@@ -47,11 +47,13 @@ export const Box = (vm) => {
   btn.innerHTML = `<img src="${isLiked ? '/static/hrtr.svg' : '/static/hrt.svg'}">${like}`;
   btn.onclick = (v) => {
     if(btn.innerHTML.indexOf('hrt.svg') > -1) {
-      btn.innerHTML = `<img src="/static/hrtr.svg">${like + 1}`;
+      let newNum = isLiked ? like : like + 1;
+      btn.innerHTML = `<img src="/static/hrtr.svg">${newNum}`;
       likeAjax(id, 'POST');
       onLike(id);
     } else {
-      btn.innerHTML = `<img src="/static/hrt.svg">${like}`;
+      let newNum = isLiked ? like - 1 : like;
+      btn.innerHTML = `<img src="/static/hrt.svg">${newNum}`;
       likeAjax(id, 'DELETE');
       onUnlike(id);
     }

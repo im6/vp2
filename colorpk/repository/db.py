@@ -4,8 +4,6 @@ from datetime import timezone, datetime
 import math
 import logging
 from random import random
-from django.db import Error
-from django.core.exceptions import ObjectDoesNotExist
 
 def getAllColor():
     all_color = Color.objects.all()
@@ -26,21 +24,27 @@ def createNewColor(color, user):
     try:
         newColor = Color(**newColorParams)
         newColor.save()
-    except Error as e:
+    except:
         error = True
 
     return error
 
 def createUserLike(colorId, userId):
-    ul = UserLike(color_id=colorId, user_id=userId)
-    ul.save()
+    try:
+        ul = UserLike(color_id=colorId, user_id=userId)
+        ul.save()
+        return False
+    except:
+        logging.error('Try to add duplicate to the userlike')
+        return True
+
 
 def deleteUserLike(colorId, userId):
     try:
         ul = UserLike.objects.get(color_id=colorId, user_id=userId)
         ul.delete()
         return False
-    except ObjectDoesNotExist as e:
+    except:
         logging.error('Try to delete records not exist on userlike table.')
         return True
 
