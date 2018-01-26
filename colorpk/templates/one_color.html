@@ -3,21 +3,22 @@
 {% load static %}
 {% block mainContent %}
     <div class="container">
-        <a id="download" download="colorpk_{{ id }}.png">
+        <a id="download" download="colorpk_{{ oneColor.id }}.png">
             <button class="btn btn-primary" type="button">
                 Download
             </button>
         </a>
         <p>
-            {{ username }}, {{ createdate }}
+            {{ oneColor.username }}, {{ oneColor.createdate }}
         </p>
     </div>
     <script>
         window._colorpk = {
           selected: {
-            id: {{ id }},
-            color: '{{ color }}',
-            like: {{ like }}
+            id: {{ oneColor.id }},
+            color: '{{ oneColor.color }}',
+            like: {{ oneColor.like }},
+            isLiked: '{{ oneColor.isLiked }}' === 'True'
           }
         };
     </script>

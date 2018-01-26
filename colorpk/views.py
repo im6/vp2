@@ -56,16 +56,14 @@ def colorOne(request, id):
         return render_to_response('one_color.html', {
             "path": request.path,
             "user": request.session.get('user', None),
-            "list": [
-                {
-                    "id": id,
-                    "color": oneColor.get('color'),
-                    "like": oneColor.get('like'),
-                    "isLiked": oneColor.get('id') in request.session.get('likes', []),
-                    "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
-                    "createdate": oneColor.get('createdate'),
-                }
-            ]
+            "oneColor": {
+                "id": id,
+                "color": oneColor.get('color'),
+                "like": oneColor.get('like'),
+                "isLiked": oneColor.get('id') in request.session.get('likes', []),
+                "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
+                "createdate": oneColor.get('createdate'),
+            }
         })
     else:
         return render_to_response('error.html', {

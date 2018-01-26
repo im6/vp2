@@ -13,6 +13,7 @@ def getColor(id):
     if len(filter0) > 0:
         return filter0[0]
     else:
+        logging.error('onecolor page not found %s' %(id))
         return None
 
 def like(id):

@@ -11,7 +11,7 @@ const oneBox = Box({
   id: selected.id,
   value: selected.color,
   like: selected.like,
-  isLiked: false,
+  isLiked: selected.isLiked,
   onLike: noop,
   onRedir: noop
 });
