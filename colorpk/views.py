@@ -7,49 +7,40 @@ from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
 from colorpk.repository.db import getUserLike
+import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
 import sys
 import logging
 import uuid
 
 @ensure_csrf_cookie
-def index(request):
-    template = get_template('main.html')
-    alldata = cache.getColors()
-    likeList = request.session.get('likes', [])
-    for cl in alldata:
-        cl['isLiked'] = cl['id'] in likeList
-    return HttpResponse(template.render({
-        "list": alldata,
-        "path": request.path,
-        "user": request.session.get('user', None)
-    }))
-
-def latest(request):
-    template = get_template('main.html')
-    alldata = cache.getColors()
-    likeList = request.session.get('likes', [])
-    for cl in alldata:
-        cl['isLiked'] = cl['id'] in likeList
-    return HttpResponse(template.render({
-        "list": alldata,
-        "path": request.path,
-        "user": request.session.get('user', None)
-    }))
-
 def popular(request):
     template = get_template('main.html')
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
-    likeList = request.session.get('likes', [])
-    for cl in alldata:
-        cl['isLiked'] = cl['id'] in likeList
+    likeList = sm.getLikeList(request.session)
     return HttpResponse(template.render({
         "list": alldata1,
         "path": request.path,
-        "user": request.session.get('user', None)
+        "user": request.session.get('user', None),
+        "likes": likeList
     }))
 
+@ensure_csrf_cookie
+def latest(request):
+    template = get_template('main.html')
+    alldata = cache.getColors()
+    likeList = sm.getLikeList(request.session)
+    return HttpResponse(template.render({
+        "list": alldata,
+        "path": request.path,
+        "user": request.session.get('user', None),
+        "likes": likeList
+    }))
+
+
+
+@ensure_csrf_cookie
 def colorOne(request, id):
     oneColor = cache.getColor(id)
     if oneColor:
@@ -60,7 +51,6 @@ def colorOne(request, id):
                 "id": id,
                 "color": oneColor.get('color'),
                 "like": oneColor.get('like'),
-                "isLiked": oneColor.get('id') in request.session.get('likes', []),
                 "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
                 "createdate": oneColor.get('createdate'),
             }
@@ -113,9 +103,8 @@ def profile(request):
     invis_list = cache.getInvisibleColors()
 
     list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
-    list1_ids = request.session.get('likes', [])
-    list1 = filter(lambda a : a.get('id') in list1_ids, visible_list)
-
+    list1_ids = getUserLike(user['id'])
+    list1 = filter(lambda a : a.get('id') in list1_ids, invis_list + visible_list)
     return HttpResponse(template.render({
         "path": request.path,
         "list0": list0,
@@ -125,6 +114,7 @@ def profile(request):
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:
+        del request.session['state']
         auth = getattr(sys.modules[__name__], "OAuth2_%s"%src)()
         token = auth.getToken(request.GET['code'])
         if token:

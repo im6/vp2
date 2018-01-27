@@ -3,7 +3,7 @@ from colorpk import views
 from colorpk import controller
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.popular),
     path('color/<int:id>', views.colorOne),
     path('latest', views.latest),
     path('popular', views.popular),

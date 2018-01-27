@@ -2,12 +2,13 @@
 import '../colors/layout';
 import './style.scss';
 import { Box } from '../colors/box';
-import { ajax, noop } from '../shared/util';
+import { getUserLikes } from "../shared/userLike";
 
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
 
 const addColorBox = (source) => {
+  const USERLIKE = getUserLikes();
   const likeMode = source === 'list1';
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
@@ -15,12 +16,19 @@ const addColorBox = (source) => {
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: likeMode || v.isLiked,
-      onLike: noop,
+      isLiked: likeMode || USERLIKE.indexOf(v.id) > -1,
+      onLike: (cid) => {
+        if(!likeMode){
+          let one = window._colorpk.list0.filter(v => v.id === cid)[0];
+          window._colorpk.list1.push(one);
+        }
+      },
       onUnlike: (cid) => {
         if(likeMode){
           const thisBox = document.querySelector(`[data-k='${cid}']`);
           $listDiv.removeChild(thisBox);
+        } else {
+          window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== cid);
         }
       }
     });

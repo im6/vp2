@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 import json
 import colorpk.repository.cache as cache
-import colorpk.repository.sessionManager as sm
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, getUserLike
 
 def toggleLike(request, id):
@@ -10,14 +9,12 @@ def toggleLike(request, id):
         # body = json.loads(body_unicode)
         cache.like(id)
         user = request.session.get('user', None)
-        sm.addToLikeList(request.session, id)
         if user:
             createUserLike(id, user['id'])
         return JsonResponse({
             "color": id
         })
     elif request.method == 'DELETE':
-        sm.removeFromLikeList(request.session, id)
         user = request.session.get('user', None)
         result = False
         if user:

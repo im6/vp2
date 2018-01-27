@@ -14,8 +14,6 @@
     <div class="list"></div>
     <script>
         window._colorpk = {
-          auth: null,
-          initData: [],
           list0: [
             {% for oneBox in list0%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
           ],

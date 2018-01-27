@@ -3,10 +3,12 @@ import './layout';
 import './style.scss';
 import { Box } from './box';
 import { noop } from '../shared/util';
+import { getUserLikes } from '../shared/userLike';
 
 const ENTRYANIMDELAY = 58,
   STEP = 11,
-  LIMIT = window._colorpk.initData.length;
+  LIMIT = window._colorpk.initData.length,
+  USERLIKE = getUserLikes();
 const $listDiv = document.getElementsByClassName('list')[0];
 
 let currentIdx = 0;
@@ -21,7 +23,7 @@ const addColorBox = (startIndex) => {
       id: v.id,
       value: v.color,
       like: v.like,
-      isLiked: v.isLiked,
+      isLiked: USERLIKE.indexOf(v.id) > -1,
       onLike: noop,
       onRedir: (id) => {
         window.location.href = `/color/${id}`;

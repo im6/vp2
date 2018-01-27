@@ -1,4 +1,5 @@
 import { noop, ajax } from '../../shared/util';
+import { addLike, removeLike } from '../../shared/userLike';
 
 const likeAjax = (id, method) => {
   ajax({
@@ -50,11 +51,13 @@ export const Box = (vm) => {
       let newNum = isLiked ? like : like + 1;
       btn.innerHTML = `<img src="/static/hrtr.svg">${newNum}`;
       likeAjax(id, 'POST');
+      addLike(id);
       onLike(id);
     } else {
       let newNum = isLiked ? like - 1 : like;
       btn.innerHTML = `<img src="/static/hrt.svg">${newNum}`;
       likeAjax(id, 'DELETE');
+      removeLike(id);
       onUnlike(id);
     }
   };
