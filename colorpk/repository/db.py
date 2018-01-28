@@ -52,3 +52,15 @@ def getUserLike(userId):
     list_like0 = UserLike.objects.filter(user_id = userId)
     list_like1 = list(map(lambda x: model_to_dict(x)['color'], list_like0))
     return list_like1
+
+def checkAdmin(userId):
+    result = User.objects.filter(id=userId, isadmin=True).exists()
+    return result
+
+def getUnpublishedColors():
+    result0 = Color.objects.filter(display=True)
+    result1 = list(map(lambda x: model_to_dict(x), result0))
+    for one in result1:
+        cls = one['color'].split('#')
+        one['color'] = list(map(lambda x : '#%s'%x, cls))
+    return result1

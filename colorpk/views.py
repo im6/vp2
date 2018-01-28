@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
 import colorpk.repository.cache as cache
-from colorpk.repository.db import getUserLike
+from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
 import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
 import sys
@@ -67,9 +67,18 @@ def newcolor(request):
     })
 
 def admin(request):
+    user = request.session.get('user', None)
+    if not user or not checkAdmin(user.get('id')):
+        return render_to_response('error.html', {
+            "code": 401,
+            "msg": "Unauthorized!"
+        })
+
+    invisibleColor = getUnpublishedColors()
     return render_to_response('admin.html', {
         "path": request.path,
-        "user": request.session.get('user', None)
+        "user": request.session.get('user', None),
+        "list": invisibleColor,
     })
 
 def signin(request):

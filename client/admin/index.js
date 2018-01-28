@@ -1,3 +1,10 @@
 import './style.scss';
 
-console.log('this is admin');
+window._colorpk = {
+  approve: id => {
+    debugger;
+  },
+  disapprove: id => {
+    debugger;
+  },
+};

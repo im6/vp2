@@ -3,14 +3,21 @@
 {% load static %}
 {% block mainContent %}
     <div class="list">
-        <h1>this is super admin</h1>
+    {% for oneBox in list %}
+        <div class="box">
+            <div class="canvas">
+                {% for oneClr in oneBox.color %}
+                    <div style="background-color: {{ oneClr }};"></div>
+                {% endfor %}
+            </div>
+            <button class="btn" type="button" onclick="_colorpk.approve({{ oneBox.id }})">
+                <img src="/static/hrtr.svg">
+            </button>
+            <button class="btn" type="button" onclick="_colorpk.disapprove({{ oneBox.id }})">
+                <img src="/static/hrt.svg">
+            </button>
+        </div>
+    {% endfor %}
     </div>
-    <script>
-        window._colorpk = {
-          initData: [
-              {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}, "isLiked": '{{ oneBox.isLiked }}'==='True'},{% endfor %}
-          ]
-        };
-    </script>
     <script src="{% static "bundle5.js" %}"></script>
 {% endblock %}
