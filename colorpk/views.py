@@ -39,7 +39,6 @@ def latest(request):
     }))
 
 
-
 @ensure_csrf_cookie
 def colorOne(request, id):
     oneColor = cache.getColor(id)
