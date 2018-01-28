@@ -4,6 +4,7 @@ $hover_1: #F38181;
 $hover_2: #FCE38A;
 $hover_3: #95E1D3;
 $hover_4: #3FC1C9;
+$hover_admin: #ab72b9;
 
 header {
   position: fixed;
@@ -17,7 +18,7 @@ header {
 }
 
 nav {
-  margin: 0 1% 0 2%;
+  margin: 0 1%;
   > a {
     color: $nav-color;
     padding: 9.25px 10px;
@@ -37,6 +38,11 @@ nav {
       color: $hover_3;
       border-bottom: 4px solid $hover_3;
     }
+
+    &:nth-child(4):hover {
+      color: $hover_admin;
+      border-bottom: 4px solid $hover_admin;
+    }
   }
 }
 
@@ -51,7 +57,6 @@ nav {
   float: right;
   padding-top: 2px;
   > img {
-    display: inline-block;
     width: 34px;
     margin-right: 10px;
     border-radius: 3px;

@@ -66,6 +66,12 @@ def newcolor(request):
         "user": request.session.get('user', None)
     })
 
+def admin(request):
+    return render_to_response('admin.html', {
+        "path": request.path,
+        "user": request.session.get('user', None)
+    })
+
 def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] = state

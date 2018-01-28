@@ -1,0 +1,14 @@
+@import '../shared/button';
+@import '../layout/base';
+
+main {
+  background: #f8fcff;
+}
+.list{
+  margin: 0 auto;
+  min-height: 1200px;
+  //border: 1px solid red;
+  .box {
+    display: inline-block;
+  }
+}

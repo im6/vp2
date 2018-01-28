@@ -2,8 +2,13 @@
     <nav>
         <a href="/popular">Popular</a>
         <a href="/latest">Latest</a>
+
         {% if path != '/newcolor' %}
             <a href="/newcolor">Create</a>
+        {% endif %}
+
+        {% if path != '/newcolor' %}
+            <a href="/admin">Admin</a>
         {% endif %}
 
         {% if path != '/signin' %}
@@ -20,4 +25,5 @@
             {% endif %}
         {% endif %}
     </nav>
+    <div style="clear: both;"></div>
 </header>

@@ -10,6 +10,7 @@ module.exports = {
     'bundle2': './client/newcolor/index.js',
     'bundle3': './client/onecolor/index.js',
     'bundle4': './client/profile/index.js',
+    'bundle5': './client/admin/index.js',
   },
   module:{
     rules: [

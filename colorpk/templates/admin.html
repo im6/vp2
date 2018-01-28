@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block mainContent %}
+    <div class="list">
+        <h1>this is super admin</h1>
+    </div>
+    <script>
+        window._colorpk = {
+          initData: [
+              {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}, "isLiked": '{{ oneBox.isLiked }}'==='True'},{% endfor %}
+          ]
+        };
+    </script>
+    <script src="{% static "bundle5.js" %}"></script>
+{% endblock %}
