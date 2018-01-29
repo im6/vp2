@@ -2,6 +2,8 @@ from django.http import JsonResponse
 import json
 import colorpk.repository.cache as cache
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, getUserLike
+from colorpk.shared import colorpk_admin_auth
+
 
 def toggleLike(request, id):
     if request.method == 'POST':
@@ -32,3 +34,14 @@ def createColor(request):
     return JsonResponse({
         "error": result
     })
+
+@colorpk_admin_auth('json')
+def approve(request, id):
+    if request.method == 'POST':
+        return JsonResponse({
+            "post": id
+        })
+    elif request.method == 'DELETE':
+        return JsonResponse({
+            "delete": id
+        })

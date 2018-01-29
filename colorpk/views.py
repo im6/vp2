@@ -9,6 +9,7 @@ import colorpk.repository.cache as cache
 from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
 import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
+from colorpk.shared import colorpk_auth, colorpk_admin_auth
 import sys
 import logging
 import uuid
@@ -66,14 +67,8 @@ def newcolor(request):
         "user": request.session.get('user', None)
     })
 
+@colorpk_admin_auth('view')
 def admin(request):
-    user = request.session.get('user', None)
-    if not user or not checkAdmin(user.get('id')):
-        return render_to_response('error.html', {
-            "code": 401,
-            "msg": "Unauthorized!"
-        })
-
     invisibleColor = getUnpublishedColors()
     return render_to_response('admin.html', {
         "path": request.path,

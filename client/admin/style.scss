@@ -7,9 +7,9 @@ main {
 }
 .list{
   margin: 0 auto;
-  min-height: 1200px;
-  //border: 1px solid red;
+  width: 1080px;
   .box {
     display: inline-block;
+    width: 170px;
   }
 }

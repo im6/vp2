@@ -15,6 +15,7 @@ urlpatterns = [
     path('unauth', views.unauth),
 
     path('like/<int:id>', controller.toggleLike),
+    path('approve/<int:id>', controller.approve),
     path('create', controller.createColor),
 
     re_path(r'/*', views.notfound),
