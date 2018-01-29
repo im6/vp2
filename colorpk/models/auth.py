@@ -48,11 +48,13 @@ class OAuth2(ABC):
         pass
 
     def registerUser(self, data):
-        result = {'id': None, 'name': data['name'], 'img': data['img']}
+        result = {'id': None, 'name': data['name'], 'img': data['img'], 'isadmin': False}
         qs = User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid'])
         if qs.exists():
             qs.update(lastlogin=datetime.now(timezone.utc))
-            result['id'] = qs.get().id
+            thisUser = qs.get()
+            result['id'] = thisUser.id
+            result['isadmin'] = thisUser.isadmin
         else:
             newUser = User(oauth=data['oauth'],
                            name=data['name'],

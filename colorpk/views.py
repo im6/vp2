@@ -128,7 +128,6 @@ def auth(request, src):
             userJSON = auth.registerUser(userInfo)
             request.session['user'] = userJSON
             request.session['likes'] = getUserLike(userJSON['id'])
-            logging.debug(userJSON)
             return redirect('/')
         else:
             return render_to_response('signin.html', {
