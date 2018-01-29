@@ -1,6 +1,7 @@
 import './style.scss';
 import { ajax, noop } from '../shared/util';
 
+const listElem = document.getElementsByClassName('list')[0];
 const approve = (id, method) => {
   ajax({
     method,
@@ -9,6 +10,9 @@ const approve = (id, method) => {
     success: noop,
     fail: noop
   });
+
+  let tgt = document.querySelector(`[data-k="${id}"]`);
+  listElem.removeChild(tgt);
 };
 
 

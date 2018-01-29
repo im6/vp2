@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 import json
 import colorpk.repository.cache as cache
-from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, getUserLike
+from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
 from colorpk.shared import colorpk_admin_auth
 
 
@@ -38,10 +38,12 @@ def createColor(request):
 @colorpk_admin_auth('json')
 def approve(request, id):
     if request.method == 'POST':
+        result = approveColor(id)
         return JsonResponse({
-            "post": id
+            "error": result
         })
     elif request.method == 'DELETE':
+        result = deleteColor(id)
         return JsonResponse({
-            "delete": id
+            "error": result
         })

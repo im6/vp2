@@ -64,3 +64,15 @@ def getUnpublishedColors():
         cls = one['color'].split('#')
         one['color'] = list(map(lambda x : '#%s'%x, cls))
     return result1
+
+def approveColor(id):
+    thisColor = Color.objects.get(id=id)
+    thisColor.display = False
+    thisColor.save()
+    return False
+
+def deleteColor(id):
+    thisColor = Color.objects.get(id=id)
+    thisColor.delete()
+    return False
+
