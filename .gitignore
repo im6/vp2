@@ -5,7 +5,7 @@ env
 db.sqlite3
 .idea
 node_modules
-local
+local/connection.cnf
 npm-debug.log
 static/*.map
 static/*.js
