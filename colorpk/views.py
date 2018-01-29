@@ -102,15 +102,12 @@ def unauth(request):
         "msg": "Unauthorized!"
     })
 
+@colorpk_auth('view')
 def profile(request):
     user = request.session.get('user', None)
-    if not user:
-        return redirect('/unauth')
-
     template = get_template('profile.html')
     visible_list = cache.getColors()
     invis_list = cache.getInvisibleColors()
-
     list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
     list1_ids = getUserLike(user['id'])
     list1 = filter(lambda a : a.get('id') in list1_ids, invis_list + visible_list)

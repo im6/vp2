@@ -31,7 +31,8 @@ def colorpk_admin_auth(resType):
             if user and checkAdmin(user.get('id')):
                 return function(*args, **kwargs)
             else:
-                logging.error('user(id=%s) attempt for admin'%(user.get('id', None)))
+                if user:
+                    logging.error('user(id=%s) attempt for admin'%(user.get('id', None)))
                 if resType == 'view':
                     return render_to_response('error.html', {
                         "code": 401,
