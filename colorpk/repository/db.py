@@ -76,3 +76,10 @@ def deleteColor(id):
     thisColor.delete()
     return False
 
+def syncByCache(data):
+    for id in data.keys():
+        thisColor = Color.objects.get(id=id)
+        thisColor.like = thisColor.like + data.get(id)
+        thisColor.save()
+
+
