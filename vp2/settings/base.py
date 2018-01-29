@@ -4,15 +4,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, "../..")))
 WSGI_APPLICATION = 'vp2.wsgi.application'
 ROOT_URLCONF = 'vp2.urls'
 ALLOWED_HOSTS = []
-INSTALLED_APPS = [
-    'colorpk',
-    'django.contrib.staticfiles',
-    'django.contrib.sessions',
-    #'django.contrib.admin',
-    #'django.contrib.auth',
-    #'django.contrib.contenttypes',
-    #'django.contrib.messages',
-]
+
 MIDDLEWARE = [
     #'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

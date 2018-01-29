@@ -13,6 +13,7 @@ from colorpk.shared import colorpk_auth, colorpk_admin_auth
 import sys
 import logging
 import uuid
+from django.conf import settings
 
 @ensure_csrf_cookie
 def popular(request):
