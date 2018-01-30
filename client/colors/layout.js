@@ -3,13 +3,14 @@
 import debounce from 'debounce';
 import { isMobile } from '../shared/util';
 
-const BOXWD = isMobile ? 185 : 260;
-const mainElem = document.getElementsByClassName('list')[0];
-const SPACEPERCENT = isMobile ? 0.99 : 0.9;
+const BOXWD = isMobile ? 185 : 260,
+  mainElem = document.getElementsByClassName('list')[0],
+  SPACEPERCENT = isMobile ? 0.99 : 0.9,
+  MAXNUM = 6;
 
 const adjustLayout = (w) => {
   mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
-  mainElem.style.maxWidth = `${BOXWD * 5}px`;
+  mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
 };
 
 window.onresize = debounce((e) => {
