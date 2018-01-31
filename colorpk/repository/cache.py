@@ -43,8 +43,8 @@ def refreshColorStore():
     try:
         init_colors0 = getAllColor()
         init_colors = sorted(init_colors0, key=lambda v: v['id'], reverse=True)
-        colors_visible = list(filter(lambda x:x['display'] == False, init_colors))
-        colors_invisible = list(filter(lambda x:x['display'] == True, init_colors))
+        colors_visible = list(filter(lambda x: not x['display'], init_colors))
+        colors_invisible = list(filter(lambda x: x['display'], init_colors))
 
         cache.set(GLOBAL_COLOR_KEY, colors_visible)
         cache.set(GLOBAL_COLOR_INV_KEY, colors_invisible)
