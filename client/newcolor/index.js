@@ -10,7 +10,8 @@ const HANDLENAME = 'drgHdl',
 
 const bars = document.getElementsByClassName('jscolor'),
   canvas = document.getElementsByClassName('canvas')[0],
-  textElem = document.getElementById('colorText');
+  textElem = document.getElementById('colorText'),
+  auth = document.getElementsByClassName('nav-user').length > 0;
 
 let currentBar = bars[0];
 
@@ -19,6 +20,30 @@ const resetColors = () => {
     bars[i].jscolor.fromString('ffffff');
   }
   textElem.value = '';
+};
+
+const publishMsg = () => {
+  const t0 = "Your new color is created successfully. We will review it before publish. Or you could sign in and have it published instantly.";
+  const t1 = "Your new color is created successfully. ";
+  if(auth){
+    swal({
+      title: "Success",
+      text: t1,
+      icon: "success",
+      buttons: 'Got it',
+    });
+  } else {
+    swal({
+      title: "Success",
+      text: t0,
+      icon: "success",
+      buttons: ['Got it', 'Sign in'],
+    }).then(v => {
+      if(v){
+        window.location = "/signin";
+      }
+    });
+  }
 };
 
 document.getElementById('createBtn').onclick = () => {
@@ -39,6 +64,7 @@ document.getElementById('createBtn').onclick = () => {
           swal("Oops", "Color duplication detected", "error" )
         }else{
           resetColors();
+          publishMsg();
         }
       },
       fail: () => {
