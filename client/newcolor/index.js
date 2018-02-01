@@ -80,4 +80,17 @@ dragula([canvas],{
 
 setTimeout(() => {
   canvas.style.height = '200px'; // for dragular effect
+
+  const { defaultColors } = window._colorpk;
+  if(defaultColors.length > 0){
+    let c0 = defaultColors.substring(0,6);
+    let c1 = defaultColors.substring(6,12);
+    let c2 = defaultColors.substring(12,18);
+    let c3 = defaultColors.substring(18,24);
+    bars[0].jscolor.fromString(c0);
+    bars[1].jscolor.fromString(c1);
+    bars[2].jscolor.fromString(c2);
+    bars[3].jscolor.fromString(c3);
+  }
+
 }, 600);

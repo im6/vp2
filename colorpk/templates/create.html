@@ -12,7 +12,6 @@
     <div class="btnGrp">
         <label for="colorText">#</label>
         <input id="colorText" type="text">
-
         <br><br>
 
         <button id="createBtn" class="btn btn-primary" style="margin-right: 7px;">
@@ -22,6 +21,12 @@
             Reset
         </button>
     </div>
+
+    <script>
+        window._colorpk = {
+          defaultColors: '{{ defaultValue }}'
+        };
+    </script>
 
     <script src="{% static "bundle2.js" %}"></script>
 {% endblock %}

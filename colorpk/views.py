@@ -63,9 +63,11 @@ def colorOne(request, id):
         })
 
 def newcolor(request):
+    defaultValue = request.GET.get('c', '')
     return render_to_response('create.html', {
         "path": request.path,
-        "user": request.session.get('user', None)
+        "user": request.session.get('user', None),
+        "defaultValue": defaultValue
     })
 
 @colorpk_admin_auth('view')
