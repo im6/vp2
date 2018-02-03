@@ -9,10 +9,14 @@ GLOBAL_LIKE_KEY = 'global_like'
 GLOBAL_CNT_KEY = 'global_cnt'
 
 def getColors():
-    return cache.get(GLOBAL_COLOR_KEY)
+    data = cache.get(GLOBAL_COLOR_KEY)
+    if not data or len(data) < 1:
+        refreshColorStore()
+        data = cache.get(GLOBAL_COLOR_KEY)
+    return data
 
 def getInvisibleColors():
-    return cache.get(GLOBAL_COLOR_KEY)
+    return cache.get(GLOBAL_COLOR_INV_KEY)
 
 def getColor(id):
     filter0 = list(filter(lambda v : v.get('id') == id, cache.get(GLOBAL_COLOR_KEY) + cache.get(GLOBAL_COLOR_INV_KEY)))

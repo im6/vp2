@@ -138,6 +138,7 @@ def auth(request, src):
                 "error": "Authentication Failed."
             })
     else:
+        logging.error('auth failed, no valid state')
         return render_to_response('signin.html', {
             "path": request.path,
             "error": "No valid state found."
