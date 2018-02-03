@@ -6,7 +6,7 @@ import { noop } from '../shared/util';
 import { getUserLikes } from '../shared/userLike';
 
 const ENTRYANIMDELAY = 50,
-  STEP = 11,
+  STEP = 17,
   LIMIT = window._colorpk.initData.length,
   USERLIKE = getUserLikes();
 const $listDiv = document.getElementsByClassName('list')[0];
@@ -47,4 +47,3 @@ document.body.onscroll = debounce(evt => {
     currentIdx += STEP;
   }
 }, 200);
-
