@@ -4,6 +4,9 @@
 html {
   background: linear-gradient(to left top, #f0f0f0, #ffffff);
 }
+body {
+  overflow: hidden;
+}
 
 main {
   padding-top: 100px;

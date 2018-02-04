@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -43,6 +44,11 @@ module.exports = {
     filename: '[name].js'
   },
   plugins: [
-    new UglifyJsPlugin()
+    new UglifyJsPlugin(),
+    new CompressionPlugin({
+      asset: "[path]",
+      algorithm: "gzip",
+      test: /\.js$/,
+    }),
   ]
 };

@@ -7,6 +7,9 @@ body {
 main {
     padding-top: 15%;
 }
+body {
+  overflow: hidden;
+}
 
 #signin-box {
   width: 240px;
@@ -73,4 +76,14 @@ main {
 .errorTxt{
   color: red;
   font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 42%;
+  }
+  #signin-box {
+    width: 210px;
+  }
 }
