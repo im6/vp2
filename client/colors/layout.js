@@ -3,22 +3,27 @@
 import debounce from 'debounce';
 import { isMobile } from '../shared/util';
 
-const BOXWD = isMobile ? 185 : 260,
-  mainElem = document.getElementsByClassName('list')[0],
+let BOXWD = null;
+let wiw = window.innerWidth;
+if(wiw < 321){
+  BOXWD = 145;
+} else if(wiw < 769){
+  BOXWD = 173;
+} else {
+  BOXWD = 260;
+}
+
+const mainElem = document.getElementsByClassName('list')[0],
   SPACEPERCENT = isMobile ? 0.99 : 0.9,
   MAXNUM = 6;
 
 const adjustLayout = (w) => {
-  if(w > 370){
-    mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
-    mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
-  } else {
-    mainElem.style.width = '307px';
-  }
+  mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
+  mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
 };
 
 window.onresize = debounce((e) => {
   adjustLayout(e.target.innerWidth);
 }, 200);
 
-adjustLayout(window.innerWidth);
+adjustLayout(wiw);
