@@ -8,4 +8,4 @@ INSTALLED_APPS = [
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 ALLOWED_HOSTS = ['.colorpk.com']
-STATIC_URL = '//dkny.oss-cn-hangzhou.aliyuncs.com/2/'
+STATIC_URL = '//dkny.oss-cn-hangzhou.aliyuncs.com/4/'
