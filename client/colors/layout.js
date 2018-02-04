@@ -13,7 +13,7 @@ const adjustLayout = (w) => {
     mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
     mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
   } else {
-    mainElem.style.width = w * 0.99 + 'px';
+    mainElem.style.width = '307px';
   }
 };
 
