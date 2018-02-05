@@ -15,6 +15,13 @@ const getCookieLocal = () => {
   return result;
 };
 
+const clearCookieFromOldVersion = () => {
+  if(document.cookie.indexOf('_csrf')> -1){
+    document.cookie = '_csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location.reload();
+  }
+};
+
 const mobileDetect = () => {
   let isMobile = false;
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -25,6 +32,8 @@ const mobileDetect = () => {
 
 
 const localCookie = getCookieLocal();
+
+clearCookieFromOldVersion();
 
 export const ajax = (config) => {
   const { method, url, data, success, fail } = config;
