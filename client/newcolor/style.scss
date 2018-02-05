@@ -86,3 +86,10 @@ main {
   color: white;
   cursor: move;
 }
+
+
+@media (max-width: 768px) {
+  main {
+    padding: 60px 0 0 0;
+  }
+}

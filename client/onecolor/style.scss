@@ -4,6 +4,7 @@
 
 body {
   background: linear-gradient(to left top, #f0f0f0, #ffffff);
+  overflow: hidden;
 }
 
 main {
@@ -14,8 +15,6 @@ main {
   }
 }
 .container {
-  margin: 0 auto;
-  width: 370px;
   p {
     color: #868686;
   }
