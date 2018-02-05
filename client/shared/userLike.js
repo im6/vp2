@@ -1,7 +1,7 @@
 const LSLIKEKEY = 'userLike';
 
 if('likes' in window._colorpk && window._colorpk.likes.length > 0){
-  window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
+  window.localStorage.setItem(LSLIKEKEY, JSON.stringify(window._colorpk.likes));
 } else if(window.localStorage.getItem(LSLIKEKEY)){
   // valid cachestorage
 } else {
