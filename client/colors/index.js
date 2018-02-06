@@ -5,7 +5,8 @@ import { Box } from './box';
 import { noop } from '../shared/util';
 import { getUserLikes } from '../shared/userLike';
 
-const ENTRYANIMDELAY = 50,
+const ENTRYANIMDELAY = 45,
+  INITNUM = 31,
   STEP = 17,
   LIMIT = window._colorpk.initData.length,
   USERLIKE = getUserLikes();
@@ -13,11 +14,11 @@ const $listDiv = document.getElementsByClassName('list')[0];
 
 let currentIdx = 0;
 
-const addColorBox = (startIndex) => {
-  for(let i = 0; i < STEP; i ++) {
-    const v = window._colorpk.initData[startIndex + i];
+const addColorBox = (step) => {
+  for(let i = currentIdx; i < step + currentIdx; i ++) {
+    const v = window._colorpk.initData[i];
     if(!v) {
-      return;
+      break;
     }
     const oneBox = Box({
       id: v.id,
@@ -29,21 +30,20 @@ const addColorBox = (startIndex) => {
         window.location.href = `/color/${id}`;
       }
     });
-    oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
+    oneBox.style.animationDelay = `${((i - currentIdx) * ENTRYANIMDELAY)}ms`;
     $listDiv.appendChild(oneBox);
   }
+
+  currentIdx += step;
 };
-
-
-addColorBox(currentIdx);
-currentIdx += STEP;
 
 document.body.onscroll = debounce(evt => {
   const e = evt.target.scrollingElement;
   const offset = e.scrollHeight - e.scrollTop - window.innerHeight;
 
   if(offset < 80 && currentIdx < LIMIT) {
-    addColorBox(currentIdx);
-    currentIdx += STEP;
+    addColorBox(STEP);
   }
 }, 200);
+
+addColorBox(INITNUM);
