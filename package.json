@@ -20,6 +20,7 @@
   "dependencies": {},
   "devDependencies": {
     "animejs": "^2.2.0",
+    "autoprefixer": "^7.2.5",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -30,6 +31,7 @@
     "dragula": "^3.7.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.0",
     "purecss": "^1.0.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",

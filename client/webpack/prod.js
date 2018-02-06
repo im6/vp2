@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const autoprefixer = require('autoprefixer');
 const path = require('path');
 
 module.exports = {
@@ -19,14 +20,23 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [{
-            loader: "css-loader",
-            options: {
-              minimize: true,
-            }
-          }, {
-            loader: "sass-loader"
-          }]
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                minimize: true,
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [ autoprefixer()]
+              }
+            },
+            {
+              loader: "sass-loader"
+            },
+          ]
         })
       },
 
