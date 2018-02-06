@@ -22,10 +22,11 @@ def popular(request):
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
     likeList = sm.getLikeList(request.session)
     return HttpResponse(template.render({
-        "list": alldata1,
         "path": request.path,
+        "assetName": "bundle0",
+        "list": alldata1,
         "user": request.session.get('user', None),
-        "likes": likeList
+        "likes": likeList,
     }))
 
 @ensure_csrf_cookie
@@ -34,12 +35,12 @@ def latest(request):
     alldata = cache.getColors()
     likeList = sm.getLikeList(request.session)
     return HttpResponse(template.render({
-        "list": alldata,
         "path": request.path,
+        "assetName": "bundle0",
+        "list": alldata,
         "user": request.session.get('user', None),
-        "likes": likeList
+        "likes": likeList,
     }))
-
 
 @ensure_csrf_cookie
 def colorOne(request, id):
@@ -47,6 +48,7 @@ def colorOne(request, id):
     if oneColor:
         return render_to_response('one_color.html', {
             "path": request.path,
+            "assetName": "bundle3",
             "user": request.session.get('user', None),
             "oneColor": {
                 "id": id,
@@ -54,7 +56,7 @@ def colorOne(request, id):
                 "like": oneColor.get('like'),
                 "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
                 "createdate": oneColor.get('createdate'),
-            }
+            },
         })
     else:
         return render_to_response('error.html', {
@@ -66,8 +68,9 @@ def newcolor(request):
     defaultValue = request.GET.get('c', '')
     return render_to_response('create.html', {
         "path": request.path,
+        "assetName": "bundle2",
         "user": request.session.get('user', None),
-        "defaultValue": defaultValue
+        "defaultValue": defaultValue,
     })
 
 @colorpk_admin_auth('view')
@@ -75,6 +78,7 @@ def admin(request):
     invisibleColor = getUnpublishedColors()
     return render_to_response('admin.html', {
         "path": request.path,
+        "assetName": "bundle5",
         "user": request.session.get('user', None),
         "list": invisibleColor,
     })
@@ -85,6 +89,7 @@ def signin(request):
     request.session['user'] = None
     return render_to_response('signin.html', {
         "path": request.path,
+        "assetName": "bundle1",
         "wb": getUrl('wb', state),
         "fb": getUrl('fb', state),
         "gg": getUrl('gg', state),
@@ -116,6 +121,7 @@ def profile(request):
     list1 = filter(lambda a : a.get('id') in list1_ids, invis_list + visible_list)
     return HttpResponse(template.render({
         "path": request.path,
+        "assetName": "bundle4",
         "list0": list0,
         "list1": list1,
         "user": request.session.get('user', None)
@@ -135,12 +141,13 @@ def auth(request, src):
         else:
             return render_to_response('signin.html', {
                 "path": request.path,
+                "assetName": "bundle1",
                 "error": "Authentication Failed."
             })
     else:
         logging.error('auth failed, no valid state')
         return render_to_response('signin.html', {
             "path": request.path,
+            "assetName": "bundle1",
             "error": "No valid state found."
         })
-

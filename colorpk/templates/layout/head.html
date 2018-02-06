@@ -1,3 +1,4 @@
+{% load static %}
 <head>
     {% if path == '/popular' %}
         <title>Popular | ColorPK</title>
@@ -14,12 +15,13 @@
     {% else %}
         <title>ColorPK | Faster and Lighter</title>
     {% endif %}
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="robots" content="INDEX,FOLLOW"/>
     <meta name="keywords" content="ColorPK, colorhunt" />
     <meta name="description" content="ColorPK | Faster, lighter and nicer." />
+
+    <link rel="stylesheet" type="text/css" href="{% static assetName %}.css">
     <link rel="shortcut icon" href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico" />
     <script type="text/javascript">
         if(window.location.hostname.indexOf('colorpk.com') > -1){
