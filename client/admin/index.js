@@ -15,6 +15,18 @@ const approve = (id, method) => {
   listElem.removeChild(tgt);
 };
 
+const syncAjax = () => {
+  ajax({
+    method: 'POST',
+    url: `/sync`,
+    data: {},
+    success: ({error}) => {
+      alert(error ? 'Fail!' : 'Success!');
+    },
+    fail: noop
+  });
+};
+
 
 window._colorpk = {
   approve: id => {
@@ -23,4 +35,7 @@ window._colorpk = {
   disapprove: id => {
     approve(id, 'DELETE');
   },
+  sync: () => {
+    syncAjax();
+  }
 };

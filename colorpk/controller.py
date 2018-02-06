@@ -4,7 +4,6 @@ import colorpk.repository.cache as cache
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
 from colorpk.shared import colorpk_admin_auth
 
-
 def toggleLike(request, id):
     if request.method == 'POST':
         # body_unicode = request.body.decode('utf-8')
@@ -47,3 +46,10 @@ def approve(request, id):
         return JsonResponse({
             "error": result
         })
+
+@colorpk_admin_auth('json')
+def syncCache(request):
+    result = cache.syncAndRefresh()
+    return JsonResponse({
+        "error": result
+    })

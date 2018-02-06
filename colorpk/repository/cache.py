@@ -2,7 +2,7 @@ from django.core.cache import cache
 from colorpk.repository.db import getAllColor, syncByCache
 import logging
 
-BUFFERSIZE = 3
+BUFFERSIZE = 30
 GLOBAL_COLOR_KEY = 'global_colors'
 GLOBAL_COLOR_INV_KEY = 'global_colors_inv'
 GLOBAL_LIKE_KEY = 'global_like'
@@ -39,8 +39,7 @@ def like(id):
 
     cntPlus()
     if cache.get(GLOBAL_CNT_KEY) > BUFFERSIZE:
-        syncDB()
-        refreshColorStore()
+        syncAndRefresh()
 
 def refreshColorStore():
     logging.debug('refreshing cache data from db...')
@@ -67,5 +66,13 @@ def syncDB():
     like_obj = cache.get(GLOBAL_LIKE_KEY)
     print(like_obj)
     syncByCache(like_obj)
+
+def syncAndRefresh():
+    try:
+        syncDB()
+        refreshColorStore()
+        return False
+    except Exception as e:
+        return True
 
 refreshColorStore()
