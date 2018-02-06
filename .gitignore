@@ -9,4 +9,5 @@ local/connection.cnf
 npm-debug.log
 static/*.map
 static/*.js
+static/*.css
 colorpk/migrations
