@@ -3,21 +3,26 @@
 {% load static %}
 {% block mainContent %}
     <div class="list">
-    {% for oneBox in list %}
-        <div class="box" data-k="{{ oneBox.id }}">
-            <div class="canvas">
-                {% for oneClr in oneBox.color %}
-                    <div style="background-color: {{ oneClr }};"></div>
-                {% endfor %}
+    {% if list %}
+        {% for oneBox in list %}
+            <div class="box" data-k="{{ oneBox.id }}">
+                <div class="canvas">
+                    {% for oneClr in oneBox.color %}
+                        <div style="background-color: {{ oneClr }};"></div>
+                    {% endfor %}
+                </div>
+                <button class="btn" type="button" onclick="_colorpk.approve({{ oneBox.id }})">
+                    <img src="{% static "hrtr.svg" %}">
+                </button>
+                <button class="btn" type="button" onclick="_colorpk.disapprove({{ oneBox.id }})">
+                    <img src="{% static "hrt.svg" %}">
+                </button>
             </div>
-            <button class="btn" type="button" onclick="_colorpk.approve({{ oneBox.id }})">
-                <img src="{% static "hrtr.svg" %}">
-            </button>
-            <button class="btn" type="button" onclick="_colorpk.disapprove({{ oneBox.id }})">
-                <img src="{% static "hrt.svg" %}">
-            </button>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <h2>No pending colors.</h2>
+    {% endif %}
+
     </div>
     <script src="{% static "bundle5.js" %}"></script>
 {% endblock %}
