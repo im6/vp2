@@ -14,7 +14,9 @@
         {% if path != '/signin' %}
             {% if user %}
                 <div class="nav-user">
-                    <img src="{{ user.img }}" alt="icon" />
+                    <a href="/profile">
+                        <img src="{{ user.img }}" title="Profile" alt="icon" />
+                    </a>
                     <div>
                         <a href="/profile">{{ user.name }}</a>
                         <a href="/signin">Sign out</a>
