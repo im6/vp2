@@ -4,11 +4,11 @@
         <a href="/latest">Latest</a>
 
         {% if path != '/newcolor' %}
-            <a href="/newcolor">Create</a>
+            <a class="createBtn" href="/newcolor">Create</a>
         {% endif %}
 
         {% if user.isadmin %}
-            <a href="/admin">Admin</a>
+            <a class="adminBtn" href="/admin">Admin</a>
         {% endif %}
 
         {% if path != '/signin' %}

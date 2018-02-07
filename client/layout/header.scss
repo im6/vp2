@@ -77,3 +77,10 @@ nav {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .createBtn, .adminBtn {
+    display: none;
+  }
+}
+
