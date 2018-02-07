@@ -16,9 +16,10 @@ const bars = document.getElementsByClassName('jscolor'),
 let currentBar = bars[0];
 
 const resetColors = () => {
-  for(let i = 0; i < 4; i ++){
-    bars[i].jscolor.fromString('ffffff');
-  }
+  bars[0].jscolor.fromString('f5f5f5');
+  bars[1].jscolor.fromString('ebebeb');
+  bars[2].jscolor.fromString('d9d9d9');
+  bars[3].jscolor.fromString('c7c7c7');
   textElem.value = '';
 };
 
@@ -50,7 +51,7 @@ document.getElementById('createBtn').onclick = () => {
   const state = [].slice.call(bars).map(v => {
     return v.jscolor.toString();
   });
-  if(state.filter(v => v === 'ffffff').length > 1){
+  if(state.join('') === "f5f5f5ebebebd9d9d9c7c7c7"){
     swal("Oops", "You need to fill out all columns", "error" )
   } else {
     ajax({
@@ -105,8 +106,6 @@ dragula([canvas],{
 });
 
 setTimeout(() => {
-  canvas.style.height = '200px'; // for dragular effect
-
   const { defaultColors } = window._colorpk;
   if(defaultColors.length > 0){
     let c0 = defaultColors.substring(0,6);
@@ -117,6 +116,7 @@ setTimeout(() => {
     bars[1].jscolor.fromString(c1);
     bars[2].jscolor.fromString(c2);
     bars[3].jscolor.fromString(c3);
+  } else {
+    resetColors();
   }
-
-}, 600);
+}, 50);

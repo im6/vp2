@@ -14,29 +14,16 @@ main {
   .canvas {
     width: 180px;
     margin: auto;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid darkgray;
     border-radius: 5px;
-    background-color: white;
     box-shadow: 0 5px 20px 1.5px #cccccc;
   }
   .jscolor {
     height: 50px;
     width: 100%;
-    border: 1px dashed darkgray;
+    border: none;
     display: block;
-
-    animation-name: boxAnim;
-    animation-fill-mode: backwards;
-    animation-duration: .6s;
-    animation-delay: 0.05s;
-
-    @keyframes boxAnim {
-      0% {
-        opacity: 0;
-        height: 0;
-      }
-    }
 
     &:nth-child(1){
       border-radius: 4px 4px 0 0;
