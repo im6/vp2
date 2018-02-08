@@ -80,6 +80,17 @@ $color-radius: 4px;
       vertical-align: middle;
       margin-right: 5px;
       margin-top: -4.5px;
+
+      animation-name: btnAnim;
+      animation-fill-mode: backwards;
+      animation-duration: .5s;
+
+      @keyframes btnAnim {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
     }
   }
 }
