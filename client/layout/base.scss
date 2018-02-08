@@ -19,5 +19,6 @@ body {
 }
 
 main {
+    display: block; // for IE 's christ
     padding: 55px 0;
 }
