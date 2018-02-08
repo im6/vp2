@@ -7,7 +7,7 @@
             <a class="createBtn" href="/newcolor">Create</a>
         {% endif %}
 
-        {% if user.isadmin %}
+        {% if user.isadmin and path != '/admin' %}
             <a class="adminBtn" href="/admin">Admin</a>
         {% endif %}
 
