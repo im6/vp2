@@ -13,7 +13,7 @@ def toggleLike(request, id):
         if user:
             createUserLike(id, user['id'])
         return JsonResponse({
-            "color": id
+            "error": False
         })
     elif request.method == 'DELETE':
         user = request.session.get('user', None)

@@ -12,7 +12,7 @@ const oneBox = Box({
   id: selected.id,
   value: selected.color,
   like: selected.like,
-  isLiked: getUserLikes().indexOf(selected.id),
+  isLiked: getUserLikes().indexOf(selected.id) > -1,
   onLike: noop,
   onRedir: noop
 });

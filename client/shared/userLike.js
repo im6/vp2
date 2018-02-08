@@ -1,5 +1,15 @@
 const LSLIKEKEY = 'userLike';
 
+const clearLocalStorage = () => {
+  let ks = Object.keys(window.localStorage);
+  if(ks.length > 1 || !LSLIKEKEY in localStorage) {
+    window.localStorage.clear();
+    console.warn('clear old localstorage');
+  }
+};
+
+clearLocalStorage();
+
 if('likes' in window._colorpk && window._colorpk.likes.length > 0){
   window.localStorage.setItem(LSLIKEKEY, JSON.stringify(window._colorpk.likes));
 } else if(window.localStorage.getItem(LSLIKEKEY)){
