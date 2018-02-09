@@ -64,15 +64,20 @@ def cntPlus():
 def syncDB():
     logging.debug('sync db with cache...')
     like_obj = cache.get(GLOBAL_LIKE_KEY)
-    print(like_obj)
     syncByCache(like_obj)
 
 def syncAndRefresh():
     try:
+        cacheData = cache.get(GLOBAL_LIKE_KEY)
         syncDB()
         refreshColorStore()
-        return False
+        return {
+            "error": False,
+            "data": cacheData
+        }
     except Exception as e:
-        return True
+        return {
+            "error": True,
+        }
 
 refreshColorStore()

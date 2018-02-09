@@ -20,8 +20,8 @@ const syncAjax = () => {
     method: 'POST',
     url: `/sync`,
     data: {},
-    success: ({error}) => {
-      alert(error ? 'Fail!' : 'Success!');
+    success: ({error, data}) => {
+      alert(error ? 'Fail!' : 'Success!' + ': ' + JSON.stringify(data));
     },
     fail: noop
   });

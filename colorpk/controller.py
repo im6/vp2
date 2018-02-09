@@ -50,6 +50,4 @@ def approve(request, id):
 @colorpk_admin_auth('json')
 def syncCache(request):
     result = cache.syncAndRefresh()
-    return JsonResponse({
-        "error": result
-    })
+    return JsonResponse(result)
