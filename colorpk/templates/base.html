@@ -6,5 +6,7 @@
         <main>
             {% block mainContent %}{% endblock %}
         </main>
+        {% load static %}
+        <script src="{% static assetName %}.js"></script>
     </body>
 </html>

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load static %}
 {% block mainContent %}
     <h3>Create a Color Palette:</h3>
 
@@ -29,6 +28,4 @@
           defaultColors: '{{ defaultValue }}'
         };
     </script>
-
-    <script src="{% static assetName %}.js"></script>
 {% endblock %}
