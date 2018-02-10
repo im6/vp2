@@ -4,6 +4,7 @@ import colorpk.repository.cache as cache
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
 from colorpk.shared import colorpk_admin_auth
 
+@cache.colorpk_like_buffer
 def toggleLike(request, id):
     if request.method == 'POST':
         # body_unicode = request.body.decode('utf-8')

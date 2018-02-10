@@ -1,12 +1,27 @@
+import logging
+from django.conf import settings
 from django.core.cache import cache
 from colorpk.repository.db import getAllColor, syncByCache
-import logging
 
-BUFFERSIZE = 30
+BUFFERSIZE = 3 if settings.DEBUG else 100
 GLOBAL_COLOR_KEY = 'global_colors'
 GLOBAL_COLOR_INV_KEY = 'global_colors_inv'
 GLOBAL_LIKE_KEY = 'global_like'
 GLOBAL_CNT_KEY = 'global_cnt'
+
+def colorpk_like_buffer(function):
+    def wrapper(*args, **kwargs):
+        cntPlus()
+        if cache.get(GLOBAL_CNT_KEY) > BUFFERSIZE:
+            cache.set(GLOBAL_CNT_KEY, 0)
+            syncAndRefresh()
+        return function(*args, **kwargs)
+    return wrapper
+
+def cntPlus():
+    cnt = cache.get(GLOBAL_CNT_KEY)
+    cnt += 1
+    cache.set(GLOBAL_CNT_KEY, cnt)
 
 def getColors():
     data = cache.get(GLOBAL_COLOR_KEY)
@@ -40,10 +55,6 @@ def like(id):
             one['like'] += 1
     cache.set(GLOBAL_COLOR_KEY, rawValue)
 
-    cntPlus()
-    if cache.get(GLOBAL_CNT_KEY) > BUFFERSIZE:
-        syncAndRefresh()
-
 def refreshColorStore():
     logging.debug('refreshing cache data from db...')
     try:
@@ -54,22 +65,17 @@ def refreshColorStore():
 
         cache.set(GLOBAL_COLOR_KEY, colors_visible)
         cache.set(GLOBAL_COLOR_INV_KEY, colors_invisible)
-        cache.set(GLOBAL_LIKE_KEY, {})
-        cache.set(GLOBAL_CNT_KEY, 0)
     except BaseException as e:
         logging.error('error on getting all colors')
-
-def cntPlus():
-    cnt = cache.get(GLOBAL_CNT_KEY)
-    cnt = cnt + 1
-    cache.set(GLOBAL_CNT_KEY, cnt)
 
 def syncDB():
     logging.debug('sync db with cache...')
     like_obj = cache.get(GLOBAL_LIKE_KEY)
     syncByCache(like_obj)
+    cache.set(GLOBAL_LIKE_KEY, {})
 
 def syncAndRefresh():
+    logging.debug('sync and refresh...')
     try:
         syncDB()
         refreshColorStore()
@@ -77,4 +83,9 @@ def syncAndRefresh():
     except Exception as e:
         return True
 
+
+# =============== initial state =====================
+
+cache.set(GLOBAL_LIKE_KEY, {})
+cache.set(GLOBAL_CNT_KEY, 0)
 refreshColorStore()
