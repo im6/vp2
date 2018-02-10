@@ -3,36 +3,36 @@
 {% load static %}
 {% block mainContent %}
     <div id="signin-box">
-        <div>
-            <a href="{{ wb }}">
-                <img src="{% static "wb.png" %}" title="微博" alt="微博">
-            </a>
-            <a href="{{ gh }}">
-                <img src="{% static "gh.png" %}" title="Github" alt="Github">
-            </a>
+        <a href="{{ wb }}">
+            <img src="{% static "wb.png" %}" title="微博" alt="微博">
+            <span>log in with 新浪微博</span>
+        </a>
+        <a href="{{ gh }}">
+            <img src="{% static "gh.png" %}" title="Github" alt="Github">
+            <span>log in with github</span>
+        </a>
+        <a href="{{ gg }}">
+            <img src="{% static "gg.png" %}" title="Google" alt="Google">
+            <span>log in with google</span>
+        </a>
+        <a href="{{ fb }}">
+            <img src="{% static "fb.png" %}" title="Facebook" alt="Facebook">
+            <span>log in with facebook</span>
+        </a>
 
-            <br>
+        {% if error %}
+            <div class="errorTxt">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
 
-            <a href="{{ gg }}">
-                <img src="{% static "gg.png" %}" title="Google" alt="Google">
-            </a>
-            <a href="{{ fb }}">
-                <img src="{% static "fb.png" %}" title="Facebook" alt="Facebook">
-            </a>
-            {% if error %}
-                <div class="errorTxt">
-                    {{ error }}
-                </div>
-            {% endif %}
-        </div>
-
-        <div>
-            After Login, you will be able to:
-            <ul>
-                <li>Publish palette directly</li>
-                <li>Endorse your color</li>
-                <li>Sync your likes/colors on the cloud</li>
-            </ul>
-        </div>
+    <div class="desc">
+        After Login, you will be able to:
+        <ul>
+            <li>Publish palette directly</li>
+            <li>Endorse your color</li>
+            <li>Sync your likes/colors on the cloud</li>
+        </ul>
     </div>
 {% endblock %}

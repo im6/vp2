@@ -1,12 +1,14 @@
 @import '../layout/base';
 
+$ROWHEIGHT: 45px;
+
 html {
   overflow: hidden;
 }
 
 body {
   overflow: hidden;
-  background: linear-gradient(to left top, rgb(247, 187, 151), rgb(221, 94, 137));
+  background: linear-gradient(to left top, #efefef, #fff);
 }
 
 main {
@@ -14,64 +16,42 @@ main {
 }
 
 #signin-box {
-  width: 240px;
+  width: 280px;
   margin: auto;
-  background-color: white;
-  padding: 12px;
-  border-radius: 5px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-
-  animation-name: boxAnim;
-  animation-fill-mode: backwards;
-  animation-duration: .5s;
-  animation-delay: 0.5s;
-
-  @keyframes boxAnim {
-    0% {
-      opacity: 0;
-    }
-  }
 
   a {
+    display: flex;
     text-decoration: none;
-    display: inline-block;
-    margin: 8px 10px;
-
-    animation-name: iconAnim;
-    animation-fill-mode: backwards;
-    animation-duration: .4s;
-    animation-delay: .8s;
-    filter: grayscale(100%) brightness(70%);
-    transition: filter 0.25s ease-in-out;
+    border-radius: 7px 5px 5px 7px;
+    margin-bottom: 11px;
 
     img {
-      width: 55px;
-      border-radius: 10px;
+      height: $ROWHEIGHT;
+    }
+    span {
+      text-transform: uppercase;
+      line-height: $ROWHEIGHT;
+      padding-left: 20px;
+      font-size: 16px;
     }
 
-    @keyframes iconAnim {
-      0% {
-        opacity: 0;
-        transform: scale(0);
-      }
+    &:nth-child(1){
+      background: linear-gradient(to right, #ffe591, #ffffcd);
+      color: #cd201f;
     }
-    &:hover {
-      filter: grayscale(0) brightness(100%);
+    &:nth-child(2){
+      background: linear-gradient(to right, #0c0c0c, #676767);
+      color: white;
     }
-  }
+    &:nth-child(3){
+      background: linear-gradient(to right, #d93725, #ff7d6e);
+      color: #fff;
+    }
+    &:nth-child(4){
+      background: linear-gradient(to right, #3b5998, #6686c8);
+      color: white;
+    }
 
-  div:nth-child(1){
-    width: 155px;
-    min-height: 148px; // placeholder
-    margin: 15px auto 25px auto;
-  }
-
-  div:nth-child(2){
-    color: #757575;
-    font-size: 15px;
-    li {
-      font-size: 12px;
-    }
   }
 }
 
@@ -79,7 +59,15 @@ main {
   color: red;
   font-size: 14px;
 }
-
+.desc {
+  width: 235px;
+  margin: 45px auto 0 auto;
+  color: #6373a1;
+  font-size: 15px;
+  li {
+    font-size: 12px;
+  }
+}
 
 @media (max-width: 768px) {
   main {
@@ -87,6 +75,9 @@ main {
   }
   #signin-box {
     width: 210px;
+    & > a > span {
+      font-size: 11px;
+    }
   }
 }
 
@@ -96,5 +87,8 @@ main {
   }
   #signin-box {
     width: 210px;
+    & > a > span {
+      font-size: 11px;
+    }
   }
 }
