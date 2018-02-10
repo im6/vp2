@@ -7,6 +7,6 @@
             {% block mainContent %}{% endblock %}
         </main>
         {% load static %}
-        <script src="{% static assetName %}.js"></script>
+        <script src="{% static assetName %}.js?{{ version }}"></script>
     </body>
 </html>
