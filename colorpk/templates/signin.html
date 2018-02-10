@@ -19,15 +19,14 @@
             <img src="{% static "fb.png" %}" title="Facebook" alt="Facebook">
             <span>log in with facebook</span>
         </a>
+    </div>
 
+    <div class="desc">
         {% if error %}
             <div class="errorTxt">
                 {{ error }}
             </div>
         {% endif %}
-    </div>
-
-    <div class="desc">
         After Login, you will be able to:
         <ul>
             <li>Publish palette directly</li>

@@ -57,8 +57,10 @@ main {
 
 .errorTxt{
   color: red;
-  font-size: 14px;
+  font-size: 17px;
+  margin-bottom: 10px;
 }
+
 .desc {
   width: 235px;
   margin: 45px auto 0 auto;
@@ -71,19 +73,7 @@ main {
 
 @media (max-width: 768px) {
   main {
-    padding-top: 42%;
-  }
-  #signin-box {
-    width: 210px;
-    & > a > span {
-      font-size: 11px;
-    }
-  }
-}
-
-@media (max-width: 320px) {
-  main {
-    padding-top: 20%;
+    padding-top: 30%;
   }
   #signin-box {
     width: 210px;
