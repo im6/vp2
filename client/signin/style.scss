@@ -8,7 +8,8 @@ html {
 
 body {
   overflow: hidden;
-  background: linear-gradient(to left top, #efefef, #fff);
+  background: linear-gradient(to left top, #daffea, #eaf0ff);
+
 }
 
 main {
@@ -36,21 +37,21 @@ main {
     }
 
     &:nth-child(1){
-      background: linear-gradient(to right, #ffe591, #ffffcd);
+      background: linear-gradient(to right, #ffdf76, #ffffcd);
       color: #cd201f;
     }
     &:nth-child(2){
-      background: linear-gradient(to right, #0c0c0c, #676767);
+      background: linear-gradient(to right, #070707, #676767);
       color: white;
       animation-delay: .1s;
     }
     &:nth-child(3){
-      background: linear-gradient(to right, #d93725, #ff7d6e);
+      background: linear-gradient(to right, #d72915, #ff7d6e);
       color: #fff;
       animation-delay: .2s;
     }
     &:nth-child(4){
-      background: linear-gradient(to right, #3b5998, #6686c8);
+      background: linear-gradient(to right, #35518a, #6686c8);
       color: white;
       animation-delay: .3s;
     }
@@ -62,7 +63,7 @@ main {
     @keyframes iconAnim {
       0% {
         opacity: 0;
-        transform: scale(1.08);
+        transform: scale(1.05);
       }
     }
 

@@ -11,12 +11,15 @@ GLOBAL_CNT_KEY = 'global_cnt'
 def getColors():
     data = cache.get(GLOBAL_COLOR_KEY)
     if not data or len(data) < 1:
-        refreshColorStore()
+        syncAndRefresh()
         data = cache.get(GLOBAL_COLOR_KEY)
     return data
 
 def getInvisibleColors():
     return cache.get(GLOBAL_COLOR_INV_KEY)
+
+def getCachedLikes():
+    return cache.get(GLOBAL_LIKE_KEY)
 
 def getColor(id):
     filter0 = list(filter(lambda v : v.get('id') == id, cache.get(GLOBAL_COLOR_KEY) + cache.get(GLOBAL_COLOR_INV_KEY)))
@@ -68,16 +71,10 @@ def syncDB():
 
 def syncAndRefresh():
     try:
-        cacheData = cache.get(GLOBAL_LIKE_KEY)
         syncDB()
         refreshColorStore()
-        return {
-            "error": False,
-            "data": cacheData
-        }
+        return False
     except Exception as e:
-        return {
-            "error": True,
-        }
+        return True
 
 refreshColorStore()
