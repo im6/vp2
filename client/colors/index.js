@@ -9,10 +9,10 @@ const ENTRYANIMDELAY = 45,
   INITNUM = 31,
   STEP = 17,
   LIMIT = window._colorpk.initData.length,
+  SCROLLBOUND = 100,
   USERLIKE = getUserLikes();
 
-const $listDiv = document.getElementsByClassName('list')[0],
-  scrollBody = document.getElementsByTagName('html')[0];
+const $listDiv = document.getElementsByClassName('list')[0];
 
 let currentIdx = 0;
 
@@ -40,9 +40,12 @@ const addColorBox = (step) => {
 };
 
 document.body.onscroll = debounce(evt => {
-  const offset = scrollBody.scrollHeight - scrollBody.scrollTop - window.innerHeight;
+  const e = evt.target.scrollingElement;
+  //let offset = e.scrollHeight - e.scrollTop - e.clientHeight; // work for chrome only
+  let offset = e.scrollHeight - e.scrollTop - window.innerHeight;
+  //console.log(e.scrollHeight, window.innerHeight, e.scrollTop,  offset);
 
-  if(offset < 80 && currentIdx < LIMIT) {
+  if(offset < SCROLLBOUND && currentIdx < LIMIT) {
     addColorBox(STEP);
   }
 }, 200);
