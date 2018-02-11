@@ -13,7 +13,9 @@ from colorpk.shared import colorpk_auth, colorpk_admin_auth
 import sys
 import logging
 import uuid
-from django.conf import settings
+import os
+
+ASSETVERSION = os.getenv('VERSION', 'dev')
 
 @ensure_csrf_cookie
 def popular(request):
@@ -24,7 +26,7 @@ def popular(request):
     return HttpResponse(template.render({
         "path": request.path,
         "assetName": "bundle0",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "list": alldata1,
         "user": request.session.get('user', None),
         "likes": likeList,
@@ -38,7 +40,7 @@ def latest(request):
     return HttpResponse(template.render({
         "path": request.path,
         "assetName": "bundle0",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "list": alldata,
         "user": request.session.get('user', None),
         "likes": likeList,
@@ -51,7 +53,7 @@ def colorOne(request, id):
         return render_to_response('one_color.html', {
             "path": request.path,
             "assetName": "bundle3",
-            "version": settings.COLORPK_VERSION,
+            "version": ASSETVERSION,
             "user": request.session.get('user', None),
             "oneColor": {
                 "id": id,
@@ -72,7 +74,7 @@ def newcolor(request):
     return render_to_response('create.html', {
         "path": request.path,
         "assetName": "bundle2",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "defaultValue": defaultValue,
     })
@@ -83,7 +85,7 @@ def admin(request):
     return render_to_response('admin.html', {
         "path": request.path,
         "assetName": "bundle5",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "list": invisibleColor,
     })
@@ -95,7 +97,7 @@ def signin(request):
     return render_to_response('signin.html', {
         "path": request.path,
         "assetName": "bundle1",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "wb": getUrl('wb', state),
         "fb": getUrl('fb', state),
         "gg": getUrl('gg', state),
@@ -128,7 +130,7 @@ def profile(request):
     return HttpResponse(template.render({
         "path": request.path,
         "assetName": "bundle4",
-        "version": settings.COLORPK_VERSION,
+        "version": ASSETVERSION,
         "list0": list0,
         "list1": list1,
         "user": request.session.get('user', None)
@@ -149,7 +151,7 @@ def auth(request, src):
             return render_to_response('signin.html', {
                 "path": request.path,
                 "assetName": "bundle1",
-                "version": settings.COLORPK_VERSION,
+                "version": ASSETVERSION,
                 "error": "Authentication Failed."
             })
     else:
@@ -157,6 +159,6 @@ def auth(request, src):
         return render_to_response('signin.html', {
             "path": request.path,
             "assetName": "bundle1",
-            "version": settings.COLORPK_VERSION,
+            "version": ASSETVERSION,
             "error": "No valid state found."
         })
