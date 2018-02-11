@@ -9,11 +9,10 @@ html {
 body {
   overflow: hidden;
   background: linear-gradient(to left top, #daffea, #eaf0ff);
-
 }
 
 main {
-    padding-top: 15%;
+    padding: 15% 0 0 0;
 }
 
 #signin-box {
@@ -96,7 +95,7 @@ main {
 
 @media (max-width: 768px) {
   main {
-    padding-top: 30%;
+    padding-top: 28%;
   }
   #signin-box {
     width: 210px;
