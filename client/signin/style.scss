@@ -39,21 +39,22 @@ main {
     &:nth-child(1){
       background: linear-gradient(to right, #ffdf76, #ffffcd);
       color: #cd201f;
+      animation-delay: .2s;
     }
     &:nth-child(2){
       background: linear-gradient(to right, #070707, #676767);
       color: white;
-      animation-delay: .1s;
+      animation-delay: .28s;
     }
     &:nth-child(3){
       background: linear-gradient(to right, #d72915, #ff7d6e);
       color: #fff;
-      animation-delay: .2s;
+      animation-delay: .35s;
     }
     &:nth-child(4){
       background: linear-gradient(to right, #35518a, #6686c8);
       color: white;
-      animation-delay: .3s;
+      animation-delay: .4s;
     }
 
     animation-name: iconAnim;
