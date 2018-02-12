@@ -2,7 +2,7 @@
 import '../colors/layout';
 import './style.scss';
 import { Box } from '../colors/box';
-import { getUserLikes } from "../shared/userLike";
+import { getUserLikes } from "../shared/userPreference";
 
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];

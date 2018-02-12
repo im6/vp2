@@ -1,7 +1,7 @@
 import './style.scss';
 import { downloadCanvas, noop } from '../shared/util';
 import { Box } from '../colors/box';
-import { getUserLikes } from "../shared/userLike";
+import { getUserLikes } from "../shared/userPreference";
 
 const downloadBtn = document.getElementById('download');
 const container = document.getElementsByClassName('container')[0];

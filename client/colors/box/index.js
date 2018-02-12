@@ -1,5 +1,5 @@
 import { noop, ajax } from '../../shared/util';
-import { addLike, removeLike } from '../../shared/userLike';
+import { addLike, removeLike } from '../../shared/userPreference';
 
 const { staticPath } = window._colorpk;
 

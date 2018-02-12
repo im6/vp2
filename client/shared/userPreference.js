@@ -1,8 +1,14 @@
-const LSLIKEKEY = 'userLike';
+const LSLIKEKEY = 'userLike',
+  WELCOMEKEY = 'hideWelcome',
+  DISABLEWELCOMEVALUE = '1';
 
 const clearLocalStorage = () => {
   let ks = Object.keys(window.localStorage);
-  if(ks.length > 1 || !LSLIKEKEY in localStorage) {
+  let errorKey = ks.filter(v => {
+    return v !== LSLIKEKEY && v !== WELCOMEKEY;
+  });
+
+  if(errorKey.length > 0) {
     window.localStorage.clear();
     console.warn('clear old localstorage');
   }
@@ -55,6 +61,24 @@ export const removeLike = (id) => {
       return v !== id;
     });
     window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
+  } catch(e){
+    console.warn('localstorage access denied.');
+  }
+};
+
+export const checkWelcome = () => {
+  let result = false;
+  try {
+    result = window.localStorage.getItem(WELCOMEKEY) === DISABLEWELCOMEVALUE;
+  } catch(e){
+    console.warn('localstorage access denied.');
+  }
+  return result;
+};
+
+export const hideWelcome = () => {
+  try {
+    window.localStorage.setItem(WELCOMEKEY, DISABLEWELCOMEVALUE);
   } catch(e){
     console.warn('localstorage access denied.');
   }

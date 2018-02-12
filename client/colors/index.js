@@ -3,7 +3,7 @@ import './layout';
 import './style.scss';
 import { Box } from './box';
 import { noop } from '../shared/util';
-import { getUserLikes } from '../shared/userLike';
+import { getUserLikes } from '../shared/userPreference';
 
 const ENTRYANIMDELAY = 45,
   INITNUM = 31,

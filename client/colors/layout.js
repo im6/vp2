@@ -2,6 +2,7 @@
 //import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
 import debounce from 'debounce';
 import { isMobile } from '../shared/util';
+import { checkWelcome, hideWelcome } from '../shared/userPreference';
 
 let BOXWD = null;
 let wiw = window.innerWidth;
@@ -14,12 +15,17 @@ if(wiw < 321){
 }
 
 const mainElem = document.getElementsByClassName('list')[0],
+  helpElem = document.getElementsByClassName('help')[0],
   SPACEPERCENT = isMobile ? 0.99 : 0.9,
-  MAXNUM = 6;
+  MAXNUM = 6,
+  BOXMARGINH = 20,
+  isWelcomeHidden = checkWelcome();
 
 const adjustLayout = (w) => {
-  mainElem.style.width = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD + 'px';
+  const wd = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD;
+  mainElem.style.width = wd + 'px';
   mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
+  helpElem.style.width = (wd - BOXMARGINH) + 'px';
 };
 
 window.onresize = debounce((e) => {
@@ -27,3 +33,11 @@ window.onresize = debounce((e) => {
 }, 200);
 
 adjustLayout(wiw);
+
+if(!isWelcomeHidden){
+  helpElem.style.display = 'block';
+  window._colorpk.removeWelcome = () => {
+    helpElem.parentElement.removeChild(helpElem);
+    hideWelcome();
+  };
+}
