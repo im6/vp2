@@ -15,17 +15,21 @@ if(wiw < 321){
 }
 
 const mainElem = document.getElementsByClassName('list')[0],
-  helpElem = document.getElementsByClassName('help')[0],
+  helpElems = document.getElementsByClassName('help'),
   SPACEPERCENT = isMobile ? 0.99 : 0.9,
   MAXNUM = 6,
   BOXMARGINH = 20,
   isWelcomeHidden = checkWelcome();
 
+const helpElem = helpElems.length > 0 ? helpElems[0] : null;
+
 const adjustLayout = (w) => {
   const wd = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD;
   mainElem.style.width = wd + 'px';
   mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
-  helpElem.style.width = (wd - BOXMARGINH) + 'px';
+  if(helpElem){
+    helpElem.style.width = (wd - BOXMARGINH) + 'px';
+  }
 };
 
 window.onresize = debounce((e) => {
@@ -34,7 +38,7 @@ window.onresize = debounce((e) => {
 
 adjustLayout(wiw);
 
-if(!isWelcomeHidden){
+if(!isWelcomeHidden && helpElem){
   helpElem.style.display = 'block';
   window._colorpk.removeWelcome = () => {
     helpElem.parentElement.removeChild(helpElem);
