@@ -40,10 +40,10 @@ const addColorBox = (step) => {
 };
 
 window.onscroll = debounce(evt => {
-  const e = evt.target.scrollingElement || evt.target.activeElement;
-  //let offset = e.scrollHeight - e.scrollTop - e.clientHeight; // work for chrome only
-  let offset = e.scrollHeight - e.scrollTop - window.innerHeight;
-  //console.log(e.scrollHeight, window.innerHeight, e.scrollTop,  offset);
+  const bodyElem = evt.target.scrollingElement || evt.target.activeElement;
+  const htmlElem = document.documentElement;
+  let position = bodyElem.scrollTop || htmlElem.scrollTop;
+  const offset = htmlElem.scrollHeight - position - htmlElem.clientHeight;
 
   if(offset < SCROLLBOUND && currentIdx < LIMIT) {
     addColorBox(STEP);

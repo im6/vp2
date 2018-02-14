@@ -18,7 +18,7 @@ const mainElem = document.getElementsByClassName('list')[0],
   helpElems = document.getElementsByClassName('help'),
   SPACEPERCENT = isMobile ? 0.99 : 0.9,
   MAXNUM = 6,
-  BOXMARGINH = 20,
+  BOXMARGINH = isMobile ? 8 : 20,
   isWelcomeHidden = checkWelcome();
 
 const helpElem = helpElems.length > 0 ? helpElems[0] : null;
