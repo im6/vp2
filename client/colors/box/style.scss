@@ -33,7 +33,7 @@ $color-radius: 4px;
     > div {
       animation-name: barMove;
       animation-fill-mode: backwards;
-      animation-duration: 1.6s;
+      animation-duration: 1.2s;
       animation-timing-function: cubic-bezier(0, 1, 0, 1);
 
       @keyframes barMove {
@@ -83,7 +83,8 @@ $color-radius: 4px;
 
       animation-name: btnAnim;
       animation-fill-mode: backwards;
-      animation-duration: .5s;
+      animation-duration: .6s;
+      animation-delay: .5s;
 
       @keyframes btnAnim {
         0% {
