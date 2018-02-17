@@ -1,10 +1,11 @@
 $header-height: 40px;
 $nav-color: #8c8c8c;
+
 $hover_1: #F38181;
 $hover_2: #FCE38A;
 $hover_3: #95E1D3;
-$hover_4: #3FC1C9;
-$hover_admin: #ab72b9;
+$hover_4: #ab72b9;
+$hover_5: #539ddb;
 
 header {
   position: fixed;
@@ -40,18 +41,19 @@ nav {
     }
 
     &:nth-child(4):hover {
-      color: $hover_admin;
-      border-bottom: 4px solid $hover_admin;
+      color: $hover_4;
+      border-bottom: 4px solid $hover_4;
+    }
+
+    &:nth-child(5):hover {
+      color: $hover_5;
+      border-bottom: 4px solid $hover_5;
     }
   }
 }
 
 .nav-auth{
   float: right;
-  &:hover {
-    color: $hover_4;
-    border-bottom: 4px solid $hover_4;
-  }
 }
 .nav-user {
   float: right;
