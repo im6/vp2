@@ -5,7 +5,7 @@ import { Box } from './box';
 import { noop } from '../shared/util';
 import { getUserLikes } from '../shared/userPreference';
 
-const ENTRYANIMDELAY = 45,
+const ENTRYANIMDELAY = 47,
   INITNUM = 31,
   STEP = 17,
   LIMIT = window._colorpk.initData.length,
@@ -32,7 +32,19 @@ const addColorBox = (step) => {
         window.location.href = `/color/${id}`;
       }
     });
-    oneBox.style.animationDelay = `${((i - currentIdx) * ENTRYANIMDELAY)}ms`;
+
+    try {
+      const delayTime = `${((i - currentIdx) * ENTRYANIMDELAY)}ms`;
+      oneBox.style.animationDelay = delayTime;
+      const rows = oneBox.querySelectorAll('.canvas > div');
+      for(let rid = 0; rid < 4; rid ++){
+        rows[rid].style.animationDelay = delayTime;
+      }
+    }
+    catch(error) {
+      console.warn('browser compatible');
+    }
+
     $listDiv.appendChild(oneBox);
   }
 
