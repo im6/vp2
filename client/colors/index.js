@@ -5,7 +5,7 @@ import { Box } from './box';
 import { noop } from '../shared/util';
 import { getUserLikes } from '../shared/userPreference';
 
-const ENTRYANIMDELAY = 47,
+const ENTRYANIMDELAY = 45,
   INITNUM = 31,
   STEP = 17,
   LIMIT = window._colorpk.initData.length,

@@ -33,7 +33,18 @@ const addColorBox = (source) => {
       }
     });
 
-    oneBox.style.animationDelay = `${(i * ENTRYANIMDELAY)}ms`;
+    try {
+      const delayTime = `${(i * ENTRYANIMDELAY)}ms`;
+      oneBox.style.animationDelay = delayTime;
+      const rows = oneBox.querySelectorAll('.canvas > div');
+      for(let rid = 0; rid < 4; rid ++){
+        rows[rid].style.animationDelay = delayTime;
+      }
+    }
+    catch(error) {
+      console.warn('browser compatible');
+    }
+
     $listDiv.appendChild(oneBox);
   });
 
