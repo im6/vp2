@@ -1,4 +1,3 @@
-# [ColorPK.com](http://www.colorpk.com)  (v2.0)
+# [ColorPK.com](http://www.colorpk.com)  (Official v2.0)
 ![logo](https://github.com/zj1926/vp2/blob/master/logo.png "colorpk.com")
-Official v2.0 is released!
 
