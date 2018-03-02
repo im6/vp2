@@ -13,7 +13,9 @@
 
         <a class="reactBtn" href="http://react.colorpk.com/extract" target="_blank">Extract</a>
 
-        {% if path != '/signin' %}
+        {% if path == '/signin' %}
+            <a class="nav-auth" href="//www.javascript.fun/about" target="_blank">About</a>
+        {% else %}
             {% if user %}
                 <div class="nav-user">
                     <a href="/profile">
