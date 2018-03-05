@@ -3,7 +3,17 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, "../..")))
 WSGI_APPLICATION = 'vp2.wsgi.application'
 ROOT_URLCONF = 'vp2.urls'
-ALLOWED_HOSTS = []
+
+USE_I18N = False
+USE_L10N = True
+LANGUAGE_CODE = 'en-us'
+
+USE_TZ = True
+TIME_ZONE = 'UTC'
+
+CSRF_USE_SESSIONS = False
+SESSION_ENGINE='django.contrib.sessions.backends.signed_cookies'
+APPEND_SLASH = False
 
 MIDDLEWARE = [
     #'django.middleware.security.SecurityMiddleware',
@@ -46,13 +56,3 @@ DATABASES = {
         },
     }
 }
-
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-CSRF_USE_SESSIONS = False
-APPEND_SLASH = False
-SESSION_ENGINE='django.contrib.sessions.backends.signed_cookies'
