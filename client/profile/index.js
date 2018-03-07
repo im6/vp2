@@ -24,11 +24,10 @@ const addColorBox = (source) => {
         }
       },
       onUnlike: (cid) => {
+        window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== cid);
         if(likeMode){
           const thisBox = document.querySelector(`[data-k='${cid}']`);
           $listDiv.removeChild(thisBox);
-        } else {
-          window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== cid);
         }
       }
     });
