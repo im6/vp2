@@ -34,6 +34,7 @@ def popular(request):
 
 @ensure_csrf_cookie
 def latest(request):
+    logging.error('come to latest.')
     template = get_template('main.html')
     alldata = cache.getColors()
     likeList = sm.getLikeList(request.session)
