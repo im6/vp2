@@ -1,9 +1,10 @@
-$box-padding: 10px;
+$box-padding: 7px;
+$box-padding-mobile: 6px;
 $color-radius: 4px;
 
 .box {
   width: 220px;
-  height: 270px;
+  height: 268px;
   background-color: white;
   //border: 1px solid blue;
   border-radius: 4px;
@@ -27,7 +28,7 @@ $color-radius: 4px;
   }
 
   .canvas {
-    height: 82%;
+    height: 84%;
     cursor: pointer;
 
     > div {
@@ -73,7 +74,7 @@ $color-radius: 4px;
   }
 
   button {
-    margin-top: 4.7%;
+    margin-top: 3.4%;
     img {
       width: 17px;
       height: 17px;
@@ -102,7 +103,7 @@ $color-radius: 4px;
       height: 180px;
       margin: 6px 4px;
       border-radius: 3px;
-      padding: 6px 6px 0 6px;
+      padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
     }
 }
 
@@ -112,6 +113,6 @@ $color-radius: 4px;
       height: 175px;
       margin: 6px 4px;
       border-radius: 3px;
-      padding: 6px 6px 0 6px;
+      padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
     }
 }
