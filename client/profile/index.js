@@ -7,6 +7,8 @@ import { getUserLikes } from "../shared/userPreference";
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
 
+let currentInd = 'list0';
+
 const addColorBox = (source) => {
   const USERLIKE = getUserLikes();
   const likeMode = source === 'list1';
@@ -57,12 +59,19 @@ const addColorBox = (source) => {
 };
 
 document.getElementById('switch_left').onclick = (event) => {
-  addColorBox('list0');
+  if(currentInd !== 'list0'){
+    addColorBox('list0');
+    currentInd = 'list0';
+  }
+
 };
 
 document.getElementById('switch_right').onclick = (event) => {
-  addColorBox('list1');
+  if(currentInd !== 'list1'){
+    addColorBox('list1');
+    currentInd = 'list1';
+  }
 };
 
-addColorBox('list0');
+addColorBox(currentInd);
 
