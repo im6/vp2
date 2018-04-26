@@ -6,7 +6,8 @@ import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
 
 const HANDLENAME = 'drgHdl',
-  COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
+  COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/,
+  INIT = ['f5f5f5', 'ebebeb', 'd9d9d9', 'c7c7c7'];
 
 const bars = document.getElementsByClassName('jscolor'),
   canvas = document.getElementsByClassName('canvas')[0],
@@ -16,10 +17,10 @@ const bars = document.getElementsByClassName('jscolor'),
 let currentBar = bars[0];
 
 const resetColors = () => {
-  bars[0].jscolor.fromString('f5f5f5');
-  bars[1].jscolor.fromString('ebebeb');
-  bars[2].jscolor.fromString('d9d9d9');
-  bars[3].jscolor.fromString('c7c7c7');
+  bars[0].jscolor.fromString(INIT[0]);
+  bars[1].jscolor.fromString(INIT[1]);
+  bars[2].jscolor.fromString(INIT[2]);
+  bars[3].jscolor.fromString(INIT[3]);
   textElem.value = '';
 };
 
@@ -47,13 +48,32 @@ const publishMsg = () => {
   }
 };
 
+const validate = (val) => {
+  let isGood = true,
+    dupCnt = 0;
+  INIT.forEach((v, k) => {
+    if(v === val[k]){
+      dupCnt++;
+    }
+  });
+
+  if(dupCnt > 1){
+    isGood = false;
+    swal("Oops", "You need to fill out all columns.", "error" );
+  } else if(val[0] === val[1] && val[0] === val[2] && val[0] === val[3]){
+    isGood = false;
+    swal("Oops", "Same colors are unacceptable.", "error" )
+  }
+  return isGood;
+};
+
 document.getElementById('createBtn').onclick = () => {
   const state = [].slice.call(bars).map(v => {
     return v.jscolor.toString();
   });
-  if(state.join('') === "f5f5f5ebebebd9d9d9c7c7c7"){
-    swal("Oops", "You need to fill out all columns", "error" )
-  } else {
+
+  const isValide = validate(state);
+  if(isValide){
     ajax({
       method: 'POST',
       url: `/create`,
