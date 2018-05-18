@@ -33,6 +33,11 @@ $btn-color: #56a5f7;
   &:focus{
     outline:0; // for chrome style purpose
   }
+
+  &:disabled {
+    background-color: #a5cbf3;
+    cursor: not-allowed;
+  }
 }
 
 .btn-primary {

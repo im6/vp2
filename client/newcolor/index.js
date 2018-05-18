@@ -12,6 +12,7 @@ const HANDLENAME = 'drgHdl',
 const bars = document.getElementsByClassName('jscolor'),
   canvas = document.getElementsByClassName('canvas')[0],
   textElem = document.getElementById('colorText'),
+  createBtn = document.getElementById('createBtn'),
   auth = document.getElementsByClassName('nav-user').length > 0;
 
 let currentBar = bars[0];
@@ -75,13 +76,14 @@ const validate = (val) => {
   return isGood;
 };
 
-document.getElementById('createBtn').onclick = () => {
+createBtn.onclick = () => {
   const state = [].slice.call(bars).map(v => {
     return v.jscolor.toString();
   });
 
   const isValide = validate(state);
   if(isValide){
+    createBtn.disabled = true;
     ajax({
       method: 'POST',
       url: `/create`,
@@ -89,6 +91,7 @@ document.getElementById('createBtn').onclick = () => {
         color: state,
       },
       success: ({error}) => {
+        createBtn.disabled = false;
         if(error){
           swal("Oops", "Color duplication detected", "error" )
         }else{
@@ -97,6 +100,7 @@ document.getElementById('createBtn').onclick = () => {
         }
       },
       fail: () => {
+        createBtn.disabled = false;
       }
     });
   }
