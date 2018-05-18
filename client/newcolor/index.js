@@ -56,13 +56,21 @@ const validate = (val) => {
       dupCnt++;
     }
   });
+  let uniq = val.reduce((acc, v, k) => {
+    if(v in acc){
+      acc[v] += 1;
+    } else {
+      acc[v] = 1;
+    }
+    return acc;
+  },{});
 
   if(dupCnt > 1){
     isGood = false;
     swal("Oops", "You need to fill out all columns.", "error" );
-  } else if(val[0] === val[1] && val[0] === val[2] && val[0] === val[3]){
+  } else if(Object.keys(uniq).length < 4){
     isGood = false;
-    swal("Oops", "Same colors are unacceptable.", "error" )
+    swal("Oops", "Four unique colors seem a better way", "error" );
   }
   return isGood;
 };
