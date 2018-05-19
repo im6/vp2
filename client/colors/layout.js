@@ -31,6 +31,7 @@ const adjustLayout = (w) => {
   mainElem.style.maxWidth = `${BOXWD * MAXNUM}px`;
   if(helpElem) {
     helpElem.style.width = (wd - BOXMARGINH * 2) + 'px';
+    helpElem.style.maxWidth = `${(BOXWD * MAXNUM) - (BOXMARGINH * 2)}px`;
   }
 };
 
