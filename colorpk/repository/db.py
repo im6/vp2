@@ -4,7 +4,6 @@ from datetime import timezone, datetime
 import math
 import logging
 from random import random
-from django.db import migrations
 
 def getAllColor():
     all_color = Color.objects.all()
@@ -82,10 +81,3 @@ def syncByCache(data):
         thisColor = Color.objects.get(id=id)
         thisColor.like = thisColor.like + data.get(id)
         thisColor.save()
-
-def setAutoIncrement():
-    latest = Color.objects.latest('id')
-    result = migrations.RunSQL("ALTER TABLE colorpk_color AUTO_INCREMENT = %s;" % (latest.id))
-    a = 1
-
-
