@@ -56,6 +56,9 @@ const validate = (val) => {
     if(v === val[k]){
       dupCnt++;
     }
+    if(val[k].length !== 6){
+      isGood = false
+    }
   });
   let uniq = val.reduce((acc, v, k) => {
     if(v in acc){

@@ -29,11 +29,17 @@ def createColor(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
-    result = createNewColor('#'.join(body['color']), user)
 
-    return JsonResponse({
-        "error": result
-    })
+    colorValue = '#'.join(body['color'])
+    if len(colorValue) == 27:
+        result = createNewColor(colorValue, user)
+        return JsonResponse({
+            "error": result
+        })
+    else:
+        return JsonResponse({
+            "error": "color value size illegal"
+        })
 
 @colorpk_admin_auth('json')
 def approve(request, id):
