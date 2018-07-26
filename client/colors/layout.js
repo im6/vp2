@@ -1,5 +1,3 @@
-//import 'style-loader!css-loader!purecss/build/pure-min.css';
-//import 'style-loader!css-loader!purecss/build/grids-responsive-min.css';
 import debounce from 'debounce';
 import { isMobile } from '../shared/util';
 import { checkWelcome, hideWelcome } from '../shared/userPreference';
