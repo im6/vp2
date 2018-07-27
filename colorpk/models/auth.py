@@ -2,7 +2,7 @@ import configparser
 import requests
 import json
 from urllib.parse import parse_qs
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 from datetime import timezone, datetime
 from colorpk.models.db import User
 
@@ -32,7 +32,7 @@ def getUrl(src, state):
 
     return url
 
-class OAuth2(ABC):
+class OAuth2(metaclass=ABCMeta):
     def __init__(self, src):
         self.oauth = src
         self.api = config[src]['api']
