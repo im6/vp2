@@ -41,11 +41,11 @@ class OAuth2(metaclass=ABCMeta):
         self.url = config[src]['url']
     @abstractmethod
     def getToken(self, code):
-        pass
+        raise NotImplementedError('getToken is not implemented')
 
     @abstractmethod
     def getUserInfo(self, token):
-        pass
+        raise NotImplementedError('getUserInfo is not implemented')
 
     def registerUser(self, data):
         result = {'id': None, 'name': data['name'], 'img': data['img'], 'isadmin': False}
