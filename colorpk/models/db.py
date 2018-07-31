@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import timezone, datetime
+from django import utils
 
 class Color(models.Model):
     id = models.AutoField(primary_key=True)
@@ -9,7 +9,7 @@ class Color(models.Model):
     username = models.CharField(max_length=40, null=True)
     colortype = models.CharField(max_length=50, null=True)
     display = models.BooleanField(default=True)
-    createdate = models.DateTimeField(default=datetime.now(timezone.utc))
+    createdate = models.DateTimeField(default=utils.timezone.now)
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
@@ -17,7 +17,7 @@ class User(models.Model):
     name = models.CharField(max_length=50)
     oauthid = models.CharField(max_length=30)
     isadmin = models.BooleanField(default=False)
-    lastlogin = models.DateTimeField(default=datetime.now(timezone.utc))
+    lastlogin = models.DateTimeField(default=utils.timezone.now)
 
 class UserLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
