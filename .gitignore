@@ -11,3 +11,5 @@ static/*.map
 static/*.js
 static/*.css
 colorpk/migrations
+
+err_log.txt
