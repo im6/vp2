@@ -5,12 +5,12 @@ class HttpTestCase(TestCase):
     def setUp(self):
         print("set up test http case")
 
-    def post_method(self):
-        c = Client()
-        res = c.post('/create/', {'username': 'john', 'password': 'smith'})
-        print(res.status_code)
-
-    def get_method(self):
+    def test_signin(self):
         c = Client()
         res = c.get('/signin')
-        print(res.status_code)
+        self.assertTrue(res.status_code == 200)
+
+    def test_main(self):
+        c = Client()
+        res = c.get('/')
+        self.assertTrue(res.status_code == 200)
