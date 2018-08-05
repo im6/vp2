@@ -1,5 +1,4 @@
 from django.test import TestCase, Client
-from colorpk.models.db import Color
 
 class HttpTestCase(TestCase):
     def setUp(self):
