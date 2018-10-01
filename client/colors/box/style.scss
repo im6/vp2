@@ -104,6 +104,9 @@ $color-radius: 4px;
       margin: 6px 4px;
       border-radius: 3px;
       padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
+      button {
+        margin-top: 2.5%;
+      }
     }
 }
 
@@ -114,5 +117,8 @@ $color-radius: 4px;
       margin: 6px 4px;
       border-radius: 3px;
       padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
+      button {
+        margin-top: 2.5%;
+      }
     }
 }
