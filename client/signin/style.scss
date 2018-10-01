@@ -24,6 +24,7 @@ main {
     text-decoration: none;
     border-radius: 7px 5px 5px 7px;
     margin-bottom: 11px;
+    padding-bottom: 1px;
 
     img {
       height: $ROWHEIGHT;
@@ -32,7 +33,6 @@ main {
       text-transform: uppercase;
       line-height: $ROWHEIGHT;
       padding-left: 20px;
-      padding-bottom: 1px;
       font-size: 16px;
     }
 
