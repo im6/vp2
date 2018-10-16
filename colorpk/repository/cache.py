@@ -25,7 +25,7 @@ def cntPlus():
 
 def getColors():
     data = cache.get(GLOBAL_COLOR_KEY)
-    if not data or len(data) < 1:
+    if not data:
         syncAndRefresh()
         data = cache.get(GLOBAL_COLOR_KEY)
     return data
