@@ -1,5 +1,4 @@
-import debounce from 'debounce';
-import { isMobile } from '../shared/util';
+import { isMobile, debounce } from '../shared/util';
 import { checkWelcome, hideWelcome } from '../shared/userPreference';
 
 let BOXWD = null, BOXMARGINH = null;

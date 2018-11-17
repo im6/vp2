@@ -1,8 +1,7 @@
-import debounce from 'debounce';
 import './layout';
 import './style.scss';
 import { Box } from './box';
-import { noop } from '../shared/util';
+import { noop, debounce } from '../shared/util';
 import { getUserLikes } from '../shared/userPreference';
 
 const ENTRYANIMDELAY = 45,

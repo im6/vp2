@@ -59,6 +59,17 @@ export const ajax = (config) => {
 
 export const isMobile = mobileDetect();
 export const noop = () => {};
+export const debounce = (fn, wait) => {
+  let timeout = null;
+  return function(){
+    const context = this;
+    const args = arguments;
+    clearTimeout(timeout);
+		timeout = setTimeout(function(){
+		  fn.apply(context, args);
+    }, wait);
+  };
+};
 
 export const downloadCanvas = (color) => {
   const HEIGHT = 420,
