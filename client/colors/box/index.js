@@ -14,7 +14,7 @@ const likeAjax = (id, method) => {
 };
 
 export const Box = (vm) => {
-  const { id, value, like, isLiked } = vm;
+  const { id, value, like, isLiked, animDelay } = vm;
   let { onLike, onRedir, onUnlike } = vm;
 
   onUnlike = onUnlike || noop;
@@ -25,6 +25,7 @@ export const Box = (vm) => {
   box.classList.add('box');
   box.dataset.k = id;
   box.dataset.l = like;
+  box.style.animationDelay = animDelay;
 
   const cvs = document.createElement("div");
   cvs.classList.add('canvas');
@@ -36,6 +37,7 @@ export const Box = (vm) => {
     oneColorTxt.innerText = v;
     oneColor.appendChild(oneColorTxt);
     oneColor.style.backgroundColor = v;
+    oneColor.style.animationDelay = animDelay;
     cvs.appendChild(oneColor);
   });
   cvs.onclick = (v) => {

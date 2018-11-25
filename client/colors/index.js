@@ -25,22 +25,11 @@ const addColorBox = (step) => {
       like: v.like,
       isLiked: USERLIKE.indexOf(v.id) > -1,
       onLike: noop,
+      animDelay: `${(i * ENTRYANIMDELAY)}ms`,
       onRedir: (id) => {
         window.location.href = `/color/${id}`;
       }
     });
-
-    try {
-      const delayTime = `${(i * ENTRYANIMDELAY)}ms`;
-      oneBox.style.animationDelay = delayTime;
-      const rows = oneBox.querySelectorAll('.canvas > div');
-      for(let rid = 0; rid < 4; rid ++){
-        rows[rid].style.animationDelay = delayTime;
-      }
-    }
-    catch(error) {
-      console.warn('browser compatible');
-    }
 
     $listDiv.appendChild(oneBox);
   }
