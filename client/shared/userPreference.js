@@ -4,11 +4,11 @@ const LSLIKEKEY = 'userLike',
 
 const clearLocalStorage = () => {
   let ks = Object.keys(window.localStorage);
-  let errorKey = ks.filter(v => {
+  let hasOldStorage = ks.some(v => {
     return v !== LSLIKEKEY && v !== WELCOMEKEY;
   });
 
-  if(errorKey.length > 0) {
+  if(hasOldStorage) {
     window.localStorage.clear();
     console.warn('clear old localstorage');
   }
