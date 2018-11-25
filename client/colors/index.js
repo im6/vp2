@@ -3,12 +3,9 @@ import './style.scss';
 import { Box } from './box';
 import { noop, debounce } from '../shared/util';
 import { getUserLikes } from '../shared/userPreference';
+import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
 
-const ENTRYANIMDELAY = 45,
-  INITNUM = 31,
-  STEP = 17,
-  LIMIT = window._colorpk.initData.length,
-  SCROLLBOUND = 100,
+const LIMIT = window._colorpk.initData.length,
   USERLIKE = getUserLikes();
 
 const $listDiv = document.getElementsByClassName('list')[0];
