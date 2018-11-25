@@ -13,9 +13,10 @@ const $listDiv = document.getElementsByClassName('list')[0];
 let currentIdx = 0;
 
 const addColorBox = (step) => {
-  for(let i = currentIdx; i < step + currentIdx; i ++) {
-    const v = window._colorpk.initData[i];
+  for(let i = 0; i < step; i ++) {
+    const v = window._colorpk.initData[i + currentIdx];
     if(!v) {
+      step = i;
       break;
     }
     const oneBox = Box({
@@ -30,7 +31,7 @@ const addColorBox = (step) => {
     });
 
     try {
-      const delayTime = `${((i - currentIdx) * ENTRYANIMDELAY)}ms`;
+      const delayTime = `${(i * ENTRYANIMDELAY)}ms`;
       oneBox.style.animationDelay = delayTime;
       const rows = oneBox.querySelectorAll('.canvas > div');
       for(let rid = 0; rid < 4; rid ++){
