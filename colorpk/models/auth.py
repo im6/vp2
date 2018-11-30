@@ -35,10 +35,10 @@ def getUrl(src, state):
 class OAuth2(metaclass=ABCMeta):
     def __init__(self, src):
         self.oauth = src
-        self.api = config[src]['api']
-        self.appKey = config[src]['appKey']
-        self.appSecret = config[src]['appSecret']
-        self.url = config[src]['url']
+        self.api = config[src].get("api")
+        self.appKey = config[src].get("appKey")
+        self.appSecret = config[src].get("appSecret")
+        self.url = config[src].get("url")
     @abstractmethod
     def getToken(self, code):
         raise NotImplementedError('getToken is not implemented')
@@ -77,8 +77,7 @@ class OAuth2_fb(OAuth2):
         }
         r = requests.get("%s/oauth/access_token" % self.api, params=payload)
         res = json.loads(r.text)
-        token = res['access_token'] if 'access_token' in res else ''
-        return token
+        return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
@@ -88,10 +87,10 @@ class OAuth2_fb(OAuth2):
         r = requests.get("%s/me" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res["id"],
-            "name": res["name"],
+            "oauthid": res.get("id"),
+            "name": res.get("name"),
             "isadmin": False,
-            "img": res['picture']['data']['url'],
+            "img": res.get("picture").get('data').get('url'),
             "oauth": self.oauth,
         }
         return data
@@ -112,12 +111,8 @@ class OAuth2_wb(OAuth2):
         }
         r = requests.post("%s/oauth2/access_token" % self.api, data=payload)
         res = json.loads(r.text)
-        if 'access_token' in res:
-            token = res['access_token']
-            self.uid = res['uid']
-        else:
-            token = ''
-        return token
+        self.uid = res.get('uid', None)
+        return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
@@ -127,10 +122,10 @@ class OAuth2_wb(OAuth2):
         r = requests.get("%s/2/users/show.json" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res["id"],
-            "name": res["name"],
+            "oauthid": res.get("id"),
+            "name": res.get("name"),
             "isadmin": False,
-            "img": res['profile_image_url'],
+            "img": res.get("profile_image_url"),
             "oauth": self.oauth,
         }
         return data
@@ -150,8 +145,7 @@ class OAuth2_gg(OAuth2):
         }
         r = requests.post("%s/oauth2/v4/token"%self.api, data=payload)
         res = json.loads(r.text)
-        token = res['access_token'] if 'access_token' in res else ''
-        return token
+        return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
@@ -160,10 +154,10 @@ class OAuth2_gg(OAuth2):
         r = requests.get("%s/plus/v1/people/me"%self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res["id"],
-            "name": res["displayName"],
+            "oauthid": res.get("id"),
+            "name": res.get("displayName"),
             "isadmin": False,
-            "img": res['image']['url'],
+            "img": res.get('image').get('url'),
             "oauth": self.oauth,
         }
         return data
@@ -182,8 +176,7 @@ class OAuth2_gh(OAuth2):
         }
         r = requests.post("https://github.com/login/oauth/access_token", data=payload)
         res = parse_qs(r.text)
-        token = res['access_token'][0] if 'access_token' in res else ''
-        return token
+        return res.get("access_token", [''])[0]
 
     def getUserInfo(self, token):
         payload = {
@@ -192,10 +185,10 @@ class OAuth2_gh(OAuth2):
         r = requests.get("%s/user" % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res["id"],
-            "name": res["name"] if res['name'] else res['login'],
+            "oauthid": res.get("id"),
+            "name": res.get("name", "") or res.get("login"),
             "isadmin": False,
-            "img": res['avatar_url'],
+            "img": res.get("avatar_url"),
             "oauth": self.oauth,
         }
         return data
