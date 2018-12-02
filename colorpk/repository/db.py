@@ -1,9 +1,9 @@
-from django.forms.models import model_to_dict
-from colorpk.models.db import Color, UserLike, User
-from datetime import timezone, datetime
 import math
 import logging
 from random import random
+from datetime import timezone, datetime
+from django.forms.models import model_to_dict
+from colorpk.models.db import Color, UserLike, User
 
 def getAllColor():
     all_color = Color.objects.all()

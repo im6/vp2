@@ -1,21 +1,23 @@
+import os
+import sys
+import uuid
+import logging
 from django.http import HttpResponse
-from django.template.loader import get_template
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.shortcuts import render_to_response
 from django.shortcuts import redirect
+from django.template.loader import get_template
+from django.shortcuts import render_to_response
+from django.http import HttpResponseNotFound, HttpResponseNotAllowed
 from django.views.decorators.cache import cache_page
-from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 import colorpk.repository.cache as cache
-from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
 import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
 from colorpk.shared import colorpk_auth, colorpk_admin_auth
-import sys
-import logging
-import uuid
-import os
+from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
+from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
 
-ASSETVERSION = os.getenv('VERSION', 'dev')
+ASSETVERSION = os.getenv('VERSION', 'a001')
 
 @ensure_csrf_cookie
 def popular(request):

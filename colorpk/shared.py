@@ -1,7 +1,7 @@
+import logging
 from django.shortcuts import render_to_response
 from django.http import JsonResponse
 from colorpk.repository.db import checkAdmin
-import logging
 
 def colorpk_auth(resType):
     def colorpk_auth_inner(function):
