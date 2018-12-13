@@ -19,13 +19,18 @@ from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # nee
 
 ASSETVERSION = os.getenv('VERSION', 'a001')
 
+template_main = get_template('main.html')
+template_oneColor = get_template('one_color.html')
+template_error = get_template('error.html')
+template_create = get_template('create.html')
+template_admin = get_template('admin.html')
+
 @ensure_csrf_cookie
 def popular(request):
-    template = get_template('main.html')
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
     likeList = sm.getLikeList(request.session)
-    return HttpResponse(template.render({
+    return HttpResponse(template_main.render({
         "path": request.path,
         "assetName": "bundle0",
         "version": ASSETVERSION,
@@ -36,10 +41,9 @@ def popular(request):
 
 @ensure_csrf_cookie
 def latest(request):
-    template = get_template('main.html')
     alldata = cache.getColors()
     likeList = sm.getLikeList(request.session)
-    return HttpResponse(template.render({
+    return HttpResponse(template_main.render({
         "path": request.path,
         "assetName": "bundle0",
         "version": ASSETVERSION,
@@ -52,7 +56,7 @@ def latest(request):
 def colorOne(request, id):
     oneColor = cache.getColor(id)
     if oneColor:
-        return render_to_response('one_color.html', {
+        return HttpResponse(template_oneColor.render({
             "path": request.path,
             "assetName": "bundle3",
             "version": ASSETVERSION,
@@ -64,33 +68,33 @@ def colorOne(request, id):
                 "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
                 "createdate": oneColor.get('createdate'),
             },
-        })
+        }))
     else:
-        return render_to_response('error.html', {
+        return HttpResponseNotFound(template_error.render({
             "code": 404,
             "msg": "Color Not Found!"
-        })
+        }))
 
 def newcolor(request):
     defaultValue = request.GET.get('c', '')
-    return render_to_response('create.html', {
+    return HttpResponse(template_create.render({
         "path": request.path,
         "assetName": "bundle2",
         "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "defaultValue": defaultValue,
-    })
+    }))
 
 @colorpk_admin_auth('view')
 def admin(request):
     invisibleColor = getUnpublishedColors()
-    return render_to_response('admin.html', {
+    return HttpResponse(template_admin.render({
         "path": request.path,
         "assetName": "bundle5",
         "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "list": invisibleColor,
-    })
+    }))
 
 def signin(request):
     state = str(uuid.uuid4())
