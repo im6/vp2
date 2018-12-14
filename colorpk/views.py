@@ -5,7 +5,6 @@ import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
-from django.shortcuts import render_to_response
 from django.http import HttpResponseNotFound, HttpResponseNotAllowed
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -24,6 +23,8 @@ template_oneColor = get_template('one_color.html')
 template_error = get_template('error.html')
 template_create = get_template('create.html')
 template_admin = get_template('admin.html')
+template_signin = get_template('signin.html')
+template_profile = get_template('profile.html')
 
 @ensure_csrf_cookie
 def popular(request):
@@ -100,7 +101,7 @@ def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] = state
     request.session['user'] = None
-    return render_to_response('signin.html', {
+    return HttpResponse(template_signin.render({
         "path": request.path,
         "assetName": "bundle1",
         "version": ASSETVERSION,
@@ -108,32 +109,31 @@ def signin(request):
         "fb": getUrl('fb', state),
         "gg": getUrl('gg', state),
         "gh": getUrl('gh', state),
-    })
+    }))
 
 @cache_page(60 * 60)
 def notfound(request):
-    return render_to_response('error.html', {
+    return HttpResponseNotFound(template_error.render({
         "code": 404,
         "msg": "Not Found!"
-    })
+    }))
 
 @cache_page(60 * 60)
 def unauth(request):
-    return render_to_response('error.html', {
+    return HttpResponseNotAllowed(template_error.render({
         "code": 401,
         "msg": "Unauthorized!"
-    })
+    }))
 
 @colorpk_auth('view')
 def profile(request):
     user = request.session.get('user', None)
-    template = get_template('profile.html')
     visible_list = cache.getColors()
     invis_list = cache.getInvisibleColors()
     list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
     list1_ids = getUserLike(user['id'])
     list1 = filter(lambda a : a.get('id') in list1_ids, invis_list + visible_list)
-    return HttpResponse(template.render({
+    return HttpResponse(template_profile.render({
         "path": request.path,
         "assetName": "bundle4",
         "version": ASSETVERSION,
@@ -154,17 +154,17 @@ def auth(request, src):
             request.session['likes'] = getUserLike(userJSON['id'])
             return redirect('/')
         else:
-            return render_to_response('signin.html', {
+            return HttpResponse(template_signin.render({
                 "path": request.path,
                 "assetName": "bundle1",
                 "version": ASSETVERSION,
                 "error": "Authentication Failed."
-            })
+            }))
     else:
         logging.error('auth failed, no valid state')
-        return render_to_response('signin.html', {
+        return HttpResponse(template_signin.render({
             "path": request.path,
             "assetName": "bundle1",
             "version": ASSETVERSION,
             "error": "No valid state found."
-        })
+        }))
