@@ -1,8 +1,9 @@
-from django.http import JsonResponse
 import json
-import colorpk.repository.cache as cache
+from django.template.loader import get_template
+from django.http import HttpResponseNotFound, JsonResponse
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
 from colorpk.shared import colorpk_admin_auth
+import colorpk.repository.cache as cache
 
 @cache.colorpk_like_buffer
 def toggleLike(request, id):
@@ -26,20 +27,27 @@ def toggleLike(request, id):
         })
 
 def createColor(request):
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    user = request.session.get('user', None)
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        user = request.session.get('user', None)
 
-    colorValue = '#'.join(body['color'])
-    if len(colorValue) == 27:
-        result = createNewColor(colorValue, user)
-        return JsonResponse({
-            "error": result
-        })
+        colorValue = '#'.join(body['color'])
+        if len(colorValue) == 27:
+            result = createNewColor(colorValue, user)
+            return JsonResponse({
+                "error": result
+            })
+        else:
+            return JsonResponse({
+                "error": "color value size illegal"
+            })
     else:
-        return JsonResponse({
-            "error": "color value size illegal"
-        })
+        template = get_template("error.html")
+        return HttpResponseNotFound(template.render({
+            "code": 404,
+            "msg": "Not Found!"
+        }))
 
 @colorpk_admin_auth('json')
 def approve(request, id):
