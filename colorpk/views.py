@@ -1,7 +1,6 @@
 import os
 import sys
 import uuid
-import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
@@ -13,7 +12,7 @@ import colorpk.repository.cache as cache
 import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
 from colorpk.shared import colorpk_admin_auth
-from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
+from colorpk.repository.db import getUserLike, getUnpublishedColors
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
 
 ASSETVERSION = os.getenv('VERSION', 'a001')
@@ -73,14 +72,14 @@ def colorOne(request, id):
     else:
         return HttpResponseNotFound(template_error.render({
             "code": 404,
-            "msg": "Color Not Found!"
+            "msg": 'Color Not Found!'
         }))
 
 def newcolor(request):
     defaultValue = request.GET.get('c', '')
     return HttpResponse(template_create.render({
         "path": request.path,
-        "assetName": "bundle2",
+        "assetName": 'bundle2',
         "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "defaultValue": defaultValue,
@@ -91,7 +90,7 @@ def admin(request):
     invisibleColor = getUnpublishedColors()
     return HttpResponse(template_admin.render({
         "path": request.path,
-        "assetName": "bundle5",
+        "assetName": 'bundle5',
         "version": ASSETVERSION,
         "user": request.session.get('user', None),
         "list": invisibleColor,
@@ -103,7 +102,7 @@ def signin(request):
     request.session['user'] = None
     return HttpResponse(template_signin.render({
         "path": request.path,
-        "assetName": "bundle1",
+        "assetName": 'bundle1',
         "version": ASSETVERSION,
         "wb": getUrl('wb', state),
         "fb": getUrl('fb', state),
@@ -115,7 +114,7 @@ def signin(request):
 def notfound(request):
     return HttpResponseNotFound(template_error.render({
         "code": 404,
-        "msg": "Not Found!"
+        "msg": 'Not Found!'
     }))
 
 def profile(request):
@@ -128,7 +127,7 @@ def profile(request):
         list1 = filter(lambda a: a.get('id') in list1_ids, invis_list + visible_list)
         return HttpResponse(template_profile.render({
             "path": request.path,
-            "assetName": "bundle4",
+            "assetName": 'bundle4',
             "version": ASSETVERSION,
             "list0": list0,
             "list1": list1,
@@ -137,9 +136,8 @@ def profile(request):
     else:
         return HttpResponse(template_error.render({
             "code": 401,
-            "msg": "Unauthorized!"
+            "msg": 'Unauthorized!'
         }))
-
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:
@@ -155,15 +153,14 @@ def auth(request, src):
         else:
             return HttpResponse(template_signin.render({
                 "path": request.path,
-                "assetName": "bundle1",
+                "assetName": 'bundle1',
                 "version": ASSETVERSION,
-                "error": "Authentication Failed."
+                "error": 'Authentication Failed.'
             }))
     else:
-        logging.error('auth failed, no valid state')
         return HttpResponse(template_signin.render({
             "path": request.path,
-            "assetName": "bundle1",
+            "assetName": 'bundle1',
             "version": ASSETVERSION,
-            "error": "No valid state found."
+            "error": 'No valid state found.'
         }))

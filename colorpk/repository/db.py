@@ -17,8 +17,8 @@ def createNewColor(color, user):
         'createdate': datetime.now(timezone.utc)
     }
     if user:
-        newColorParams['userid'] = user['id']
-        newColorParams['username'] = user['name']
+        newColorParams['userid'] = user.get('id')
+        newColorParams['username'] = user.get('name')
 
     error = False
     try:
@@ -61,7 +61,7 @@ def getUnpublishedColors():
     result0 = Color.objects.filter(display=True)
     result1 = list(map(lambda x: model_to_dict(x), result0))
     for one in result1:
-        cls = one['color'].split('#')
+        cls = one.get('color').split('#')
         one['color'] = list(map(lambda x : '#%s'%x, cls))
     return result1
 
