@@ -5,14 +5,14 @@ import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
-from django.http import HttpResponseNotFound, HttpResponseNotAllowed
+from django.http import HttpResponseNotFound
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 import colorpk.repository.cache as cache
 import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
-from colorpk.shared import colorpk_auth, colorpk_admin_auth
+from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import getUserLike, checkAdmin, getUnpublishedColors
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
 
@@ -118,29 +118,28 @@ def notfound(request):
         "msg": "Not Found!"
     }))
 
-@cache_page(60 * 60)
-def unauth(request):
-    return HttpResponseNotAllowed(template_error.render({
-        "code": 401,
-        "msg": "Unauthorized!"
-    }))
-
-@colorpk_auth('view')
 def profile(request):
     user = request.session.get('user', None)
-    visible_list = cache.getColors()
-    invis_list = cache.getInvisibleColors()
-    list0 = filter(lambda a : a.get('userid') == user.get('id'), invis_list + visible_list)
-    list1_ids = getUserLike(user['id'])
-    list1 = filter(lambda a : a.get('id') in list1_ids, invis_list + visible_list)
-    return HttpResponse(template_profile.render({
-        "path": request.path,
-        "assetName": "bundle4",
-        "version": ASSETVERSION,
-        "list0": list0,
-        "list1": list1,
-        "user": request.session.get('user', None)
-    }))
+    if user:
+        visible_list = cache.getColors()
+        invis_list = cache.getInvisibleColors()
+        list0 = filter(lambda a: a.get('userid') == user.get('id'), invis_list + visible_list)
+        list1_ids = getUserLike(user['id'])
+        list1 = filter(lambda a: a.get('id') in list1_ids, invis_list + visible_list)
+        return HttpResponse(template_profile.render({
+            "path": request.path,
+            "assetName": "bundle4",
+            "version": ASSETVERSION,
+            "list0": list0,
+            "list1": list1,
+            "user": request.session.get('user', None)
+        }))
+    else:
+        return HttpResponse(template_error.render({
+            "code": 401,
+            "msg": "Unauthorized!"
+        }))
+
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:

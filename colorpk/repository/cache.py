@@ -38,10 +38,10 @@ def getCachedLikes():
 
 def getColor(id):
     filter0 = list(filter(lambda v : v.get('id') == id, cache.get(GLOBAL_COLOR_KEY) + cache.get(GLOBAL_COLOR_INV_KEY)))
-    if len(filter0) > 0:
+    if filter0:
         return filter0[0]
     else:
-        logging.error('onecolor page not found %s' %(id))
+        logging.error('ColorID(%s) not found' %(id))
         return None
 
 def like(id):

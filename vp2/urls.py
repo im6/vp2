@@ -12,7 +12,6 @@ urlpatterns = [
     path('profile', views.profile),
     path('auth/<str:src>', views.auth),
     path('admin', views.admin),
-    path('unauth', views.unauth),
 
     path('like/<int:id>', controller.toggleLike),
     path('approve/<int:id>', controller.approve),
