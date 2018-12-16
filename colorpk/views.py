@@ -151,7 +151,7 @@ def auth(request, src):
             userInfo = auth.getUserInfo(token)
             userJSON = auth.registerUser(userInfo)
             request.session['user'] = userJSON
-            request.session['likes'] = getUserLike(userJSON['id'])
+            request.session['likes'] = getUserLike(userJSON.get('id'))
             return redirect('/')
         else:
             return HttpResponse(template_signin.render({

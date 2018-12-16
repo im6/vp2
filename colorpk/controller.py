@@ -25,6 +25,12 @@ def toggleLike(request, id):
         return JsonResponse({
             "error": result
         })
+    else:
+        template = get_template("error.html")
+        return HttpResponseNotFound(template.render({
+            "code": 404,
+            "msg": "Not Found!"
+        }))
 
 def createColor(request):
     if request.method == 'POST':
@@ -61,6 +67,12 @@ def approve(request, id):
         return JsonResponse({
             "error": result
         })
+    else:
+        template = get_template("error.html")
+        return HttpResponseNotFound(template.render({
+            "code": 404,
+            "msg": "Not Found!"
+        }))
 
 @colorpk_admin_auth('json')
 def syncCache(request):
