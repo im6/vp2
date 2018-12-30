@@ -5,7 +5,7 @@ from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike
 from colorpk.shared import colorpk_admin_auth
 import colorpk.repository.cache as cache
 
-@require_http_methods(["POST", "DELETE"])
+@require_http_methods(['POST', 'DELETE'])
 @cache.colorpk_like_buffer
 def toggleLike(request, id):
     if request.method == 'POST':
@@ -16,7 +16,7 @@ def toggleLike(request, id):
         if user:
             createUserLike(id, user['id'])
         return JsonResponse({
-            "error": False
+            'error': False
         })
     elif request.method == 'DELETE':
         user = request.session.get('user', None)
@@ -24,10 +24,10 @@ def toggleLike(request, id):
         if user:
             result = deleteUserLike(id, user['id'])
         return JsonResponse({
-            "error": result
+            'error': result
         })
 
-@require_http_methods(["POST"])
+@require_http_methods(['POST'])
 def createColor(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
@@ -37,33 +37,33 @@ def createColor(request):
     if len(colorValue) == 27:
         result = createNewColor(colorValue, user)
         return JsonResponse({
-            "error": result
+            'error': result
         })
     else:
         return JsonResponse({
-            "error": "color value size illegal"
+            'error': 'color value size illegal'
         })
 
-@require_http_methods(["POST", "DELETE"])
+@require_http_methods(['POST', 'DELETE'])
 @colorpk_admin_auth('json')
 def approve(request, id):
     if request.method == 'POST':
         result = approveColor(id)
         return JsonResponse({
-            "error": result
+            'error': result
         })
     elif request.method == 'DELETE':
         result = deleteColor(id)
         return JsonResponse({
-            "error": result
+            'error': result
         })
 
-@require_http_methods(["POST"])
+@require_http_methods(['POST'])
 @colorpk_admin_auth('json')
 def syncCache(request):
     cacheData = cache.getCachedLikes()
     result = cache.syncAndRefresh()
     return JsonResponse({
-        "error": result,
-        "data": cacheData
+        'error': result,
+        'data': cacheData
     })

@@ -15,14 +15,14 @@ def colorpk_admin_auth(resType):
                 if resType == 'view':
                     template_error = get_template('error.html')
                     return HttpResponse(template_error.render({
-                        "code": 401,
-                        "msg": "Unauthorized!"
+                        'code': 401,
+                        'msg': 'Unauthorized!'
                     }))
                 elif resType == 'json':
                     return JsonResponse({
-                        "error": True,
-                        "code": 401,
-                        "msg": "Unauthorized!"
+                        'error': True,
+                        'code': 401,
+                        'msg': 'Unauthorized!'
                     })
 
         return wrapper

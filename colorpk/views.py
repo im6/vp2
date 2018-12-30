@@ -31,12 +31,12 @@ def popular(request):
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
     likeList = sm.getLikeList(request.session)
     return HttpResponse(template_main.render({
-        "path": request.path,
-        "assetName": "bundle0",
-        "version": ASSETVERSION,
-        "list": alldata1,
-        "user": request.session.get('user', None),
-        "likes": likeList,
+        'path': request.path,
+        'assetName': 'bundle0',
+        'version': ASSETVERSION,
+        'list': alldata1,
+        'user': request.session.get('user', None),
+        'likes': likeList,
     }))
 
 @ensure_csrf_cookie
@@ -44,12 +44,12 @@ def latest(request):
     alldata = cache.getColors()
     likeList = sm.getLikeList(request.session)
     return HttpResponse(template_main.render({
-        "path": request.path,
-        "assetName": "bundle0",
-        "version": ASSETVERSION,
-        "list": alldata,
-        "user": request.session.get('user', None),
-        "likes": likeList,
+        'path': request.path,
+        'assetName': 'bundle0',
+        'version': ASSETVERSION,
+        'list': alldata,
+        'user': request.session.get('user', None),
+        'likes': likeList,
     }))
 
 @ensure_csrf_cookie
@@ -57,43 +57,43 @@ def colorOne(request, id):
     oneColor = cache.getColor(id)
     if oneColor:
         return HttpResponse(template_oneColor.render({
-            "path": request.path,
-            "assetName": "bundle3",
-            "version": ASSETVERSION,
-            "user": request.session.get('user', None),
-            "oneColor": {
-                "id": id,
-                "color": oneColor.get('color'),
-                "like": oneColor.get('like'),
-                "username": oneColor.get('username') if oneColor.get('username') else 'Anonymous',
-                "createdate": oneColor.get('createdate'),
+            'path': request.path,
+            'assetName': 'bundle3',
+            'version': ASSETVERSION,
+            'user': request.session.get('user', None),
+            'oneColor': {
+                'id': id,
+                'color': oneColor.get('color'),
+                'like': oneColor.get('like'),
+                'username': oneColor.get('username') if oneColor.get('username') else 'Anonymous',
+                'createdate': oneColor.get('createdate'),
             },
         }))
     else:
         return HttpResponseNotFound(template_error.render({
-            "code": 404,
-            "msg": 'Color Not Found!'
+            'code': 404,
+            'msg': 'Color Not Found!'
         }))
 
 def newcolor(request):
     defaultValue = request.GET.get('c', '')
     return HttpResponse(template_create.render({
-        "path": request.path,
-        "assetName": 'bundle2',
-        "version": ASSETVERSION,
-        "user": request.session.get('user', None),
-        "defaultValue": defaultValue,
+        'path': request.path,
+        'assetName': 'bundle2',
+        'version': ASSETVERSION,
+        'user': request.session.get('user', None),
+        'defaultValue': defaultValue,
     }))
 
 @colorpk_admin_auth('view')
 def admin(request):
     invisibleColor = getUnpublishedColors()
     return HttpResponse(template_admin.render({
-        "path": request.path,
-        "assetName": 'bundle5',
-        "version": ASSETVERSION,
-        "user": request.session.get('user', None),
-        "list": invisibleColor,
+        'path': request.path,
+        'assetName': 'bundle5',
+        'version': ASSETVERSION,
+        'user': request.session.get('user', None),
+        'list': invisibleColor,
     }))
 
 def signin(request):
@@ -101,20 +101,20 @@ def signin(request):
     request.session['state'] = state
     request.session['user'] = None
     return HttpResponse(template_signin.render({
-        "path": request.path,
-        "assetName": 'bundle1',
-        "version": ASSETVERSION,
-        "wb": getUrl('wb', state),
-        "fb": getUrl('fb', state),
-        "gg": getUrl('gg', state),
-        "gh": getUrl('gh', state),
+        'path': request.path,
+        'assetName': 'bundle1',
+        'version': ASSETVERSION,
+        'wb': getUrl('wb', state),
+        'fb': getUrl('fb', state),
+        'gg': getUrl('gg', state),
+        'gh': getUrl('gh', state),
     }))
 
 @cache_page(60 * 60)
 def notfound(request):
     return HttpResponseNotFound(template_error.render({
-        "code": 404,
-        "msg": 'Not Found!'
+        'code': 404,
+        'msg': 'Not Found!'
     }))
 
 def profile(request):
@@ -126,23 +126,23 @@ def profile(request):
         list1_ids = getUserLike(user['id'])
         list1 = filter(lambda a: a.get('id') in list1_ids, invis_list + visible_list)
         return HttpResponse(template_profile.render({
-            "path": request.path,
-            "assetName": 'bundle4',
-            "version": ASSETVERSION,
-            "list0": list0,
-            "list1": list1,
-            "user": request.session.get('user', None)
+            'path': request.path,
+            'assetName': 'bundle4',
+            'version': ASSETVERSION,
+            'list0': list0,
+            'list1': list1,
+            'user': request.session.get('user', None)
         }))
     else:
         return HttpResponse(template_error.render({
-            "code": 401,
-            "msg": 'Unauthorized!'
+            'code': 401,
+            'msg': 'Unauthorized!'
         }))
 
 def auth(request, src):
     if request.session.get('state', None) == request.GET['state']:
         del request.session['state']
-        auth = getattr(sys.modules[__name__], "OAuth2_%s"%src)()
+        auth = getattr(sys.modules[__name__], 'OAuth2_%s'%src)()
         token = auth.getToken(request.GET['code'])
         if token:
             userInfo = auth.getUserInfo(token)
@@ -152,15 +152,15 @@ def auth(request, src):
             return redirect('/')
         else:
             return HttpResponse(template_signin.render({
-                "path": request.path,
-                "assetName": 'bundle1',
-                "version": ASSETVERSION,
-                "error": 'Authentication Failed.'
+                'path': request.path,
+                'assetName': 'bundle1',
+                'version': ASSETVERSION,
+                'error': 'Authentication Failed.'
             }))
     else:
         return HttpResponse(template_signin.render({
-            "path": request.path,
-            "assetName": 'bundle1',
-            "version": ASSETVERSION,
-            "error": 'No valid state found.'
+            'path': request.path,
+            'assetName': 'bundle1',
+            'version': ASSETVERSION,
+            'error': 'No valid state found.'
         }))
