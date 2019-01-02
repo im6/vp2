@@ -1,6 +1,6 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, "../..")))
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '../..')))
 WSGI_APPLICATION = 'vp2.wsgi.application'
 ROOT_URLCONF = 'vp2.urls'
 

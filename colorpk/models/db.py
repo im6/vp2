@@ -24,5 +24,5 @@ class UserLike(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (("user", "color"),)
+        unique_together = (('user', 'color'),)
 

@@ -12,22 +12,22 @@ config.read('local/connection.cnf')
 def getUrl(src, state):
     url = ''
     if src == 'wb':
-        url = "https://api.weibo.com/oauth2/authorize?" \
-              "client_id=%s&scope=follow_app_official_microblog&" \
-              "state=%s&redirect_uri=%s"\
+        url = 'https://api.weibo.com/oauth2/authorize?' \
+              'client_id=%s&scope=follow_app_official_microblog&' \
+              'state=%s&redirect_uri=%s'\
               %(config[src]['appkey'], state, config[src]['url'])
     elif src == 'fb':
-        url = "https://www.facebook.com/v2.8/dialog/oauth?" \
-              "client_id=%s&response_type=code&state=%s&redirect_uri=%s"\
+        url = 'https://www.facebook.com/v2.8/dialog/oauth?' \
+              'client_id=%s&response_type=code&state=%s&redirect_uri=%s'\
               %(config[src]['appkey'], state, config[src]['url'])
     elif src == 'gg':
-        url = "https://accounts.google.com/o/oauth2/v2/auth?" \
-              "client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&" \
-              "response_type=code&state=%s&redirect_uri=%s"\
+        url = 'https://accounts.google.com/o/oauth2/v2/auth?' \
+              'client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&' \
+              'response_type=code&state=%s&redirect_uri=%s'\
               %(config[src]['appkey'], state, config[src]['url'])
 
     elif src == 'gh':
-        url = "https://github.com/login/oauth/authorize?client_id=%s&state=%s&redirect_uri=%s"\
+        url = 'https://github.com/login/oauth/authorize?client_id=%s&state=%s&redirect_uri=%s'\
               %(config[src]['appkey'], state, config[src]['url'])
 
     return url
@@ -35,10 +35,10 @@ def getUrl(src, state):
 class OAuth2(metaclass=ABCMeta):
     def __init__(self, src):
         self.oauth = src
-        self.api = config[src].get("api")
-        self.appKey = config[src].get("appKey")
-        self.appSecret = config[src].get("appSecret")
-        self.url = config[src].get("url")
+        self.api = config[src].get('api')
+        self.appKey = config[src].get('appKey')
+        self.appSecret = config[src].get('appSecret')
+        self.url = config[src].get('url')
     @abstractmethod
     def getToken(self, code):
         raise NotImplementedError('getToken is not implemented')
@@ -70,28 +70,28 @@ class OAuth2_fb(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "client_id": self.appKey,
-            "client_secret": self.appSecret,
-            "code": code,
-            "redirect_uri": self.url,
+            'client_id': self.appKey,
+            'client_secret': self.appSecret,
+            'code': code,
+            'redirect_uri': self.url,
         }
-        r = requests.get("%s/oauth/access_token" % self.api, params=payload)
+        r = requests.get('%s/oauth/access_token' % self.api, params=payload)
         res = json.loads(r.text)
         return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
-            "access_token": token,
-            "fields": 'id,name,picture'
+            'access_token': token,
+            'fields': 'id,name,picture'
         }
-        r = requests.get("%s/me" % self.api, params=payload)
+        r = requests.get('%s/me' % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res.get("id"),
-            "name": res.get("name"),
-            "isadmin": False,
-            "img": res.get("picture").get('data').get('url'),
-            "oauth": self.oauth,
+            'oauthid': res.get('id'),
+            'name': res.get('name'),
+            'isadmin': False,
+            'img': res.get('picture').get('data').get('url'),
+            'oauth': self.oauth,
         }
         return data
 
@@ -103,30 +103,30 @@ class OAuth2_wb(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "client_id": self.appKey,
-            "client_secret": self.appSecret,
-            "code": code,
-            "grant_type": 'authorization_code',
-            "redirect_uri": self.url,
+            'client_id': self.appKey,
+            'client_secret': self.appSecret,
+            'code': code,
+            'grant_type': 'authorization_code',
+            'redirect_uri': self.url,
         }
-        r = requests.post("%s/oauth2/access_token" % self.api, data=payload)
+        r = requests.post('%s/oauth2/access_token' % self.api, data=payload)
         res = json.loads(r.text)
         self.uid = res.get('uid', None)
         return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
-            "access_token": token,
-            "uid": self.uid
+            'access_token': token,
+            'uid': self.uid
         }
-        r = requests.get("%s/2/users/show.json" % self.api, params=payload)
+        r = requests.get('%s/2/users/show.json' % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res.get("id"),
-            "name": res.get("name"),
-            "isadmin": False,
-            "img": res.get("profile_image_url"),
-            "oauth": self.oauth,
+            'oauthid': res.get('id'),
+            'name': res.get('name'),
+            'isadmin': False,
+            'img': res.get('profile_image_url'),
+            'oauth': self.oauth,
         }
         return data
 
@@ -137,28 +137,28 @@ class OAuth2_gg(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "code": code,
-            "client_id": self.appKey,
-            "client_secret": self.appSecret,
-            "redirect_uri": self.url,
-            "grant_type": "authorization_code"
+            'code': code,
+            'client_id': self.appKey,
+            'client_secret': self.appSecret,
+            'redirect_uri': self.url,
+            'grant_type': 'authorization_code'
         }
-        r = requests.post("%s/oauth2/v4/token"%self.api, data=payload)
+        r = requests.post('%s/oauth2/v4/token'%self.api, data=payload)
         res = json.loads(r.text)
         return res.get('access_token', '')
 
     def getUserInfo(self, token):
         payload = {
-            "access_token": token,
+            'access_token': token,
         }
-        r = requests.get("%s/plus/v1/people/me"%self.api, params=payload)
+        r = requests.get('%s/plus/v1/people/me'%self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res.get("id"),
-            "name": res.get("displayName"),
-            "isadmin": False,
-            "img": res.get('image').get('url'),
-            "oauth": self.oauth,
+            'oauthid': res.get('id'),
+            'name': res.get('displayName'),
+            'isadmin': False,
+            'img': res.get('image').get('url'),
+            'oauth': self.oauth,
         }
         return data
 
@@ -169,26 +169,26 @@ class OAuth2_gh(OAuth2):
 
     def getToken(self, code):
         payload = {
-            "client_id": self.appKey,
-            "client_secret": self.appSecret,
-            "code": code,
-            "redirect_uri": self.url,
+            'client_id': self.appKey,
+            'client_secret': self.appSecret,
+            'code': code,
+            'redirect_uri': self.url,
         }
-        r = requests.post("https://github.com/login/oauth/access_token", data=payload)
+        r = requests.post('https://github.com/login/oauth/access_token', data=payload)
         res = parse_qs(r.text)
-        return res.get("access_token", [''])[0]
+        return res.get('access_token', [''])[0]
 
     def getUserInfo(self, token):
         payload = {
-            "access_token": token,
+            'access_token': token,
         }
-        r = requests.get("%s/user" % self.api, params=payload)
+        r = requests.get('%s/user' % self.api, params=payload)
         res = json.loads(r.text)
         data = {
-            "oauthid": res.get("id"),
-            "name": res.get("name", "") or res.get("login"),
-            "isadmin": False,
-            "img": res.get("avatar_url"),
-            "oauth": self.oauth,
+            'oauthid': res.get('id'),
+            'name': res.get('name', '') or res.get('login'),
+            'isadmin': False,
+            'img': res.get('avatar_url'),
+            'oauth': self.oauth,
         }
         return data
