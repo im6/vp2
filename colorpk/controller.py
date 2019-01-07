@@ -9,12 +9,10 @@ import colorpk.repository.cache as cache
 @cache.colorpk_like_buffer
 def toggleLike(request, id):
     if request.method == 'POST':
-        # body_unicode = request.body.decode('utf-8')
-        # body = json.loads(body_unicode)
         cache.like(id)
         user = request.session.get('user', None)
         if user:
-            createUserLike(id, user['id'])
+            createUserLike(id, user.get('id'))
         return JsonResponse({
             'error': False
         })
@@ -22,7 +20,7 @@ def toggleLike(request, id):
         user = request.session.get('user', None)
         result = False
         if user:
-            result = deleteUserLike(id, user['id'])
+            result = deleteUserLike(id, user.get('id'))
         return JsonResponse({
             'error': result
         })
@@ -33,7 +31,7 @@ def createColor(request):
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
 
-    colorValue = '#'.join(body['color'])
+    colorValue = '#'.join(body.get('color'))
     if len(colorValue) == 27:
         result = createNewColor(colorValue, user)
         return JsonResponse({

@@ -24,6 +24,5 @@ def colorpk_admin_auth(resType):
                         'code': 401,
                         'msg': 'Unauthorized!'
                     })
-
         return wrapper
     return colorpk_auth_inner

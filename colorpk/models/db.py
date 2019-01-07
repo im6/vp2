@@ -1,5 +1,5 @@
-from django.db import models
 from django import utils
+from django.db import models
 
 class Color(models.Model):
     id = models.AutoField(primary_key=True)
