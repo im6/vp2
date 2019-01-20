@@ -1,8 +1,8 @@
 import './layout';
 import './style.scss';
-import { Box } from './box';
-import { noop, debounce } from '../shared/util';
-import { getUserLikes } from '../shared/userPreference';
+import Box from './box';
+import { noop, debounce, ajax } from '../shared/util';
+import { getUserLikes, addLike, removeLike, } from '../shared/userPreference';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
 
 const LIMIT = window._colorpk.initData.length,
@@ -12,6 +12,15 @@ const $listDiv = document.getElementsByClassName('list')[0];
 
 let currentIdx = 0;
 
+const likeAjax = (id, method) => {
+  ajax({
+    method,
+    url: `/like/${id}`,
+    success: noop,
+    fail: noop
+  });
+};
+
 const addColorBox = (step) => {
   for(let i = 0; i < step; i ++) {
     const v = window._colorpk.initData[i + currentIdx];
@@ -19,13 +28,20 @@ const addColorBox = (step) => {
       step = i;
       break;
     }
-    const oneBox = Box({
+    const oneBox = new Box({
       id: v.id,
       value: v.color,
       like: v.like,
       isLiked: USERLIKE.indexOf(v.id) > -1,
-      onLike: noop,
       animDelay: `${(i * ENTRYANIMDELAY)}ms`,
+      onLike: id => {
+        likeAjax(id, 'POST');
+        addLike(id);
+      },
+      onUnlike: id => {
+        likeAjax(id, 'DELETE');
+        removeLike(id);
+      },
       onRedir: (id) => {
         window.location.href = `/color/${id}`;
       }

@@ -54,7 +54,12 @@ export const ajax = (config) => {
   if(method !== 'GET') {
     xhr.setRequestHeader('Content-Type', 'application/json');
   }
-  xhr.send(JSON.stringify(data));
+
+  if(data){
+    xhr.send(JSON.stringify(data));
+  } else {
+    xhr.send();
+  }
 };
 
 export const isMobile = mobileDetect();
