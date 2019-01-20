@@ -1,7 +1,7 @@
 import './layout';
 import './style.scss';
 import Box from './box';
-import { noop, debounce, ajax } from '../shared/util';
+import { debounce, likeAjax } from '../shared/util';
 import { getUserLikes, addLike, removeLike, } from '../shared/userPreference';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
 
@@ -11,15 +11,6 @@ const LIMIT = window._colorpk.initData.length,
 const $listDiv = document.getElementsByClassName('list')[0];
 
 let currentIdx = 0;
-
-const likeAjax = (id, method) => {
-  ajax({
-    method,
-    url: `/like/${id}`,
-    success: noop,
-    fail: noop
-  });
-};
 
 const addColorBox = (step) => {
   for(let i = 0; i < step; i ++) {

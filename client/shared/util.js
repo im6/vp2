@@ -62,6 +62,15 @@ export const ajax = (config) => {
   }
 };
 
+export const likeAjax = (id, method) => {
+  ajax({
+    method,
+    url: `/like/${id}`,
+    success: noop,
+    fail: noop
+  });
+};
+
 export const isMobile = mobileDetect();
 export const noop = () => {};
 export const debounce = (fn, wait) => {

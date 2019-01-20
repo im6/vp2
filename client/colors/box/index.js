@@ -19,7 +19,6 @@ class Box {
     self.onLike = onLike;
     self.onUnlike = onUnlike;
     self.onRedir = onRedir;
-
     const elem = self.createElement();
     return elem;
   }
@@ -46,11 +45,13 @@ class Box {
       cvs.appendChild(oneColor);
     });
 
-    cvs.onclick = (v) => {
-      if(v.target.tagName === 'DIV'){
-        self.onRedir(self.id);
-      }
-    };
+    if(self.onRedir){
+      cvs.onclick = (v) => {
+        if(v.target.tagName === 'DIV'){
+          self.onRedir(self.id);
+        }
+      };
+    }
 
     const btn = document.createElement("button");
     btn.classList.add('btn');

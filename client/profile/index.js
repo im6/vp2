@@ -1,8 +1,9 @@
 //https://codepen.io/JiveDig/pen/jbdJXR
 import '../colors/layout';
 import './style.scss';
-import { Box } from '../colors/box';
-import { getUserLikes } from "../shared/userPreference";
+import Box from '../colors/box';
+import { likeAjax } from '../shared/util';
+import { getUserLikes, addLike, removeLike, } from "../shared/userPreference";
 
 const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
@@ -14,23 +15,30 @@ const addColorBox = (source) => {
   const likeMode = source === 'list1';
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
-    const oneBox = Box({
+    const oneBox = new Box({
       id: v.id,
       value: v.color,
       like: v.like,
       isLiked: likeMode || USERLIKE.indexOf(v.id) > -1,
-      onLike: (cid) => {
+      onLike: id => {
+        likeAjax(id, 'POST');
+        addLike(id);
         if(!likeMode){
-          let one = window._colorpk.list0.filter(v => v.id === cid)[0];
+          let one = window._colorpk.list0.filter(v => v.id === id)[0];
           window._colorpk.list1.push(one);
         }
       },
-      onUnlike: (cid) => {
-        window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== cid);
+      onUnlike: id => {
+        likeAjax(id, 'DELETE');
+        removeLike(id);
+        window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== id);
         if(likeMode){
-          const thisBox = document.querySelector(`[data-k='${cid}']`);
+          const thisBox = document.querySelector(`[data-k='${id}']`);
           $listDiv.removeChild(thisBox);
         }
+      },
+      onRedir: (id) => {
+        window.location.href = `/color/${id}`;
       }
     });
 
@@ -74,4 +82,3 @@ document.getElementById('switch_right').onclick = (event) => {
 };
 
 addColorBox(currentInd);
-
