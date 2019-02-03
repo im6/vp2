@@ -79,10 +79,16 @@ nav {
     }
   }
 }
+.reactCreateBtn {
+  display: none;
+}
 
 @media (max-width: 768px) {
-  .createBtn, .adminBtn, .reactBtn{
+  .createBtn, .adminBtn, .reactExtractBtn{
     display: none;
+  }
+  .reactCreateBtn {
+    display: inline-block;
   }
 }
 
