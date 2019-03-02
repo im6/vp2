@@ -1,10 +1,12 @@
+'use strict'
 const common = require('./common');
+const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 
-const { 
+const {
   entry,
   output,
   resolve,
@@ -36,12 +38,18 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      }
+    }),
     new UglifyJsPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
     new CompressionPlugin({
       algorithm: "gzip",
+      filename: '[path]',
     }),
   ]
 };

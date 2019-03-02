@@ -3,13 +3,12 @@ import './style.scss';
 import Box from './box';
 import { debounce, likeAjax } from '../shared/util';
 import { getUserLikes, addLike, removeLike, } from '../shared/userPreference';
-import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
+import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND, } from '../shared/constant';
 
 const LIMIT = window._colorpk.initData.length,
   USERLIKE = getUserLikes();
 
 const $listDiv = document.getElementsByClassName('list')[0];
-
 let currentIdx = 0;
 
 const addColorBox = (step) => {
