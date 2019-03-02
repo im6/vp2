@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --config client/webpack/dev.js",
-    "build": "webpack --config client/webpack/prod.js"
+    "build": "webpack --config client/webpack/prod.js",
+    "analyze": "webpack --config client/webpack/analyzer.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,10 +24,12 @@
     "@babel/preset-env": "^7.3.4",
     "autoprefixer": "^9.4.9",
     "autoprefixer-loader": "^3.2.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.0",
     "dragula": "^3.7.2",
+    "jest": "^24.1.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
@@ -34,6 +38,7 @@
     "sweetalert": "^2.1.2",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
   },
