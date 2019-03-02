@@ -1,50 +1,31 @@
-const webpack = require('webpack');
-const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+'use strict'
+const common = require('./common');
+const {
+  babelLoader,
+  entry,
+  output,
+  resolve,
+} = common;
 
 module.exports = {
+  mode: 'development',
   watch: true,
-  entry: {
-    'bundle0': './client/colors/index.js',
-    'bundle1': './client/signin/index.js',
-    'bundle2': './client/newcolor/index.js',
-    'bundle3': './client/onecolor/index.js',
-    'bundle4': './client/profile/index.js',
-    'bundle5': './client/admin/index.js',
-  },
-  module:{
+  devtool: 'source-map',
+  resolve,
+  entry,
+  output,
+  module: {
     rules: [
+      babelLoader,
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: "css-loader",
-          }, {
-            loader: "sass-loader"
-          }]
-        })
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            "presets": ['env']
-          }
-        }]
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "sass-loader" },
+        ]
       },
     ],
   },
-  output: {
-    publicPath: '/static',
-    path: path.join(__dirname, '../../static'),
-    filename: '[name].js'
-  },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: "[name].css",
-    }),
-  ]
+  plugins: [],
 };

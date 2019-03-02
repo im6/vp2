@@ -15,7 +15,7 @@ from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import getUserLike, getUnpublishedColors
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
 
-ASSETVERSION = os.getenv('VERSION', 'a001')
+ASSETVERSION = os.getenv('VERSION', 'DEBUG')
 
 template_main = get_template('main.html')
 template_oneColor = get_template('one_color.html')

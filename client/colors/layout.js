@@ -21,7 +21,6 @@ const mainElem = document.getElementsByClassName('list')[0],
   isWelcomeHidden = checkWelcome();
 
 const helpElem = helpElems.length > 0 ? helpElems[0] : null;
-
 const adjustLayout = (w) => {
   const wd = Math.floor(w * SPACEPERCENT/BOXWD) * BOXWD;
   mainElem.style.width = wd + 'px';

@@ -1,69 +1,46 @@
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
+const common = require('./common');
 const autoprefixer = require('autoprefixer');
-const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+
+const { 
+  entry,
+  output,
+  resolve,
+  babelLoader,
+} = common;
 
 module.exports = {
-  entry: {
-    'bundle0': './client/colors/index.js',
-    'bundle1': './client/signin/index.js',
-    'bundle2': './client/newcolor/index.js',
-    'bundle3': './client/onecolor/index.js',
-    'bundle4': './client/profile/index.js',
-    'bundle5': './client/admin/index.js',
-  },
+  mode: 'production',
+  entry,
+  output,
+  resolve,
   module:{
     rules: [
+      babelLoader,
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                minimize: true,
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [ autoprefixer()]
-              }
-            },
-            {
-              loader: "sass-loader"
-            },
-          ]
-        })
-      },
-
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            "presets": ['env']
-          }
-        }]
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [ autoprefixer()]
+            }
+          },
+          "sass-loader",
+        ]
       },
     ],
   },
-  output: {
-    publicPath: '/static',
-    path: path.join(__dirname, '../../static'),
-    filename: '[name].js'
-  },
   plugins: [
     new UglifyJsPlugin(),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
     new CompressionPlugin({
-      asset: "[path]",
       algorithm: "gzip",
     }),
   ]
