@@ -2,7 +2,7 @@ const { staticPath } = window._colorpk;
 class Box {
   constructor({
                 id,
-                value,
+                color,
                 like,
                 isLiked,
                 animDelay,
@@ -12,7 +12,7 @@ class Box {
               }){
     const self = this;
     self.id = id;
-    self.value = value;
+    self.color = color;
     self.like = like;
     self.isLiked = isLiked;
     self.animDelay = animDelay;
@@ -33,7 +33,7 @@ class Box {
 
     const cvs = document.createElement("div");
     cvs.classList.add('canvas');
-    const colors0 = self.value.split('#');
+    const colors0 = self.color.split('#');
     const colors1 = colors0.map(v => '#' + v);
     colors1.forEach(v => {
       const oneColor = document.createElement("div");

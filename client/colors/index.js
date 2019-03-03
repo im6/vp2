@@ -18,10 +18,11 @@ const addColorBox = (step) => {
       step = i;
       break;
     }
+    const { id, like, color, } = v;
     const oneBox = new Box({
-      id: v.id,
-      value: v.color,
-      like: v.like,
+      id,
+      color,
+      like,
       isLiked: USERLIKE.indexOf(v.id) > -1,
       animDelay: `${(i * ENTRYANIMDELAY)}ms`,
       onLike: id => {
