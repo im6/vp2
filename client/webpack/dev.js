@@ -1,5 +1,6 @@
 'use strict'
 const common = require('./common');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {
   babelLoader,
   entry,
@@ -20,12 +21,16 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          { loader: "style-loader" },
+          MiniCssExtractPlugin.loader,
           { loader: "css-loader" },
           { loader: "sass-loader" },
         ]
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
+  ],
 };
