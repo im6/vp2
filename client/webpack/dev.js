@@ -10,7 +10,7 @@ const {
 module.exports = {
   mode: 'development',
   watch: true,
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
   resolve,
   entry,
   output,

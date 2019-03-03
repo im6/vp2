@@ -7,7 +7,7 @@
     "start": "webpack --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
-    "test": "jest"
+    "test": "jest --coverage --silent"
   },
   "repository": {
     "type": "git",
@@ -42,5 +42,13 @@
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "babel": {
+    "presets": ["@babel/preset-env"]
+  },
+  "jest": {
+    "setupFiles": [
+      "./client/test/jest-mock.js"
+    ]
+  }
 }

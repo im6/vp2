@@ -14,3 +14,4 @@ static/*.css
 colorpk/migrations
 
 err_log.txt
+coverage
