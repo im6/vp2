@@ -7,7 +7,8 @@
     "start": "webpack --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
-    "test": "jest --coverage --silent"
+    "test": "jest",
+    "coverage": "jest --coverage --silent"
   },
   "repository": {
     "type": "git",
@@ -48,7 +49,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./client/test/jest-mock.js"
+      "./client/jest-mock.js"
     ]
   }
 }
