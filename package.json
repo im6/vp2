@@ -8,7 +8,8 @@
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
     "test": "jest",
-    "coverage": "jest --coverage --silent"
+    "coverage": "jest --coverage --silent",
+    "single-test": "jest client/colors/box/Box.spec.js -t \"test box click event\""
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
+    "pre-commit": "^1.2.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "sweetalert": "^2.1.2",
@@ -44,8 +46,13 @@
     "webpack-dev-server": "^3.2.1"
   },
   "devDependencies": {},
+  "pre-commit": [
+    "test"
+  ],
   "babel": {
-    "presets": ["@babel/preset-env"]
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "jest": {
     "setupFiles": [

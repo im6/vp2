@@ -7,11 +7,11 @@ const downloadBtn = document.getElementById('download');
 const container = document.getElementsByClassName('container')[0];
 const selected = window._colorpk.selected;
 downloadBtn.href = downloadCanvas(selected.color);
-
+const { id, color, like } = selected;
 const oneBox = new Box({
-  id: selected.id,
-  value: selected.color,
-  like: selected.like,
+  id,
+  color,
+  like,
   isLiked: getUserLikes().indexOf(selected.id) > -1,
   onLike: id => {
     likeAjax(id, 'POST');

@@ -1,14 +1,13 @@
 import Box from './Box';
 
 describe('Box Class function', () => {
-  test('render a color box', () => {
-    const mockLikeCb = jest.fn(id => console.log(`like: ${id}`));
-    const mockUnlikeCb = jest.fn(id => console.log(`unlike: ${id}`));
-    const mockRedirectCb = jest.fn(id => console.log(`redirect: ${id}`));
-
+  test('render a color box with classname', () => {
+    const mockLikeCb = jest.fn();
+    const mockUnlikeCb = jest.fn();
+    const mockRedirectCb = jest.fn();
     const testBox = new Box({
       id: 473,
-      value: "64638f#9795cf#aba9e9#cbc9ff",
+      color: "64638f#9795cf#aba9e9#cbc9ff",
       like: 17, 
       isLiked: true,
       animDelay: '10ms',
@@ -16,7 +15,39 @@ describe('Box Class function', () => {
       onUnlike: mockUnlikeCb,
       onRedir: mockRedirectCb,
     });
-    console.log(testBox)
-    expect(1).toBe(1);
+
+    expect(testBox.classList.contains('box')).toBeTruthy();
+  });
+
+  test('test box click event', () => {
+    const mockLikeCb = jest.fn();
+    const mockUnlikeCb = jest.fn();
+    const mockRedirectCb = jest.fn();
+
+    const mockColorId = 473;
+    const testBox = new Box({
+      id: mockColorId,
+      color: "64638f#9795cf#aba9e9#cbc9ff",
+      like: 17, 
+      isLiked: true,
+      animDelay: '10ms',
+      onLike: mockLikeCb,
+      onUnlike: mockUnlikeCb,
+      onRedir: mockRedirectCb,
+    });
+    
+    const likeBtn = testBox.querySelector('.btn');
+    const canvasElem = testBox.querySelector('.canvas');
+    
+    likeBtn.click();
+    likeBtn.click();
+    canvasElem.click();
+
+    expect(mockUnlikeCb).toBeCalled();
+    expect(mockLikeCb).toBeCalled();
+    expect(mockLikeCb.mock.calls[0][0]).toEqual(mockColorId);
+    expect(mockUnlikeCb.mock.calls[0][0]).toEqual(mockColorId);
+    expect(mockRedirectCb).toBeCalled();
+    expect(mockRedirectCb.mock.calls[0][0]).toEqual(mockColorId);
   });
 });
