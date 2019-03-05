@@ -55,7 +55,7 @@ export const ajax = (config) => {
     xhr.setRequestHeader('Content-Type', 'application/json');
   }
 
-  if(data){
+  if(Object.keys(data).length){
     xhr.send(JSON.stringify(data));
   } else {
     xhr.send();

@@ -1,5 +1,5 @@
 import './style.scss';
-import { downloadCanvas, noop, likeAjax } from '../shared/util';
+import { downloadCanvas, likeAjax } from '../shared/util';
 import Box from '../colors/box';
 import { getUserLikes, addLike, removeLike, } from "../shared/userPreference";
 
