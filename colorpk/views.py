@@ -3,8 +3,9 @@ import sys
 import uuid
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template.loader import get_template
 from django.http import HttpResponseNotFound
+from django.middleware.csrf import get_token
+from django.template.loader import get_template
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -15,7 +16,7 @@ from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import getUserLike, getUnpublishedColors
 from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
 
-ASSETVERSION = os.getenv('VERSION', 'no_version')
+ASSETVERSION = os.getenv('VERSION', 'debug')
 
 template_main = get_template('main.html')
 template_oneColor = get_template('one_color.html')
@@ -25,7 +26,6 @@ template_admin = get_template('admin.html')
 template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
 
-@ensure_csrf_cookie
 def popular(request):
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
@@ -37,9 +37,9 @@ def popular(request):
         'list': alldata1,
         'user': request.session.get('user', None),
         'likes': likeList,
+        'csrf_token': get_token(request),
     }))
 
-@ensure_csrf_cookie
 def latest(request):
     alldata = cache.getColors()
     likeList = sm.getLikeList(request.session)
@@ -50,9 +50,9 @@ def latest(request):
         'list': alldata,
         'user': request.session.get('user', None),
         'likes': likeList,
+        'csrf_token': get_token(request),
     }))
 
-@ensure_csrf_cookie
 def colorOne(request, id):
     oneColor = cache.getColor(id)
     if oneColor:
@@ -68,6 +68,7 @@ def colorOne(request, id):
                 'username': oneColor.get('username') if oneColor.get('username') else 'Anonymous',
                 'createdate': oneColor.get('createdate'),
             },
+            'csrf_token': get_token(request),
         }))
     else:
         return HttpResponseNotFound(template_error.render({
@@ -83,6 +84,7 @@ def newcolor(request):
         'version': ASSETVERSION,
         'user': request.session.get('user', None),
         'defaultValue': defaultValue,
+        'csrf_token': get_token(request),
     }))
 
 @colorpk_admin_auth('view')
@@ -94,6 +96,7 @@ def admin(request):
         'version': ASSETVERSION,
         'user': request.session.get('user', None),
         'list': invisibleColor,
+        'csrf_token': get_token(request),
     }))
 
 def signin(request):
@@ -131,7 +134,8 @@ def profile(request):
             'version': ASSETVERSION,
             'list0': list0,
             'list1': list1,
-            'user': request.session.get('user', None)
+            'user': request.session.get('user', None),
+            'csrf_token': get_token(request),
         }))
     else:
         return HttpResponse(template_error.render({

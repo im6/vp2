@@ -8,5 +8,6 @@
         </main>
         {% load static %}
         <script src="{% static assetName %}.js?{{ version }}"></script>
+        {% csrf_token %}
     </body>
 </html>

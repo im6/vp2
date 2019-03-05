@@ -1,20 +1,8 @@
-const getCookieLocal = () => {
-  let result = {};
-  if(!window.cookie || window.cookie.length === 0){
-    const cookies0 = document.cookie.split(';');
-    result = cookies0.reduce((acc, v, k) => {
-      let idx = v.indexOf('=');
-      let v1 = v.split(v[idx]);
-      acc[v1[0]] = v1[1];
-      return acc;
-    }, {});
-  } else {
-    console.error('invalid cookie');
-  }
 
-  return result;
-};
-
+let csrfToken;
+document.addEventListener("DOMContentLoaded", function(e) {
+  csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').getAttribute('value');
+});
 const clearCookieFromOldVersion = () => {
   if(document.cookie.indexOf('_csrf')> -1){
     document.cookie = '_csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -29,9 +17,6 @@ const mobileDetect = () => {
   }
   return isMobile;
 };
-
-
-const localCookie = getCookieLocal();
 
 clearCookieFromOldVersion();
 
@@ -50,12 +35,12 @@ export const ajax = (config) => {
   };
 
   xhr.open(method, url);
-  xhr.setRequestHeader('X-CSRFToken', localCookie.csrftoken);
+  xhr.setRequestHeader('X-CSRFToken', csrfToken);
   if(method !== 'GET') {
     xhr.setRequestHeader('Content-Type', 'application/json');
   }
 
-  if(Object.keys(data).length){
+  if(data && Object.keys(data).length){
     xhr.send(JSON.stringify(data));
   } else {
     xhr.send();
