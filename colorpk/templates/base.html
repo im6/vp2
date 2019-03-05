@@ -6,8 +6,8 @@
         <main>
             {% block mainContent %}{% endblock %}
         </main>
+        {% csrf_token %}
         {% load static %}
         <script src="{% static assetName %}.js?{{ version }}"></script>
-        {% csrf_token %}
     </body>
 </html>

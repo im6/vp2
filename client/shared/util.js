@@ -1,8 +1,5 @@
 
-let csrfToken;
-document.addEventListener("DOMContentLoaded", function(e) {
-  csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').getAttribute('value');
-});
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').getAttribute('value');
 const clearCookieFromOldVersion = () => {
   if(document.cookie.indexOf('_csrf')> -1){
     document.cookie = '_csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
