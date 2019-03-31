@@ -1,5 +1,5 @@
 //https://codepen.io/JiveDig/pen/jbdJXR
-import '../colors/layout';
+import '../layout';
 import './style.scss';
 import Box from '../colors/box';
 import { likeAjax } from '../shared/util';

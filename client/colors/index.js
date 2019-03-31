@@ -1,4 +1,4 @@
-import './layout';
+import '../layout';
 import './style.scss';
 import Box from './box';
 import { debounce, likeAjax } from '../shared/util';

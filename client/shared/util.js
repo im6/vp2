@@ -7,14 +7,6 @@ const clearCookieFromOldVersion = () => {
   }
 };
 
-const mobileDetect = () => {
-  let isMobile = false;
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    isMobile = true;
-  }
-  return isMobile;
-};
-
 clearCookieFromOldVersion();
 
 export const ajax = (config) => {
@@ -53,7 +45,6 @@ export const likeAjax = (id, method) => {
   });
 };
 
-export const isMobile = mobileDetect();
 export const noop = () => {};
 export const debounce = (fn, wait) => {
   let timeout = null;
