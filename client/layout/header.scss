@@ -1,11 +1,16 @@
 $header-height: 40px;
 $nav-color: #8c8c8c;
 
-$hover_1: #F38181;
-$hover_2: #FCE38A;
-$hover_3: #95E1D3;
-$hover_4: #ab72b9;
-$hover_5: #539ddb;
+$hover_color_0: #F38181;
+$hover_color_1: #FCE38A;
+$hover_color_2: #95E1D3;
+$hover_color_3: #ab72b9;
+$hover_color_4: #539ddb;
+
+@mixin nav_color_mx($hover_color) {
+  color: $hover_color;
+  border-bottom: 4px solid $hover_color;
+}
 
 header {
   position: fixed;
@@ -28,26 +33,21 @@ nav {
     transition: color 0.25s ease-in-out;
 
     &:nth-child(1):hover {
-      color: $hover_1;
-      border-bottom: 4px solid $hover_1;
+      @include nav_color_mx($hover_color_0)
     }
     &:nth-child(2):hover {
-      color: $hover_2;
-      border-bottom: 4px solid $hover_2;
+      @include nav_color_mx($hover_color_1)
     }
     &:nth-child(3):hover {
-      color: $hover_3;
-      border-bottom: 4px solid $hover_3;
+      @include nav_color_mx($hover_color_2)
     }
 
     &:nth-child(4):hover {
-      color: $hover_4;
-      border-bottom: 4px solid $hover_4;
+      @include nav_color_mx($hover_color_3)
     }
 
     &:nth-child(5):hover {
-      color: $hover_5;
-      border-bottom: 4px solid $hover_5;
+      @include nav_color_mx($hover_color_4)
     }
   }
 }
@@ -74,7 +74,7 @@ nav {
       display: block;
       text-decoration: none;
       &:hover {
-        color: $hover_4;
+        color: $hover_color_3;
       }
     }
   }
