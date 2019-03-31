@@ -17,15 +17,13 @@
             <a class="nav-auth" href="//www.javascript.fun/about" target="_blank">About</a>
         {% else %}
             {% if user %}
-                <div class="nav-user">
-                    <a href="/profile">
-                        <img src="{{ user.img }}" title="Profile" alt="icon" />
-                    </a>
-                    <div>
-                        <a href="/profile">{{ user.name }}</a>
-                        <a href="/signin">Sign out</a>
-                    </div>
+                <div class="nav-user-txt">
+                    <a href="/profile">{{ user.name }}</a>
+                    <a href="/signin">Sign out</a>
                 </div>
+                <a class="nav-user-link" href="/profile">
+                    <img src="{{ user.img }}" title="Profile" alt="icon" />
+                </a>
             {% else %}
                 <a href="/signin" class="nav-auth">Sign In</a>
             {% endif %}
