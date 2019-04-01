@@ -5,6 +5,7 @@ const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const {
   entry,
@@ -44,6 +45,7 @@ module.exports = {
       }
     }),
     new UglifyJsPlugin(),
+    new OptimizeCssAssetsPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
