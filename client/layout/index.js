@@ -8,18 +8,18 @@ const mainElem = document.querySelector('.list'),
   helpElem = document.querySelector('.help');
 
 const adjustLayout = (w) => {
-  sizeManager.updateWinWidth(w);
+  sizeManager.windowWidth = w;
   const {
-    width,
-    maxWidth,
-    helpWidth,
-    helpMaxWidth,
-  } = sizeManager.containerWidth;
-  mainElem.style.width = width;
-  mainElem.style.maxWidth = maxWidth;
+    containerWidth,
+    containerWidthMax,
+    helperWidth,
+    helperWidthMax,
+  } = sizeManager.sizeInfo;
+  mainElem.style.width = containerWidth;
+  mainElem.style.maxWidth = containerWidthMax;
   if(helpElem) {
-    helpElem.style.width = helpWidth;
-    helpElem.style.maxWidth = helpMaxWidth;
+    helpElem.style.width = helperWidth;
+    helpElem.style.maxWidth = helperWidthMax;
   }
 };
 
@@ -29,7 +29,7 @@ window.onresize = debounce((e) => {
 
 adjustLayout(window.innerWidth);
 
-if(!isWelcomeHidden && helpElem){
+if(!isWelcomeHidden && helpElem) {
   helpElem.style.display = 'block';
   window._colorpk.removeWelcome = () => {
     helpElem.parentElement.removeChild(helpElem);

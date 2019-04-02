@@ -1,11 +1,27 @@
 const MAXNUM = 6;
 
 class LayoutManager {
-  constructor(wiw) {
-    this.wiw = wiw;
+  constructor() {
+    this.sizeInfo = null;
   }
-  get boxSize() {
-    const { wiw } = this;
+
+  set windowWidth(wiw) {
+    const [boxWidth, boxMargin] = this.boxSize(wiw);
+    const util = this.widthUtility(wiw);
+    
+    const wd = Math.floor(wiw * util/boxWidth) * boxWidth;
+    const maxTotal = boxWidth * MAXNUM;
+    const doubleMargin = boxMargin * 2;
+
+    this.sizeInfo = {
+      containerWidth: `${wd}px`,
+      containerWidthMax: `${maxTotal}px`,
+      helperWidth: `${wd - doubleMargin}px`,
+      helperWidthMax: `${maxTotal - doubleMargin}px`,
+    };
+  }
+
+  boxSize(wiw) {
     let width, margin;
     if(wiw < 321){
       margin = 4;
@@ -17,32 +33,11 @@ class LayoutManager {
       margin = 10;
       width = 220 + (7 + margin) * 2; //wide screen
     }
-    return {
-      width,
-      margin,
-    };
+    return [width, margin];
   }
 
-  get widthUtility(){
-    return this.wiw > 667 ? 0.9 : 0.99;
-  }
-
-  get containerWidth(){
-    const { wiw } = this;
-    const { width, margin } = this.boxSize;
-    const wd = Math.floor(wiw * this.widthUtility/width) * width;
-    const maxTotal = width * MAXNUM;
-    const doubleMargin = margin * 2;
-    return {
-      width: `${wd}px`,
-      maxWidth: `${maxTotal}px`,
-      helpWidth: `${wd - doubleMargin}px`,
-      helpMaxWidth: `${maxTotal - doubleMargin}px`
-    };
-  }
-
-  updateWinWidth(newWiw) {
-    this.wiw = newWiw;
+  widthUtility(wiw){
+    return wiw > 692 ? 0.9 : 0.99;
   }
 }
 
