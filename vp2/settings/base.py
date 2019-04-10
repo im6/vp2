@@ -13,7 +13,7 @@ TIME_ZONE = 'UTC'
 
 CSRF_USE_SESSIONS = False
 CSRF_COOKIE_HTTPONLY = True
-SESSION_ENGINE='django.contrib.sessions.backends.signed_cookies'
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 APPEND_SLASH = False
 
 MIDDLEWARE = [
