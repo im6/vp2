@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.cache import cache
 from colorpk.repository.db import getAllColor, syncByCache
 
-BUFFERSIZE = 3 if settings.DEBUG else 100
+BUFFERSIZE = 3 if settings.DEBUG else 50
 GLOBAL_COLOR_KEY = 'global_colors'
 GLOBAL_COLOR_INV_KEY = 'global_colors_inv'
 GLOBAL_LIKE_KEY = 'global_like'
@@ -53,6 +53,7 @@ def like(id):
     for one in rawValue:
         if one.get('id') == id:
             one['like'] += 1
+            break
     cache.set(GLOBAL_COLOR_KEY, rawValue)
 
 def refreshColorStore():
@@ -76,6 +77,7 @@ def syncDB():
 
 def syncAndRefresh():
     logging.debug('sync and refresh...')
+    print("sync cache")
     try:
         syncDB()
         refreshColorStore()
