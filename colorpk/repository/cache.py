@@ -41,7 +41,7 @@ def getColor(id):
     if filter0:
         return filter0[0]
     else:
-        logging.error('ColorID(%s) not found' %(id))
+        logging.error('ColorID(%s) not found' % (id))
         return None
 
 def like(id):

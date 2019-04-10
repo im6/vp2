@@ -15,20 +15,20 @@ def getUrl(src, state):
         url = 'https://api.weibo.com/oauth2/authorize?' \
               'client_id=%s&scope=follow_app_official_microblog&' \
               'state=%s&redirect_uri=%s'\
-              %(config[src]['appkey'], state, config[src]['url'])
+              % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'fb':
         url = 'https://www.facebook.com/v2.8/dialog/oauth?' \
               'client_id=%s&response_type=code&state=%s&redirect_uri=%s'\
-              %(config[src]['appkey'], state, config[src]['url'])
+              % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'gg':
         url = 'https://accounts.google.com/o/oauth2/v2/auth?' \
               'client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&' \
               'response_type=code&state=%s&redirect_uri=%s'\
-              %(config[src]['appkey'], state, config[src]['url'])
+              % (config[src]['appkey'], state, config[src]['url'])
 
     elif src == 'gh':
         url = 'https://github.com/login/oauth/authorize?client_id=%s&state=%s&redirect_uri=%s'\
-              %(config[src]['appkey'], state, config[src]['url'])
+              % (config[src]['appkey'], state, config[src]['url'])
 
     return url
 
