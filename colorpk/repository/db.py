@@ -49,7 +49,7 @@ def deleteUserLike(colorId, userId):
         return True
 
 def getUserLike(userId):
-    list_like0 = UserLike.objects.filter(user_id = userId)
+    list_like0 = UserLike.objects.filter(user_id=userId)
     list_like1 = list(map(lambda x: model_to_dict(x)['color'], list_like0))
     return list_like1
 
