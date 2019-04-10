@@ -25,7 +25,7 @@ const addColorBox = (source) => {
         likeAjax(id, 'POST');
         addLike(id);
         if(!likeMode){
-          let one = window._colorpk.list0.filter(v => v.id === id)[0];
+          const one = window._colorpk.list0.find(v => v.id === id);
           window._colorpk.list1.push(one);
         }
       },
@@ -59,11 +59,7 @@ const addColorBox = (source) => {
   });
 
   if(window._colorpk[source].length < 1){
-    if(likeMode){
-      $listDiv.innerHTML = '<h3>You have not liked any color.</h3>';
-    } else {
-      $listDiv.innerHTML = '<h3>You have not created any color.</h3>';
-    }
+    $listDiv.innerHTML = `<h3>You have not ${likeMode ? 'liked' : 'created'} any color.</h3>`;
   }
 };
 
@@ -72,7 +68,6 @@ document.getElementById('switch_left').onclick = (event) => {
     addColorBox('list0');
     currentInd = 'list0';
   }
-
 };
 
 document.getElementById('switch_right').onclick = (event) => {

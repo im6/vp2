@@ -109,7 +109,5 @@ export const downloadCanvas = (color) => {
   if('remove' in myCanvas){
     myCanvas.remove();
   }
-
   return url;
-
 };
