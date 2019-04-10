@@ -11,15 +11,15 @@ class Box {
                 onRedir,
               }){
     const self = this;
-    self.id = id;
-    self.color = color;
-    self.like = like;
-    self.isLiked = isLiked;
-    self.animDelay = animDelay;
-    self.onLike = onLike;
-    self.onUnlike = onUnlike;
-    self.onRedir = onRedir;
-    const elem = self.createElement();
+    this.id = id;
+    this.color = color;
+    this.like = like;
+    this.isLiked = isLiked;
+    this.animDelay = animDelay;
+    this.onLike = onLike;
+    this.onUnlike = onUnlike;
+    this.onRedir = onRedir;
+    const elem = this.createElement();
     return elem;
   }
 
@@ -27,13 +27,13 @@ class Box {
     const self = this;
     const box = document.createElement("div");
     box.classList.add('box');
-    box.dataset.k = self.id;
-    box.dataset.l = self.like;
-    box.style.animationDelay = self.animDelay;
+    box.dataset.k = this.id;
+    box.dataset.l = this.like;
+    box.style.animationDelay = this.animDelay;
 
     const cvs = document.createElement("div");
     cvs.classList.add('canvas');
-    const colors0 = self.color.split('#');
+    const colors0 = this.color.split('#');
     const colors1 = colors0.map(v => '#' + v);
     colors1.forEach(v => {
       const oneColor = document.createElement("div");
@@ -41,14 +41,14 @@ class Box {
       oneColorTxt.innerText = v;
       oneColor.appendChild(oneColorTxt);
       oneColor.style.backgroundColor = v;
-      oneColor.style.animationDelay = self.animDelay;
+      oneColor.style.animationDelay = this.animDelay;
       cvs.appendChild(oneColor);
     });
 
-    if(self.onRedir){
+    if(this.onRedir){
       cvs.onclick = (v) => {
         if(v.target.tagName === 'DIV'){
-          self.onRedir(self.id);
+          this.onRedir(this.id);
         }
       };
     }
@@ -56,16 +56,16 @@ class Box {
     const btn = document.createElement("button");
     btn.classList.add('btn');
     btn.setAttribute("type", "button");
-    btn.innerHTML = `<img src="${staticPath}${self.isLiked ? 'hrtr.svg' : 'hrt.svg'}">${self.like}`;
+    btn.innerHTML = `<img src="${staticPath}${this.isLiked ? 'hrtr.svg' : 'hrt.svg'}">${this.like}`;
     btn.onclick = e => {
       if(btn.innerHTML.indexOf('hrt.svg') > -1) {
-        const newNum = self.isLiked ? self.like : self.like + 1;
+        const newNum = this.isLiked ? this.like : this.like + 1;
         btn.innerHTML = `<img src="${staticPath}hrtr.svg">${newNum}`;
-        self.onLike(self.id);
+        this.onLike(this.id);
       } else {
-        const newNum = self.isLiked ? self.like - 1 : self.like;
+        const newNum = this.isLiked ? this.like - 1 : this.like;
         btn.innerHTML = `<img src="${staticPath}hrt.svg">${newNum}`;
-        self.onUnlike(self.id);
+        this.onUnlike(this.id);
       }
     };
 
