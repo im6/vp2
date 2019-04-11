@@ -25,7 +25,8 @@
 
     <script>
         window._colorpk = {
-          defaultColors: '{{ defaultValue }}'
+            auth: {% if user %}true{% else %}false{% endif %},
+            defaultColors: '{{ defaultValue }}'
         };
     </script>
 {% endblock %}

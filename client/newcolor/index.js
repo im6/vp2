@@ -13,7 +13,7 @@ const bars = document.getElementsByClassName('jscolor'),
   canvas = document.getElementsByClassName('canvas')[0],
   textElem = document.getElementById('colorText'),
   createBtn = document.getElementById('createBtn'),
-  auth = document.getElementsByClassName('nav-user').length > 0;
+  { auth } = window._colorpk;
 
 let currentBar = bars[0];
 

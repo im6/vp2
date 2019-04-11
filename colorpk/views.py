@@ -102,7 +102,8 @@ def admin(request):
 def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] = state
-    request.session['user'] = None
+    if 'user' in request.session:
+        del request.session['user']
     return HttpResponse(template_signin.render({
         'path': request.path,
         'assetName': 'bundle1',
