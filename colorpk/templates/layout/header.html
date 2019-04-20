@@ -4,17 +4,17 @@
         <a href="/latest">Latest</a>
 
         {% if path != '/newcolor' %}
-            <a class="createBtn" href="/newcolor">Create</a>
+            <a href="/newcolor" class="createBtn">Create</a>
         {% endif %}
 
         {% if user.isadmin and path != '/admin' %}
-            <a class="adminBtn" href="/admin">Admin</a>
+            <a href="/admin" class="adminBtn">Admin</a>
         {% endif %}
 
-        <a class="reactExtractBtn" href="http://react.colorpk.com/extract" target="_blank">Extract</a>
-        <a class="reactCreateBtn" href="http://react.colorpk.com/new" target="_blank">Create</a>
+        <a href="http://react.colorpk.com/extract" target="_blank" class="reactExtractBtn">Extract</a>
+        <a href="http://react.colorpk.com/new" target="_blank" class="reactCreateBtn">Create</a>
         {% if path == '/signin' %}
-            <a class="nav-auth" href="//www.javascript.fun/about" target="_blank">About</a>
+            <a href="//www.javascript.fun/about" target="_blank" class="nav-auth">About</a>
         {% else %}
             {% if user %}
                 <div class="nav-user-txt">
