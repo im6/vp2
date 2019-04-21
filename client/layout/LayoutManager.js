@@ -22,16 +22,17 @@ class LayoutManager {
   }
 
   boxSize(wiw) {
+    // Borders and padding are not included in the width calculation.
     let width, margin;
     if(wiw < 321){
       margin = 4;
-      width = 125 + (6 + margin) * 2;
+      width = 125 + margin * 2;
     } else if(wiw < 769){
       margin = 4;
-      width = 150 + (6 + margin) * 2;
-    } else {
+      width = 150 + margin * 2;
+    } else { //wide screen
       margin = 10;
-      width = 220 + (7 + margin) * 2; //wide screen
+      width = 220 + margin * 2;
     }
     return [width, margin];
   }

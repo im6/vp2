@@ -10,7 +10,6 @@ class Box {
                 onUnlike,
                 onRedir,
               }){
-    const self = this;
     this.id = id;
     this.color = color;
     this.like = like;
@@ -24,7 +23,6 @@ class Box {
   }
 
   createElement(){
-    const self = this;
     const box = document.createElement("div");
     box.classList.add('box');
     box.dataset.k = this.id;

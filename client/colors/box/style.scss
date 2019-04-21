@@ -1,14 +1,12 @@
 $box-padding: 7px;
-$box-padding-mobile: 6px;
+$box-padding-mobile: 4px;
 $color-radius: 4px;
 
 .box {
-  width: 220px;
-  height: 268px;
   background-color: white;
   //border: 1px solid blue;
   border-radius: 4px;
-  padding: $box-padding $box-padding 0 $box-padding;
+  padding: $box-padding;
   margin: 11px 10px;
 
   box-shadow: 0 2px 3px 0.6px #d9d9d9;
@@ -21,14 +19,14 @@ $color-radius: 4px;
     0% { opacity: 0;}
   }
 
-
   &:hover {
     transition: box-shadow 0.4s;
     box-shadow: 0 3px 17px 2px #cccccc;
   }
 
   .canvas {
-    height: 84%;
+    width: 206px;
+    height: 230px;
     cursor: pointer;
 
     > div {
@@ -74,7 +72,7 @@ $color-radius: 4px;
   }
 
   button {
-    margin-top: 2.8%;
+    margin-top: $box-padding;
     img {
       width: 17px;
       height: 17px;
@@ -99,13 +97,15 @@ $color-radius: 4px;
 
 @media (max-width: 768px) {
     .box {
-      width: 150px;
-      height: 180px;
       margin: 6px 4px;
+      padding: $box-padding-mobile;
       border-radius: 3px;
-      padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
+      .canvas {
+        width: 142px;
+        height: 160px;
+      }
       button {
-        margin-top: 2%;
+        margin-top: $box-padding-mobile;
         img {
           width: 14px;
         }
@@ -115,13 +115,15 @@ $color-radius: 4px;
 
 @media (max-width: 321px) {
     .box {
-      width: 125px;
-      height: 175px;
       margin: 6px 4px;
+      padding: $box-padding-mobile;
       border-radius: 3px;
-      padding: $box-padding-mobile $box-padding-mobile 0 $box-padding-mobile;
+      .canvas {
+        width: 117px;
+        height: 175px;
+      }
       button {
-        margin-top: 2%;
+        margin-top: $box-padding-mobile;
         img {
           width: 14px;
         }

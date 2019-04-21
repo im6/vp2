@@ -9,14 +9,14 @@ body {
 
 main {
   padding-top: 100px;
-  .box {
-    margin: 0 auto;
-    display: block;
-  }
-}
-.container {
-  p {
-    color: #868686;
+  .container {
+    p {
+      color: #868686;
+    }
+    &>.box {
+      margin: 0 auto;
+      width: 206px;
+    }
   }
 }
 
@@ -24,4 +24,15 @@ main {
   text-align: center;
   display: block;
   margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  main .container>.box {
+    width: 142px;
+  }
+}
+@media (max-width: 321px) {
+  main .container>.box {
+    width: 117px;
+  }
 }
