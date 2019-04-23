@@ -3,6 +3,7 @@ $box-padding-mobile: 4px;
 $color-radius: 4px;
 
 .box {
+  width: 206px;
   background-color: white;
   //border: 1px solid blue;
   border-radius: 4px;
@@ -25,7 +26,6 @@ $color-radius: 4px;
   }
 
   .canvas {
-    width: 206px;
     height: 230px;
     cursor: pointer;
 
@@ -97,11 +97,11 @@ $color-radius: 4px;
 
 @media (max-width: 768px) {
     .box {
+      width: 142px;
       margin: 6px 4px;
       padding: $box-padding-mobile;
       border-radius: 3px;
       .canvas {
-        width: 142px;
         height: 160px;
       }
       button {
@@ -115,11 +115,11 @@ $color-radius: 4px;
 
 @media (max-width: 321px) {
     .box {
+      width: 117px;
       margin: 6px 4px;
       padding: $box-padding-mobile;
       border-radius: 3px;
       .canvas {
-        width: 117px;
         height: 175px;
       }
       button {
