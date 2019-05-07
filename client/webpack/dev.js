@@ -8,6 +8,8 @@ const {
   resolve,
 } = common;
 
+const devPort= 3000, proxyPort = 3001;
+
 module.exports = {
   mode: 'development',
   watch: true,
@@ -33,4 +35,15 @@ module.exports = {
       filename: "[name].css",
     }),
   ],
+  devServer: {
+    open: true,
+    hot: true,
+    port: devPort,
+    proxy: {
+      '*': {
+        target: `http://localhost:${proxyPort}`,
+        secure: false,
+      },
+    },
+  }
 };

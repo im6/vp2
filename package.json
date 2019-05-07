@@ -4,36 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config client/webpack/dev.js",
+    "start": "webpack-dev-server --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
     "test": "jest",
     "coverage": "jest --coverage --silent",
     "single-test": "jest client/colors/box/Box.spec.js -t \"test box click event\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zj1926/vp2.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/zj1926/vp2.git",
+  "author": "im6 <ee2win@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zj1926/vp2/issues"
   },
   "homepage": "https://github.com/zj1926/vp2#readme",
-  "dependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "autoprefixer": "^9.4.9",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "autoprefixer": "^9.5.1",
     "autoprefixer-loader": "^3.2.0",
-    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "compression-webpack-plugin": "^2.0.0",
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
     "dragula": "^3.7.2",
-    "jest": "^24.1.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.11.0",
+    "jest": "^24.8.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
@@ -41,12 +38,11 @@
     "style-loader": "^0.23.1",
     "sweetalert": "^2.1.2",
     "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack": "^4.29.6",
-    "webpack-bundle-analyzer": "^3.1.0",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
+    "webpack": "^4.30.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
   },
-  "devDependencies": {},
   "pre-commit": [
     "test"
   ],

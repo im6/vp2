@@ -3,3 +3,14 @@
 ![logo](https://github.com/zj1926/vp2/blob/master/static/logo.png "colorpk.com")
 
 ## An web app written with `NO javascript framework`
+
+## QuickStart
+
+```sh
+yarn install
+npm start
+```
+
+```sh
+<set your env variable> runserver 3001
+```
