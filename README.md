@@ -12,5 +12,6 @@ npm start
 ```
 
 ```sh
-<set your env variable> runserver 3001
+<set your env variable>
+python manage.py runserver 3001
 ```
