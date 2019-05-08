@@ -17,7 +17,7 @@ def getUrl(src, state):
               'state=%s&redirect_uri=%s'\
               % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'fb':
-        url = 'https://www.facebook.com/v2.8/dialog/oauth?' \
+        url = 'https://www.facebook.com/v3.3/dialog/oauth?' \
               'client_id=%s&response_type=code&state=%s&redirect_uri=%s'\
               % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'gg':
