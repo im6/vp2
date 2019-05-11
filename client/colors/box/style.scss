@@ -96,37 +96,37 @@ $color-radius: 4px;
 }
 
 @media (max-width: 768px) {
-    .box {
-      width: 142px;
-      margin: 6px 4px;
-      padding: $box-padding-mobile;
-      border-radius: 3px;
-      .canvas {
-        height: 160px;
-      }
-      button {
-        margin-top: $box-padding-mobile;
-        img {
-          width: 14px;
-        }
+  .box {
+    width: 142px;
+    margin: 6px 4px;
+    padding: $box-padding-mobile;
+    border-radius: 3px;
+    .canvas {
+      height: 160px;
+    }
+    button {
+      margin-top: $box-padding-mobile;
+      img {
+        width: 14px;
       }
     }
+  }
 }
 
 @media (max-width: 321px) {
-    .box {
-      width: 117px;
-      margin: 6px 4px;
-      padding: $box-padding-mobile;
-      border-radius: 3px;
-      .canvas {
-        height: 175px;
-      }
-      button {
-        margin-top: $box-padding-mobile;
-        img {
-          width: 14px;
-        }
+  .box {
+    width: 117px;
+    margin: 6px 4px;
+    padding: $box-padding-mobile;
+    border-radius: 3px;
+    .canvas {
+      height: 175px;
+    }
+    button {
+      margin-top: $box-padding-mobile;
+      img {
+        width: 14px;
       }
     }
+  }
 }
