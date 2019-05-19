@@ -3,8 +3,8 @@
         <a href="/popular">Popular</a>
         <a href="/latest">Latest</a>
 
-        {% if path != '/newcolor' %}
-            <a href="/newcolor" class="createBtn">Create</a>
+        {% if path != '/new' %}
+            <a href="/new" class="createBtn">Create</a>
         {% endif %}
 
         {% if user.isadmin and path != '/admin' %}
