@@ -11,10 +11,12 @@
             <a href="/admin" class="adminBtn">Admin</a>
         {% endif %}
 
-        <a href="http://react.colorpk.com/extract" target="_blank" class="reactExtractBtn">Extract</a>
+        {% if path != '/about' and path != '/signin' %}
+          <a href="/about" class="aboutBtn">About</a>
+        {% endif %}
         <a href="http://react.colorpk.com/new" target="_blank" class="reactCreateBtn">Create</a>
         {% if path == '/signin' %}
-            <a href="//www.javascript.fun/about" target="_blank" class="nav-auth">About</a>
+            <a href="/about" target="_blank" class="nav-auth">About</a>
         {% else %}
             {% if user %}
                 <div class="nav-user-txt">

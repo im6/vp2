@@ -25,6 +25,7 @@ template_create = get_template('create.html')
 template_admin = get_template('admin.html')
 template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
+template_about = get_template('about.html')
 
 def popular(request):
     alldata = cache.getColors()
@@ -169,3 +170,6 @@ def auth(request, src):
             'version': ASSETVERSION,
             'error': 'No valid state found.'
         }))
+
+def about(request):
+  return HttpResponse(template_about.render())
