@@ -3,8 +3,8 @@ const LSLIKEKEY = 'userLike',
   DISABLEWELCOMEVALUE = '1';
 
 const clearLocalStorage = () => {
-  let ks = Object.keys(window.localStorage);
-  let hasOldStorage = ks.some(v => {
+  const ks = Object.keys(window.localStorage);
+  const hasOldStorage = ks.some(v => {
     return v !== LSLIKEKEY && v !== WELCOMEKEY;
   });
 
@@ -46,7 +46,7 @@ export const getUserLikes = () => {
 
 export const addLike = (id) => {
   try {
-    let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
+    const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
     userLike.push(id);
     window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
   } catch(e){
@@ -56,7 +56,7 @@ export const addLike = (id) => {
 
 export const removeLike = (id) => {
   try {
-    let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
+    const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
     userLike = userLike.filter(v => {
       return v !== id;
     });

@@ -4,10 +4,9 @@ import './style.scss';
 import Box from '../colors/box';
 import { likeAjax } from '../shared/util';
 import { getUserLikes, addLike, removeLike, } from "../shared/userPreference";
+import { ENTRYANIMDELAY } from '../shared/constant';
 
-const ENTRYANIMDELAY = 58;
 const $listDiv = document.getElementsByClassName('list')[0];
-
 let currentInd = 'list0';
 
 const addColorBox = (source) => {
