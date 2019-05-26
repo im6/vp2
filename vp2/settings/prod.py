@@ -2,6 +2,7 @@ from .base import *
 
 INSTALLED_APPS = [
     'colorpk',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
 ]
 
