@@ -53,3 +53,9 @@ window.onscroll = debounce(evt => {
 }, 200);
 
 addColorBox(INITNUM);
+
+typeof ga === 'function' && ga('send', 'timing', {
+  'timingCategory': 'script_loading',
+  'timingVar': 'colors',
+  'timingValue': Date.now() - window._colorpk.load0
+});

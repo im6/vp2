@@ -73,3 +73,8 @@ document.getElementById('switch_right').onclick = (event) => {
 };
 
 addColorBox(currentInd);
+typeof ga === 'function' && ga('send', 'timing', {
+  'timingCategory': 'script_loading',
+  'timingVar': 'profile',
+  'timingValue': Date.now() - window._colorpk.load0
+});

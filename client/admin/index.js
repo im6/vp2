@@ -39,3 +39,9 @@ window._colorpk = {
     syncAjax();
   }
 };
+
+typeof ga === 'function' && ga('send', 'timing', {
+  'timingCategory': 'script_loading',
+  'timingVar': 'admin',
+  'timingValue': Date.now() - window._colorpk.load0
+});
