@@ -11,16 +11,24 @@ def toggleLike(request, id):
     if request.method == 'POST':
         cache.like(id)
         user = request.session.get('user', None)
+        result = False
         if user:
-            createUserLike(id, user.get('id'))
+            result = createUserLike(id, user.get('id'))
+
+            currentLike = request.session['likes']
+            currentLike.append(id)
+            request.session['likes'] = currentLike
         return JsonResponse({
-            'error': False
+            'error': result
         })
     elif request.method == 'DELETE':
         user = request.session.get('user', None)
         result = False
         if user:
             result = deleteUserLike(id, user.get('id'))
+
+            currentLike = request.session['likes']
+            request.session['likes'] = list(filter(lambda x: x != id, currentLike))
         return JsonResponse({
             'error': result
         })

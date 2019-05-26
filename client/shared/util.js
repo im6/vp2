@@ -9,6 +9,17 @@ const clearCookieFromOldVersion = () => {
 
 clearCookieFromOldVersion();
 
+const checkLocalStorage = () => {
+  const textKey = "_tls";
+  try {
+    window.localStorage.setItem(textKey, '1');
+    window.localStorage.getItem(textKey);
+    return true;
+  } catch(e) {
+      return false;
+  }
+}
+export const localStorageEnabled = checkLocalStorage();
 export const ajax = (config) => {
   const { method, url, data, success, fail } = config;
   const xhr = new XMLHttpRequest();

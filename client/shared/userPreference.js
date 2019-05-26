@@ -1,85 +1,17 @@
-const LSLIKEKEY = 'userLike',
-  WELCOMEKEY = 'hideWelcome',
-  DISABLEWELCOMEVALUE = '1';
-
-const clearLocalStorage = () => {
-  const ks = Object.keys(window.localStorage);
-  const hasOldStorage = ks.some(v => {
-    return v !== LSLIKEKEY && v !== WELCOMEKEY;
-  });
-
-  if(hasOldStorage) {
-    window.localStorage.clear();
-    console.warn('clear old localstorage');
-  }
-};
-
-try {
-  clearLocalStorage();
-  if('likes' in window._colorpk && window._colorpk.likes.length > 0){
-    window.localStorage.setItem(LSLIKEKEY, JSON.stringify(window._colorpk.likes));
-  } else if(window.localStorage.getItem(LSLIKEKEY)){
-    // valid cachestorage
-  } else {
-    window.localStorage.setItem(LSLIKEKEY, JSON.stringify([]));
-  }
-}
-catch (e) {
-  console.warn('localstorage access denied.');
-}
-
-export const getUserLikes = () => {
-  let userLike = [];
-  try {
-    if('likes' in window._colorpk && window._colorpk.likes.length > 0){
-      userLike = window._colorpk.likes;
-      window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
-    } else if(window.localStorage.getItem(LSLIKEKEY)){
-      userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-    }
-  } catch(e) {
-    console.warn('localstorage access denied.');
-  }
-
-  return userLike;
-};
-
-export const addLike = (id) => {
-  try {
-    const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-    userLike.push(id);
-    window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
-  } catch(e){
-    console.warn('localstorage access denied.');
-  }
-};
-
-export const removeLike = (id) => {
-  try {
-    const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-    userLike = userLike.filter(v => {
-      return v !== id;
-    });
-    window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
-  } catch(e){
-    console.warn('localstorage access denied.');
-  }
-};
+import { localStorageEnabled } from './util';
+const WELCOMEKEY = 'hideWelcome';
+const DISABLEWELCOMEVALUE = '1';
 
 export const checkWelcome = () => {
-  let result = false;
-  try {
-    result = window.localStorage.getItem(WELCOMEKEY) === DISABLEWELCOMEVALUE;
-  } catch(e){
-    console.warn('localstorage access denied.');
+  if(localStorageEnabled){
+    return window.localStorage.getItem(WELCOMEKEY) === DISABLEWELCOMEVALUE;
+  } else {
+    return false;
   }
-  return result;
 };
 
 export const hideWelcome = () => {
-  try {
+  if(localStorageEnabled){
     window.localStorage.setItem(WELCOMEKEY, DISABLEWELCOMEVALUE);
-  } catch(e){
-    console.warn('localstorage access denied.');
   }
 };

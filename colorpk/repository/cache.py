@@ -5,9 +5,9 @@ from colorpk.repository.db import getAllColor, syncByCache
 
 BUFFERSIZE = 3 if settings.DEBUG else 50
 GLOBAL_COLOR_KEY = 'global_colors'
-GLOBAL_COLOR_INV_KEY = 'global_colors_inv'
-GLOBAL_LIKE_KEY = 'global_like'
-GLOBAL_CNT_KEY = 'global_cnt'
+GLOBAL_COLOR_INV_KEY = 'global_colors_inv' # invisible new-created color
+GLOBAL_LIKE_KEY = 'global_like' # like buffer object
+GLOBAL_CNT_KEY = 'global_cnt' # cnt to save buffer
 
 def colorpk_like_buffer(function):
     def wrapper(*args, **kwargs):
