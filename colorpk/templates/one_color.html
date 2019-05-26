@@ -17,6 +17,8 @@
     <script>
         window._colorpk = {
           staticPath: '{% static "" %}',
+          user: '{{ user.id }}',
+          likes: [{{ oneColor.id }}],
           selected: {
             id: {{ oneColor.id }},
             color: '{{ oneColor.color }}',

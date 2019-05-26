@@ -7,6 +7,7 @@
     <script>
         window._colorpk = {
           staticPath: '{% static "" %}',
+          user: '{{ user.id }}',
           likes: {{ likes }},
           initData: [
               {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}, "isLiked": {% if oneBox.isLiked %}true{% else %}false{% endif %} },{% endfor %}

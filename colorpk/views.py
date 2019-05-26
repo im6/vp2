@@ -1,6 +1,7 @@
 import os
 import sys
 import uuid
+
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.http import HttpResponseNotFound
@@ -10,7 +11,6 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 import colorpk.repository.cache as cache
-import colorpk.repository.sessionManager as sm
 from colorpk.models.auth import getUrl
 from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import getUserLike, getUnpublishedColors
@@ -30,26 +30,28 @@ template_about = get_template('about.html')
 def popular(request):
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
-    likeList = sm.getLikeList(request.session)
+    likeList = request.session.get('likes', [])
+    user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
         'version': ASSETVERSION,
         'list': alldata1,
-        'user': request.session.get('user', None),
+        'user': user,
         'likes': likeList,
         'csrf_token': get_token(request),
     }))
 
 def latest(request):
     alldata = cache.getColors()
-    likeList = sm.getLikeList(request.session)
+    likeList = request.session.get('likes', [])
+    user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
         'version': ASSETVERSION,
         'list': alldata,
-        'user': request.session.get('user', None),
+        'user': user,
         'likes': likeList,
         'csrf_token': get_token(request),
     }))
@@ -104,7 +106,9 @@ def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] = state
     if 'user' in request.session:
-        del request.session['user']
+      del request.session['user']
+    if 'likes' in request.session:
+      del request.session['likes']
     return HttpResponse(template_signin.render({
         'path': request.path,
         'assetName': 'bundle1',

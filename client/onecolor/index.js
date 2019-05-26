@@ -1,7 +1,7 @@
 import './style.scss';
-import { downloadCanvas, likeAjax } from '../shared/util';
 import Box from '../colors/box';
-import { getUserLikes, addLike, removeLike, } from "../shared/userPreference";
+import { downloadCanvas } from '../shared/util';
+import likeManager from '../shared/likeManager';
 
 const downloadBtn = document.getElementById('download');
 const container = document.getElementsByClassName('container')[0];
@@ -12,16 +12,13 @@ const oneBox = new Box({
   id,
   color,
   like,
-  isLiked: getUserLikes().indexOf(selected.id) > -1,
+  isLiked: likeManager.likeMap.hasOwnProperty(selected.id),
   onLike: id => {
-    likeAjax(id, 'POST');
-    addLike(id);
+    likeManager.addLike(id);
   },
   onUnlike: id => {
-    likeAjax(id, 'DELETE');
-    removeLike(id);
+    likeManager.removeLike(id);
   }
 });
 
 container.insertBefore(oneBox, downloadBtn);
-

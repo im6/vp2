@@ -1,13 +1,11 @@
 import '../layout';
 import './style.scss';
 import Box from './box';
-import { debounce, likeAjax } from '../shared/util';
-import { getUserLikes, addLike, removeLike, } from '../shared/userPreference';
+import { debounce } from '../shared/util';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND, } from '../shared/constant';
 import likeManager from '../shared/likeManager';
 
-const LIMIT = window._colorpk.initData.length,
-  USERLIKE = getUserLikes();
+const LIMIT = window._colorpk.initData.length;
 
 const $listDiv = document.getElementsByClassName('list')[0];
 let currentIdx = 0;
@@ -24,15 +22,13 @@ const addColorBox = (step) => {
       id,
       color,
       like,
-      isLiked: USERLIKE.indexOf(v.id) > -1,
+      isLiked: likeManager.likeMap.hasOwnProperty(v.id),
       animDelay: `${(i * ENTRYANIMDELAY)}ms`,
       onLike: id => {
-        likeAjax(id, 'POST');
-        addLike(id);
+        likeManager.addLike(id);
       },
       onUnlike: id => {
-        likeAjax(id, 'DELETE');
-        removeLike(id);
+        likeManager.removeLike(id);
       },
       onRedir: (id) => {
         window.location.href = `/color/${id}`;
