@@ -64,6 +64,7 @@ def colorOne(request, id):
             'assetName': 'bundle3',
             'version': ASSETVERSION,
             'user': request.session.get('user', None),
+            'likes': request.session.get('likes', []),
             'oneColor': {
                 'id': id,
                 'color': oneColor.get('color'),

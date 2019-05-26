@@ -23,10 +23,5 @@
         </button>
     </div>
 
-    <script>
-        window._colorpk = {
-            auth: {% if user %}true{% else %}false{% endif %},
-            defaultColors: '{{ defaultValue }}'
-        };
-    </script>
+    {% include 'script.html' %}
 {% endblock %}

@@ -12,16 +12,5 @@
     <br>
 
     <div class="list"></div>
-    <script>
-        window._colorpk = {
-          staticPath: '{% static "" %}',
-          user: '{{ user.id }}',
-          list0: [
-            {% for oneBox in list0%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
-          ],
-          list1: [
-            {% for oneBox in list1%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
-          ],
-        };
-    </script>
+    {% include 'script.html' %}
 {% endblock %}

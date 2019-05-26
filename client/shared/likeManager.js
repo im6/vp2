@@ -4,17 +4,9 @@ const LSLIKEKEY = 'userLike';
 
 class LikeManagement {
   constructor(){
-    this.isAuth = window._colorpk.user.length > 0;
+    this.isAuth = window._colorpk.auth;
     this.hasLocalStorage = localStorageEnabled;
-    try {
-      this.likeMap = this.initLike();
-    } catch (err) {
-      this.likeMap = {};
-      ga('send', 'exception', {
-        'exDescription': err.message,
-        'exFatal': false
-      });
-    }
+    this.likeMap = this.initLike();
   }
   initLike(){
     let res = {}

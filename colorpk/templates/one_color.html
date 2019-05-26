@@ -14,17 +14,5 @@
             {{ oneColor.createdate }}
         </p>
     </div>
-    <script>
-        window._colorpk = {
-          staticPath: '{% static "" %}',
-          user: '{{ user.id }}',
-          likes: [{{ oneColor.id }}],
-          selected: {
-            id: {{ oneColor.id }},
-            color: '{{ oneColor.color }}',
-            like: {{ oneColor.like }},
-            isLiked: '{{ oneColor.isLiked }}' === 'True'
-          }
-        };
-    </script>
+    {% include 'script.html' %}
 {% endblock %}
