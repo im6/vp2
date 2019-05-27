@@ -54,6 +54,6 @@ window.onscroll = debounce(evt => {
 
 addColorBox(INITNUM);
 
-dataLayer.push({
+window.dataLayer.push({
   'scriptLoadingTime': Date.now() - window._colorpk.load0
 });

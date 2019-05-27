@@ -155,8 +155,6 @@ setTimeout(() => {
     resetColors();
   }
 }, 50);
-typeof ga === 'function' && ga('send', 'timing', {
-  'timingCategory': 'script_loading',
-  'timingVar': 'newcolor',
-  'timingValue': Date.now() - window._colorpk.load0
+window.dataLayer.push({
+  'scriptLoadingTime': Date.now() - window._colorpk.load0
 });

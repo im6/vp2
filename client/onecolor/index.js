@@ -22,8 +22,6 @@ const oneBox = new Box({
 });
 
 container.insertBefore(oneBox, downloadBtn);
-typeof ga === 'function' && ga('send', 'timing', {
-  'timingCategory': 'script_loading',
-  'timingVar': 'onecolor',
-  'timingValue': Date.now() - window._colorpk.load0
+window.dataLayer.push({
+  'scriptLoadingTime': Date.now() - window._colorpk.load0
 });

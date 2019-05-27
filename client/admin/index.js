@@ -40,8 +40,6 @@ window._colorpk = {
   }
 };
 
-typeof ga === 'function' && ga('send', 'timing', {
-  'timingCategory': 'script_loading',
-  'timingVar': 'admin',
-  'timingValue': Date.now() - window._colorpk.load0
+window.dataLayer.push({
+  'scriptLoadingTime': Date.now() - window._colorpk.load0
 });
