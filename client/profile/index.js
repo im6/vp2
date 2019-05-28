@@ -73,6 +73,5 @@ document.getElementById('switch_right').onclick = (event) => {
 };
 
 addColorBox(currentInd);
-window.dataLayer.push({
-  'scriptLoadingTime': Date.now() - window._colorpk.load0
-});
+
+window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

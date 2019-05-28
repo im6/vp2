@@ -155,6 +155,5 @@ setTimeout(() => {
     resetColors();
   }
 }, 50);
-window.dataLayer.push({
-  'scriptLoadingTime': Date.now() - window._colorpk.load0
-});
+
+window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));
