@@ -2,13 +2,12 @@ import os
 import sys
 import uuid
 
-from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.http import HttpResponseNotFound
 from django.middleware.csrf import get_token
 from django.template.loader import get_template
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 
 import colorpk.repository.cache as cache
 from colorpk.models.auth import getUrl
@@ -27,7 +26,7 @@ template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
 template_about = get_template('about.html')
 
-def popular(request):
+def popular(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
     likeList = request.session.get('likes', [])
@@ -42,7 +41,7 @@ def popular(request):
         'csrf_token': get_token(request),
     }))
 
-def latest(request):
+def latest(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
     likeList = request.session.get('likes', [])
     user = request.session.get('user', None)
@@ -56,7 +55,7 @@ def latest(request):
         'csrf_token': get_token(request),
     }))
 
-def colorOne(request, id):
+def colorOne(request: HttpRequest, id: int) -> HttpResponse:
     oneColor = cache.getColor(id)
     if oneColor:
         return HttpResponse(template_oneColor.render({
@@ -80,7 +79,7 @@ def colorOne(request, id):
             'msg': 'Color Not Found!'
         }))
 
-def newcolor(request):
+def newcolor(request: HttpRequest) -> HttpResponse:
     defaultValue = request.GET.get('c', '')
     return HttpResponse(template_create.render({
         'path': request.path,
@@ -92,7 +91,7 @@ def newcolor(request):
     }))
 
 @colorpk_admin_auth('view')
-def admin(request):
+def admin(request: HttpRequest) -> HttpResponse:
     invisibleColor = getUnpublishedColors()
     return HttpResponse(template_admin.render({
         'path': request.path,
@@ -103,7 +102,7 @@ def admin(request):
         'csrf_token': get_token(request),
     }))
 
-def signin(request):
+def signin(request: HttpRequest) -> HttpResponse:
     state = str(uuid.uuid4())
     request.session['state'] = state
     if 'user' in request.session:
@@ -121,13 +120,13 @@ def signin(request):
     }))
 
 @cache_page(60 * 60)
-def notfound(request):
+def notfound(request: HttpRequest) -> HttpResponse:
     return HttpResponseNotFound(template_error.render({
         'code': 404,
         'msg': 'Not Found!'
     }))
 
-def profile(request):
+def profile(request: HttpRequest) -> HttpResponse:
     user = request.session.get('user', None)
     if user:
         visible_list = cache.getColors()
@@ -150,7 +149,7 @@ def profile(request):
             'msg': 'Unauthorized!'
         }))
 
-def auth(request, src):
+def auth(request: HttpRequest, src: str) -> HttpResponse:
     if request.session.get('state', None) == request.GET['state']:
         del request.session['state']
         auth = getattr(sys.modules[__name__], 'OAuth2_%s'%src)()
@@ -176,5 +175,5 @@ def auth(request, src):
             'error': 'No valid state found.'
         }))
 
-def about(request):
+def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_about.render())

@@ -1,5 +1,5 @@
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.views.decorators.http import require_http_methods
 from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
 from colorpk.shared import colorpk_admin_auth
@@ -7,7 +7,7 @@ import colorpk.repository.cache as cache
 
 @require_http_methods(['POST', 'DELETE'])
 @cache.colorpk_like_buffer
-def toggleLike(request, id):
+def toggleLike(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == 'POST':
         cache.like(id)
         user = request.session.get('user', None)
@@ -32,7 +32,7 @@ def toggleLike(request, id):
         })
 
 @require_http_methods(['POST'])
-def createColor(request):
+def createColor(request: HttpRequest) -> HttpResponse:
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
@@ -50,7 +50,7 @@ def createColor(request):
 
 @require_http_methods(['POST', 'DELETE'])
 @colorpk_admin_auth('json')
-def approve(request, id):
+def approve(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == 'POST':
         result = approveColor(id)
         return JsonResponse({
@@ -64,7 +64,7 @@ def approve(request, id):
 
 @require_http_methods(['POST'])
 @colorpk_admin_auth('json')
-def syncCache(request):
+def syncCache(request: HttpRequest) -> HttpResponse:
     cacheData = cache.getCachedLikes()
     result = cache.syncAndRefresh()
     return JsonResponse({

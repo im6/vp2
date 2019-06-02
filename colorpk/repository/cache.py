@@ -18,7 +18,7 @@ def colorpk_like_buffer(function):
         return function(*args, **kwargs)
     return wrapper
 
-def cntPlus():
+def cntPlus() -> None:
     cnt = cache.get(GLOBAL_CNT_KEY)
     cnt += 1
     cache.set(GLOBAL_CNT_KEY, cnt)
@@ -44,7 +44,7 @@ def getColor(id):
         logging.error('ColorID(%s) not found' % (id))
         return None
 
-def like(id):
+def like(id) -> None:
     like_obj = cache.get(GLOBAL_LIKE_KEY)
     like_obj[id] = like_obj.get(id, 0) + 1
     cache.set(GLOBAL_LIKE_KEY, like_obj)
@@ -56,7 +56,7 @@ def like(id):
             break
     cache.set(GLOBAL_COLOR_KEY, rawValue)
 
-def refreshColorStore():
+def refreshColorStore() -> None:
     logging.debug('refreshing cache data from db...')
     try:
         init_colors0 = getAllColor()
@@ -69,13 +69,13 @@ def refreshColorStore():
     except BaseException as e:
         logging.error('error on getting all colors')
 
-def syncDB():
+def syncDB() -> None:
     logging.debug('sync db with cache...')
     like_obj = cache.get(GLOBAL_LIKE_KEY)
     syncByCache(like_obj)
     cache.set(GLOBAL_LIKE_KEY, {})
 
-def syncAndRefresh():
+def syncAndRefresh() -> bool:
     logging.debug('sync and refresh...')
     print("sync cache")
     try:

@@ -3,7 +3,7 @@ from django.template.loader import get_template
 from django.http import JsonResponse, HttpResponse
 from colorpk.repository.db import checkAdmin
 
-def colorpk_admin_auth(resType):
+def colorpk_admin_auth(resType: str):
     def colorpk_auth_inner(function):
         def wrapper(*args, **kwargs):
             user = args[0].session.get('user', None)
