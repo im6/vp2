@@ -13,22 +13,22 @@ def getUrl(src, state):
     url = ''
     if src == 'wb':
         url = 'https://api.weibo.com/oauth2/authorize?' \
-              'client_id=%s&scope=follow_app_official_microblog&' \
-              'state=%s&redirect_uri=%s'\
-              % (config[src]['appkey'], state, config[src]['url'])
+            'client_id=%s&scope=follow_app_official_microblog&' \
+            'state=%s&redirect_uri=%s'\
+            % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'fb':
         url = 'https://www.facebook.com/v3.3/dialog/oauth?' \
-              'client_id=%s&response_type=code&state=%s&redirect_uri=%s'\
-              % (config[src]['appkey'], state, config[src]['url'])
+            'client_id=%s&response_type=code&state=%s&redirect_uri=%s'\
+            % (config[src]['appkey'], state, config[src]['url'])
     elif src == 'gg':
         url = 'https://accounts.google.com/o/oauth2/v2/auth?' \
-              'client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&' \
-              'response_type=code&state=%s&redirect_uri=%s'\
-              % (config[src]['appkey'], state, config[src]['url'])
+            'client_id=%s&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile&' \
+            'response_type=code&state=%s&redirect_uri=%s'\
+            % (config[src]['appkey'], state, config[src]['url'])
 
     elif src == 'gh':
         url = 'https://github.com/login/oauth/authorize?client_id=%s&state=%s&redirect_uri=%s'\
-              % (config[src]['appkey'], state, config[src]['url'])
+            % (config[src]['appkey'], state, config[src]['url'])
 
     return url
 
@@ -56,10 +56,10 @@ class OAuth2(metaclass=ABCMeta):
             result['id'] = thisUser.id
             result['isadmin'] = thisUser.isadmin
         else:
-            newUser = User(oauth=data['oauth'],
-                           name=data['name'],
-                           oauthid=data['oauthid'],
-                           lastlogin=datetime.now(timezone.utc))
+            newUser = User(oauth=data['oauth'], 
+            name=data['name'],
+            oauthid=data['oauthid'],
+            lastlogin=datetime.now(timezone.utc))
             newUser.save()
             result['id'] = newUser.id
         return result
@@ -95,7 +95,6 @@ class OAuth2_fb(OAuth2):
         }
         return data
 
-
 class OAuth2_wb(OAuth2):
     def __init__(self):
         super().__init__('wb')
@@ -129,7 +128,6 @@ class OAuth2_wb(OAuth2):
             'oauth': self.oauth,
         }
         return data
-
 
 class OAuth2_gg(OAuth2):
     def __init__(self):

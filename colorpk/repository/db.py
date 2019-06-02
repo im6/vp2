@@ -38,7 +38,6 @@ def createUserLike(colorId, userId):
         logging.error('Try to add duplicate to the userlike')
         return True
 
-
 def deleteUserLike(colorId, userId):
     try:
         ul = UserLike.objects.get(color_id=colorId, user_id=userId)

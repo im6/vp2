@@ -107,9 +107,9 @@ def signin(request):
     state = str(uuid.uuid4())
     request.session['state'] = state
     if 'user' in request.session:
-      del request.session['user']
+        del request.session['user']
     if 'likes' in request.session:
-      del request.session['likes']
+        del request.session['likes']
     return HttpResponse(template_signin.render({
         'path': request.path,
         'assetName': 'bundle1',
@@ -177,4 +177,4 @@ def auth(request, src):
         }))
 
 def about(request):
-  return HttpResponse(template_about.render())
+    return HttpResponse(template_about.render())
