@@ -1,4 +1,4 @@
-@import '../layout/base';
+@import "../layout/base";
 
 $ROWHEIGHT: 45px;
 
@@ -12,7 +12,7 @@ body {
 }
 
 main {
-    padding: 15% 0 0 0;
+  padding: 15% 0 0 0;
 }
 
 #signin-box {
@@ -24,7 +24,7 @@ main {
     text-decoration: none;
     border-radius: 7px 5px 5px 7px;
     margin-bottom: 11px;
-    padding-bottom: 1px;
+    padding: 0 0 1px 3px;
 
     img {
       height: $ROWHEIGHT;
@@ -35,30 +35,30 @@ main {
       font-size: 16px;
     }
 
-    &:nth-child(1){
+    &:nth-child(1) {
       background: linear-gradient(to right, #ffdf76, #ffffcd);
       color: #cd201f;
-      animation-delay: .2s;
+      animation-delay: 0.2s;
     }
-    &:nth-child(2){
+    &:nth-child(2) {
       background: linear-gradient(to right, #000, #676767);
       color: white;
-      animation-delay: .28s;
+      animation-delay: 0.28s;
     }
-    &:nth-child(3){
+    &:nth-child(3) {
       background: linear-gradient(to right, #cf2a18, #ff7d6e);
       color: #fff;
-      animation-delay: .35s;
+      animation-delay: 0.35s;
     }
-    &:nth-child(4){
+    &:nth-child(4) {
       background: linear-gradient(to right, #365189, #6686c8);
       color: white;
-      animation-delay: .4s;
+      animation-delay: 0.4s;
     }
 
     animation-name: iconAnim;
     animation-fill-mode: backwards;
-    animation-duration: .15s;
+    animation-duration: 0.15s;
 
     @keyframes iconAnim {
       0% {
@@ -73,11 +73,10 @@ main {
       transition: box-shadow 0.4s;
       box-shadow: 0 4px 17px 3px #cccccc;
     }
-
   }
 }
 
-.errorTxt{
+.errorTxt {
   color: red;
   font-size: 17px;
   margin-bottom: 10px;
