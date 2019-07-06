@@ -1,6 +1,6 @@
 {
   "name": "vp2",
-  "version": "1.0.1",
+  "version": "2.3.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,19 +11,17 @@
     "coverage": "jest --coverage --silent",
     "single-test": "jest client/colors/box/Box.spec.js -t \"test box click event\""
   },
-  "repository": "git+https://github.com/zj1926/vp2.git",
-  "author": "im6 <ee2win@gmail.com>",
+  "repository": "git+https://github.com/im6/vp2.git",
+  "author": "im6",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zj1926/vp2/issues"
+    "url": "https://github.com/im6/vp2/issues"
   },
-  "homepage": "https://github.com/zj1926/vp2#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/im6/vp2#readme",
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "autoprefixer": "^9.6.0",
-    "autoprefixer-loader": "^3.2.0",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "compression-webpack-plugin": "^3.0.0",
     "css-loader": "^3.0.0",
@@ -31,16 +29,16 @@
     "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "sweetalert": "^2.1.2",
-    "webpack": "^4.34.0",
+    "webpack": "^4.35.2",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1"
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
   },
   "pre-commit": [
     "test"
