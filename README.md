@@ -1,6 +1,6 @@
-# [ColorPK.com](http://www.colorpk.com) v2.2
+# [ColorPK.com](https://www.colorpk.com) v2.3
 
-![logo](https://github.com/zj1926/vp2/blob/master/static/logo.png "colorpk.com")
+[![logo](https://github.com/zj1926/vp2/blob/master/static/logo.png "colorpk.com")](https://www.colorpk.com)
 
 ## An web app written with `NO javascript framework`
 
