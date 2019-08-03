@@ -1,9 +1,9 @@
 const csrfToken = document
-  .querySelector("[name=csrfmiddlewaretoken]")
-  .getAttribute("value");
+  .querySelector('[name=csrfmiddlewaretoken]')
+  .getAttribute('value');
 const clearCookieFromOldVersion = () => {
-  if (document.cookie.indexOf("_csrf") > -1) {
-    document.cookie = "_csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  if (document.cookie.indexOf('_csrf') > -1) {
+    document.cookie = '_csrf=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     window.location.reload();
   }
 };
@@ -11,9 +11,9 @@ const clearCookieFromOldVersion = () => {
 clearCookieFromOldVersion();
 
 const checkLocalStorage = () => {
-  const textKey = "_tls";
+  const textKey = '_tls';
   try {
-    window.localStorage.setItem(textKey, "1");
+    window.localStorage.setItem(textKey, '1');
     window.localStorage.getItem(textKey);
     window.localStorage.removeItem(textKey);
     return true;
@@ -37,9 +37,9 @@ export const ajax = config => {
   };
 
   xhr.open(method, url);
-  xhr.setRequestHeader("X-CSRFToken", csrfToken);
-  if (method !== "GET") {
-    xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader('X-CSRFToken', csrfToken);
+  if (method !== 'GET') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
   }
 
   if (data && Object.keys(data).length) {
@@ -54,7 +54,7 @@ export const likeAjax = (id, method) => {
     method,
     url: `/like/${id}`,
     success: noop,
-    fail: noop
+    fail: noop,
   });
 };
 
@@ -77,22 +77,22 @@ export const downloadCanvas = color => {
     MARGIN = 13,
     CANVASRATIO = 0.65;
 
-  const colors = color.split("#").map(v => "#" + v);
-  const myCanvas = document.createElement("canvas");
-  const ctx = myCanvas.getContext("2d");
+  const colors = color.split('#').map(v => '#' + v);
+  const myCanvas = document.createElement('canvas');
+  const ctx = myCanvas.getContext('2d');
 
   myCanvas.width = WIDTH;
   myCanvas.height = HEIGHT;
-  myCanvas.style.border = "1px solid #c1c1c1";
+  myCanvas.style.border = '1px solid #c1c1c1';
 
   const boxHts = [
     HEIGHT * CANVASRATIO * 0.4,
     HEIGHT * CANVASRATIO * 0.25,
     HEIGHT * CANVASRATIO * 0.175,
-    HEIGHT * CANVASRATIO * 0.175
+    HEIGHT * CANVASRATIO * 0.175,
   ];
 
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, WIDTH, HEIGHT * CANVASRATIO + MARGIN * 4);
 
   ctx.fillStyle = colors[0];
@@ -117,19 +117,19 @@ export const downloadCanvas = color => {
   const colorTxtPosition = CANVASRATIO * HEIGHT + 80,
     space = 17;
 
-  ctx.font = "13px Arial";
-  ctx.fillStyle = "#a3a3a3";
-  ctx.fillText("ColorPK.com", WIDTH - MARGIN - 78, HEIGHT * 0.74);
+  ctx.font = '13px Arial';
+  ctx.fillStyle = '#a3a3a3';
+  ctx.fillText('ColorPK.com', WIDTH - MARGIN - 78, HEIGHT * 0.74);
 
-  ctx.font = "15px Arial";
-  ctx.fillStyle = "#909090";
+  ctx.font = '15px Arial';
+  ctx.fillStyle = '#909090';
   ctx.fillText(colors[0], MARGIN, colorTxtPosition);
   ctx.fillText(colors[1], MARGIN, colorTxtPosition + space);
   ctx.fillText(colors[2], MARGIN, colorTxtPosition + space * 2);
   ctx.fillText(colors[3], MARGIN, colorTxtPosition + space * 3);
 
   const url = myCanvas.toDataURL();
-  if ("remove" in myCanvas) {
+  if ('remove' in myCanvas) {
     myCanvas.remove();
   }
   return url;

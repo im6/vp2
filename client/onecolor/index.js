@@ -18,7 +18,7 @@ const oneBox = new Box({
   },
   onUnlike: id => {
     likeManager.removeLike(id);
-  }
+  },
 });
 
 container.insertBefore(oneBox, downloadBtn);

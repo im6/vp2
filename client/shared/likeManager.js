@@ -1,6 +1,6 @@
-import { likeAjax, localStorageEnabled } from "./util";
+import { likeAjax, localStorageEnabled } from './util';
 
-const LSLIKEKEY = "userLike";
+const LSLIKEKEY = 'userLike';
 
 class LikeManagement {
   constructor() {
@@ -43,7 +43,7 @@ class LikeManagement {
 
   addLike(id) {
     this.likeMap[id.toString()] = true;
-    likeAjax(id, "POST");
+    likeAjax(id, 'POST');
 
     if (!this.isAuth && this.hasLocalStorage) {
       const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
@@ -54,7 +54,7 @@ class LikeManagement {
 
   removeLike(id) {
     delete this.likeMap[id.toString()];
-    likeAjax(id, "DELETE");
+    likeAjax(id, 'DELETE');
     if (!this.isAuth && this.hasLocalStorage) {
       let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
       userLike = userLike.filter(v => v !== id);
