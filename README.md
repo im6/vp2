@@ -1,4 +1,4 @@
-# [ColorPK.com](https://www.colorpk.com) v2.3
+# [ColorPK.com](https://www.colorpk.com) v2
 
 [![logo](https://github.com/zj1926/vp2/blob/master/static/logo.png 'colorpk.com')](https://www.colorpk.com)
 
