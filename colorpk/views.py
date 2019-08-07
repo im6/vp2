@@ -18,7 +18,7 @@ from colorpk.models.auth import OAuth2Facebook, OAuth2Weibo, OAuth2Google, OAuth
 ASSETVERSION = os.getenv('VERSION', 'debug')
 
 template_main = get_template('main.html')
-template_oneColor = get_template('one_color.html')
+template_one_color = get_template('one_color.html')
 template_error = get_template('error.html')
 template_create = get_template('create.html')
 template_admin = get_template('admin.html')
@@ -30,7 +30,7 @@ template_about = get_template('about.html')
 def popular(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
     alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
-    likeList = request.session.get('likes', [])
+    like_list = request.session.get('likes', [])
     user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
@@ -38,14 +38,14 @@ def popular(request: HttpRequest) -> HttpResponse:
         'version': ASSETVERSION,
         'list': alldata1,
         'user': user,
-        'likes': likeList,
+        'likes': like_list,
         'csrf_token': get_token(request),
     }))
 
 
 def latest(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
-    likeList = request.session.get('likes', [])
+    like_list = request.session.get('likes', [])
     user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
@@ -53,15 +53,15 @@ def latest(request: HttpRequest) -> HttpResponse:
         'version': ASSETVERSION,
         'list': alldata,
         'user': user,
-        'likes': likeList,
+        'likes': like_list,
         'csrf_token': get_token(request),
     }))
 
 
 def color_one(request: HttpRequest, id: int) -> HttpResponse:
-    oneColor = cache.getColor(id)
-    if oneColor:
-        return HttpResponse(template_oneColor.render({
+    one_color = cache.getColor(id)
+    if one_color:
+        return HttpResponse(template_one_color.render({
             'path': request.path,
             'assetName': 'bundle3',
             'version': ASSETVERSION,
@@ -69,10 +69,10 @@ def color_one(request: HttpRequest, id: int) -> HttpResponse:
             'likes': request.session.get('likes', []),
             'oneColor': {
                 'id': id,
-                'color': oneColor.get('color'),
-                'like': oneColor.get('like'),
-                'username': oneColor.get('username') if oneColor.get('username') else 'Anonymous',
-                'createdate': oneColor.get('createdate'),
+                'color': one_color.get('color'),
+                'like': one_color.get('like'),
+                'username': one_color.get('username') if one_color.get('username') else 'Anonymous',
+                'createdate': one_color.get('createdate'),
             },
             'csrf_token': get_token(request),
         }))

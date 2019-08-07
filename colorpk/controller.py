@@ -5,6 +5,7 @@ from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike
 from colorpk.shared import colorpk_admin_auth
 import colorpk.repository.cache as cache
 
+
 @require_http_methods(['POST', 'DELETE'])
 @cache.colorpk_like_buffer
 def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
@@ -14,9 +15,9 @@ def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
         result = False
         if user:
             result = createUserLike(id, user.get('id'))
-            currentLike = request.session['likes']
-            currentLike.append(id)
-            request.session['likes'] = currentLike
+            current_like = request.session['likes']
+            current_like.append(id)
+            request.session['likes'] = current_like
         return JsonResponse({
             'error': result
         })
@@ -25,11 +26,13 @@ def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
         result = False
         if user:
             result = deleteUserLike(id, user.get('id'))
-            currentLike = request.session['likes']
-            request.session['likes'] = list(filter(lambda x: x != id, currentLike))
+            current_like = request.session['likes']
+            request.session['likes'] = list(
+                filter(lambda x: x != id, current_like))
         return JsonResponse({
             'error': result
         })
+
 
 @require_http_methods(['POST'])
 def create_color(request: HttpRequest) -> HttpResponse:
@@ -37,9 +40,9 @@ def create_color(request: HttpRequest) -> HttpResponse:
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
 
-    colorValue = '#'.join(body.get('color'))
-    if len(colorValue) == 27:
-        result = createNewColor(colorValue, user)
+    color_value = '#'.join(body.get('color'))
+    if len(color_value) == 27:
+        result = createNewColor(color_value, user)
         return JsonResponse({
             'error': result
         })
@@ -47,6 +50,7 @@ def create_color(request: HttpRequest) -> HttpResponse:
         return JsonResponse({
             'error': 'color value size illegal'
         })
+
 
 @require_http_methods(['POST', 'DELETE'])
 @colorpk_admin_auth('json')
@@ -62,12 +66,13 @@ def approve(request: HttpRequest, id: int) -> HttpResponse:
             'error': result
         })
 
+
 @require_http_methods(['POST'])
 @colorpk_admin_auth('json')
 def sync_cache(request: HttpRequest) -> HttpResponse:
-    cacheData = cache.getCachedLikes()
+    cache_data = cache.getCachedLikes()
     result = cache.syncAndRefresh()
     return JsonResponse({
         'error': result,
-        'data': cacheData
+        'data': cache_data
     })
