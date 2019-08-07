@@ -55,7 +55,7 @@ def latest(request: HttpRequest) -> HttpResponse:
         'csrf_token': get_token(request),
     }))
 
-def colorOne(request: HttpRequest, id: int) -> HttpResponse:
+def color_one(request: HttpRequest, id: int) -> HttpResponse:
     oneColor = cache.getColor(id)
     if oneColor:
         return HttpResponse(template_oneColor.render({
@@ -79,7 +79,7 @@ def colorOne(request: HttpRequest, id: int) -> HttpResponse:
             'msg': 'Color Not Found!'
         }))
 
-def newcolor(request: HttpRequest) -> HttpResponse:
+def new_color(request: HttpRequest) -> HttpResponse:
     defaultValue = request.GET.get('c', '')
     return HttpResponse(template_create.render({
         'path': request.path,

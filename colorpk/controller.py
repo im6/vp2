@@ -7,7 +7,7 @@ import colorpk.repository.cache as cache
 
 @require_http_methods(['POST', 'DELETE'])
 @cache.colorpk_like_buffer
-def toggleLike(request: HttpRequest, id: int) -> HttpResponse:
+def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == 'POST':
         cache.like(id)
         user = request.session.get('user', None)
@@ -32,7 +32,7 @@ def toggleLike(request: HttpRequest, id: int) -> HttpResponse:
         })
 
 @require_http_methods(['POST'])
-def createColor(request: HttpRequest) -> HttpResponse:
+def create_color(request: HttpRequest) -> HttpResponse:
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     user = request.session.get('user', None)
@@ -64,7 +64,7 @@ def approve(request: HttpRequest, id: int) -> HttpResponse:
 
 @require_http_methods(['POST'])
 @colorpk_admin_auth('json')
-def syncCache(request: HttpRequest) -> HttpResponse:
+def sync_cache(request: HttpRequest) -> HttpResponse:
     cacheData = cache.getCachedLikes()
     result = cache.syncAndRefresh()
     return JsonResponse({
