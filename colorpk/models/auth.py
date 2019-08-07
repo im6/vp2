@@ -64,7 +64,7 @@ class OAuth2(metaclass=ABCMeta):
             result['id'] = newUser.id
         return result
 
-class OAuth2_fb(OAuth2):
+class OAuth2Facebook(OAuth2):
     def __init__(self):
         super().__init__('fb')
 
@@ -95,7 +95,7 @@ class OAuth2_fb(OAuth2):
         }
         return data
 
-class OAuth2_wb(OAuth2):
+class OAuth2Weibo(OAuth2):
     def __init__(self):
         super().__init__('wb')
         self.uid = None
@@ -129,7 +129,7 @@ class OAuth2_wb(OAuth2):
         }
         return data
 
-class OAuth2_gg(OAuth2):
+class OAuth2Google(OAuth2):
     def __init__(self):
         super().__init__('gg')
 
@@ -161,7 +161,7 @@ class OAuth2_gg(OAuth2):
         return data
 
 
-class OAuth2_gh(OAuth2):
+class OAuth2Github(OAuth2):
     def __init__(self):
         super().__init__('gh')
 

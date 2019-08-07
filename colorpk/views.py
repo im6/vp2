@@ -13,7 +13,7 @@ import colorpk.repository.cache as cache
 from colorpk.models.auth import getUrl
 from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import getUserLike, getUnpublishedColors
-from colorpk.models.auth import OAuth2_fb, OAuth2_wb, OAuth2_gg, OAuth2_gh # needed here
+from colorpk.models.auth import OAuth2Facebook, OAuth2Weibo, OAuth2Google, OAuth2Github  # needed here
 
 ASSETVERSION = os.getenv('VERSION', 'debug')
 
@@ -25,6 +25,7 @@ template_admin = get_template('admin.html')
 template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
 template_about = get_template('about.html')
+
 
 def popular(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
@@ -41,6 +42,7 @@ def popular(request: HttpRequest) -> HttpResponse:
         'csrf_token': get_token(request),
     }))
 
+
 def latest(request: HttpRequest) -> HttpResponse:
     alldata = cache.getColors()
     likeList = request.session.get('likes', [])
@@ -54,6 +56,7 @@ def latest(request: HttpRequest) -> HttpResponse:
         'likes': likeList,
         'csrf_token': get_token(request),
     }))
+
 
 def color_one(request: HttpRequest, id: int) -> HttpResponse:
     oneColor = cache.getColor(id)
@@ -79,6 +82,7 @@ def color_one(request: HttpRequest, id: int) -> HttpResponse:
             'msg': 'Color Not Found!'
         }))
 
+
 def new_color(request: HttpRequest) -> HttpResponse:
     defaultValue = request.GET.get('c', '')
     return HttpResponse(template_create.render({
@@ -89,6 +93,7 @@ def new_color(request: HttpRequest) -> HttpResponse:
         'defaultValue': defaultValue,
         'csrf_token': get_token(request),
     }))
+
 
 @colorpk_admin_auth('view')
 def admin(request: HttpRequest) -> HttpResponse:
@@ -101,6 +106,7 @@ def admin(request: HttpRequest) -> HttpResponse:
         'list': invisibleColor,
         'csrf_token': get_token(request),
     }))
+
 
 def signin(request: HttpRequest) -> HttpResponse:
     state = str(uuid.uuid4())
@@ -119,6 +125,7 @@ def signin(request: HttpRequest) -> HttpResponse:
         'gh': getUrl('gh', state),
     }))
 
+
 @cache_page(60 * 60)
 def notfound(request: HttpRequest) -> HttpResponse:
     return HttpResponseNotFound(template_error.render({
@@ -126,14 +133,17 @@ def notfound(request: HttpRequest) -> HttpResponse:
         'msg': 'Not Found!'
     }))
 
+
 def profile(request: HttpRequest) -> HttpResponse:
     user = request.session.get('user', None)
     if user:
         visible_list = cache.getColors()
         invis_list = cache.getInvisibleColors()
-        list0 = filter(lambda a: a.get('userid') == user.get('id'), invis_list + visible_list)
+        list0 = filter(lambda a: a.get('userid') ==
+                       user.get('id'), invis_list + visible_list)
         list1_ids = getUserLike(user['id'])
-        list1 = filter(lambda a: a.get('id') in list1_ids, invis_list + visible_list)
+        list1 = filter(lambda a: a.get('id') in list1_ids,
+                       invis_list + visible_list)
         return HttpResponse(template_profile.render({
             'path': request.path,
             'assetName': 'bundle4',
@@ -149,10 +159,18 @@ def profile(request: HttpRequest) -> HttpResponse:
             'msg': 'Unauthorized!'
         }))
 
+
 def auth(request: HttpRequest, src: str) -> HttpResponse:
     if request.session.get('state', None) == request.GET['state']:
         del request.session['state']
-        auth = getattr(sys.modules[__name__], 'OAuth2_%s'%src)()
+        name_map = {
+            'gg': 'Google',
+            'fb': 'Facebook',
+            'gh': 'Github',
+            'wb': 'Weibo'
+        }
+        auth = getattr(sys.modules[__name__],
+                       'OAuth2%s' % name_map.get(src))()
         token = auth.getToken(request.GET['code'])
         if token:
             userInfo = auth.getUserInfo(token)
@@ -174,6 +192,7 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
             'version': ASSETVERSION,
             'error': 'No valid state found.'
         }))
+
 
 def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_about.render())
