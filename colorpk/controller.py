@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.views.decorators.http import require_http_methods
-from colorpk.repository.db import createNewColor, createUserLike, deleteUserLike, approveColor, deleteColor
+from colorpk.repository.db import create_new_color, create_user_like, delete_user_like, approve_color, delete_color
 from colorpk.shared import colorpk_admin_auth
 import colorpk.repository.cache as cache
 
@@ -14,7 +14,7 @@ def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
         user = request.session.get('user', None)
         result = False
         if user:
-            result = createUserLike(id, user.get('id'))
+            result = create_user_like(id, user.get('id'))
             current_like = request.session['likes']
             current_like.append(id)
             request.session['likes'] = current_like
@@ -25,7 +25,7 @@ def toggle_like(request: HttpRequest, id: int) -> HttpResponse:
         user = request.session.get('user', None)
         result = False
         if user:
-            result = deleteUserLike(id, user.get('id'))
+            result = delete_user_like(id, user.get('id'))
             current_like = request.session['likes']
             request.session['likes'] = list(
                 filter(lambda x: x != id, current_like))
@@ -42,7 +42,7 @@ def create_color(request: HttpRequest) -> HttpResponse:
 
     color_value = '#'.join(body.get('color'))
     if len(color_value) == 27:
-        result = createNewColor(color_value, user)
+        result = create_new_color(color_value, user)
         return JsonResponse({
             'error': result
         })
@@ -56,12 +56,12 @@ def create_color(request: HttpRequest) -> HttpResponse:
 @colorpk_admin_auth('json')
 def approve(request: HttpRequest, id: int) -> HttpResponse:
     if request.method == 'POST':
-        result = approveColor(id)
+        result = approve_color(id)
         return JsonResponse({
             'error': result
         })
     elif request.method == 'DELETE':
-        result = deleteColor(id)
+        result = delete_color(id)
         return JsonResponse({
             'error': result
         })

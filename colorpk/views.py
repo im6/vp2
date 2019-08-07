@@ -12,7 +12,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 import colorpk.repository.cache as cache
 from colorpk.models.auth import getUrl
 from colorpk.shared import colorpk_admin_auth
-from colorpk.repository.db import getUserLike, getUnpublishedColors
+from colorpk.repository.db import get_user_like, get_unpublished_colors
 from colorpk.models.auth import OAuth2Facebook, OAuth2Weibo, OAuth2Google, OAuth2Github  # needed here
 
 ASSETVERSION = os.getenv('VERSION', 'debug')
@@ -84,26 +84,26 @@ def color_one(request: HttpRequest, id: int) -> HttpResponse:
 
 
 def new_color(request: HttpRequest) -> HttpResponse:
-    defaultValue = request.GET.get('c', '')
+    default_value = request.GET.get('c', '')
     return HttpResponse(template_create.render({
         'path': request.path,
         'assetName': 'bundle2',
         'version': ASSETVERSION,
         'user': request.session.get('user', None),
-        'defaultValue': defaultValue,
+        'defaultValue': default_value,
         'csrf_token': get_token(request),
     }))
 
 
 @colorpk_admin_auth('view')
 def admin(request: HttpRequest) -> HttpResponse:
-    invisibleColor = getUnpublishedColors()
+    invisible_color = get_unpublished_colors()
     return HttpResponse(template_admin.render({
         'path': request.path,
         'assetName': 'bundle5',
         'version': ASSETVERSION,
         'user': request.session.get('user', None),
-        'list': invisibleColor,
+        'list': invisible_color,
         'csrf_token': get_token(request),
     }))
 
@@ -127,7 +127,7 @@ def signin(request: HttpRequest) -> HttpResponse:
 
 
 @cache_page(60 * 60)
-def notfound(request: HttpRequest) -> HttpResponse:
+def not_found(request: HttpRequest) -> HttpResponse:
     return HttpResponseNotFound(template_error.render({
         'code': 404,
         'msg': 'Not Found!'
@@ -141,7 +141,7 @@ def profile(request: HttpRequest) -> HttpResponse:
         invis_list = cache.getInvisibleColors()
         list0 = filter(lambda a: a.get('userid') ==
                        user.get('id'), invis_list + visible_list)
-        list1_ids = getUserLike(user['id'])
+        list1_ids = get_user_like(user['id'])
         list1 = filter(lambda a: a.get('id') in list1_ids,
                        invis_list + visible_list)
         return HttpResponse(template_profile.render({
@@ -176,7 +176,7 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
             userInfo = auth.getUserInfo(token)
             userJSON = auth.registerUser(userInfo)
             request.session['user'] = userJSON
-            request.session['likes'] = getUserLike(userJSON.get('id'))
+            request.session['likes'] = get_user_like(userJSON.get('id'))
             return redirect('/')
         else:
             return HttpResponse(template_signin.render({

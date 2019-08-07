@@ -1,13 +1,13 @@
 import logging
 from django.template.loader import get_template
 from django.http import JsonResponse, HttpResponse
-from colorpk.repository.db import checkAdmin
+from colorpk.repository.db import check_admin
 
 def colorpk_admin_auth(resType: str):
     def colorpk_auth_inner(function):
         def wrapper(*args, **kwargs):
             user = args[0].session.get('user', None)
-            if user and checkAdmin(user.get('id')):
+            if user and check_admin(user.get('id')):
                 return function(*args, **kwargs)
             else:
                 if user:

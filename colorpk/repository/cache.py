@@ -1,7 +1,7 @@
 import logging
 from django.conf import settings
 from django.core.cache import cache
-from colorpk.repository.db import getAllColor, syncByCache
+from colorpk.repository.db import get_all_color, sync_by_cache
 
 BUFFERSIZE = 3 if settings.DEBUG else 50
 GLOBAL_COLOR_KEY = 'global_colors'
@@ -59,7 +59,7 @@ def like(id) -> None:
 def refreshColorStore() -> None:
     logging.debug('refreshing cache data from db...')
     try:
-        init_colors0 = getAllColor()
+        init_colors0 = get_all_color()
         init_colors = sorted(init_colors0, key=lambda v: v['id'], reverse=True)
         colors_visible = list(filter(lambda x: not x['display'], init_colors))
         colors_invisible = list(filter(lambda x: x['display'], init_colors))
@@ -72,7 +72,7 @@ def refreshColorStore() -> None:
 def syncDB() -> None:
     logging.debug('sync db with cache...')
     like_obj = cache.get(GLOBAL_LIKE_KEY)
-    syncByCache(like_obj)
+    sync_by_cache(like_obj)
     cache.set(GLOBAL_LIKE_KEY, {})
 
 def syncAndRefresh() -> bool:

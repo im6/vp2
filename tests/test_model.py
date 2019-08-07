@@ -1,15 +1,16 @@
 from django.test import TestCase
 from colorpk.models.db import Color
 from datetime import datetime, timezone
-from colorpk.repository.db import getAllColor
+from colorpk.repository.db import get_all_color
+
 
 class ModelTestCase(TestCase):
     def setUp(self):
-        self.colorList = getAllColor()
+        self.colorList = get_all_color()
         if len(self.colorList) < 1:
             print("color list empty.")
             self.createDummyColors()
-            self.colorList = getAllColor()
+            self.colorList = get_all_color()
 
     def test_color_exist(self):
         self.assertTrue(len(self.colorList) == 3)

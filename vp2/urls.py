@@ -19,5 +19,5 @@ urlpatterns = [
     path('sync', controller.sync_cache),
     path('create', controller.create_color),
 
-    re_path(r'/*', views.notfound),
+    re_path(r'/*', views.not_found),
 ]
