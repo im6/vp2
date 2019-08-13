@@ -12,20 +12,20 @@ def get_all_color():
 
 
 def create_new_color(color, user):
-    newColorParams = {
+    new_color_params = {
         'like': math.floor(random() * 30),
         'color': color,
         'display': 1,
         'createdate': datetime.now(timezone.utc)
     }
     if user:
-        newColorParams['userid'] = user.get('id')
-        newColorParams['username'] = user.get('name')
+        new_color_params['userid'] = user.get('id')
+        new_color_params['username'] = user.get('name')
 
     error = False
     try:
-        newColor = Color(**newColorParams)
-        newColor.save()
+        new_color = Color(**new_color_params)
+        new_color.save()
     except:
         error = True
 
@@ -34,8 +34,8 @@ def create_new_color(color, user):
 
 def create_user_like(colorId, userId):
     try:
-        ul = UserLike(color_id=colorId, user_id=userId)
-        ul.save()
+        user_like_item = UserLike(color_id=colorId, user_id=userId)
+        user_like_item.save()
         return False
     except:
         logging.error('Try to add duplicate to the userlike')
@@ -44,8 +44,8 @@ def create_user_like(colorId, userId):
 
 def delete_user_like(colorId, userId):
     try:
-        ul = UserLike.objects.get(color_id=colorId, user_id=userId)
-        ul.delete()
+        user_like_item = UserLike.objects.get(color_id=colorId, user_id=userId)
+        user_like_item.delete()
         return False
     except:
         logging.error('Try to delete records not exist on userlike table.')
@@ -73,20 +73,20 @@ def get_unpublished_colors():
 
 
 def approve_color(id):
-    thisColor = Color.objects.get(id=id)
-    thisColor.display = False
-    thisColor.save()
+    this_color = Color.objects.get(id=id)
+    this_color.display = False
+    this_color.save()
     return False
 
 
 def delete_color(id):
-    thisColor = Color.objects.get(id=id)
-    thisColor.delete()
+    this_color = Color.objects.get(id=id)
+    this_color.delete()
     return False
 
 
 def sync_by_cache(data):
     for id in data.keys():
-        thisColor = Color.objects.get(id=id)
-        thisColor.like = thisColor.like + data.get(id)
-        thisColor.save()
+        this_color = Color.objects.get(id=id)
+        this_color.like = this_color.like + data.get(id)
+        this_color.save()

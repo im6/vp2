@@ -28,15 +28,15 @@ template_about = get_template('about.html')
 
 
 def popular(request: HttpRequest) -> HttpResponse:
-    alldata = cache.getColors()
-    alldata1 = sorted(alldata, key=lambda v: v['like'], reverse=True)
+    all_data = cache.getColors()
+    all_data_sorted = sorted(all_data, key=lambda v: v['like'], reverse=True)
     like_list = request.session.get('likes', [])
     user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
         'version': ASSETVERSION,
-        'list': alldata1,
+        'list': all_data_sorted,
         'user': user,
         'likes': like_list,
         'csrf_token': get_token(request),
@@ -44,14 +44,14 @@ def popular(request: HttpRequest) -> HttpResponse:
 
 
 def latest(request: HttpRequest) -> HttpResponse:
-    alldata = cache.getColors()
+    all_data = cache.getColors()
     like_list = request.session.get('likes', [])
     user = request.session.get('user', None)
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
         'version': ASSETVERSION,
-        'list': alldata,
+        'list': all_data,
         'user': user,
         'likes': like_list,
         'csrf_token': get_token(request),
