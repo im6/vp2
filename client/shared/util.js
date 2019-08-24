@@ -7,7 +7,7 @@ const clearCookieFromOldVersion = () => {
     window.location.reload();
   }
 };
-
+export const noop = () => { };
 clearCookieFromOldVersion();
 
 const checkLocalStorage = () => {
@@ -58,14 +58,14 @@ export const likeAjax = (id, method) => {
   });
 };
 
-export const noop = () => {};
+
 export const debounce = (fn, wait) => {
   let timeout = null;
-  return function() {
+  return function () {
     const context = this;
     const args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       fn.apply(context, args);
     }, wait);
   };

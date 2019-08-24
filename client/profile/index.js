@@ -1,4 +1,6 @@
-//https://codepen.io/JiveDig/pen/jbdJXR
+
+/* eslint-disable no-underscore-dangle, no-console */
+
 import '../layout';
 import './style.scss';
 import Box from '../colors/box';
@@ -42,7 +44,7 @@ const addColorBox = source => {
       const delayTime = `${i * ENTRYANIMDELAY}ms`;
       oneBox.style.animationDelay = delayTime;
       const rows = oneBox.querySelectorAll('.canvas > div');
-      for (let rid = 0; rid < 4; rid++) {
+      for (let rid = 0; rid < 4; rid += 1) {
         rows[rid].style.animationDelay = delayTime;
       }
     } catch (error) {
@@ -55,7 +57,7 @@ const addColorBox = source => {
   if (window._colorpk[source].length < 1) {
     $listDiv.innerHTML = `<h3>You have not ${
       likeMode ? 'liked' : 'created'
-    } any color.</h3>`;
+      } any color.</h3>`;
   }
 };
 

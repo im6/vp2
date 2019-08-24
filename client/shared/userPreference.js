@@ -1,13 +1,13 @@
 import { localStorageEnabled } from './util';
+
 const WELCOMEKEY = 'hideWelcome';
 const DISABLEWELCOMEVALUE = '1';
 
 export const checkWelcome = () => {
   if (localStorageEnabled) {
     return window.localStorage.getItem(WELCOMEKEY) === DISABLEWELCOMEVALUE;
-  } else {
-    return false;
   }
+  return false;
 };
 
 export const hideWelcome = () => {

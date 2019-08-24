@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { likeAjax, localStorageEnabled } from './util';
 
 const LSLIKEKEY = 'userLike';
@@ -8,8 +9,9 @@ class LikeManagement {
     this.hasLocalStorage = localStorageEnabled;
     this.likeMap = this.initLike();
   }
+
   initLike() {
-    let res = {};
+    const res = {};
     if (this.isAuth) {
       // grab from global _colorpk
       if (Array.isArray(window._colorpk.list1)) {
@@ -64,4 +66,5 @@ class LikeManagement {
 }
 
 const likeManager = new LikeManagement();
+
 export default likeManager;

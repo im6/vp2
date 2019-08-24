@@ -15,3 +15,7 @@ npm start
 <set your env variable>
 python manage.py runserver 3001
 ```
+
+## Special thanks
+
+[styled tab](//https://codepen.io/JiveDig/pen/jbdJXR)

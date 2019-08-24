@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./client",
     "start": "webpack-dev-server --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
@@ -27,6 +28,10 @@
     "compression-webpack-plugin": "^3.0.0",
     "css-loader": "^3.0.0",
     "dragula": "^3.7.2",
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
     "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
