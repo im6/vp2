@@ -93,18 +93,18 @@ export const downloadCanvas = color => {
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, WIDTH, HEIGHT * CANVASRATIO + MARGIN * 4);
 
-  ctx.fillStyle = colors[0];
+  ctx.fillStyle = colors[0]; // eslint-disable-line prefer-destructuring
   ctx.fillRect(MARGIN, MARGIN, WIDTH - MARGIN * 2, boxHts[0]);
-  ctx.fillStyle = colors[1];
+  ctx.fillStyle = colors[1]; // eslint-disable-line prefer-destructuring
   ctx.fillRect(MARGIN, MARGIN + boxHts[0], WIDTH - MARGIN * 2, boxHts[1]);
-  ctx.fillStyle = colors[2];
+  ctx.fillStyle = colors[2]; // eslint-disable-line prefer-destructuring
   ctx.fillRect(
     MARGIN,
     MARGIN + boxHts[0] + boxHts[1],
     WIDTH - MARGIN * 2,
     boxHts[2]
   );
-  ctx.fillStyle = colors[3];
+  ctx.fillStyle = colors[3]; // eslint-disable-line prefer-destructuring
   ctx.fillRect(
     MARGIN,
     MARGIN + boxHts[0] + boxHts[1] + boxHts[2],
