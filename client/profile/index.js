@@ -18,24 +18,24 @@ const addColorBox = source => {
       id,
       color,
       like,
-      isLiked: likeMode || likeManager.likeMap.hasOwnProperty(v.id),
-      onLike: id => {
-        likeManager.addLike(id);
+      isLiked: likeMode || Object.prototype.hasOwnProperty.call(likeManager.likeMap, v.id),
+      onLike: id0 => {
+        likeManager.addLike(id0);
         if (!likeMode) {
-          const one = window._colorpk.list0.find(v => v.id === id);
+          const one = window._colorpk.list0.find(v0 => v0.id === id0);
           window._colorpk.list1.push(one);
         }
       },
-      onUnlike: id => {
-        likeManager.removeLike(id);
-        window._colorpk.list1 = window._colorpk.list1.filter(v => v.id !== id);
+      onUnlike: id0 => {
+        likeManager.removeLike(id0);
+        window._colorpk.list1 = window._colorpk.list1.filter(v0 => v0.id !== id0);
         if (likeMode) {
-          const thisBox = document.querySelector(`[data-k='${id}']`);
+          const thisBox = document.querySelector(`[data-k='${id0}']`);
           $listDiv.removeChild(thisBox);
         }
       },
-      onRedir: id => {
-        window.location.href = `/color/${id}`;
+      onRedir: id0 => {
+        window.location.href = `/color/${id0}`;
       },
     });
 
@@ -47,6 +47,7 @@ const addColorBox = source => {
         rows[rid].style.animationDelay = delayTime;
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn('browser compatible');
     }
 
@@ -56,18 +57,18 @@ const addColorBox = source => {
   if (window._colorpk[source].length < 1) {
     $listDiv.innerHTML = `<h3>You have not ${
       likeMode ? 'liked' : 'created'
-    } any color.</h3>`;
+      } any color.</h3>`;
   }
 };
 
-document.getElementById('switch_left').onclick = event => {
+document.getElementById('switch_left').onclick = () => {
   if (currentInd !== 'list0') {
     addColorBox('list0');
     currentInd = 'list0';
   }
 };
 
-document.getElementById('switch_right').onclick = event => {
+document.getElementById('switch_right').onclick = () => {
   if (currentInd !== 'list1') {
     addColorBox('list1');
     currentInd = 'list1';

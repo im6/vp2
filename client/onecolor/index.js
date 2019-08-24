@@ -5,6 +5,7 @@ import likeManager from '../shared/likeManager';
 
 const downloadBtn = document.getElementById('download');
 const container = document.getElementsByClassName('container')[0];
+// eslint-disable-next-line no-underscore-dangle
 const { id, color, like } = window._colorpk.selected;
 downloadBtn.href = downloadCanvas(color);
 
@@ -12,12 +13,12 @@ const oneBox = new Box({
   id,
   color,
   like,
-  isLiked: likeManager.likeMap.hasOwnProperty(id),
-  onLike: id => {
-    likeManager.addLike(id);
+  isLiked: Object.prototype.hasOwnProperty.call(likeManager.likeMap, id),
+  onLike: id0 => {
+    likeManager.addLike(id0);
   },
-  onUnlike: id => {
-    likeManager.removeLike(id);
+  onUnlike: id0 => {
+    likeManager.removeLike(id0);
   },
 });
 
