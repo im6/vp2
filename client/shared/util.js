@@ -7,7 +7,7 @@ const clearCookieFromOldVersion = () => {
     window.location.reload();
   }
 };
-export const noop = () => {};
+export const noop = () => { };
 clearCookieFromOldVersion();
 
 const checkLocalStorage = () => {
@@ -60,23 +60,22 @@ export const likeAjax = (id, method) => {
 
 export const debounce = (fn, wait) => {
   let timeout = null;
-  return function() {
+  return (...args) => {
     const context = this;
-    const args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(() => {
       fn.apply(context, args);
     }, wait);
   };
 };
 
 export const downloadCanvas = color => {
-  const HEIGHT = 420,
-    WIDTH = 340,
-    MARGIN = 13,
-    CANVASRATIO = 0.65;
+  const HEIGHT = 420;
+  const WIDTH = 340;
+  const MARGIN = 13;
+  const CANVASRATIO = 0.65;
 
-  const colors = color.split('#').map(v => '#' + v);
+  const colors = color.split('#').map(v => `#${v}`);
   const myCanvas = document.createElement('canvas');
   const ctx = myCanvas.getContext('2d');
 
@@ -113,8 +112,8 @@ export const downloadCanvas = color => {
     boxHts[3]
   );
 
-  const colorTxtPosition = CANVASRATIO * HEIGHT + 80,
-    space = 17;
+  const colorTxtPosition = CANVASRATIO * HEIGHT + 80;
+  const space = 17;
 
   ctx.font = '13px Arial';
   ctx.fillStyle = '#a3a3a3';

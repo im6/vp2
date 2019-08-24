@@ -18,7 +18,9 @@ const addColorBox = source => {
       id,
       color,
       like,
-      isLiked: likeMode || Object.prototype.hasOwnProperty.call(likeManager.likeMap, v.id),
+      isLiked:
+        likeMode ||
+        Object.prototype.hasOwnProperty.call(likeManager.likeMap, v.id),
       onLike: id0 => {
         likeManager.addLike(id0);
         if (!likeMode) {
@@ -28,7 +30,9 @@ const addColorBox = source => {
       },
       onUnlike: id0 => {
         likeManager.removeLike(id0);
-        window._colorpk.list1 = window._colorpk.list1.filter(v0 => v0.id !== id0);
+        window._colorpk.list1 = window._colorpk.list1.filter(
+          v0 => v0.id !== id0
+        );
         if (likeMode) {
           const thisBox = document.querySelector(`[data-k='${id0}']`);
           $listDiv.removeChild(thisBox);
@@ -57,7 +61,7 @@ const addColorBox = source => {
   if (window._colorpk[source].length < 1) {
     $listDiv.innerHTML = `<h3>You have not ${
       likeMode ? 'liked' : 'created'
-      } any color.</h3>`;
+    } any color.</h3>`;
   }
 };
 
