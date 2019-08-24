@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import '../layout';
 import './style.scss';
 import Box from './box';
@@ -11,10 +12,11 @@ const $listDiv = document.getElementsByClassName('list')[0];
 let currentIdx = 0;
 
 const addColorBox = step => {
-  for (let i = 0; i < step; i++) {
+  let forwardSteps = step;
+  for (let i = 0; i < step; i += 1) {
     const v = window._colorpk.initData[i + currentIdx];
     if (!v) {
-      step = i;
+      forwardSteps = i;
       break;
     }
     const { id, like, color } = v;
@@ -22,29 +24,29 @@ const addColorBox = step => {
       id,
       color,
       like,
-      isLiked: likeManager.likeMap.hasOwnProperty(v.id),
+      isLiked: Object.prototype.hasOwnProperty.call(likeManager.likeMap, v.id),
       animDelay: `${i * ENTRYANIMDELAY}ms`,
-      onLike: id => {
-        likeManager.addLike(id);
+      onLike: id1 => {
+        likeManager.addLike(id1);
       },
-      onUnlike: id => {
-        likeManager.removeLike(id);
+      onUnlike: id1 => {
+        likeManager.removeLike(id1);
       },
-      onRedir: id => {
-        window.location.href = `/color/${id}`;
+      onRedir: id1 => {
+        window.location.href = `/color/${id1}`;
       },
     });
 
     $listDiv.appendChild(oneBox);
   }
 
-  currentIdx += step;
+  currentIdx += forwardSteps;
 };
 
 window.onscroll = debounce(evt => {
   const bodyElem = evt.target.scrollingElement || evt.target.activeElement;
   const htmlElem = document.documentElement;
-  let position = bodyElem.scrollTop || htmlElem.scrollTop;
+  const position = bodyElem.scrollTop || htmlElem.scrollTop;
   const offset = htmlElem.scrollHeight - position - htmlElem.clientHeight;
 
   if (offset < SCROLLBOUND && currentIdx < LIMIT) {

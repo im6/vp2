@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-underscore-dangle
 const { staticPath } = window._colorpk;
 class Box {
   constructor({
@@ -32,7 +33,7 @@ class Box {
     const cvs = document.createElement('div');
     cvs.classList.add('canvas');
     const colors0 = this.color.split('#');
-    const colors1 = colors0.map(v => '#' + v);
+    const colors1 = colors0.map(v => `#${v}`);
     colors1.forEach(v => {
       const oneColor = document.createElement('div');
       const oneColorTxt = document.createElement('span');
@@ -56,8 +57,8 @@ class Box {
     btn.setAttribute('type', 'button');
     btn.innerHTML = `<img src="${staticPath}${
       this.isLiked ? 'hrtr.svg' : 'hrt.svg'
-    }">${this.like}`;
-    btn.onclick = e => {
+      }">${this.like}`;
+    btn.onclick = () => {
       if (btn.innerHTML.indexOf('hrt.svg') > -1) {
         const newNum = this.isLiked ? this.like : this.like + 1;
         btn.innerHTML = `<img src="${staticPath}hrtr.svg">${newNum}`;

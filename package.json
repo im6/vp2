@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./client/admin",
+    "lint": "eslint ./client/colors",
     "start": "webpack-dev-server --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
@@ -32,6 +32,7 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.2",
     "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.12.0",
