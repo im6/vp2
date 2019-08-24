@@ -7,7 +7,7 @@ const mainElem = document.querySelector('.list'),
   isWelcomeHidden = checkWelcome(),
   helpElem = document.querySelector('.help');
 
-const adjustLayout = (w) => {
+const adjustLayout = w => {
   sizeManager.windowWidth = w;
   const {
     containerWidth,
@@ -17,19 +17,19 @@ const adjustLayout = (w) => {
   } = sizeManager.sizeInfo;
   mainElem.style.width = containerWidth;
   mainElem.style.maxWidth = containerWidthMax;
-  if(helpElem) {
+  if (helpElem) {
     helpElem.style.width = helperWidth;
     helpElem.style.maxWidth = helperWidthMax;
   }
 };
 
-window.onresize = debounce((e) => {
+window.onresize = debounce(e => {
   adjustLayout(e.target.innerWidth);
 }, 250);
 
 adjustLayout(window.innerWidth);
 
-if(!isWelcomeHidden && helpElem) {
+if (!isWelcomeHidden && helpElem) {
   helpElem.style.display = 'block';
   window._colorpk.removeWelcome = () => {
     helpElem.parentElement.removeChild(helpElem);

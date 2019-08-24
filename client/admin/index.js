@@ -8,7 +8,7 @@ const approve = (id, method) => {
     url: `/approve/${id}`,
     data: {},
     success: noop,
-    fail: noop
+    fail: noop,
   });
 
   let tgt = document.querySelector(`[data-k="${id}"]`);
@@ -20,13 +20,12 @@ const syncAjax = () => {
     method: 'POST',
     url: `/sync`,
     data: {},
-    success: ({error, data}) => {
+    success: ({ error, data }) => {
       alert(error ? 'Fail!' : 'Success!' + ': ' + JSON.stringify(data));
     },
-    fail: noop
+    fail: noop,
   });
 };
-
 
 window._colorpk = {
   approve: id => {
@@ -37,7 +36,7 @@ window._colorpk = {
   },
   sync: () => {
     syncAjax();
-  }
+  },
 };
 
 window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

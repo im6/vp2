@@ -3,7 +3,7 @@ const WELCOMEKEY = 'hideWelcome';
 const DISABLEWELCOMEVALUE = '1';
 
 export const checkWelcome = () => {
-  if(localStorageEnabled){
+  if (localStorageEnabled) {
     return window.localStorage.getItem(WELCOMEKEY) === DISABLEWELCOMEVALUE;
   } else {
     return false;
@@ -11,7 +11,7 @@ export const checkWelcome = () => {
 };
 
 export const hideWelcome = () => {
-  if(localStorageEnabled){
+  if (localStorageEnabled) {
     window.localStorage.setItem(WELCOMEKEY, DISABLEWELCOMEVALUE);
   }
 };

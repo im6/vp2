@@ -1,14 +1,10 @@
-'use strict'
+'use strict';
 const common = require('./common');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const {
-  babelLoader,
-  entry,
-  output,
-  resolve,
-} = common;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { babelLoader, entry, output, resolve } = common;
 
-const devPort= 3000, proxyPort = 3001;
+const devPort = 3000,
+  proxyPort = 3001;
 
 module.exports = {
   mode: 'development',
@@ -24,15 +20,15 @@ module.exports = {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: "css-loader" },
-          { loader: "sass-loader" },
-        ]
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: '[name].css',
     }),
   ],
   devServer: {
@@ -45,5 +41,5 @@ module.exports = {
         secure: false,
       },
     },
-  }
+  },
 };

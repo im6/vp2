@@ -7,6 +7,7 @@
     "start": "webpack-dev-server --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "analyze": "webpack --config client/webpack/analyzer.js",
+    "prettier": "prettier --write ./client/**/*.js",
     "test": "jest",
     "coverage": "jest --coverage --silent",
     "single-test": "jest client/colors/box/Box.spec.js -t \"test box click event\""
@@ -32,6 +33,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
+    "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "sweetalert": "^2.1.2",
@@ -41,6 +43,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "pre-commit": [
+    "prettier",
     "test"
   ],
   "babel": {

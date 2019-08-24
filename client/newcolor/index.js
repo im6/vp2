@@ -26,55 +26,56 @@ const resetColors = () => {
 };
 
 const publishMsg = () => {
-  const t0 = "Your new color is created successfully. We will review it before publish. Or you could sign in and have it published instantly.";
-  const t1 = "Your new color is created successfully. ";
-  if(auth){
+  const t0 =
+    'Your new color is created successfully. We will review it before publish. Or you could sign in and have it published instantly.';
+  const t1 = 'Your new color is created successfully. ';
+  if (auth) {
     swal({
-      title: "Success",
+      title: 'Success',
       text: t1,
-      icon: "success",
+      icon: 'success',
       buttons: 'Got it',
     });
   } else {
     swal({
-      title: "Success",
+      title: 'Success',
       text: t0,
-      icon: "success",
+      icon: 'success',
       buttons: ['Got it', 'Sign in'],
     }).then(v => {
-      if(v){
-        window.location = "/signin";
+      if (v) {
+        window.location = '/signin';
       }
     });
   }
 };
 
-const validate = (val) => {
+const validate = val => {
   let isGood = true,
     dupCnt = 0;
   INIT.forEach((v, k) => {
-    if(v === val[k]){
+    if (v === val[k]) {
       dupCnt++;
     }
-    if(val[k].length !== 6){
-      isGood = false
+    if (val[k].length !== 6) {
+      isGood = false;
     }
   });
   let uniq = val.reduce((acc, v, k) => {
-    if(v in acc){
+    if (v in acc) {
       acc[v] += 1;
     } else {
       acc[v] = 1;
     }
     return acc;
-  },{});
+  }, {});
 
-  if(dupCnt > 1){
+  if (dupCnt > 1) {
     isGood = false;
-    swal("Oops", "You need to fill out all columns.", "error" );
-  } else if(Object.keys(uniq).length < 4){
+    swal('Oops', 'You need to fill out all columns.', 'error');
+  } else if (Object.keys(uniq).length < 4) {
     isGood = false;
-    swal("Oops", "Four unique colors seem a better way", "error" );
+    swal('Oops', 'Four unique colors seem a better way', 'error');
   }
   return isGood;
 };
@@ -85,7 +86,7 @@ createBtn.onclick = () => {
   });
 
   const isValide = validate(state);
-  if(isValide){
+  if (isValide) {
     createBtn.disabled = true;
     ajax({
       method: 'POST',
@@ -93,18 +94,18 @@ createBtn.onclick = () => {
       data: {
         color: state,
       },
-      success: ({error}) => {
+      success: ({ error }) => {
         createBtn.disabled = false;
-        if(error){
-          swal("Oops", "Color duplication detected", "error" )
-        }else{
+        if (error) {
+          swal('Oops', 'Color duplication detected', 'error');
+        } else {
           resetColors();
           publishMsg();
         }
       },
       fail: () => {
         createBtn.disabled = false;
-      }
+      },
     });
   }
 };
@@ -113,28 +114,27 @@ document.getElementById('resetBtn').onclick = () => {
   resetColors();
 };
 
-
-window._cpOnColorChange = (jsc) => {
+window._cpOnColorChange = jsc => {
   textElem.value = jsc.toString();
 };
 
 textElem.oninput = ({ target }) => {
   const vl = target.value;
-  if(COLORREG.test(vl)) {
+  if (COLORREG.test(vl)) {
     currentBar.style.backgroundColor = '#' + vl;
     currentBar.jscolor.fromString(vl);
   }
 };
 
-for(let i = 0; i < 4; i ++){
+for (let i = 0; i < 4; i++) {
   bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
-  bars[i].onclick = ({target}) => {
+  bars[i].onclick = ({ target }) => {
     currentBar = target;
     textElem.value = target.jscolor.toString();
   };
 }
 
-dragula([canvas],{
+dragula([canvas], {
   moves: (el, container, handle) => {
     return handle.className === HANDLENAME;
   },
@@ -142,11 +142,11 @@ dragula([canvas],{
 
 setTimeout(() => {
   const { defaultColors } = window._colorpk;
-  if(defaultColors.length > 0){
-    let c0 = defaultColors.substring(0,6);
-    let c1 = defaultColors.substring(6,12);
-    let c2 = defaultColors.substring(12,18);
-    let c3 = defaultColors.substring(18,24);
+  if (defaultColors.length > 0) {
+    let c0 = defaultColors.substring(0, 6);
+    let c1 = defaultColors.substring(6, 12);
+    let c2 = defaultColors.substring(12, 18);
+    let c3 = defaultColors.substring(18, 24);
     bars[0].jscolor.fromString(c0);
     bars[1].jscolor.fromString(c1);
     bars[2].jscolor.fromString(c2);
