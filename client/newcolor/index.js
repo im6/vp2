@@ -1,19 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle,  */
+
 import './style.scss';
 import './jscolor.min';
 import dragula from 'dragula';
 import swal from 'sweetalert';
+// eslint-disable-next-line
 import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
 
-const HANDLENAME = 'drgHdl',
-  COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/,
-  INIT = ['f5f5f5', 'ebebeb', 'd9d9d9', 'c7c7c7'];
+const HANDLENAME = 'drgHdl';
+const COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
+const INIT = ['f5f5f5', 'ebebeb', 'd9d9d9', 'c7c7c7'];
 
-const bars = document.getElementsByClassName('jscolor'),
-  canvas = document.getElementsByClassName('canvas')[0],
-  textElem = document.getElementById('colorText'),
-  createBtn = document.getElementById('createBtn'),
-  { auth } = window._colorpk;
+const bars = document.getElementsByClassName('jscolor');
+const canvas = document.getElementsByClassName('canvas')[0];
+const textElem = document.getElementById('colorText');
+const createBtn = document.getElementById('createBtn');
+const { auth } = window._colorpk;
 
 let currentBar = bars[0];
 
@@ -51,17 +54,18 @@ const publishMsg = () => {
 };
 
 const validate = val => {
-  let isGood = true,
-    dupCnt = 0;
+  let isGood = true;
+  let dupCnt = 0;
+
   INIT.forEach((v, k) => {
     if (v === val[k]) {
-      dupCnt++;
+      dupCnt += 1;
     }
     if (val[k].length !== 6) {
       isGood = false;
     }
   });
-  let uniq = val.reduce((acc, v, k) => {
+  const uniq = val.reduce((acc, v) => {
     if (v in acc) {
       acc[v] += 1;
     } else {
@@ -121,12 +125,12 @@ window._cpOnColorChange = jsc => {
 textElem.oninput = ({ target }) => {
   const vl = target.value;
   if (COLORREG.test(vl)) {
-    currentBar.style.backgroundColor = '#' + vl;
+    currentBar.style.backgroundColor = `#${vl}`;
     currentBar.jscolor.fromString(vl);
   }
 };
 
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 4; i += 1) {
   bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
   bars[i].onclick = ({ target }) => {
     currentBar = target;
@@ -143,10 +147,10 @@ dragula([canvas], {
 setTimeout(() => {
   const { defaultColors } = window._colorpk;
   if (defaultColors.length > 0) {
-    let c0 = defaultColors.substring(0, 6);
-    let c1 = defaultColors.substring(6, 12);
-    let c2 = defaultColors.substring(12, 18);
-    let c3 = defaultColors.substring(18, 24);
+    const c0 = defaultColors.substring(0, 6);
+    const c1 = defaultColors.substring(6, 12);
+    const c2 = defaultColors.substring(12, 18);
+    const c3 = defaultColors.substring(18, 24);
     bars[0].jscolor.fromString(c0);
     bars[1].jscolor.fromString(c1);
     bars[2].jscolor.fromString(c2);

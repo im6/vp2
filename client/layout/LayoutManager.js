@@ -1,7 +1,8 @@
 const MAXNUM = 6;
 let instance = null;
 
-class LayoutManager { // singleton
+class LayoutManager {
+  // singleton
   constructor() {
     if (!instance) {
       this.sizeInfo = null;
