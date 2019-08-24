@@ -11,8 +11,7 @@ const approve = (id, method) => {
     fail: noop,
   });
 
-  let tgt = document.querySelector(`[data-k="${id}"]`);
-  listElem.removeChild(tgt);
+  listElem.removeChild(document.querySelector(`[data-k="${id}"]`));
 };
 
 const syncAjax = () => {
@@ -21,13 +20,14 @@ const syncAjax = () => {
     url: `/sync`,
     data: {},
     success: ({ error, data }) => {
-      alert(error ? 'Fail!' : 'Success!' + ': ' + JSON.stringify(data));
+      const msg = error ? 'Fail!' : `Success: ${JSON.stringify(data)}`;
+      alert(msg); // eslint-disable-line no-alert
     },
     fail: noop,
   });
 };
 
-window._colorpk = {
+window._colorpk = { // eslint-disable-line no-underscore-dangle
   approve: id => {
     approve(id, 'POST');
   },

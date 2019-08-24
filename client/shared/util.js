@@ -58,7 +58,6 @@ export const likeAjax = (id, method) => {
   });
 };
 
-
 export const debounce = (fn, wait) => {
   let timeout = null;
   return function () {

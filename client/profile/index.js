@@ -1,5 +1,4 @@
-
-/* eslint-disable no-underscore-dangle, no-console */
+/* eslint-disable no-underscore-dangle */
 
 import '../layout';
 import './style.scss';
