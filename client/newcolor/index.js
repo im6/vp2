@@ -12,13 +12,13 @@ const HANDLENAME = 'drgHdl';
 const COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
 const INIT = ['f5f5f5', 'ebebeb', 'd9d9d9', 'c7c7c7'];
 
-const bars = document.getElementsByClassName('jscolor');
 const canvas = document.getElementsByClassName('canvas')[0];
+const bars = Array.from(canvas.children);
 const textElem = document.getElementById('colorText');
 const createBtn = document.getElementById('createBtn');
 const { auth } = window._colorpk;
 
-let currentBar = bars[0];
+let currentBarIndex = 0;
 
 const resetColors = () => {
   bars[0].jscolor.fromString(INIT[0]);
@@ -85,7 +85,7 @@ const validate = val => {
 };
 
 createBtn.onclick = () => {
-  const state = [].slice.call(bars).map(v => {
+  const state = bars.map(v => {
     return v.jscolor.toString();
   });
 
@@ -125,16 +125,16 @@ window._cpOnColorChange = jsc => {
 textElem.oninput = ({ target }) => {
   const vl = target.value;
   if (COLORREG.test(vl)) {
-    currentBar.style.backgroundColor = `#${vl}`;
-    currentBar.jscolor.fromString(vl);
+    bars[currentBarIndex].style.backgroundColor = `#${vl}`;
+    bars[currentBarIndex].jscolor.fromString(vl);
   }
 };
 
 for (let i = 0; i < 4; i += 1) {
   bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
-  bars[i].onclick = ({ target }) => {
-    currentBar = target;
-    textElem.value = target.jscolor.toString();
+  bars[i].onclick = () => {
+    currentBarIndex = i;
+    textElem.value = bars[i].jscolor.toString();
   };
 }
 
