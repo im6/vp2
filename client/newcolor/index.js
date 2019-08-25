@@ -20,11 +20,14 @@ const { auth } = window._colorpk;
 
 let currentBarIndex = 0;
 
+const setCurrent = newValue => {
+  currentBarIndex = newValue;
+};
+
 const resetColors = () => {
-  bars[0].jscolor.fromString(INIT[0]);
-  bars[1].jscolor.fromString(INIT[1]);
-  bars[2].jscolor.fromString(INIT[2]);
-  bars[3].jscolor.fromString(INIT[3]);
+  bars.forEach((v, k) => {
+    v.jscolor.fromString(INIT[k]);
+  });
   textElem.value = '';
 };
 
@@ -133,7 +136,7 @@ textElem.oninput = ({ target }) => {
 for (let i = 0; i < 4; i += 1) {
   bars[i].innerHTML = `<h1 class="${HANDLENAME}">&#8801;</h1>`;
   bars[i].onclick = () => {
-    currentBarIndex = i;
+    setCurrent(i);
     textElem.value = bars[i].jscolor.toString();
   };
 }
