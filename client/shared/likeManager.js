@@ -65,6 +65,6 @@ class LikeManagement {
   }
 }
 
-const likeManager = new LikeManagement();
+const likeManager = new LikeManagement(); // always singleton
 
 export default likeManager;

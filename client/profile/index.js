@@ -7,10 +7,14 @@ import likeManager from '../shared/likeManager';
 import { ENTRYANIMDELAY } from '../shared/constant';
 
 const $listDiv = document.getElementsByClassName('list')[0];
-let currentInd = 'list0';
+const tab = {
+  portfolio: 'list0',
+  like: 'list1',
+};
+let currentTab = tab.portfolio;
 
 const addColorBox = source => {
-  const likeMode = source === 'list1';
+  const likeMode = source === tab.like;
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
     const { id, color, like } = v;
@@ -24,13 +28,13 @@ const addColorBox = source => {
       onLike: id0 => {
         likeManager.addLike(id0);
         if (!likeMode) {
-          const one = window._colorpk.list0.find(v0 => v0.id === id0);
-          window._colorpk.list1.push(one);
+          const one = window._colorpk[tab.portfolio].find(v0 => v0.id === id0);
+          window._colorpk[tab.like].push(one);
         }
       },
       onUnlike: id0 => {
         likeManager.removeLike(id0);
-        window._colorpk.list1 = window._colorpk.list1.filter(
+        window._colorpk[tab.like] = window._colorpk[tab.like].filter(
           v0 => v0.id !== id0
         );
         if (likeMode) {
@@ -66,18 +70,18 @@ const addColorBox = source => {
 };
 
 document.getElementById('switch_left').onclick = () => {
-  if (currentInd !== 'list0') {
-    addColorBox('list0');
-    currentInd = 'list0';
+  if (currentTab !== tab.portfolio) {
+    addColorBox(tab.portfolio);
+    currentTab = tab.portfolio;
   }
 };
 
 document.getElementById('switch_right').onclick = () => {
-  if (currentInd !== 'list1') {
-    addColorBox('list1');
-    currentInd = 'list1';
+  if (currentTab !== tab.like) {
+    addColorBox(tab.like);
+    currentTab = tab.like;
   }
 };
 
-addColorBox(currentInd);
+addColorBox(currentTab);
 window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));
