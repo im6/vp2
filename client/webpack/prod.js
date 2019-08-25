@@ -1,10 +1,11 @@
-'use strict';
-const common = require('./common');
+/* eslint-disable import/no-extraneous-dependencies  */
+
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const common = require('./common');
 
 const { entry, output, resolve, babelLoader } = common;
 

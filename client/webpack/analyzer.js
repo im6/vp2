@@ -1,7 +1,6 @@
-'use strict';
+/* eslint-disable import/no-extraneous-dependencies  */
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./common');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
 
 const { babelLoader, entry, output, resolve } = common;
 

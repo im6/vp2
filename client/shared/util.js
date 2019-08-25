@@ -7,7 +7,7 @@ const clearCookieFromOldVersion = () => {
     window.location.reload();
   }
 };
-export const noop = () => { };
+export const noop = () => {};
 clearCookieFromOldVersion();
 
 const checkLocalStorage = () => {

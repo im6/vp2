@@ -1,10 +1,12 @@
-'use strict';
-const common = require('./common');
+/* eslint-disable import/no-extraneous-dependencies  */
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const common = require('./common');
+
 const { babelLoader, entry, output, resolve } = common;
 
-const devPort = 3000,
-  proxyPort = 3001;
+const devPort = 3000;
+const proxyPort = 3001;
 
 module.exports = {
   mode: 'development',
