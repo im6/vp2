@@ -58,29 +58,35 @@ const publishMsg = () => {
 
 const validate = val => {
   let isGood = true;
-  let dupCnt = 0;
+  let emptyRowNum = 0;
 
   INIT.forEach((v, k) => {
     if (v === val[k]) {
-      dupCnt += 1;
+      emptyRowNum += 1;
     }
     if (val[k].length !== 6) {
       isGood = false;
     }
   });
-  const uniq = val.reduce((acc, v) => {
-    if (v in acc) {
-      acc[v] += 1;
-    } else {
-      acc[v] = 1;
+  const uniq = val.reduce(
+    (acc, v) => {
+      if (v in acc) {
+        acc[v] += true;
+      } else {
+        acc[v] = true;
+        acc._num += 1;
+      }
+      return acc;
+    },
+    {
+      _num: 0,
     }
-    return acc;
-  }, {});
+  );
 
-  if (dupCnt > 1) {
+  if (emptyRowNum > 1) {
     isGood = false;
     swal('Oops', 'You need to fill out all columns.', 'error');
-  } else if (Object.keys(uniq).length < 4) {
+  } else if (uniq._num < 4) {
     isGood = false;
     swal('Oops', 'Four unique colors seem a better way', 'error');
   }
