@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle,  */
-
+import '../shared/base';
+import 'core-js/features/array/from';
 import './style.scss';
 import './jscolor.min';
 import dragula from 'dragula';
@@ -168,5 +169,3 @@ setTimeout(() => {
     resetColors();
   }
 }, 50);
-
-window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

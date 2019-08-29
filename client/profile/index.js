@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
+import '../shared/base';
 import '../layout';
 import './style.scss';
 import Box from '../colors/box';
@@ -84,4 +85,3 @@ document.getElementById('switch_right').onclick = () => {
 };
 
 addColorBox(currentTab);
-window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

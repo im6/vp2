@@ -1,3 +1,4 @@
+import '../shared/base';
 import './style.scss';
 import Box from '../colors/box';
 import { downloadCanvas } from '../shared/util';
@@ -23,4 +24,3 @@ const oneBox = new Box({
 });
 
 container.insertBefore(oneBox, downloadBtn);
-window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

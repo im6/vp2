@@ -1,3 +1,4 @@
+import '../shared/base';
 import './style.scss';
 import { ajax, noop } from '../shared/util';
 
@@ -38,5 +39,3 @@ window._colorpk = {
     syncAjax();
   },
 };
-
-window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));

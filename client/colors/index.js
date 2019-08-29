@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import '../shared/base';
 import '../layout';
 import './style.scss';
 import Box from './box';
@@ -55,5 +56,3 @@ window.onscroll = debounce(evt => {
 }, 200);
 
 addColorBox(INITNUM);
-
-window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));
