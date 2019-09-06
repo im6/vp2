@@ -1,25 +1,32 @@
 {% load static %}
 <head>
-    {% if path == '/popular' %}
-        <title>Popular | ColorPK | Color Palette for Designer and Developers</title>
-    {% elif path == '/latest' %}
-        <title>Latest | ColorPK | Color Palette for Designer and Developers</title>
-    {% elif path == '/new' %}
-        <title>Create Color | ColorPK | Color Palette for Designer and Developers</title>
-    {% elif path == '/signin' %}
-        <title>Sign In | ColorPK | Color Palette for Designer and Developers</title>
-    {% elif path == '/admin' %}
-        <title>Admin Panel | ColorPK | Color Palette for Designer and Developers</title>
-    {% elif path == '/profile' %}
-        <title>My Profile | ColorPK | Color Palette for Designer and Developers</title>
-    {% else %}
-        <title>ColorPK | Color Palette for Designer and Developers</title>
-    {% endif %}
+    <title>
+      {% if path == '/popular' %}
+        Popular
+      {% elif path == '/latest' %}
+        Latest
+      {% elif path == '/new' %}
+        Create Color
+      {% elif path == '/signin' %}
+        Sign In
+      {% elif path == '/admin' %}
+        Admin Panel
+      {% elif path == '/profile' %}
+        My Profile
+      {% else %}
+        Welcome
+      {% endif %}
+      | ColorPK 
+      | Color Palette for Designer and Developers
+      | 颜色搭配
+      | 色彩组合
+      | 艺术设计
+    </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="robots" content="INDEX,FOLLOW"/>
     <meta name="keywords" content="ColorPK, colorhunt" />
-    <meta name="description" content="ColorPK | Faster lighter and nicer than colorhunt." />
+    <meta name="description" content="ColorPK | Faster lighter and nicer than colorhunt | 全球最大色彩搭配网站 | 颜色搭配 | 艺术设计" />
     <link rel="stylesheet" type="text/css" href="{% static assetName %}.css?{{ version }}">
     <link rel="shortcut icon" href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico" />
     <script>
