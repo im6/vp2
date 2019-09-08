@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies  */
 
-const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -34,11 +33,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
     new OptimizeCssAssetsPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
