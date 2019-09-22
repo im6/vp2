@@ -4,7 +4,7 @@ import { checkWelcome, hideWelcome } from '../shared/userPreference';
 
 const sizeManager = new LayoutManager();
 const mainElem = document.querySelector('.list');
-const isWelcomeHidden = checkWelcome();
+const isWelcomeHidden = checkWelcome() && false; // todo: always show colorpk v1
 const helpElem = document.querySelector('.help');
 
 const adjustLayout = w => {
