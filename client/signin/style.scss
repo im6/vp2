@@ -1,4 +1,4 @@
-@import "../layout/base";
+@import '../layout/base';
 
 $ROWHEIGHT: 45px;
 
@@ -24,7 +24,7 @@ main {
     text-decoration: none;
     border-radius: 7px 5px 5px 7px;
     margin-bottom: 11px;
-    padding: 0 0 1px 3px;
+    padding-bottom: 1px;
 
     img {
       height: $ROWHEIGHT;
