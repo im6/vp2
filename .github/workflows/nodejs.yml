@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - auto
+      - master
 
 jobs:
   build:
@@ -33,4 +33,4 @@ jobs:
           access-key-id: ${{ secrets.oss_app_key }}
           access-key-secret: ${{ secrets.oss_app_secret }}
       - name: cp files to aliyun
-        run: ossutil cp -rf static oss://${{ secrets.oss_bucket }}/temp/ --meta=Cache-Control:"public, max-age=1728002"#Content-Encoding:gzip --include "*.css" --include "*.js"
+        run: ossutil cp -rf static oss://${{ secrets.oss_bucket }}/4/ --meta=Cache-Control:"public, max-age=1728002"#Content-Encoding:gzip --include "*.css" --include "*.js"
