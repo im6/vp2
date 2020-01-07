@@ -14,7 +14,7 @@ class Box {
     this.id = id;
     this.color = color;
     this.like = like;
-    this.isLiked = true || isLiked;
+    this.isLiked = isLiked;
     this.animDelay = animDelay;
     this.onLike = onLike;
     this.onUnlike = onUnlike;
