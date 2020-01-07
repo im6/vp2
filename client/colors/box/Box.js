@@ -14,7 +14,7 @@ class Box {
     this.id = id;
     this.color = color;
     this.like = like;
-    this.isLiked = isLiked;
+    this.isLiked = true || isLiked;
     this.animDelay = animDelay;
     this.onLike = onLike;
     this.onUnlike = onUnlike;
@@ -57,7 +57,7 @@ class Box {
     btn.setAttribute('type', 'button');
     btn.innerHTML = `<img src="${staticPath}${
       this.isLiked ? 'hrtr.svg' : 'hrt.svg'
-      }">${this.like}`;
+    }">${this.like}`;
     btn.onclick = () => {
       if (btn.innerHTML.indexOf('hrt.svg') > -1) {
         const newNum = this.isLiked ? this.like : this.like + 1;
