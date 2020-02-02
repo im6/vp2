@@ -5,7 +5,6 @@ from colorpk.repository.db import create_new_color, create_user_like, delete_use
 from colorpk.shared import colorpk_admin_auth
 import colorpk.repository.cache as cache
 
-
 @require_http_methods(['POST', 'DELETE'])
 @cache.colorpk_like_buffer
 def toggle_like(request: HttpRequest, id: int) -> HttpResponse:

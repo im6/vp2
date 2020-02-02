@@ -7,7 +7,8 @@ import { debounce } from '../shared/util';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
 import likeManager from '../shared/likeManager';
 
-const LIMIT = window._colorpk.initData.length;
+const { initData } = window._colorpk;
+const LIMIT = initData.length;
 
 const $listDiv = document.getElementsByClassName('list')[0];
 let currentIdx = 0;
@@ -15,7 +16,7 @@ let currentIdx = 0;
 const addColorBox = step => {
   let forwardSteps = step;
   for (let i = 0; i < step; i += 1) {
-    const v = window._colorpk.initData[i + currentIdx];
+    const v = initData[i + currentIdx];
     if (!v) {
       forwardSteps = i;
       break;
