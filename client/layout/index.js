@@ -31,7 +31,6 @@ adjustLayout(window.innerWidth);
 
 if (!isWelcomeHidden && helpElem) {
   helpElem.style.display = 'block';
-  // eslint-disable-next-line no-underscore-dangle
   window._colorpk.removeWelcome = () => {
     helpElem.parentElement.removeChild(helpElem);
     hideWelcome();

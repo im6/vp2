@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle,  */
+/* eslint-disable import/no-extraneous-dependencies  */
 import '../shared/base';
 import 'core-js/features/array/from';
 import './style.scss';

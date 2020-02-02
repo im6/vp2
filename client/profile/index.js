@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import '../shared/base';
 import '../layout';
 import './style.scss';
@@ -66,7 +64,7 @@ const addColorBox = source => {
   if (window._colorpk[source].length < 1) {
     $listDiv.innerHTML = `<h3>You have not ${
       likeMode ? 'liked' : 'created'
-    } any color.</h3>`;
+      } any color.</h3>`;
   }
 };
 

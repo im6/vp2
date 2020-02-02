@@ -25,3 +25,8 @@ eventPolyFill();
 
 const event = new CustomEvent('_COLORPK_SCRIPT_READY');
 window.dispatchEvent(event);
+
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  require('./globalTypeCheck');
+}

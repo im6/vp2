@@ -27,8 +27,9 @@ const syncAjax = () => {
     fail: noop,
   });
 };
-// eslint-disable-next-line no-underscore-dangle
+
 window._colorpk = {
+  ...window._colorpk,
   approve: id => {
     approve(id, 'POST');
   },
@@ -38,4 +39,4 @@ window._colorpk = {
   sync: () => {
     syncAjax();
   },
-};
+}

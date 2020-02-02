@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { likeAjax, localStorageEnabled } from './util';
 
 const LSLIKEKEY = 'userLike';

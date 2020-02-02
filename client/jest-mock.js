@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-underscore-dangle
 global.window._colorpk = {
   staticPath: '/static/',
   initData: [

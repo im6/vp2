@@ -6,7 +6,6 @@ import likeManager from '../shared/likeManager';
 
 const downloadBtn = document.getElementById('download');
 const container = document.getElementsByClassName('container')[0];
-// eslint-disable-next-line no-underscore-dangle
 const { id, color, like } = window._colorpk.selected;
 downloadBtn.href = downloadCanvas(color);
 

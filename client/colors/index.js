@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import '../shared/base';
 import '../layout';
 import './style.scss';
