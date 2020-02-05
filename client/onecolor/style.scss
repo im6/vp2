@@ -7,7 +7,7 @@ body {
   overflow: hidden;
 }
 
-main {
+.main {
   padding-top: 100px;
   .container {
     p {
@@ -27,12 +27,12 @@ main {
 }
 
 @media (max-width: 768px) {
-  main .container>.box {
+  .main .container>.box {
     width: 142px;
   }
 }
 @media (max-width: 321px) {
-  main .container>.box {
+  .main .container>.box {
     width: 117px;
   }
 }

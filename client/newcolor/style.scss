@@ -8,7 +8,7 @@ body {
   overflow: hidden;
 }
 
-main {
+.main {
   padding-top: 100px;
   h3 {
     text-align: center;
@@ -81,7 +81,7 @@ main {
 
 
 @media (max-width: 768px) {
-  main {
+  .main {
     padding: 60px 0 0 0;
   }
 }

@@ -11,7 +11,7 @@ body {
   background: linear-gradient(to left top, #daffea, #eaf0ff);
 }
 
-main {
+.main {
   padding: 15% 0 0 0;
 }
 
@@ -93,7 +93,7 @@ main {
 }
 
 @media (max-width: 768px) {
-  main {
+  .main {
     padding-top: 28%;
   }
   #signin-box {
