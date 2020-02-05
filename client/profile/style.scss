@@ -38,7 +38,7 @@ main {
     }
   }
 
-  label {
+  &>label {
     float: left;
     display: inline-block;
     width: 65px;

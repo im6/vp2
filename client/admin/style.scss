@@ -8,7 +8,7 @@ html {
 
 .list{
   margin: 0 auto;
-  max-width: 1080px;
+  max-width: 1000px;
   width: 90%;
   &>.btn:first-of-type{
     margin-left: 10px;
@@ -16,6 +16,5 @@ html {
   }
   .box {
     display: inline-block;
-    width: 170px;
   }
 }
