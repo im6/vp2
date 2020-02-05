@@ -5,10 +5,15 @@
 html {
   background: #f8fcff;
 }
+
 .list{
   margin: 0 auto;
   max-width: 1080px;
   width: 90%;
+  &>.btn:first-of-type{
+    margin-left: 10px;
+    width: 100px;
+  }
   .box {
     display: inline-block;
     width: 170px;

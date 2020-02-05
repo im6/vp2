@@ -14,7 +14,7 @@ const pageTypes = {
     defaultColors: 'string',
   },
   '/signin': {},
-  '/color/': {
+  '/color': {
     likes: 'object',
     selected: 'object',
   },
