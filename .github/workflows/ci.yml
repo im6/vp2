@@ -1,7 +1,11 @@
-name: build
+name: CI
 
 on:
   push:
+    paths:
+      - '.github/**'
+      - 'client/**'
+      - 'package.json'
     branches:
       - master
 
