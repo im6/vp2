@@ -1,6 +1,8 @@
 # [ColorPK.com](https://www.colorpk.com) v2 ![](https://github.com/im6/vp2/workflows/build/badge.svg)
 
-[![logo](https://github.com/im6/vp2/blob/master/static/logo.png 'colorpk.com')](https://www.colorpk.com)
+<p align="center">
+  <img width="256" height="296" src="https://github.com/im6/vp2/blob/master/static/logo.png">
+</p>
 
 ## A web app written with `NO javascript framework`
 
