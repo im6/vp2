@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 // eslint-disable-next-line
 import 'style-loader!css-loader!dragula/dist/dragula.min.css';
 import { ajax } from '../shared/util';
+import validate from './helper/validate';
 
 const HANDLENAME = 'drgHdl';
 const COLORREG = /^(?:[0-9a-fA-F]{3}){1,2}$/;
@@ -57,49 +58,12 @@ const publishMsg = () => {
   }
 };
 
-const validate = val => {
-  let isGood = true;
-  let emptyRowNum = 0;
-
-  INIT.forEach((v, k) => {
-    if (v === val[k]) {
-      emptyRowNum += 1;
-    }
-    if (val[k].length !== 6) {
-      isGood = false;
-    }
-  });
-  const uniq = val.reduce(
-    (acc, v) => {
-      if (v in acc) {
-        acc[v] += true;
-      } else {
-        acc[v] = true;
-        acc._num += 1;
-      }
-      return acc;
-    },
-    {
-      _num: 0,
-    }
-  );
-
-  if (emptyRowNum > 1) {
-    isGood = false;
-    swal('Oops', 'You need to fill out all columns.', 'error');
-  } else if (uniq._num < 4) {
-    isGood = false;
-    swal('Oops', 'Four unique colors seem a better way', 'error');
-  }
-  return isGood;
-};
-
 createBtn.onclick = () => {
   const state = bars.map(v => {
     return v.jscolor.toString();
   });
 
-  const isValide = validate(state);
+  const [isValide, badReason] = validate(INIT, state);
   if (isValide) {
     createBtn.disabled = true;
     ajax({
@@ -121,7 +85,14 @@ createBtn.onclick = () => {
         createBtn.disabled = false;
       },
     });
+  } else if (badReason.badRowNum > 0) {
+    swal('Oops', 'Invalid color value', 'error');
+  } else if (badReason.emptyRowNum > 0) {
+    swal('Oops', 'You need to fill out all columns.', 'error');
+  } else if (badReason.dup > 0) {
+    swal('Oops', 'Four unique colors seem a better way', 'error');
   }
+
 };
 
 document.getElementById('resetBtn').onclick = () => {
