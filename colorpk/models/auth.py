@@ -7,7 +7,7 @@ from datetime import timezone, datetime
 from colorpk.models.db import User
 
 config = configparser.ConfigParser()
-config.read('local/connection.cnf')
+config.read('connection.cnf')
 
 def getUrl(src, state):
     url = ''

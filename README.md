@@ -22,7 +22,7 @@ source env/bin/activate
 pip install -r requirements/dev.txt
 ```
 
-before running, add `local/connection.cnf` file
+before running, add `./connection.cnf` file in app root directory.
 
 ```sh
 <set your env variable>

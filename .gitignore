@@ -7,7 +7,7 @@ db.sqlite3
 .idea
 .vscode
 node_modules
-local/connection.cnf
+connection.cnf
 npm-debug.log
 static-dev
 colorpk/migrations
