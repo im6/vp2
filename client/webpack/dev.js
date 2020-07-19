@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies  */
-
+const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./common');
 
-const { babelLoader, entry, output, resolve } = common;
+const { babelLoader, entry, resolve } = common;
 
 module.exports = {
   mode: 'development',
@@ -11,7 +12,10 @@ module.exports = {
   devtool: 'cheap-eval-source-map',
   resolve,
   entry,
-  output,
+  output: {
+    path: path.join(__dirname, '../../static-dev'),
+    filename: '[name].js',
+  },
   module: {
     rules: [
       babelLoader,
@@ -26,6 +30,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'static/*.png', flatten: true },
+        { from: 'static/*.svg', flatten: true },
+        { from: 'static/*.xml', flatten: true }
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),

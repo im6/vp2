@@ -9,9 +9,7 @@ db.sqlite3
 node_modules
 local/connection.cnf
 npm-debug.log
-static/*.map
-static/*.js
-static/*.css
+static-dev
 colorpk/migrations
 
 err_log.txt

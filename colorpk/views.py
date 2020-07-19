@@ -15,8 +15,6 @@ from colorpk.shared import colorpk_admin_auth
 from colorpk.repository.db import get_user_like, get_unpublished_colors
 from colorpk.models.auth import OAuth2Facebook, OAuth2Weibo, OAuth2Google, OAuth2Github  # needed here
 
-ASSETVERSION = os.getenv('VERSION', 'debug')
-
 template_main = get_template('main.html')
 template_one_color = get_template('one_color.html')
 template_error = get_template('error.html')
@@ -35,7 +33,6 @@ def popular(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
-        'version': ASSETVERSION,
         'list': all_data_sorted,
         'user': user,
         'likes': like_list,
@@ -50,7 +47,6 @@ def latest(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_main.render({
         'path': request.path,
         'assetName': 'bundle0',
-        'version': ASSETVERSION,
         'list': all_data,
         'user': user,
         'likes': like_list,
@@ -64,7 +60,6 @@ def color_one(request: HttpRequest, id: int) -> HttpResponse:
         return HttpResponse(template_one_color.render({
             'path': request.path,
             'assetName': 'bundle3',
-            'version': ASSETVERSION,
             'user': request.session.get('user', None),
             'likes': request.session.get('likes', []),
             'oneColor': {
@@ -88,7 +83,6 @@ def new_color(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_create.render({
         'path': request.path,
         'assetName': 'bundle2',
-        'version': ASSETVERSION,
         'user': request.session.get('user', None),
         'defaultValue': default_value,
         'csrf_token': get_token(request),
@@ -101,7 +95,6 @@ def admin(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_admin.render({
         'path': request.path,
         'assetName': 'bundle5',
-        'version': ASSETVERSION,
         'user': request.session.get('user', None),
         'list': invisible_color,
         'csrf_token': get_token(request),
@@ -118,7 +111,6 @@ def signin(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_signin.render({
         'path': request.path,
         'assetName': 'bundle1',
-        'version': ASSETVERSION,
         'wb': getUrl('wb', state),
         'fb': getUrl('fb', state),
         'gg': getUrl('gg', state),
@@ -147,7 +139,6 @@ def profile(request: HttpRequest) -> HttpResponse:
         return HttpResponse(template_profile.render({
             'path': request.path,
             'assetName': 'bundle4',
-            'version': ASSETVERSION,
             'list0': list0,
             'list1': list1,
             'user': request.session.get('user', None),
@@ -182,14 +173,12 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
             return HttpResponse(template_signin.render({
                 'path': request.path,
                 'assetName': 'bundle1',
-                'version': ASSETVERSION,
                 'error': 'Authentication Failed.'
             }))
     else:
         return HttpResponse(template_signin.render({
             'path': request.path,
             'assetName': 'bundle1',
-            'version': ASSETVERSION,
             'error': 'No valid state found.'
         }))
 

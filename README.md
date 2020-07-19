@@ -22,6 +22,8 @@ source env/bin/activate
 pip install -r requirements/dev.txt
 ```
 
+before running, add `local/connection.cnf` file
+
 ```sh
 <set your env variable>
 python manage.py runserver 3001
