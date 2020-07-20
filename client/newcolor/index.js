@@ -75,7 +75,7 @@ createBtn.onclick = () => {
       success: ({ error }) => {
         createBtn.disabled = false;
         if (error) {
-          swal('Oops', 'Color duplication detected', 'error');
+          swal('Oops', 'Colors have already existed.', 'error');
         } else {
           resetColors();
           publishMsg();
