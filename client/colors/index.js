@@ -1,7 +1,7 @@
 import '../shared/base';
 import '../layout';
 import './style.scss';
-import Box from './box';
+import Box from '../box';
 import { debounce } from '../shared/util';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../shared/constant';
 import likeManager from '../shared/likeManager';

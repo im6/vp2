@@ -1,6 +1,6 @@
 import '../shared/base';
 import './style.scss';
-import Box from '../colors/box';
+import Box from '../box';
 import { downloadCanvas } from '../shared/util';
 import likeManager from '../shared/likeManager';
 

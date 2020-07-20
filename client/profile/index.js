@@ -1,7 +1,7 @@
 import '../shared/base';
 import '../layout';
 import './style.scss';
-import Box from '../colors/box';
+import Box from '../box';
 import likeManager from '../shared/likeManager';
 import { ENTRYANIMDELAY } from '../shared/constant';
 
