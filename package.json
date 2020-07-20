@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./client",
-    "start": "webpack --watch --config client/webpack/dev.js",
+    "start": "webpack-dev-server --config client/webpack/dev.js",
     "build": "webpack --config client/webpack/prod.js",
     "proxy": "webpack-dev-server --config client/webpack/dev.js",
     "analyze": "webpack --config client/webpack/analyzer.js",

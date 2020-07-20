@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies  */
-const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./common');
 
+const devPort = 3000;
+const proxyPort = 3001;
 const { babelLoader, entry, resolve } = common;
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
   resolve,
   entry,
   output: {
-    path: path.join(__dirname, '../../static-dev'),
+    publicPath: '/static',
     filename: '[name].js',
   },
   module: {
@@ -41,16 +42,15 @@ module.exports = {
       filename: '[name].css',
     }),
   ],
-  // --- proxy work well with webpack-dev-server
-  // devServer: {
-  //   open: true,
-  //   hot: true,
-  //   port: 3000,
-  //   proxy: {
-  //     '*': {
-  //       target: `http://localhost:${3001}`,
-  //       secure: false,
-  //     },
-  //   },
-  // },
+  devServer: {
+    open: true,
+    hot: true,
+    port: devPort,
+    proxy: {
+      '*': {
+        target: `http://localhost:${proxyPort}`,
+        secure: false,
+      },
+    },
+  },
 };

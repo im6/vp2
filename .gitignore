@@ -9,7 +9,6 @@ db.sqlite3
 node_modules
 connection.cnf
 npm-debug.log
-static-dev
 colorpk/migrations
 
 err_log.txt

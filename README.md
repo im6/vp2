@@ -8,11 +8,6 @@ A python web app written with `NO javascript framework`
 
 ## QuickStart
 
-```sh
-yarn install
-npm start
-```
-
 local dev django server
 
 ```sh
@@ -25,8 +20,14 @@ pip install -r requirements/dev.txt
 before running, add `./connection.cnf` file in app root directory.
 
 ```sh
-<set your env variable>
-python manage.py runserver 3001
+<set your env variable> python manage.py runserver 3001
+```
+
+open new console, and dev on port 3000 for hot reload.
+
+```sh
+yarn install
+yarn start
 ```
 
 ## Special thanks
