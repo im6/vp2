@@ -9,6 +9,7 @@ db.sqlite3
 node_modules
 connection.cnf
 npm-debug.log
+package-lock.json
 colorpk/migrations
 
 err_log.txt

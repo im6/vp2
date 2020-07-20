@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies  */
-const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./common');
 
@@ -31,13 +30,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [
-        { from: 'static/*.png', flatten: true },
-        { from: 'static/*.svg', flatten: true },
-        { from: 'static/*.xml', flatten: true }
-      ],
-    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
