@@ -185,3 +185,7 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
 
 def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse(template_about.render())
+
+def privacy(request: HttpRequest) -> HttpResponse:
+    rendered = get_template('privacy.html').render()
+    return HttpResponse(rendered)

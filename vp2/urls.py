@@ -13,6 +13,7 @@ urlpatterns = [
     path('auth/<str:src>', views.auth),
     path('admin', views.admin),
     path('about', views.about),
+    path('privacy', views.privacy),
 
     path('like/<int:id>', controller.toggle_like),
     path('approve/<int:id>', controller.approve),
