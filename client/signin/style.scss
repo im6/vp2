@@ -16,7 +16,7 @@ body {
 }
 
 #signin-box {
-  width: 280px;
+  width: 250px;
   margin: auto;
 
   a {
@@ -47,8 +47,8 @@ body {
       animation-delay: 0.28s;
     }
     &:nth-child(3) {
-      background: linear-gradient(to right, #cf2a18, #ff7d6e);
-      color: #fff;
+      background: white;
+      color: gray;
       animation-delay: 0.35s;
     }
     &:nth-child(4) {
