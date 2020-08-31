@@ -20,7 +20,7 @@ const validate = (template, val) => {
   })
 
   return [
-    uniq.dup === 0 && badRowNum === 0 && emptyRowNum === 0,
+    uniq.dup + badRowNum + emptyRowNum === 0,
     {
       badRowNum,
       emptyRowNum,
