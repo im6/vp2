@@ -2,10 +2,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./common');
 
-const devPort = 3000;
-const proxyPort = 3001;
 const { babelLoader, entry, resolve } = common;
-
 module.exports = {
   mode: 'development',
   watch: true,
@@ -37,10 +34,10 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    port: devPort,
+    port: 3000,
     proxy: {
       '*': {
-        target: `http://localhost:${proxyPort}`,
+        target: 'http://localhost:3001',
         secure: false,
       },
     },

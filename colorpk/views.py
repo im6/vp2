@@ -24,7 +24,6 @@ template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
 template_about = get_template('about.html')
 
-
 def popular(request: HttpRequest) -> HttpResponse:
     all_data = cache.getColors()
     all_data_sorted = sorted(all_data, key=lambda v: v['like'], reverse=True)
