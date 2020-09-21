@@ -1,7 +1,6 @@
 {% load static %}
 <script>
   window._colorpk = {
-    staticPath: '{% static "" %}',
     auth: {% if user %}true{% else %}false{% endif %},
     load0: Date.now(),
     {% if path == '/popular' or path == '/latest' or path == '/' %}

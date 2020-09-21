@@ -16,10 +16,10 @@
                     {% endfor %}
                 </div>
                 <button class="btn" type="button" onclick="_colorpk.approve({{ oneBox.id }})">
-                    <img src="{% static "hrtr.svg" %}">
+			<img src="{{ imgCdnUrl }}hrtr.svg">
                 </button>
                 <button class="btn" type="button" onclick="_colorpk.disapprove({{ oneBox.id }})">
-                    <img src="{% static "hrt.svg" %}">
+			<img src="{{ imgCdnUrl }}hrt.svg">
                 </button>
             </div>
         {% endfor %}

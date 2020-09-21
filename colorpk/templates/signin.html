@@ -3,19 +3,19 @@
 {% block mainContent %}
 <div id="signin-box">
   <a href="{{ wb }}">
-    <img src="{% static "wb.png" %}" title="微博" alt="微博">
+    <img src="{{ imgCdnUrl }}wb.svg" title="微博" alt="微博">
     <span>Sign in with 新浪微博</span>
   </a>
   <a href="{{ gh }}">
-    <img src="{% static "gh.png" %}" title="Github" alt="Github">
+    <img src="{{ imgCdnUrl }}gh.svg" title="Github" alt="Github">
     <span>Sign in with Github</span>
   </a>
   <a href="{{ gg }}">
-    <img src="{% static "gg.svg" %}" title="Google" alt="Google">
+    <img src="{{ imgCdnUrl }}gg.svg" title="Google" alt="Google">
     <span>Sign in with Google</span>
   </a>
   <a href="{{ fb }}">
-    <img src="{% static "fb.png" %}" title="Facebook" alt="Facebook">
+    <img src="{{ imgCdnUrl }}fb.svg" title="Facebook" alt="Facebook">
     <span>Sign in with Facebook</span>
   </a>
 </div>

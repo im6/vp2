@@ -24,6 +24,8 @@ template_signin = get_template('signin.html')
 template_profile = get_template('profile.html')
 template_about = get_template('about.html')
 
+imgCdnUrl = 'https://dkny.oss-cn-hangzhou.aliyuncs.com/4/'
+
 def popular(request: HttpRequest) -> HttpResponse:
     all_data = cache.getColors()
     all_data_sorted = sorted(all_data, key=lambda v: v['like'], reverse=True)
@@ -97,6 +99,7 @@ def admin(request: HttpRequest) -> HttpResponse:
         'user': request.session.get('user', None),
         'list': invisible_color,
         'csrf_token': get_token(request),
+        'imgCdnUrl': imgCdnUrl,
     }))
 
 
@@ -114,6 +117,7 @@ def signin(request: HttpRequest) -> HttpResponse:
         'fb': getUrl('fb', state),
         'gg': getUrl('gg', state),
         'gh': getUrl('gh', state),
+        'imgCdnUrl': imgCdnUrl,
     }))
 
 
