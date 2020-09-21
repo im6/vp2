@@ -1,5 +1,6 @@
 from django.urls import path, re_path
 from colorpk import views
+from colorpk import static
 from colorpk import controller
 
 urlpatterns = [
@@ -19,6 +20,8 @@ urlpatterns = [
     path('approve/<int:id>', controller.approve),
     path('sync', controller.sync_cache),
     path('create', controller.create_color),
+
+    path('sitemap.xml', static.sendSitemap),
 
     re_path(r'/*', views.not_found),
 ]
