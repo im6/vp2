@@ -8,5 +8,5 @@ INSTALLED_APPS = [
 DEBUG = True
 ALLOWED_HOSTS = []
 SECRET_KEY = 'helloWorld'
-# STATIC_URL = '/static/'
-STATIC_URL = 'https://cdn.jsdelivr.net/gh/im6/vp2-ui@%s/dist/' % '0.0.1'
+STATIC_URL = '/hot/'
+# STATIC_URL = 'https://cdn.jsdelivr.net/gh/im6/vp2-ui@%s/dist/' % '0.0.1'
