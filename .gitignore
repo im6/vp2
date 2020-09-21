@@ -1,16 +1,10 @@
 __pycache__/
 *.py[cod]
 .DS_Store
-
 env
 db.sqlite3
 .idea
 .vscode
-node_modules
 connection.cnf
-npm-debug.log
-package-lock.json
 colorpk/migrations
-
 err_log.txt
-coverage
