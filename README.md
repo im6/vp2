@@ -1,6 +1,6 @@
 # [ColorPK.com](https://www.colorpk.com) v2
 
-A Django version of `ColorPK`
+A Django version of `ColorPK` back-end service. Work together with [front-end source](https://github.com/im6/vp2-ui)
 
 ## QuickStart
 
