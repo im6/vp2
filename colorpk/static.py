@@ -2,4 +2,4 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound, FileRes
 
 def sendSitemap(request: HttpRequest) -> HttpResponse:
     img = open('static/sitemap.xml', 'rb')
-    return FileResponse(img)
+    return FileResponse(img, content_type = "application/xml")
