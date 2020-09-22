@@ -2,6 +2,10 @@
 {% load static %}
 {% block mainContent %}
 <div id="signin-box">
+  <a href="{{ gg }}">
+    <img src="{{ imgCdnUrl }}gg.svg" title="Google" alt="Google">
+    <span>Sign in with Google</span>
+  </a>
   <a href="{{ wb }}">
     <img src="{{ imgCdnUrl }}wb.svg" title="微博" alt="微博">
     <span>Sign in with 新浪微博</span>
@@ -9,10 +13,6 @@
   <a href="{{ gh }}">
     <img src="{{ imgCdnUrl }}gh.svg" title="Github" alt="Github">
     <span>Sign in with Github</span>
-  </a>
-  <a href="{{ gg }}">
-    <img src="{{ imgCdnUrl }}gg.svg" title="Google" alt="Google">
-    <span>Sign in with Google</span>
   </a>
   <a href="{{ fb }}">
     <img src="{{ imgCdnUrl }}fb.svg" title="Facebook" alt="Facebook">
