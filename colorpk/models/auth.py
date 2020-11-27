@@ -178,9 +178,9 @@ class OAuth2Github(OAuth2):
 
     def getUserInfo(self, token):
         payload = {
-            'access_token': token,
+          'Authorization': 'token %s' % token,
         }
-        r = requests.get('%s/user' % self.api, params=payload)
+        r = requests.get('%s/user' % self.api, headers=payload)
         res = json.loads(r.text)
         data = {
             'oauthid': res.get('id'),
