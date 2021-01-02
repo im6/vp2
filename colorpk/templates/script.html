@@ -6,7 +6,7 @@
     {% if path == '/popular' or path == '/latest' or path == '/' %}
     likes: {{ likes }},
     initData: [
-        {% for oneBox in list %}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}, "isLiked": {% if oneBox.isLiked %}true{% else %}false{% endif %} },{% endfor %}
+        {% for oneBox in list %}{"k": {{oneBox.id}},"v": "{{oneBox.color}}","s": {{ oneBox.like }}, "l": {% if oneBox.isLiked %}true{% else %}false{% endif %} },{% endfor %}
     ],
     {% elif oneColor %}
     likes: {{ likes }},
@@ -19,10 +19,10 @@
     defaultColors: '{{ defaultValue }}',
     {% elif path == '/profile' %}
     list0: [
-      {% for oneBox in list0%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
+      {% for oneBox in list0%}{"k": {{oneBox.id}},"v": "{{oneBox.color}}","s": {{ oneBox.like }}},{% endfor %}
     ],
     list1: [
-      {% for oneBox in list1%}{"id": {{oneBox.id}},"color": "{{oneBox.color}}","like": {{ oneBox.like }}},{% endfor %}
+      {% for oneBox in list1%}{"k": {{oneBox.id}},"v": "{{oneBox.color}}","s": {{ oneBox.like }}},{% endfor %}
     ],
     {% endif %}
   };

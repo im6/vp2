@@ -15,7 +15,7 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_HTTPONLY = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 APPEND_SLASH = False
-STATIC_URL = 'https://cdn.jsdelivr.net/gh/im6/vp2-ui@%s/dist/' % os.environ.get('VERSION', 'v0.0.6') 
+STATIC_URL = 'https://cdn.jsdelivr.net/gh/im6/vp2-ui@%s/dist/' % os.environ.get('VERSION', 'v0.0.7') 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
