@@ -47,22 +47,17 @@ class OAuth2(metaclass=ABCMeta):
     def getUserInfo(self, token):
         raise NotImplementedError('getUserInfo is not implemented')
 
-    def registerUser(self, data):
-        result = {'id': None, 'name': data['name'], 'img': data['img'], 'isadmin': False}
-        qs = User.objects.filter(oauth=data['oauth'], oauthid=data['oauthid'])
+    def getUserStatus(self, user):
+        qs = User.objects.filter(oauth=user.oauth, oauth_id=user.oauth_id)
+        nowTime = datetime.now(timezone.utc)
         if qs.exists():
-            qs.update(lastlogin=datetime.now(timezone.utc))
-            thisUser = qs.get()
-            result['id'] = thisUser.id
-            result['isadmin'] = thisUser.isadmin
+            qs.update(last_login=nowTime)
+            user_exist = qs.get()
+            return user_exist.id, user_exist.is_admin
         else:
-            newUser = User(oauth=data['oauth'], 
-            name=data['name'],
-            oauthid=data['oauthid'],
-            lastlogin=datetime.now(timezone.utc))
-            newUser.save()
-            result['id'] = newUser.id
-        return result
+            user.last_login = nowTime
+            user.save()
+            return user.id, False
 
 class OAuth2Facebook(OAuth2):
     def __init__(self):
@@ -86,14 +81,14 @@ class OAuth2Facebook(OAuth2):
         }
         r = requests.get('%s/me' % self.api, params=payload)
         res = json.loads(r.text)
-        data = {
-            'oauthid': res.get('id'),
-            'name': res.get('name'),
-            'isadmin': False,
-            'img': res.get('picture').get('data').get('url'),
-            'oauth': self.oauth,
-        }
-        return data
+        user = User(
+          oauth=self.oauth,
+          oauth_id=res.get('id'),
+          name=res.get('name'),
+          is_admin=False
+        )
+        iconImg = res.get('picture').get('data').get('url')
+        return user, iconImg
 
 class OAuth2Weibo(OAuth2):
     def __init__(self):
@@ -120,14 +115,14 @@ class OAuth2Weibo(OAuth2):
         }
         r = requests.get('%s/2/users/show.json' % self.api, params=payload)
         res = json.loads(r.text)
-        data = {
-            'oauthid': res.get('id'),
-            'name': res.get('name'),
-            'isadmin': False,
-            'img': res.get('profile_image_url'),
-            'oauth': self.oauth,
-        }
-        return data
+        user = User(
+          oauth=self.oauth,
+          oauth_id=res.get('id'),
+          name=res.get('name'),
+          is_admin=False
+        )
+        iconImg = res.get('profile_image_url')
+        return user, iconImg
 
 class OAuth2Google(OAuth2):
     def __init__(self):
@@ -151,15 +146,15 @@ class OAuth2Google(OAuth2):
         }
         r = requests.get('%s/plus/v1/people/me'%self.api, params=payload)
         res = json.loads(r.text)
-        data = {
-            'oauthid': res.get('id'),
-            'name': res.get('displayName'),
-            'isadmin': False,
-            'img': res.get('image').get('url'),
-            'oauth': self.oauth,
-        }
-        return data
 
+        user = User(
+          oauth=self.oauth,
+          oauth_id=res.get('id'),
+          name=res.get('displayName'),
+          is_admin=False
+        )
+        iconImg = res.get('image').get('url')
+        return user, iconImg
 
 class OAuth2Github(OAuth2):
     def __init__(self):
@@ -182,11 +177,12 @@ class OAuth2Github(OAuth2):
         }
         r = requests.get('%s/user' % self.api, headers=payload)
         res = json.loads(r.text)
-        data = {
-            'oauthid': res.get('id'),
-            'name': res.get('name', '') or res.get('login'),
-            'isadmin': False,
-            'img': res.get('avatar_url'),
-            'oauth': self.oauth,
-        }
-        return data
+
+        user = User(
+          oauth=self.oauth,
+          oauth_id=res.get('id'),
+          name=res.get('name', '') or res.get('login'),
+          is_admin=False
+        )
+        iconImg = res.get('avatar_url')
+        return user, iconImg

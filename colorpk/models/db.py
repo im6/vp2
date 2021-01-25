@@ -3,21 +3,21 @@ from django.db import models
 
 class Color(models.Model):
     id = models.AutoField(primary_key=True)
-    like = models.IntegerField()
+    star = models.IntegerField()
     color = models.CharField(max_length=27, unique=True)
-    userid = models.IntegerField(null=True)
+    user_id = models.IntegerField(null=True, db_column='user_id')
     username = models.CharField(max_length=40, null=True)
-    colortype = models.CharField(max_length=50, null=True)
+    color_type = models.CharField(max_length=50, null=True, db_column='color_type')
     display = models.BooleanField(default=True)
-    createdate = models.DateTimeField(default=utils.timezone.now)
+    created_date = models.DateTimeField(default=utils.timezone.now, db_column='created_date')
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     oauth = models.SlugField(max_length=2)
     name = models.CharField(max_length=50)
-    oauthid = models.CharField(max_length=30)
-    isadmin = models.BooleanField(default=False)
-    lastlogin = models.DateTimeField(default=utils.timezone.now)
+    oauth_id = models.CharField(max_length=30, db_column='oauth_id')
+    is_admin = models.BooleanField(default=False, db_column='is_admin')
+    last_login = models.DateTimeField(default=utils.timezone.now, db_column='last_login')
 
 class UserLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

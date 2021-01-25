@@ -52,7 +52,7 @@ def like(id) -> None:
     rawValue = cache.get(GLOBAL_COLOR_KEY)
     for one in rawValue:
         if one.get('id') == id:
-            one['like'] += 1
+            one['star'] += 1
             break
     cache.set(GLOBAL_COLOR_KEY, rawValue)
 

@@ -28,7 +28,7 @@ imgCdnUrl = 'https://dkny.oss-cn-hangzhou.aliyuncs.com/4/'
 
 def popular(request: HttpRequest) -> HttpResponse:
     all_data = cache.getColors()
-    all_data_sorted = sorted(all_data, key=lambda v: v['like'], reverse=True)
+    all_data_sorted = sorted(all_data, key=lambda v: v['star'], reverse=True)
     like_list = request.session.get('likes', [])
     user = request.session.get('user', None)
     return HttpResponse(template_main.render({
@@ -66,9 +66,9 @@ def color_one(request: HttpRequest, id: int) -> HttpResponse:
             'oneColor': {
                 'id': id,
                 'color': one_color.get('color'),
-                'like': one_color.get('like'),
+                'star': one_color.get('star'),
                 'username': one_color.get('username') if one_color.get('username') else 'Anonymous',
-                'createdate': one_color.get('createdate'),
+                'createdDate': one_color.get('created_date'),
             },
             'csrf_token': get_token(request),
         }))
@@ -134,7 +134,7 @@ def profile(request: HttpRequest) -> HttpResponse:
     if user:
         visible_list = cache.getColors()
         invis_list = cache.getInvisibleColors()
-        list0 = filter(lambda a: a.get('userid') ==
+        list0 = filter(lambda a: a.get('user_id') ==
                        user.get('id'), invis_list + visible_list)
         list1_ids = get_user_like(user['id'])
         list1 = filter(lambda a: a.get('id') in list1_ids,
@@ -167,10 +167,15 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
                        'OAuth2%s' % name_map.get(src))()
         token = auth.getToken(request.GET['code'])
         if token:
-            userInfo = auth.getUserInfo(token)
-            userJSON = auth.registerUser(userInfo)
-            request.session['user'] = userJSON
-            request.session['likes'] = get_user_like(userJSON.get('id'))
+            user_oauth_info, img = auth.getUserInfo(token)
+            user_id, is_admin = auth.getUserStatus(user_oauth_info)
+            request.session['user'] = {
+              "id": user_id,
+              "name": user_oauth_info.name,
+              "img": img,
+              "isAdmin": is_admin
+            }
+            request.session['likes'] = get_user_like(user_id)
             return redirect('/')
         else:
             return HttpResponse(template_signin.render({
