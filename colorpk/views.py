@@ -168,7 +168,7 @@ def auth(request: HttpRequest, src: str) -> HttpResponse:
         token = auth.getToken(request.GET['code'])
         if token:
             user_oauth_info, img = auth.getUserInfo(token)
-            user_id, is_admin = auth.registerUser(user_oauth_info, img)
+            user_id, is_admin = auth.getUserStatus(user_oauth_info)
             request.session['user'] = {
               "id": user_id,
               "name": user_oauth_info.name,

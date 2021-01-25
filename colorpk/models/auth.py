@@ -47,7 +47,7 @@ class OAuth2(metaclass=ABCMeta):
     def getUserInfo(self, token):
         raise NotImplementedError('getUserInfo is not implemented')
 
-    def registerUser(self, user, img):
+    def getUserStatus(self, user):
         qs = User.objects.filter(oauth=user.oauth, oauth_id=user.oauth_id)
         nowTime = datetime.now(timezone.utc)
         if qs.exists():
