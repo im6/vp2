@@ -52,8 +52,8 @@ class OAuth2(metaclass=ABCMeta):
         nowTime = datetime.now(timezone.utc)
         if qs.exists():
             qs.update(last_login=nowTime)
-            thisUser = qs.get()
-            return thisUser.id, thisUser.is_admin
+            user_exist = qs.get()
+            return user_exist.id, user_exist.is_admin
         else:
             user.last_login = nowTime
             user.save()
