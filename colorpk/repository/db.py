@@ -12,20 +12,20 @@ def get_all_color():
 
 
 def create_new_color(color, user):
-    new_color_params = {
-        'like': math.floor(random() * 30),
-        'color': color,
-        'display': 1,
-        'createdate': datetime.now(timezone.utc)
-    }
+    newColor = Color(
+      star=math.floor(random() * 30),
+      color=color,
+      display=True,
+      created_date=datetime.now(timezone.utc)
+    )
     if user:
-        new_color_params['userid'] = user.get('id')
-        new_color_params['username'] = user.get('name')
+        newColor.user_id = user.get('id')
+        newColor.username = user.get('name')
+        newColor.display = False
 
     error = False
     try:
-        new_color = Color(**new_color_params)
-        new_color.save()
+        newColor.save()
     except:
         error = True
 
@@ -59,7 +59,7 @@ def get_user_like(userId):
 
 
 def check_admin(userId):
-    result = User.objects.filter(id=userId, isadmin=True).exists()
+    result = User.objects.filter(id=userId, is_admin=True).exists()
     return result
 
 
