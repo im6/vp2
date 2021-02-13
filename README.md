@@ -7,8 +7,7 @@ A Django version of `ColorPK` back-end service. Work together with [front-end so
 * install python package locally.
 
 ```sh
-pip3 install virtualenv
-virtualenv -p python3 env
+python3 -m venv env
 source env/bin/activate
 pip install -r requirements/dev.txt
 ```
