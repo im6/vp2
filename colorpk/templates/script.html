@@ -11,9 +11,9 @@
     {% elif oneColor %}
     likes: {{ likes }},
     selected: {
-      id: {{ oneColor.id }},
-      color: '{{ oneColor.color }}',
-      like: {{ oneColor.star }},
+      k: {{ oneColor.id }},
+      v: '{{ oneColor.color }}',
+      s: {{ oneColor.star }},
     }
     {% elif path == '/new' %}
     defaultColors: '{{ defaultValue }}',
